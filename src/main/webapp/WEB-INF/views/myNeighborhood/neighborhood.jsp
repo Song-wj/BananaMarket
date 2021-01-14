@@ -10,6 +10,7 @@
 		width:70%;
 		margin:auto;
 		text-align:center;		
+		margin-bottom:200px;
 	}
 	div.content nav.recommad_list ul li{
 		display:inline;
@@ -139,49 +140,49 @@
 		<div class="category">
 			<div>
 				<div>				
-					<img src="images/work.png">
+					<img src="images/work1.png">
 				</div>
 				<label>일자리</label>
 			</div>
 			<div>
 				<div>				
-					<img src="images/man.png">
+					<img src="images/manager.png">
 				</div>
 				<label>동네 구인구직</label>
 			</div>
 			<div>
 				<div>
-					<img src="images/study.png">
+					<img src="images/notebook.png">
 				</div>
 				<label>과외/클래스</label>
 			</div>
 			<div>
 				<div>
-					<img src="images/fruit.png">
+					<img src="images/harvest.png">
 				</div>
 				<label>농수산물</label>
 			</div>
 			<div>
 				<div>
-					<img src="images/apart.png">
+					<img src="images/home.png">
 				</div>
 				<label>부동산</label>
 			</div>
 			<div>
 				<div>				
-					<img src="images/car.png">
+					<img src="images/car1.png">
 				</div>
 				<label>중고차</label>
 			</div>
 			<div>
 				<div>				
-					<img src="images/display.png">
+					<img src="images/diplay.png">
 				</div>
 				<label>전시/행사</label>			
 			</div>
 			<div>
 				<div>
-					<img src="images/clothes.png">
+					<img src="images/fashion.png">
 				</div>
 				<label>세탁</label>
 			</div>		
@@ -275,5 +276,6 @@
 		</div><!-- store_news -->
 		
 	</div> <!-- content -->
+	<jsp:include page="../footer.jsp" />
 </body>
 </html>
