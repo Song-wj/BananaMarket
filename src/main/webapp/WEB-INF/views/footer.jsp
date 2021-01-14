@@ -24,7 +24,7 @@ div.footer div.fcontent1 div.flogo{
 	margin-top:30px;
 }
 div.footer div.fcontent1 img{
-	margin-left:60px;
+	margin-left:10px;
 	width:200px;
 	height:60px;
 }	
