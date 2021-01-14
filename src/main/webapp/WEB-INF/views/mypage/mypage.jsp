@@ -20,6 +20,7 @@
 	div.h {
 		width:70%;
 		margin:auto;
+		margin-bottom:50%;
 	}
 	section.section2_mypage,
 	section.section3_mypage {
@@ -30,10 +31,10 @@
 		margin: 15px 0;
 	}
 	section.section1_mypage {
-		padding-top:30px;
+		padding-top:150px;
 	}
 	section.section2_mypage label.mannerTemp {
-		font-size:13px;
+		font-size:15px;
 	}
 	section.section2_mypage{
 		border-radius:10px;
@@ -47,7 +48,6 @@
 	section.section5_mypage {
 		float:left;
 		width:17%;
-		display:inline-block;
 		background-color: rgb(251,247,242);
 		margin-bottom:80px;		
 	}
@@ -55,7 +55,7 @@
 		margin-right:15px;
 	}
 	section.section5_mypage {
-		width:81.45%;
+		width:81.47%;
 		float:left;
 		display:inline-block;
 	}
@@ -85,12 +85,12 @@
 		margin-left:-30px;
 	}
 	ul.mypageSide>li:first-child {
-		font-size:23px;
+		font-size:26px;
 		font-weight:900;
 	}
 	ul.mypageSide>li:nth-child(2) {
 		margin-top:-3px;
-		font-size:18px;
+		font-size:20px;
 		color:gray;
 	}
 	ul.mypageSide>li:nth-child(3) {
@@ -141,14 +141,14 @@
 	}
 	div.sideMenu li>a {
 		text-decoration:none;
-		font-size:13px;
+		font-size:18px;
 		color:#3A1D1D;
 		display:block;
-		width:60px;
+		width:72px;
 	}
 	div.profileDetails,
 	div.contentSection {
-		height:500px;
+		height:800px;
 		background-color: rgb(251,247,242);
 		border:6px solid #fff;
 		box-shadow: 0 0 6px rgb(221,221,221);
@@ -162,7 +162,7 @@
 	div.profileDetails li>a {
 		color:#3A1D1D;
 		text-decoration:none;
-		font-size:13px;
+		font-size:18px;
 	}
 	/* Add an active class to the active dropdown button */
 	section.section4_mypage .active {
@@ -173,25 +173,26 @@
 	/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 	section.section4_mypage .dropdown-container {
 		display: none;
+		padding-top:5px;
 		padding-left: 8px;
-		width:80px;
+		width:115px;
 	}
 	section.section4_mypage .dropdown-container a {
 		color:#3A1D1D;
-		font-size:12px;
+		font-size:18px;
 		text-decoration:none;
 	}
 	/* Optional: Style the caret down icon */
 	section.section4_mypage .fa-caret-down {
-		font-size:16px;
-		color:#FEE500;
+		font-size:27px;
+		color:#3A1D1D;
 		float: right;
-		padding-right:53px;
+		padding-right:80px;
 	}
 	section.section4_mypage .dropdown-btn {
 	  padding: 6px 0 6px 0;
 	  text-decoration: none;
-	  font-size: 13px;
+	  font-size: 18px;
 	  color: black;
 	  display: block;
 	  border: none;
@@ -205,6 +206,8 @@
 </style>
 </head>
 <body>
+	<jsp:include page="../header.jsp"/>
+
 	<div class="h">
 		<section class="section1_mypage">
 			<div class="mypageImg">
@@ -215,7 +218,7 @@
 					<li>닉네임</li>
 					<li>아이디</li>
 					<li>
-						<button type="submit">프로필 수정</button>
+						<a href="mypage_update.do"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
 					</li>
 				</ul>
 			</div>
@@ -294,5 +297,7 @@
 	  });
 	}
 	</script>
+	
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
