@@ -496,5 +496,6 @@
 				<li class="keyword-item"><a class="keyword-link" href="#">냉장고</a></li>
 			</ul>
 	</section>
+	<jsp:include page="footer.jsp"/>
 </body>
 </html>
