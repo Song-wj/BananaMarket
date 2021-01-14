@@ -7,6 +7,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MypageController {
 	
+	/**
+	 * 마이페이지 - 프로필 수정
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_update.do", method=RequestMethod.GET)
+	public String mypage_update() {
+		return "mypage/mypage_update";
+	}
+	
+	/**
+	 * 마이페이지 - 홈화면
+	 * @return
+	 */
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
 	public String mypage() {
 		return "mypage/mypage";

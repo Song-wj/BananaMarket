@@ -13,11 +13,12 @@
 		$('#mannerbar').jqbar({ 
 			label: '', 
 			value: 36.5, 
-			barColor: '#3A1D1D' });
+			barColor: '#3A1D1D' 
+		});
 	});
 </script>
 <style>
-	div.h {
+	div.mypage_mainDiv {
 		width:70%;
 		margin:auto;
 		margin-bottom:50%;
@@ -190,17 +191,17 @@
 		padding-right:80px;
 	}
 	section.section4_mypage .dropdown-btn {
-	  padding: 6px 0 6px 0;
-	  text-decoration: none;
-	  font-size: 18px;
-	  color: black;
-	  display: block;
-	  border: none;
-	  background: none;
-	  width: 100%;
-	  text-align: left;
-	  cursor: pointer;
-	  outline: none;
+		padding: 6px 0 6px 0;
+		text-decoration: none;
+		font-size: 18px;
+		color: black;
+		display: block;
+		border: none;
+		background: none;
+		width: 100%;
+		text-align: left;
+		cursor: pointer;
+		outline: none;
 	}
 	
 </style>
@@ -208,7 +209,7 @@
 <body>
 	<jsp:include page="../header.jsp"/>
 
-	<div class="h">
+	<div class="mypage_mainDiv">
 		<section class="section1_mypage">
 			<div class="mypageImg">
 				<img src="images/mypage_bananaimg.jpg" class="mypageImg">
