@@ -305,6 +305,8 @@
 </style>
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
+
 	<section id="home-main-section-top">
 		<div id="home-main-top">
 			<div class="home-main-desc">
@@ -367,7 +369,7 @@
 	</section>
 	<section class="home-main-section background-gray">
 		<div class="home-hot-content">
-			<h1 class="home-main-title" style="text-align: center;">중고거래 인기매물</h1>
+			<h1 class="home-main-title" style="text-align: center; margin-bottom: 5rem;">중고거래 인기매물</h1>
 				<div class="cards-wrap">
 					<article class="card-top">
 						<a class="card-link" href="#">
