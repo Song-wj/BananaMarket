@@ -15,6 +15,19 @@
 			value: 36.5, 
 			barColor: '#3A1D1D' 
 		});
+		
+		$("#mypage_purchasedBtn").click(function(){
+			$("#contentSection").load("mypage_purchased.do");
+		});
+		
+		$("#mypage_contractBtn").click(function(){
+			$("#contentSection").load("mypage_contract.do");
+		});
+		
+		$("#mypage_likeBtn").click(function(){
+			$("#contentSection").load("mypage_like.do");
+		});
+		
 	});
 </script>
 <style>
@@ -59,6 +72,7 @@
 		width:81.47%;
 		float:left;
 		display:inline-block;
+		overflow:auto;
 	}
 	img.mypageImg {
 		magin-bottom:100px;
@@ -234,17 +248,17 @@
 			<div class="sideMenu">
 				<ul>
 					<li>
-						<a href="#">
+						<a href="#" id="mypage_contractBtn">
 						<img src="images/mypage_contract.png">
 						<span>판매내역</span></a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="#" id="mypage_purchasedBtn">
 						<img src="images/mypage_purchased.png">
 						<span>구매내역</span></a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="#" id="mypage_likeBtn">
 						<img src="images/mypage_like.png">
 						<span>관심목록</span></a>
 					</li>
@@ -276,7 +290,7 @@
 			</div>
 		</section>
 		<section class="section5_mypage">
-			<div class="contentSection">
+			<div class="contentSection" id="contentSection">
 				
 			</div>
 		</section>

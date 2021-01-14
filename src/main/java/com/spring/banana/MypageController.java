@@ -8,6 +8,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	/**
+	 * 마이페이지 - 관심목록
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_like.do", method=RequestMethod.GET)
+	public String mypage_like() {
+		return "mypage/mypage_like";
+	}
+	
+	/**
+	 * 마이페이지 - 판매내역
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_contract.do", method=RequestMethod.GET)
+	public String mypage_contract() {
+		return "mypage/mypage_contract";
+	}
+	
+	/**
+	 * 마이페이지 - 구매내역
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+	public String mypage_purchased() {
+		return "mypage/mypage_purchased";
+	}
+	
+	/**
 	 * 마이페이지 - 프로필 수정
 	 * @return
 	 */
