@@ -24,7 +24,6 @@
 	section.section_login>div>form.login>ul>li>ul{
 		margin-left:24px;
 	}
-	
 	section.section_login>div>form.login>ul>li>ul>li>div{
 		background-color:lightgray;
      	width:1px; 

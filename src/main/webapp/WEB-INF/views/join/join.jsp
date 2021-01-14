@@ -37,7 +37,6 @@
 		margin:auto;
 	}
 	div.img_wrap>img{
-		
 		border-radius:50%;
 		border:6px solid #fff;
 		box-shadow: 0 0 16px rgb(221,221,221);
