@@ -92,7 +92,7 @@
 			<ul class="header-menu-list">
 				<li class="header-menu-item"><a class="menu-link" href="#">로그인</a></li>
 				<li class="header-menu-item"><a class="menu-link" href="#">회원가입</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="#">나의 바나나</a></li>
+				<li class="header-menu-item"><a class="menu-link" href="mypage.do">나의 바나나</a></li>
 				<li class="header-menu-item"><a class="menu-link" href="#">동네생활</a></li>
 				<li class="header-menu-item"><a class="menu-link" href="#">내 근처</a></li>
 			</ul>
