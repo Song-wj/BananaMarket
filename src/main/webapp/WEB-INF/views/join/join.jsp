@@ -123,12 +123,22 @@
 		background-color:RGB(254,229,0);
 		font-weight:bold;
 		border:1px solid RGB(254,229,0);
-		padding:12px 17px;
+		padding:13px 17px;
 		font-size:17px;
 		border-radius:5px;
 	}
-
+	section.section_join>div>form.join button.join_btn_style:hover{
+		opacity:0.7;
+	}
 	
+	section.section_join>div>form.join button.join_btn_style:nth-child(2){
+		position: relative;
+        top:1.6px;
+	}
+	section.section_join>div>form.join button.join_btn_style:first-child{
+		width:100%;
+		margin-top:30px;
+	}
 </style>
 </head>
 <body>
