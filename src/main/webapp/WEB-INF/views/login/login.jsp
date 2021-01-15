@@ -72,7 +72,9 @@
 		width:100%;
 		margin-top:30px;
 	}
-	
+	section.section_login>div>form.login button.login_btn_style:hover{
+		opacity:0.7;
+	}
 </style>
 </head>
 <body>
