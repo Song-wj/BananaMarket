@@ -8,9 +8,10 @@
 <style>
 	div.content{
 		width:70%;
-		margin:auto;
+		margin:auto;		
 		text-align:center;		
 		margin-bottom:200px;
+		margin-top:200px;
 	}
 	div.content nav.recommad_list ul li{
 		display:inline;
@@ -115,17 +116,18 @@
 	}
 	div.store_news button{
 		width:700px;
-		margin-top:30px;
+		margin-top:60px;
 		height:40px;
 		background-color:white;
 		outline:none;
 		border-radius:15px;
-		margin-left:300px;
+		margin-left:270px;
 		
 	}
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp" />
 	<div class="content">
 		<nav class="recommad_list">
 			<ul>

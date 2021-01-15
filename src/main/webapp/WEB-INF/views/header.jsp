@@ -29,7 +29,7 @@
 	}
 	
 	#fixed-bar #fixed-bar-wrap .fixed-logo {
-		margin-bottom: 5px;
+		margin-bottom: 5px;	
 	}
 	
 	#header-search-input {
