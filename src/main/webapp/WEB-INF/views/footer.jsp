@@ -21,7 +21,7 @@ div.footer div.fcontent2{
 	border-top:0.5px solid rgb(173,181,189);
 }
 div.footer div.fcontent1 div.flogo{
-	margin-top:30px;
+	margin-top:35px;
 	display:inline-block;
 	float:left;
 }
