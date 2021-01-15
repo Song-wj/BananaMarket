@@ -35,11 +35,14 @@
 	div.join{
 		width:25%;
 		margin:auto;
+		margin-top:150px;
+		margin-bottom:300px;
 	}
 	div.img_wrap>img{
 		border-radius:50%;
 		border:6px solid #fff;
-		box-shadow: 0 0 16px rgb(221,221,221);
+		box-shadow: 0 0 16px yellow;
+		margin-bottom:10px;
 	}
 	div.img_wrap{
 		margin-bottom:10px;
@@ -57,7 +60,8 @@
 		border: 1px solid #ebebeb; 
 		border-bottom-color: #e2e2e2; 
 		border-radius: .25em;
-		margin-left:130px;
+		/* margin-left:130px; */ /* 75%일때 */
+		margin-left:160px;
 	}
 	section.section_join>div>form.join>ul>li:first-child>input[type="file"]{
 		position: absolute; 
@@ -113,11 +117,20 @@
 	section.section_join>div>form.join input.addr2{
 		width:48.8%
 	}
+	section.section_join>div>form.join button.btn_style{
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:5px 10px;
+		font-size:15px;
+	}
 	
 </style>
 </head>
 <body>
-
+	<jsp:include page="../header.jsp"/>
+	
 	<div class="join">
 		<section class="section_join">
 			<div>
@@ -194,6 +207,7 @@
 			</div>
 		</section>
 	</div>
-	
+
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
