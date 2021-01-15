@@ -92,7 +92,7 @@
 <body>
 	<header id="fixed-bar" class="fixed-bar-box-shadow">
 		<div id="fixed-bar-wrap">
-			<img class="fixed-logo" src="http://localhost:9000/banana/images/logo.png"
+			<img class="fixed-logo" src="http://localhost:9000/banana/images/logo1.png"
 			 onclick="location.href='http://localhost:9000/banana/index.do'">
 			<input type="text" id="header-search-input" placeholder="동네 이름, 물품명 등을 검색해보세요!">
 			<button id="header-search-button">
