@@ -60,7 +60,21 @@
 	section.section_login>div>form.login>ul>li:nth-child(2){
 		margin-top:-1px;
 	}
-	
+	section.section_login>div>form.login button.login_btn_style{
+		pisition:relative;
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:13px 17px;
+		font-size:17px;
+		border-radius:5px;
+		width:100%;
+		margin-top:30px;
+	}
+	section.section_login>div>form.login button.login_btn_style:hover{
+		opacity:0.7;
+	}
 </style>
 </head>
 <body>
@@ -80,7 +94,7 @@
 							<div id="errMsg">에러메세지</div>
 						</li>
 						<li>
-							<button type="button" class="btn_style" id="btnLogin">로그인</button>
+							<button type="button" class="login_btn_style" id="btnLogin">로그인</button>
 						</li>
 						<li>
 							<ul>
