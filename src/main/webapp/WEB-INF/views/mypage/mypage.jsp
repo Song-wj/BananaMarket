@@ -48,6 +48,9 @@
 		border:1px solid lightgray;
 		margin: 15px 0;
 	}
+	section.section2_mypage {
+		margin-top:40px;
+	}
 	section.section1_mypage {
 		padding-top:150px;
 	}
@@ -78,7 +81,7 @@
 		display:inline-block;
 		overflow:auto;
 	}
-	img.mypageImg {
+	section.section1_mypage img.mypageImg {
 		magin-bottom:100px;
 		width:100px;
 		heigth:100px;
@@ -86,36 +89,37 @@
 		border:6px solid #fff;
 		box-shadow: 0 0 16px #FEE500;
 	}
-	div.mypageImg {
+	section.section1_mypage div.mypageImg {
 		float:left;
 		display:inline-block;
 		width:120px;
 		height:120px;
 	} 
-	div.mypageSide {
+	section.section1_mypage div.mypageSide {
 		float:inherit; 
 		display:inline-block;
 	}
-	ul.mypageSide {
+	section.section1_mypage ul.mypageSide {
 		display:inline-block;
 		list-style:none;
 	}
-	ul.mypageSide>li {
-		margin-left:-30px;
+	section.section1_mypage ul.mypageSide>li {
+		margin-left:5px;
 	}
-	ul.mypageSide>li:first-child {
+	section.section1_mypage ul.mypageSide>li:first-child {
+		padding-top:10px;
 		font-size:26px;
 		font-weight:900;
 	}
-	ul.mypageSide>li:nth-child(2) {
+	section.section1_mypage ul.mypageSide>li:nth-child(2) {
 		margin-top:-3px;
 		font-size:20px;
 		color:gray;
 	}
-	ul.mypageSide>li:nth-child(3) {
+	section.section1_mypage ul.mypageSide>li:nth-child(3) {
 		padding-top:8px;
 	}
-	div.manner {
+	section.section2_mypage div.manner {
 	}
 	section.section2_mypage .jqbar {
 	    position: relative;
@@ -145,28 +149,28 @@
 	section.section2_mypage .jqbar.vertical .bar-level {
 	    position: absolute;
 	}
-	div.sideMenu {
+	section.section3_mypage div.sideMenu {
 		width:-30%;
 		text-align:center;
 	}
-	div.sideMenu li {
+	section.section3_mypage div.sideMenu li {
 		list-style:none;
 		display:inline-block;
 		padding:0 60px;
 	}
-	div.sideMenu li img {
-		width:50px;
-		height:50px;
+	section.section3_mypage div.sideMenu li img {
+		width:55px;
+		height:55px;
 	}
-	div.sideMenu li>a {
+	section.section3_mypage div.sideMenu li>a {
 		text-decoration:none;
 		font-size:18px;
 		color:#3A1D1D;
 		display:block;
 		width:72px;
 	}
-	div.profileDetails,
-	div.contentSection {
+	section.section4_mypage div.profileDetails,
+	section.section5_mypage div.contentSection {
 		height:800px;
 		background-color: rgb(251,247,242);
 		border:6px solid #fff;
@@ -174,11 +178,12 @@
 		border:1px solid lightgray;
 		border-radius:10px;
 	}
-	div.profileDetails li {
+	section.section4_mypage div.profileDetails li {
 		list-style:none;
 		padding:45px 0; 
+		padding-left:50px;
 	}
-	div.profileDetails li>a {
+	section.section4_mypage div.profileDetails li>a {
 		color:#3A1D1D;
 		text-decoration:none;
 		font-size:18px;
@@ -194,7 +199,7 @@
 		display: none;
 		padding-top:5px;
 		padding-left: 8px;
-		width:115px;
+		width:105px;
 	}
 	section.section4_mypage .dropdown-container a {
 		color:#3A1D1D;
