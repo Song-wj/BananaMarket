@@ -13,6 +13,7 @@
 		margin-bottom:200px;
 		margin-top:200px;
 	}
+
 	div.content nav.recommad_list ul li{
 		display:inline;
 		border:1px solid lightgray;
@@ -23,6 +24,7 @@
 	div.content nav.recommad_list{
 		border-bottom:5px solid #FEE500;
 		margin-bottom:50px;
+		height:70px;
 	}
 	div.category>div{
 		display:inline-block;
