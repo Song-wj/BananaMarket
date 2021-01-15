@@ -35,11 +35,14 @@
 	div.join{
 		width:25%;
 		margin:auto;
+		margin-top:150px;
+		margin-bottom:300px;
 	}
 	div.img_wrap>img{
 		border-radius:50%;
 		border:6px solid #fff;
-		box-shadow: 0 0 16px rgb(221,221,221);
+		box-shadow: 0 0 16px yellow;
+		margin-bottom:10px;
 	}
 	div.img_wrap{
 		margin-bottom:10px;
@@ -57,7 +60,8 @@
 		border: 1px solid #ebebeb; 
 		border-bottom-color: #e2e2e2; 
 		border-radius: .25em;
-		margin-left:130px;
+		/* margin-left:130px; */ /* 75%일때 */
+		margin-left:160px;
 	}
 	section.section_join>div>form.join>ul>li:first-child>input[type="file"]{
 		position: absolute; 
@@ -113,11 +117,33 @@
 	section.section_join>div>form.join input.addr2{
 		width:48.8%
 	}
+	section.section_join>div>form.join button.join_btn_style{
+		pisition:relative;
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:13px 17px;
+		font-size:17px;
+		border-radius:5px;
+	}
+	section.section_join>div>form.join button.join_btn_style:hover{
+		opacity:0.7;
+	}
 	
+	section.section_join>div>form.join button.join_btn_style:nth-child(2){
+		position: relative;
+        top:1.6px;
+	}
+	section.section_join>div>form.join button.join_btn_style:first-child{
+		width:100%;
+		margin-top:30px;
+	}
 </style>
 </head>
 <body>
-
+	<jsp:include page="../header.jsp"/>
+	
 	<div class="join">
 		<section class="section_join">
 			<div>
@@ -181,19 +207,20 @@
 					</li>
 					<li>
 						<input type="text" name="addr_num" placeholder="우편번호" class="addr1" id="addr1">
-						<button type="button" class="btn_style" onClick="goPopup();">찾기</button>
+						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
 						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2">
 						<input type="text" name="addr3" placeholder="상세주소" class="addr2" id="addr3">
 					</li>
 					<li>
-						<button type="button" class="btn_style" id="btnJoin">회원가입</button>
+						<button type="button" class="join_btn_style" id="btnJoin">회원가입</button>
 					</li>
 				</ul>
 				</form>
 			</div>
 		</section>
 	</div>
+
 	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
