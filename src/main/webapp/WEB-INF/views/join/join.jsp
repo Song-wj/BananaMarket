@@ -43,10 +43,16 @@
 		border:6px solid #fff;
 		box-shadow: 0 0 16px yellow;
 		margin-bottom:10px;
+		margin-left:-16px;
 	}
 	div.img_wrap{
 		margin-bottom:10px;
 		text-align:center;
+	}
+	section.section_join>div>form.join>h1{
+		font-size:28px;
+		margin-bottom:40px;
+		margin-left:-10px;
 	}
 	section.section_join>div>form.join>ul>li:first-child>label{
 		display: inline-block; 
@@ -75,7 +81,7 @@
 	}
 	section.section_join>div>form.join>ul>li{
 		list-style-type:none;
-		margin-left:-42px;
+		margin-left:-7px;
 		margin-top:3px;
 	}
 	section.section_join>div>form.join>ul>li:first-child,
@@ -123,7 +129,7 @@
 		background-color:RGB(254,229,0);
 		font-weight:bold;
 		border:1px solid RGB(254,229,0);
-		padding:13px 17px;
+		padding:15px 17px;
 		font-size:17px;
 		border-radius:5px;
 	}
@@ -132,7 +138,6 @@
 	}
 	section.section_join>div>form.join button.join_btn_style:nth-child(2){
 		position: relative;
-        top:1.6px;
 	}
 	section.section_join>div>form.join button.join_btn_style:first-child{
 		margin-top:30px;
