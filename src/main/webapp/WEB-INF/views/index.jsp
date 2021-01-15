@@ -6,15 +6,6 @@
 <meta charset="UTF-8">
 <title>바나나마켓</title>
 <style>
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-	* {
-		padding: 0;
-		margin: 0;
-		outline: none;	
-		color: #212529;
-		font-family: 'Noto Sans KR', snas-serif;
-	}
-	
 	#home-main-section-top {
 		margin-top: 72px;
 		padding-top: 24px;
