@@ -21,7 +21,9 @@ div.footer div.fcontent2{
 	border-top:0.5px solid rgb(173,181,189);
 }
 div.footer div.fcontent1 div.flogo{
-	margin-top:30px;
+	margin-top:35px;
+	display:inline-block;
+	float:left;
 }
 div.footer div.fcontent1 img{
 	margin-left:10px;
@@ -33,6 +35,7 @@ div.footer div.fcontent1 ul{
 	list-style:none;
 	float:left;
 	margin-right:80px;
+	margin-top:50px;
 	font-size:17px;
 }
 div.footer div.fcontent1 ul li{
@@ -40,7 +43,7 @@ div.footer div.fcontent1 ul li{
 	color:rgb(173,181,189);
 }
 div.footer div.fcontent1 ul.nav1{
-	margin-left:250px;
+	margin-left:50px;
 }
 div.footer div.fcontent1 ul.nav2 li:nth-child(2),
 div.footer div.fcontent1 ul.nav1 li{
