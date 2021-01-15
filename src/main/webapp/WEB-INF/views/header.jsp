@@ -29,11 +29,12 @@
 	
 	#fixed-bar #fixed-bar-wrap .fixed-logo {
 		margin-bottom: 5px;	
+		margin-left: 10%;
 	}
 	
 	#header-search-input {
 		position: absolute;
-		top:53px;
+		top:30px;
 		margin-left: 30px;
 		width: 400px;
 		padding: 8px 0;
@@ -48,14 +49,14 @@
 	#header-search-button {
 		all: unset;
 		position: absolute;
-		top: 63px;
+		top: 40px;
 		margin-left: 395px;
 	}
 	
 	#fixed-bar .header-menu-list {
 		position: absolute;
-		top: 60px;
-		left: 50rem;
+		top: 40px;
+		left: 65rem;
 		list-style-type: none;
 	}
 	
