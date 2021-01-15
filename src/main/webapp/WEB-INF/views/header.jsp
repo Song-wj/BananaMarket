@@ -18,12 +18,11 @@
 	
 	.fixed-bar-box-shadow {
 		box-sizing: border-box;
-		border-bottom: 1px solid rgba(0,0,0,0.04);
+		border-bottom: 1px solid rgba(0,0,0,0.1);
 	}
 	
 	#fixed-bar #fixed-bar-wrap {
-	    width: 75%;
-	    margin: 0 auto;
+	    width: 100%;
 	    padding: 16px 0;
 	    position: relative;
 	}
