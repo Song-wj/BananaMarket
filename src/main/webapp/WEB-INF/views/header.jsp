@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	* {
+		padding: 0;
+		margin: 0;
+		outline: none;	
+		color: #212529;
+		font-family: 'Noto Sans KR', snas-serif;
+	}
+
 	#fixed-bar {
 		width: 100%;
 	    background-color: #fff;
@@ -55,8 +64,8 @@
 	
 	#fixed-bar .header-menu-list {
 		position: absolute;
-		top: 25px;
-		left: 65rem;
+		top: 40px;
+		left: 75rem;
 		list-style-type: none;
 	}
 	
