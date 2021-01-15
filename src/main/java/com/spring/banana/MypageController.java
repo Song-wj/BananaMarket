@@ -8,6 +8,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	/**
+	 * 마이페이지 - 내 댓글
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_mycomment.do", method=RequestMethod.GET)
+	public String mypage_comment() {
+		return "mypage/mypage_mycomment";
+	}
+	
+	/**
+	 * 마이페이지 - 내 게시물
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_mypost.do", method=RequestMethod.GET)
+	public String mypage_mypost() {
+		return "mypage/mypage_mypost";
+	}
+	
+	/**
 	 * 마이페이지 - 동네설정
 	 * @return
 	 */

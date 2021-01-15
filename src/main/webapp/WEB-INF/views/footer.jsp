@@ -79,7 +79,7 @@ div.footer div.fcontent2 label{
 <div class="footer">
 	<div class="fcontent1">
 		<div class="flogo">
-			<img src="http://localhost:9000/banana/images/logo.png">
+			<img src="http://localhost:9000/banana/images/logo1.png">
 		</div>
 			<ul class="nav1">
 				<li>믿을 수 있는 중고거래</li>
