@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class dongneLifeController {
+public class DongneLifeController {
 	
-	@RequestMapping(value = "/dongneLife", method = RequestMethod.GET)
+	@RequestMapping(value ="/dongneLife", method = RequestMethod.GET)
 	public String dongnelife() {
-		return "dongneLife";
+	
+		return "/dongneLife/dongneLife";
 	}
 }
