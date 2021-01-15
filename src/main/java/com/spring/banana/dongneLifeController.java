@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class dongneLifeController {
+
 	
 	@RequestMapping(value ="/dongneLife.do", method = RequestMethod.GET)
 	public String dongnelife() {
@@ -13,3 +14,4 @@ public class dongneLifeController {
 		return "/dongneLife/dongneLife";
 	}
 }
+

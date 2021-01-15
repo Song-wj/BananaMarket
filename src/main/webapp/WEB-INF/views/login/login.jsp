@@ -10,6 +10,8 @@
 	div.login{
 		width:25%;
 		margin:auto;
+		margin-top:150px;
+		margin-bottom:300px;
 	}
 	section.section_login>div>form.login>ul>li{
 		list-style-type:none;
@@ -29,6 +31,9 @@
      	width:1px; 
      	height:11px;
      	display:inline-block;
+	}
+	section.section_login>div>form.login>ul>li:last-child{
+		margin-left:-17px; /** 67%일때 **/
 	}
 	section.section_login>div>form.login>ul>li>ul>li>a{
 		text-decoration:none;
@@ -59,6 +64,8 @@
 </style>
 </head>
 <body>
+	<jsp:include page="../header.jsp"/>
+
 	<div class="login">
 		<section class="section_login">
 			<div>
@@ -93,5 +100,7 @@
 			</div>
 		</section>
 	</div>
+	
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
