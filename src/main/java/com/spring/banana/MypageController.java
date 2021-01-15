@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	/**
+	 * 마이페이지 - 동네설정
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_setLocation.do", method=RequestMethod.GET)
+	public String mypage_setLocation() {
+		return "mypage/mypage_setLocation";
+	}
+	
+	/**
 	 * 마이페이지 - 관심목록
 	 * @return
 	 */

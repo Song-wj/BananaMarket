@@ -28,6 +28,10 @@
 			$("#contentSection").load("mypage_like.do");
 		});
 		
+		$("#mypage_setLocationBtn").click(function(){
+			$("#contentSection").load("mypage_setLocation.do");
+		});
+		
 	});
 </script>
 <style>
@@ -269,7 +273,7 @@
 			<div class="profileDetails">
 				<ul>
 					<li>
-						<a href="#">내 동네 설정</a>
+						<a href="#" id="mypage_setLocationBtn">내 동네 설정</a>
 					</li>
 					<li>
 						<button class="dropdown-btn">동네생활
