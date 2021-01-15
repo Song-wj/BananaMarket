@@ -12,4 +12,9 @@ public class NeighborhoodController {
 		
 		return "/myNeighborhood/neighborhood";
 	}
+	
+	@RequestMapping(value="/footer.do", method=RequestMethod.GET)
+	public String index() {
+		return "footer";
+	}
 }
