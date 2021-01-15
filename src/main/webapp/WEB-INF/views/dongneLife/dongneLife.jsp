@@ -113,6 +113,7 @@
 	
 </style>
 <body>
+	<jsp:include page="../header.jsp"/>
 	<div class="dongnelife">
 		<section class="section1">
 			<div class="dl_title">
@@ -142,5 +143,6 @@
 			</div>
 		</section>
 	</div>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
