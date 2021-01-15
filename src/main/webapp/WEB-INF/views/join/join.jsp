@@ -130,14 +130,13 @@
 	section.section_join>div>form.join button.join_btn_style:hover{
 		opacity:0.7;
 	}
-	
 	section.section_join>div>form.join button.join_btn_style:nth-child(2){
 		position: relative;
         top:1.6px;
 	}
 	section.section_join>div>form.join button.join_btn_style:first-child{
-		width:100%;
 		margin-top:30px;
+		width:100%;
 	}
 </style>
 </head>
