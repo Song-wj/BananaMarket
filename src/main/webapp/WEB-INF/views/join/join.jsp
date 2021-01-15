@@ -117,14 +117,17 @@
 	section.section_join>div>form.join input.addr2{
 		width:48.8%
 	}
-	section.section_join>div>form.join button.btn_style{
+	section.section_join>div>form.join button.join_btn_style{
+		pisition:relative;
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
 		border:1px solid RGB(254,229,0);
-		padding:5px 10px;
-		font-size:15px;
+		padding:12.5px 17px;
+		font-size:17px;
+		border-radius:5px;
 	}
+
 	
 </style>
 </head>
@@ -194,13 +197,13 @@
 					</li>
 					<li>
 						<input type="text" name="addr_num" placeholder="우편번호" class="addr1" id="addr1">
-						<button type="button" class="btn_style" onClick="goPopup();">찾기</button>
+						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
 						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2">
 						<input type="text" name="addr3" placeholder="상세주소" class="addr2" id="addr3">
 					</li>
 					<li>
-						<button type="button" class="btn_style" id="btnJoin">회원가입</button>
+						<button type="button" class="join_btn_style" id="btnJoin">회원가입</button>
 					</li>
 				</ul>
 				</form>
