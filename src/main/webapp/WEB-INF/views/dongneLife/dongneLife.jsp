@@ -10,6 +10,7 @@
 	.dongnelife {
 		width: 70%;
 		margin:auto;
+		height: 1000px;
 		border:1px solid green;
 	}
 	.dl_title {
@@ -103,11 +104,15 @@
 		width:92%;
 		height:90px;
 	}
-	
+	.dl_content2 ul li:nth-child(4) img{
+		width:20px;
+		height:20px;
+	}
 	.dl_content2 ul li button{
 		all:unset;
 		margin-right:10px;
-		border:1px solid #FEE500;
+		position: relative;
+        top: -4px;
 	}
 	
 	
@@ -136,8 +141,8 @@
 					</li>	
 					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
 					<li>
-						<img src=""><button type="button">공감하기</button>
-						<img src=""><button type="button">댓글쓰기</button>
+						<img src="images/smile.png"><button type="button">공감하기</button>
+						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
 					</li>
 				</ul>
 			</div>
