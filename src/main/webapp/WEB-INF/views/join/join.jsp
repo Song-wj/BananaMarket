@@ -123,7 +123,7 @@
 		background-color:RGB(254,229,0);
 		font-weight:bold;
 		border:1px solid RGB(254,229,0);
-		padding:12.5px 17px;
+		padding:12px 17px;
 		font-size:17px;
 		border-radius:5px;
 	}
