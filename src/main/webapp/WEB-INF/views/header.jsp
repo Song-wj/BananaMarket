@@ -6,6 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	* {
+		padding: 0;
+		margin: 0;
+		outline: none;	
+		color: #212529;
+		font-family: 'Noto Sans KR', snas-serif;
+	}
+
 	#fixed-bar {
 		width: 100%;
 	    background-color: #fff;
@@ -56,7 +65,7 @@
 	#fixed-bar .header-menu-list {
 		position: absolute;
 		top: 40px;
-		left: 65rem;
+		left: 75rem;
 		list-style-type: none;
 	}
 	
@@ -83,7 +92,7 @@
 <body>
 	<header id="fixed-bar" class="fixed-bar-box-shadow">
 		<div id="fixed-bar-wrap">
-			<img class="fixed-logo" src="http://localhost:9000/banana/images/logo.png"
+			<img class="fixed-logo" src="http://localhost:9000/banana/images/logo1.png"
 			 onclick="location.href='http://localhost:9000/banana/index.do'">
 			<input type="text" id="header-search-input" placeholder="동네 이름, 물품명 등을 검색해보세요!">
 			<button id="header-search-button">
@@ -92,8 +101,8 @@
 			<ul class="header-menu-list">
 				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/login.do">로그인</a></li>
 				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/join.do">회원가입</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="#">나의 바나나</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="#">동네생활</a></li>
+				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
+				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
 				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
 			</ul>
 		</div>
