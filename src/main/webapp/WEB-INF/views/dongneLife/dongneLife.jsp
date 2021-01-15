@@ -11,13 +11,16 @@
 		width: 70%;
 		margin:auto;
 		height: 1000px;
+		padding-top:150px;
 		border:1px solid green;
+		
 	}
 	.dl_title {
 		border-bottom:4px solid #FEE500;
 	}
 	.dl_title h1 {
 		font-size:28px;
+		margin-left:20px;
 	}
 	.dl_content1 {
 		margin-top:20px;
@@ -46,10 +49,6 @@
         top: -11px;
      	color:  #FEE500;
         text-shadow: -1px 0 rgb(98,71,24), 0 1px rgb(98,71,24),  1px 0 rgb(98,71,24), 0 -1px rgb(98,71,24);
-        /* color:rgb(98,71,24);
-        text-shadow: -1px 0 #FEE500, 0 1px #FEE500,  1px 0 #FEE500, 0 -1px#FEE500;
-        text-shadow: -1px 0 rgb(98,71,24), 0 1px rgb(98,71,24),  1px 0 rgb(98,71,24), 0 -1px rgb(98,71,24);
-         */
 	}
 	.dl_content1 button:hover{
 		color:rgb(98,71,24);
@@ -66,7 +65,7 @@
 		list-style-type:none;
 	}
 	.dl_content2 ul li {
-		margin-top: 15px;
+		margin: 15px 0 0 35px;
 	}
 	.dl_content2 ul li:first-child {
 		padding-top: 20px;
@@ -113,6 +112,15 @@
 		margin-right:10px;
 		position: relative;
         top: -4px;
+	}
+	.dl_content2 ul li button:hover{
+		all:unset;
+		margin-right:10px;
+		position: relative;
+        top: -4px;
+		color: #FEE500;
+		text-shadow: -1px 0 rgb(98,71,24), 0 1px rgb(98,71,24),  1px 0 rgb(98,71,24), 0 -1px rgb(98,71,24);
+        
 	}
 	
 	
