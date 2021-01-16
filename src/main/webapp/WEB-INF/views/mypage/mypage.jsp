@@ -32,6 +32,14 @@
 			$("#contentSection").load("mypage_setLocation.do");
 		});
 		
+		$("#mypost").click(function(){
+			$("#contentSection").load("mypage_mypost.do");
+		});
+		
+		$("#mycomment").click(function(){
+			$("#contentSection").load("mypage_mycomment.do");
+		});
+		
 	});
 </script>
 <style>
@@ -285,8 +293,8 @@
 							<i class="fa fa-caret-down"></i>
 						</button>
 						<div class="dropdown-container">
-							<a href="#">동네생활 글</a>
-							<a href="#">동네생활 댓글</a>
+							<a href="#" id="mypost">동네생활 글</a>
+							<a href="#" id="mycomment">동네생활 댓글</a>
 						</div>
 					</li>
 					<li>

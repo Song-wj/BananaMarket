@@ -13,9 +13,15 @@
 		margin-top:150px;
 		margin-bottom:300px;
 	}
+	section.section_login>div>form.login>h1{
+		font-size:28px;
+		margin-bottom:40px;
+		margin-left:-10px;
+	}
+	
 	section.section_login>div>form.login>ul>li{
 		list-style-type:none;
-		margin-left:-42px;
+		margin-left:-7px;
 		margin-top:3px;
 	}
 	section.section_login>div>form.login>ul>li>ul>li{
@@ -33,7 +39,10 @@
      	display:inline-block;
 	}
 	section.section_login>div>form.login>ul>li:last-child{
-		margin-left:-17px; /** 67%일때 **/
+		margin-left:70px;
+	}
+	section.section_login>div>form.login>ul>li>ul>li>a:hover{
+		border-bottom:1px solid black;	
 	}
 	section.section_login>div>form.login>ul>li>ul>li>a{
 		text-decoration:none;
