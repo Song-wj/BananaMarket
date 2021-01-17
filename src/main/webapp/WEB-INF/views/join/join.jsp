@@ -118,7 +118,7 @@
 		width:48.8%
 	}
 	section.section_join>div>form.join button.join_btn_style{
-		pisition:relative;
+		position:relative;
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
