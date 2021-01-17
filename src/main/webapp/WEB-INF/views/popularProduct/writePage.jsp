@@ -56,7 +56,7 @@ $(document).ready(function(){
 		if($("#ptitle").val() ==""){
 			alert("제목을 적어주세요");
 			$("#ptitle").focus();
-		}else if($("#pcategory").val() =="카테고리"){
+		}else if($("#pcategory").val() =="none"){
 			alert("카테고리를 선택해주세요");
 			$("#pcategory").focus();
 		}else if(!barginCheck($("#bargin").val())){
@@ -71,11 +71,8 @@ $(document).ready(function(){
 	})
 	
 	function barginCheck(chk){
+		alert(chk);
 		
-		if(chk=="on"){
-			$("#pprice").css("disabled","true");
-			return true;
-		}
 
 	}
 })
