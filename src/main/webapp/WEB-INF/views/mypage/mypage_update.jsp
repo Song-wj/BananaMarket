@@ -32,20 +32,27 @@
 	}
 </script>
 <style>
-	div.join{ 
-		padding-top:150px;
-		padding-bottom:50px;
+	div.join{
 		width:25%;
 		margin:auto;
+		margin-top:150px;
+		margin-bottom:300px;
 	}
 	div.img_wrap>img{
 		border-radius:50%;
 		border:6px solid #fff;
-		box-shadow: 0 0 16px rgb(221,221,221);
+		box-shadow: 0 0 16px yellow;
+		margin-bottom:10px;
+		margin-left:-16px;
 	}
 	div.img_wrap{
 		margin-bottom:10px;
 		text-align:center;
+	}
+	section.section_join>div>form.join>h1{
+		font-size:28px;
+		margin-bottom:40px;
+		margin-left:-10px;
 	}
 	section.section_join>div>form.join>ul>li:first-child>label{
 		display: inline-block; 
@@ -59,7 +66,8 @@
 		border: 1px solid #ebebeb; 
 		border-bottom-color: #e2e2e2; 
 		border-radius: .25em;
-		margin-left:130px;
+		/* margin-left:130px; */ /* 75%일때 */
+		margin-left:160px;
 	}
 	section.section_join>div>form.join>ul>li:first-child>input[type="file"]{
 		position: absolute; 
@@ -73,7 +81,7 @@
 	}
 	section.section_join>div>form.join>ul>li{
 		list-style-type:none;
-		margin-left:-42px;
+		margin-left:-7px;
 		margin-top:3px;
 	}
 	section.section_join>div>form.join>ul>li:first-child,
@@ -115,7 +123,26 @@
 	section.section_join>div>form.join input.addr2{
 		width:48.8%
 	}
-	
+	section.section_join>div>form.join button.join_btn_style{
+		pisition:relative;
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:15px 17px;
+		font-size:17px;
+		border-radius:5px;
+	}
+	section.section_join>div>form.join button.join_btn_style:hover{
+		opacity:0.7;
+	}
+	section.section_join>div>form.join button.join_btn_style:nth-child(2){
+		position: relative;
+	}
+	section.section_join>div>form.join button.join_btn_style:first-child{
+		margin-top:30px;
+		width:49.2%;
+	}
 </style>
 </head>
 <body>
@@ -185,15 +212,14 @@
 					</li>
 					<li>
 						<input type="text" name="addr_num" placeholder="우편번호" class="addr1" id="addr1">
-						<button type="button" class="btn_style" onClick="goPopup();">찾기</button>
+						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
 						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2">
 						<input type="text" name="addr3" placeholder="상세주소" class="addr2" id="addr3">
 					</li>
 					<li>
-						<button type="button" class="btn_style" id="btnJoin">수정완료</button>
-						<button type="reset" class="btn_style" id="btnCancle">취소</button>
-						<a href="mypage.do"><button type="button" class="btn_style" id="btnMypage">마이페이지</button></a>
+						<button type="button" class="join_btn_style" id="btnJoin">수정완료</button>
+						<a href="mypage.do"><button type="button" class="join_btn_style" id="btnMypage">마이페이지</button></a>
 					</li>
 				</ul>
 				</form>

@@ -32,6 +32,18 @@
 			$("#contentSection").load("mypage_setLocation.do");
 		});
 		
+		$("#mypost").click(function(){
+			$("#contentSection").load("mypage_mypost.do");
+		});
+		
+		$("#mycomment").click(function(){
+			$("#contentSection").load("mypage_mycomment.do");
+		});
+		
+		$("#subjectList").click(function() {
+			$("#contentSection").load("mypage_subjectList.do");
+		});
+		
 	});
 </script>
 <style>
@@ -199,8 +211,9 @@
 		display: none;
 		padding-top:5px;
 		padding-left: 8px;
-		width:105px;
+		width:150px;
 	}
+	
 	section.section4_mypage .dropdown-container a {
 		color:#3A1D1D;
 		font-size:18px;
@@ -285,8 +298,9 @@
 							<i class="fa fa-caret-down"></i>
 						</button>
 						<div class="dropdown-container">
-							<a href="#">동네생활 글</a>
-							<a href="#">동네생활 댓글</a>
+							<div><a href="#" id="mypost">동네생활 글</a></div>
+							<div><a href="#" id="mycomment">동네생활 댓글</a></div>
+							<div><a href="#" id="subjectList">동네생활 주제 목록</a></div>
 						</div>
 					</li>
 					<li>
