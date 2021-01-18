@@ -21,6 +21,7 @@
 		width:100%;
 	}
 	td.real>h1{
+		text-align:center;
 		font-size:28px;
 	}
 	td.button{
