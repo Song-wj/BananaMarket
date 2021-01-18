@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class JoinController {
-	@RequestMapping(value="/join.do",method=RequestMethod.GET)
-	public String join() {
-		return "/join/join";
+public class EnrollstoreController {
+
+	@RequestMapping(value="/enrollstore.do",method=RequestMethod.GET)
+	public String enrollStore() {
+		return "/enrollstore/enrollstore";
 	}
 }

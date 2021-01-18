@@ -29,6 +29,7 @@ div.footer div.fcontent1 img{
 	margin-left:10px;
 	width:200px;
 	height:60px;
+	margin-top:18px;
 }	
 div.footer div.fcontent1 ul{
 	display:inline-block;	
@@ -73,6 +74,11 @@ div.footer div.fcontent2 span>label,
 div.footer div.fcontent2 label{
 	color:rgb(173,181,189);
 }
+div.footer div.fcontent1 ul.nav1>li>a{
+	text-decoration:none;
+	color: white;
+	font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -83,7 +89,7 @@ div.footer div.fcontent2 label{
 		</div>
 			<ul class="nav1">
 				<li>믿을 수 있는 중고거래</li>
-				<li>자주 묻는 질문</li>
+				<li><a href="http://localhost:9000/banana/question_list.do">자주 묻는 질문</a></li>
 				<li></li>
 			</ul>
 			<ul class="nav2">
