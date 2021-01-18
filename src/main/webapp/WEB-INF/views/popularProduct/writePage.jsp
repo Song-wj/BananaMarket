@@ -18,7 +18,34 @@
 		list-style:none;
 		margin-top:30px;
 	}
-	
+	div.content form.pwriteForm ul li:first-child>label{
+		display: inline-block; 
+		padding: .5em .75em; 
+		color: #999; 
+		font-size: inherit; 
+		line-height: normal; 
+		background-color: #fdfdfd; 
+		cursor: pointer; 
+		border: 1px solid #ebebeb; 
+		border-bottom-color: #e2e2e2; 
+		border-radius: .25em;
+		margin-left:-400px;
+	}
+	div.content form.pwriteForm ul li:first-child>input[type="file"]{
+		position: absolute; 
+		width: 1px; 
+		height: 1px; 
+		padding: 0; 
+		margin: -1px; 
+		overflow: hidden; 
+		clip:rect(0,0,0,0); 
+		border: 0;
+	}
+	div.content form.pwriteForm ul li:first-child div{
+
+		margin-top:20px;
+		margin-bottom:20px;
+	}
 	div.content form.pwriteForm ul li input[type='text'],
 	div.content form.pwriteForm ul li select,
 	div.content form.pwriteForm ul li textarea{
@@ -52,6 +79,32 @@
 <script>
 
 $(document).ready(function(){
+	
+	var sel_files = [];
+	$(document).ready(function(){
+		$("#input_img").on("change", handleImgFileSelect);
+	});
+	
+	function handleImgFileSelect(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;				
+			}
+			
+			sel_files.push(f);
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var img_html ="<img src=\"" + e.target.result + "\"  style='width:100px;height:100px;margin-right:20px;'/>";
+				$("#img_list").append(img_html);
+			}
+			reader.readAsDataURL(f);
+		});
+	};
+	
 	$('#pwrite_btn').click(function(){
 		if($("#ptitle").val() ==""){
 			alert("제목을 적어주세요");
@@ -79,6 +132,17 @@ $(document).ready(function(){
         }
     });
 	
+	
+	/* $("#input_img").change(function(){
+		if(window.FileReader){
+			var fileName= $(this)[0].length;
+			alert(fileName);
+		
+								
+		}
+	});  */
+	
+	
 });
 </script>
 </head>
@@ -88,8 +152,11 @@ $(document).ready(function(){
 		<h1>상품 등록하기</h1>
 		<form name="pwriteForm" action="" method="post" class="pwriteForm">
 		<ul>
-			<li><input type="file" name="pfile" id="pfile"></li>
-			<li><input type="text" name="ptitle" placeholder="제목" id="ptitle"></li>
+			<li><label for="input_img">이미지 추가</label>
+				<input type="file" id="input_img"  multiple>
+				<div id="img_list"></div>
+    		</li>
+			<li><input type="text" name="ptitle" placeholder="제목" id="ptitle" ></li>
 			<li><select name="category" id="pcategory">
 				<option value="none">카테고리</option>
 				<option value="디지털/가전">디지털/가전</option>
