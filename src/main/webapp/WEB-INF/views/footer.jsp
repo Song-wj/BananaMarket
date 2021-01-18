@@ -29,6 +29,7 @@ div.footer div.fcontent1 img{
 	margin-left:10px;
 	width:200px;
 	height:60px;
+	margin-top:18px;
 }	
 div.footer div.fcontent1 ul{
 	display:inline-block;	
