@@ -32,6 +32,18 @@
 			$("#contentSection").load("mypage_setLocation.do");
 		});
 		
+		$("#mypage_locationCheck").click(function(){
+			$("#contentSection").load("mypage_locationCheck.do");	
+		});
+		
+		$("#mypage_keyword").click(function(){
+			$("#contentSection").load("mypage_keyword.do");	
+		});
+		
+		$("#mypage_collectView").click(function(){
+			$("#contentSection").load("mypage_collectView.do");	
+		});
+		
 		$("#mypost").click(function(){
 			$("#contentSection").load("mypage_mypost.do");
 		});
@@ -292,6 +304,15 @@
 				<ul>
 					<li>
 						<a href="#" id="mypage_setLocationBtn">내 동네 설정</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_locationCheck">동네 인증</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_keyword">키워드 알림 설정</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_collectView">모아보기</a>
 					</li>
 					<li>
 						<button class="dropdown-btn">동네생활
