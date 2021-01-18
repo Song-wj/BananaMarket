@@ -32,6 +32,30 @@
 			$("#contentSection").load("mypage_setLocation.do");
 		});
 		
+		$("#mypage_locationCheck").click(function(){
+			$("#contentSection").load("mypage_locationCheck.do");	
+		});
+		
+		$("#mypage_keyword").click(function(){
+			$("#contentSection").load("mypage_keyword.do");	
+		});
+		
+		$("#mypage_collectView").click(function(){
+			$("#contentSection").load("mypage_collectView.do");	
+		});
+		
+		$("#mypost").click(function(){
+			$("#contentSection").load("mypage_mypost.do");
+		});
+		
+		$("#mycomment").click(function(){
+			$("#contentSection").load("mypage_mycomment.do");
+		});
+		
+		$("#subjectList").click(function() {
+			$("#contentSection").load("mypage_subjectList.do");
+		});
+		
 	});
 </script>
 <style>
@@ -199,8 +223,9 @@
 		display: none;
 		padding-top:5px;
 		padding-left: 8px;
-		width:105px;
+		width:150px;
 	}
+	
 	section.section4_mypage .dropdown-container a {
 		color:#3A1D1D;
 		font-size:18px;
@@ -281,12 +306,22 @@
 						<a href="#" id="mypage_setLocationBtn">내 동네 설정</a>
 					</li>
 					<li>
+						<a href="#" id="mypage_locationCheck">동네 인증</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_keyword">키워드 알림 설정</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_collectView">모아보기</a>
+					</li>
+					<li>
 						<button class="dropdown-btn">동네생활
 							<i class="fa fa-caret-down"></i>
 						</button>
 						<div class="dropdown-container">
-							<a href="#">동네생활 글</a>
-							<a href="#">동네생활 댓글</a>
+							<div><a href="#" id="mypost">동네생활 글</a></div>
+							<div><a href="#" id="mycomment">동네생활 댓글</a></div>
+							<div><a href="#" id="subjectList">동네생활 주제 목록</a></div>
 						</div>
 					</li>
 					<li>

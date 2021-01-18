@@ -34,6 +34,15 @@
 	div.category>div img{
 		width:50px;
 		height:50px;
+		display: block; 
+		margin: 0px auto;
+	}
+	div.category>div a{
+		text-decoration:none;
+		cursor:pointer;
+	}
+	div.category>div a label{
+		cursor:pointer;
 	}
 	div.recommand_store,
 	div.store_news{
@@ -143,52 +152,52 @@
 		</nav>
 		<div class="category">
 			<div>
-				<div>				
+				<a href="">			
 					<img src="images/work1.png">
-				</div>
-				<label>일자리</label>
+				    <label>일자리</label>
+				</a>
 			</div>
-			<div>
-				<div>				
+			<div>	
+				<a href="">						
 					<img src="images/manager.png">
-				</div>
-				<label>동네 구인구직</label>
+					<label>동네 구인구직</label>
+				</a>
 			</div>
 			<div>
-				<div>
-					<img src="images/notebook.png">
-				</div>
-				<label>과외/클래스</label>
+				<a href="">	
+					<img src="images/notebook.png">			
+					<label>과외/클래스</label>
+				</a>
 			</div>
 			<div>
-				<div>
-					<img src="images/harvest.png">
-				</div>
-				<label>농수산물</label>
+				<a href="">	
+					<img src="images/harvest.png">		
+				    <label>농수산물</label>
+				</a>
 			</div>
 			<div>
-				<div>
-					<img src="images/home.png">
-				</div>
-				<label>부동산</label>
+				<a href="">	
+					<img src="images/home.png">	
+				    <label>부동산</label>
+				</a>
 			</div>
 			<div>
-				<div>				
+				<a href="">			
 					<img src="images/car1.png">
-				</div>
-				<label>중고차</label>
+					<label>중고차</label>
+				</a>
 			</div>
 			<div>
-				<div>				
-					<img src="images/diplay.png">
-				</div>
-				<label>전시/행사</label>			
+				<a href="">					
+					<img src="images/diplay.png">			
+			    	<label>전시/행사</label>			
+			    </a>
 			</div>
 			<div>
-				<div>
-					<img src="images/fashion.png">
-				</div>
-				<label>세탁</label>
+				<a href="">	
+					<img src="images/fashion.png">		
+					<label>세탁</label>
+				</a>
 			</div>		
 		</div> <!-- category -->
 		<div class="recommand_store">
