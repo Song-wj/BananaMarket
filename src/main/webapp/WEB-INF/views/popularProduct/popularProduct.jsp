@@ -83,17 +83,22 @@
 		bottom:150px;
 		transition: all ease 1s;
 	}
+	div.content>div.pbanner div label{
+		display:inline-block;	
+		margin-right:10px;
+		font-weight:bold;
+		float:left;
+		margin-top:15px;
+	}
 	div.content>div.pbanner div button{
 		border:1px solid white;
 		background-color:white;
-		border-radius:50%;
-		
+		border-radius:50%;	
 	}
 	div.content>div.pbanner div img{
 		width:50px;
 		height:45px;
-	}
-			
+	}		
 	div.content>div.pbanner div:last-child:active {
 		transform: rotate( 180deg );
 	}
@@ -101,10 +106,24 @@
 </style>
 <script>
  	$(document).ready(function(){
+ 		var chk = 0;
 		$( 'button#plus' ).click( function() {
-			$("#plus").css("transform"," rotate( 180deg )");
-		 	$("#pstore").css("visibility","visible");
-		 	$("#pwrite").css("visibility","visible");
+			
+				$("#plus").css("transform"," rotate( 180deg )");
+				
+			if(chk ==0 ){
+			 	$("#pstore").css("visibility","visible");
+			 	$("#pwrite").css("visibility","visible");
+			 	$(".pstore").css("visibility","visible");
+			 	$(".pwrite").css("visibility","visible");
+			 	chk = 1;
+			}else{				
+			 	$("#pstore").css("visibility","hidden");
+			 	$("#pwrite").css("visibility","hidden");
+			 	$(".pstore").css("visibility","hidden");
+			 	$(".pwrite").css("visibility","hidden");
+			 	chk=0;
+			} 
 		});		
  	})
  	
@@ -185,8 +204,8 @@
 			</div>
 		</div> <!-- product -->
 		<div class="pbanner">
-			<div><button type="button" id="pstore"><img src="images/pstore.png"></button></div>
-			<div><button type="button" id="pwrite"><img src="images/pwrite.png"></button></div>
+			<div><a href="promoteDongne.do"><label class="pstore">동네홍보</label><button type="button" id="pstore"><img src="images/pstore.png"></button></a></div>
+			<div><a href="writePage.do"><label class="pwrite">중고거래</label><button type="button" id="pwrite"><img src="images/pwrite.png"></button></a></div>
 			<div><button type="button" id="plus"><img src="images/picon.png"></button></div>
 		</div> <!-- banner -->
 	</div> <!-- content -->

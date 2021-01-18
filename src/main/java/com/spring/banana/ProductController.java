@@ -20,4 +20,14 @@ public class ProductController {
 	public String updatePage() {
 		return "/popularProduct/updatePage";
 	}
+	
+	@RequestMapping(value="/deletePage.do", method=RequestMethod.GET)
+	public String deletePage() {
+		return "/popularProduct/deletePage";
+	}
+	
+	@RequestMapping(value="/promoteDongne.do", method=RequestMethod.GET)
+	public String promoteDonge() {
+		return "/popularProduct/promoteDongne";
+	}
 }
