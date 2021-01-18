@@ -15,4 +15,9 @@ public class ProductController {
 	public String writePage() {
 		return "/popularProduct/writePage";
 	}
+	
+	@RequestMapping(value="/updatePage.do", method=RequestMethod.GET)
+	public String updatePage() {
+		return "/popularProduct/updatePage";
+	}
 }
