@@ -14,11 +14,11 @@
 		margin-bottom:150px;
 		text-align:center;
 	}
-	div.content form.pwriteForm ul li{
+	div.content form.pupdateForm ul li{
 		list-style:none;
 		margin-top:30px;
 	}
-	div.content form.pwriteForm ul li:first-child>label{
+	div.content form.pupdateForm ul li:first-child>label{
 		display: inline-block; 
 		padding: .5em .75em; 
 		color: #999; 
@@ -31,7 +31,7 @@
 		border-radius: .25em;
 		margin-left:-400px;
 	}
-	div.content form.pwriteForm ul li:first-child>input[type="file"]{
+	div.content form.pupdateForm ul li:first-child>input[type="file"]{
 		position: absolute; 
 		width: 1px; 
 		height: 1px; 
@@ -41,14 +41,14 @@
 		clip:rect(0,0,0,0); 
 		border: 0;
 	}
-	div.content form.pwriteForm ul li:first-child div{
+	div.content form.pupdateForm ul li:first-child div{
 
 		margin-top:20px;
 		margin-bottom:20px;
 	}
-	div.content form.pwriteForm ul li input[type='text'],
-	div.content form.pwriteForm ul li select,
-	div.content form.pwriteForm ul li textarea{
+	div.content form.pupdateForm ul li input[type='text'],
+	div.content form.pupdateForm ul li select,
+	div.content form.pupdateForm ul li textarea{
 		padding:15px 0;
 		border:1px solid lightgray;
 		border-radius:5px;
@@ -56,16 +56,16 @@
 		text-indent:10px;
 		font-size:17px;
 	}
-	div.content form.pwriteForm ul li:nth-child(4){
+	div.content form.pupdateForm ul li:nth-child(4){
 		margin-left:170px;
 	}
-	div.content form.pwriteForm ul li input[type='checkbox']{
+	div.content form.pupdateForm ul li input[type='checkbox']{
 		margin-left:70px;
 	}
-	div.content form.pwriteForm ul li textarea{
+	div.content form.pupdateForm ul li textarea{
 		text-indent:0px;
 	}
-	div.content form.pwriteForm ul li button{
+	div.content form.pupdateForm ul li button{
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
@@ -79,6 +79,7 @@
 <script>
 
 $(document).ready(function(){
+	
 	
 	var sel_files = [];
 	$(document).ready(function(){
@@ -105,6 +106,7 @@ $(document).ready(function(){
 		});
 	};
 	
+	
 	$('#pwrite_btn').click(function(){
 		if($("#ptitle").val() ==""){
 			alert("제목을 적어주세요");
@@ -119,7 +121,7 @@ $(document).ready(function(){
 			alert("상품 내용을 적어주세요");
 			$("#pcontent").focus();
 		}else
-			pwriteForm.submit();
+			pupdateForm.submit();
 		
 	});
 	
@@ -132,31 +134,19 @@ $(document).ready(function(){
         }
     });
 	
-	
-	/* $("#input_img").change(function(){
-		if(window.FileReader){
-			var fileName= $(this)[0].length;
-			alert(fileName);
-		
-								
-		}
-	});  */
-	
-	
 });
 </script>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
 	<div class= "content">
-		<h1>상품 등록하기</h1>
-		<form name="pwriteForm" action="" method="post" class="pwriteForm">
+		<h1>상품 수정하기</h1>
+		<form name="pupdateForm" action="" method="post" class="pupdateForm">
 		<ul>
 			<li><label for="input_img">이미지 추가</label>
 				<input type="file" id="input_img"  multiple>
-				<div id="img_list"></div>
-    		</li>
-			<li><input type="text" name="ptitle" placeholder="제목" id="ptitle" ></li>
+				<div id="img_list"></div></li>
+			<li><input type="text" name="ptitle"  id="ptitle"></li>
 			<li><select name="category" id="pcategory">
 				<option value="none">카테고리</option>
 				<option value="디지털/가전">디지털/가전</option>
@@ -175,9 +165,9 @@ $(document).ready(function(){
 				<option value="기타 중고물품">기타 중고물품</option>
 				<option value="삽니다">삽니다.</option>
 			</select></li>
-			<li><input type="text" name="pprice" placeholder="₩가격 (선택사항)" id="pprice"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
-			<li><textarea cols=10 rows=10 name="pcontent" placeholder="게시글 내용을 작성해주세요. 가품 및 판매금지품목은 게시가 제한될 수 있어요." id="pcontent" style="resize:none;"></textarea></li>
-			<li><button type="button" id="pwrite_btn">완료</button></li>	
+			<li><input type="text" name="pprice" id="pprice"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
+			<li><textarea cols=10 rows=10 name="pcontent"  id="pcontent" style="resize:none;"></textarea></li>
+			<li><button type="button" id="pupdate_btn">수정하기</button></li>	
 		</ul>
 		</form>
 	</div>
