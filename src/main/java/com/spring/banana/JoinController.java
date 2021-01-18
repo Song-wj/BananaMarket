@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class JoinController {
 	@RequestMapping(value="/join.do",method=RequestMethod.GET)
-	public String admin() {
+	public String join() {
 		return "/join/join";
 	}
 }
