@@ -18,7 +18,34 @@
 		list-style:none;
 		margin-top:30px;
 	}
-	
+	div.content form.pupdateForm ul li:first-child>label{
+		display: inline-block; 
+		padding: .5em .75em; 
+		color: #999; 
+		font-size: inherit; 
+		line-height: normal; 
+		background-color: #fdfdfd; 
+		cursor: pointer; 
+		border: 1px solid #ebebeb; 
+		border-bottom-color: #e2e2e2; 
+		border-radius: .25em;
+		margin-left:-400px;
+	}
+	div.content form.pupdateForm ul li:first-child>input[type="file"]{
+		position: absolute; 
+		width: 1px; 
+		height: 1px; 
+		padding: 0; 
+		margin: -1px; 
+		overflow: hidden; 
+		clip:rect(0,0,0,0); 
+		border: 0;
+	}
+	div.content form.pupdateForm ul li:first-child div{
+
+		margin-top:20px;
+		margin-bottom:20px;
+	}
 	div.content form.pupdateForm ul li input[type='text'],
 	div.content form.pupdateForm ul li select,
 	div.content form.pupdateForm ul li textarea{
@@ -52,6 +79,34 @@
 <script>
 
 $(document).ready(function(){
+	
+	
+	var sel_files = [];
+	$(document).ready(function(){
+		$("#input_img").on("change", handleImgFileSelect);
+	});
+	
+	function handleImgFileSelect(e){
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지 확장자만 가능합니다.");
+				return;				
+			}
+			
+			sel_files.push(f);
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var img_html ="<img src=\"" + e.target.result + "\"  style='width:100px;height:100px;margin-right:20px;'/>";
+				$("#img_list").append(img_html);
+			}
+			reader.readAsDataURL(f);
+		});
+	};
+	
+	
 	$('#pwrite_btn').click(function(){
 		if($("#ptitle").val() ==""){
 			alert("제목을 적어주세요");
@@ -88,7 +143,9 @@ $(document).ready(function(){
 		<h1>상품 수정하기</h1>
 		<form name="pupdateForm" action="" method="post" class="pupdateForm">
 		<ul>
-			<li><input type="file" name="pfile" id="pfile"></li>
+			<li><label for="input_img">이미지 추가</label>
+				<input type="file" id="input_img"  multiple>
+				<div id="img_list"></div></li>
 			<li><input type="text" name="ptitle"  id="ptitle"></li>
 			<li><select name="category" id="pcategory">
 				<option value="none">카테고리</option>
@@ -108,7 +165,7 @@ $(document).ready(function(){
 				<option value="기타 중고물품">기타 중고물품</option>
 				<option value="삽니다">삽니다.</option>
 			</select></li>
-			<li><input type="text" name="pprice" ><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
+			<li><input type="text" name="pprice" id="pprice"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
 			<li><textarea cols=10 rows=10 name="pcontent"  id="pcontent" style="resize:none;"></textarea></li>
 			<li><button type="button" id="pupdate_btn">수정하기</button></li>	
 		</ul>
