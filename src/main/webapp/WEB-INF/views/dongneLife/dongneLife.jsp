@@ -10,10 +10,10 @@
 	.dongnelife {
 		width: 70%;
 		margin:auto;
-		height: 1000px;
+		height:1000px;
 		padding-top:150px;
 		border:1px solid green;
-		
+		padding-bottom:5%;
 	}
 	.dl_title {
 		border-bottom:4px solid #FEE500;
@@ -134,8 +134,44 @@
 			</div>
 			<div class="dl_content1">
 				<img src="images/김수현.jpg"><label>히흫님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
-				<button type="button"> 동네생활 글쓰기</button><hr>
+				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
 			</div>	
+			<div class="dl_content2">
+				<ul>	
+					<li>
+						<label>주제</label>
+						<label>시간(몇분전)</label>
+					</li>
+					<li>
+						<img src="images/banana.jpg">
+						<label>히히</label>
+						<label>이의동</label>
+					</li>	
+					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
+					<li>
+						<img src="images/smile.png"><button type="button">공감하기</button>
+						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
+					</li>
+				</ul>
+			</div>
+			<div class="dl_content2">
+				<ul>	
+					<li>
+						<label>주제</label>
+						<label>시간(몇분전)</label>
+					</li>
+					<li>
+						<img src="images/banana.jpg">
+						<label>히히</label>
+						<label>이의동</label>
+					</li>	
+					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
+					<li>
+						<img src="images/smile.png"><button type="button">공감하기</button>
+						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
+					</li>
+				</ul>
+			</div>
 			<div class="dl_content2">
 				<ul>	
 					<li>
