@@ -128,7 +128,7 @@
 		list-style:none;
 	}
 	section.section1_mypage ul.mypageSide>li {
-		margin-left:5px;
+		margin-left:15px;
 	}
 	section.section1_mypage ul.mypageSide>li:first-child {
 		padding-top:10px;
