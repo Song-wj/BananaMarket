@@ -8,6 +8,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	/**
+	 * 마이페이지 - 동네생활 주제 Content
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
+	public String mypage_subjectContent() {
+		return "mypage/mypage_subjectContent";
+	}
+	
+	/**
+	 * 마이페이지 - 동네생활 주제 목록2
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_subjectList2.do", method=RequestMethod.GET)
+	public String mypage_subjectList2() {
+		return "mypage/mypage_subjectList2";
+	}
+
+	/**
 	 * 마이페이지 - 동네생활 주제 목록
 	 * @return
 	 */
