@@ -56,6 +56,10 @@
 			$("#contentSection").load("mypage_subjectList.do");
 		});
 		
+		$("#review").click(function() {
+			$("#contentSection").load("mypage_review.do");
+		});
+		
 	});
 </script>
 <style>
@@ -328,7 +332,7 @@
 						<a href="#">받은 매너 평가</a>
 					</li>
 					<li>
-						<a href="#">받은 거래 후기</a>
+						<a href="#" id="review">받은 거래 후기</a>
 					</li>
 				</ul>
 			</div>

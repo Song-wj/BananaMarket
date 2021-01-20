@@ -131,5 +131,14 @@ public class MypageController {
 	public String mypage() {
 		return "mypage/mypage";
 	}
+	
+	/**
+	 * 마이페이지 - 내 댓글
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
+	public String mypage_review() {
+		return "mypage/mypage_review";
+	}
 
 }
