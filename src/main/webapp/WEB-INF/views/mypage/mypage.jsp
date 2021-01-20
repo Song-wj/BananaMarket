@@ -66,7 +66,7 @@
 	div.mypage_mainDiv {
 		width:70%;
 		margin:auto;
-		margin-bottom:50%;
+		padding-bottom:65%;
 	}
 	section.section2_mypage,
 	section.section3_mypage {
@@ -147,6 +147,19 @@
 	section.section1_mypage ul.mypageSide>li:nth-child(3) {
 		padding-top:8px;
 	}
+	section.section1_mypage ul.mypageSide>li:nth-child(3) button {
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:3px 5px;
+		font-size:15px;
+		border-radius:5px;
+	}
+	section.section1_mypage ul.mypageSide>li:nth-child(3) button:hover{
+		cursor:pointer;
+		opacity:0.7;
+	}
 	section.section2_mypage div.manner {
 	}
 	section.section2_mypage .jqbar {
@@ -199,7 +212,7 @@
 	}
 	section.section4_mypage div.profileDetails,
 	section.section5_mypage div.contentSection {
-		height:800px;
+		height:1100px;
 		background-color: rgb(251,247,242);
 		border:6px solid #fff;
 		box-shadow: 0 0 6px rgb(221,221,221);
@@ -208,7 +221,7 @@
 	}
 	section.section4_mypage div.profileDetails li {
 		list-style:none;
-		padding:45px 0; 
+		padding:40px 0; 
 		padding-left:50px;
 	}
 	section.section4_mypage div.profileDetails li>a {
