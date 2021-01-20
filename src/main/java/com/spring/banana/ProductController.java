@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ProductController {
 
+	@RequestMapping(value="/productContent.do", method=RequestMethod.GET)
+	public String productContent() {
+		return "/popularProduct/productContent";
+	}
+	
 	@RequestMapping(value="/popularProduct.do", method=RequestMethod.GET)
 	public String popularProdcut() {
 		return "/popularProduct/popularProduct";
