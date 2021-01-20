@@ -8,6 +8,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	/**
+	 * 마이페이지 - 동네생활 주제 Content
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_mannerGrade.do", method=RequestMethod.GET)
+	public String mypage_mannerGrade() {
+		return "mypage/mypage_mannerGrade";
+	}
+	
+	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
+	public String mypage_subjectContent() {
+		return "mypage/mypage_subjectContent";
+	}
+	
+	/**
+	 * 마이페이지 - 동네생활 주제 목록2
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_subjectList2.do", method=RequestMethod.GET)
+	public String mypage_subjectList2() {
+		return "mypage/mypage_subjectList2";
+	}
+
+	/**
 	 * 마이페이지 - 동네생활 주제 목록
 	 * @return
 	 */
@@ -32,6 +55,32 @@ public class MypageController {
 	@RequestMapping(value="/mypage_mypost.do", method=RequestMethod.GET)
 	public String mypage_mypost() {
 		return "mypage/mypage_mypost";
+	}
+	
+	/**
+	 * 마이페이지 - 모아보기
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_collectView.do", method=RequestMethod.GET)
+	public String mypage_collectView() {
+		return "mypage/mypage_collectView";
+	}
+	
+	/**
+	 * 마이페이지 - 키워드 알림설정
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_keyword.do", method=RequestMethod.GET)
+	public String mypage_keyword() {
+		return "mypage/mypage_keyword";
+	}
+	/**
+	 * 마이페이지 - 동네인증
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_locationCheck.do", method=RequestMethod.GET)
+	public String mypage_locationCheck() {
+		return "mypage/mypage_locationCheck";
 	}
 	
 	/**

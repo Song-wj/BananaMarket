@@ -32,6 +32,18 @@
 			$("#contentSection").load("mypage_setLocation.do");
 		});
 		
+		$("#mypage_locationCheck").click(function(){
+			$("#contentSection").load("mypage_locationCheck.do");	
+		});
+		
+		$("#mypage_keyword").click(function(){
+			$("#contentSection").load("mypage_keyword.do");	
+		});
+		
+		$("#mypage_collectView").click(function(){
+			$("#contentSection").load("mypage_collectView.do");	
+		});
+		
 		$("#mypost").click(function(){
 			$("#contentSection").load("mypage_mypost.do");
 		});
@@ -44,13 +56,17 @@
 			$("#contentSection").load("mypage_subjectList.do");
 		});
 		
+		$("#mypage_mannerGrade").click(function() {
+			$("#contentSection").load("mypage_mannerGrade.do");
+		});
+		
 	});
 </script>
 <style>
 	div.mypage_mainDiv {
 		width:70%;
 		margin:auto;
-		margin-bottom:50%;
+		padding-bottom:65%;
 	}
 	section.section2_mypage,
 	section.section3_mypage {
@@ -116,7 +132,7 @@
 		list-style:none;
 	}
 	section.section1_mypage ul.mypageSide>li {
-		margin-left:5px;
+		margin-left:15px;
 	}
 	section.section1_mypage ul.mypageSide>li:first-child {
 		padding-top:10px;
@@ -130,6 +146,19 @@
 	}
 	section.section1_mypage ul.mypageSide>li:nth-child(3) {
 		padding-top:8px;
+	}
+	section.section1_mypage ul.mypageSide>li:nth-child(3) button {
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:3px 5px;
+		font-size:15px;
+		border-radius:5px;
+	}
+	section.section1_mypage ul.mypageSide>li:nth-child(3) button:hover{
+		cursor:pointer;
+		opacity:0.7;
 	}
 	section.section2_mypage div.manner {
 	}
@@ -183,7 +212,7 @@
 	}
 	section.section4_mypage div.profileDetails,
 	section.section5_mypage div.contentSection {
-		height:800px;
+		height:1100px;
 		background-color: rgb(251,247,242);
 		border:6px solid #fff;
 		box-shadow: 0 0 6px rgb(221,221,221);
@@ -192,7 +221,7 @@
 	}
 	section.section4_mypage div.profileDetails li {
 		list-style:none;
-		padding:45px 0; 
+		padding:40px 0; 
 		padding-left:50px;
 	}
 	section.section4_mypage div.profileDetails li>a {
@@ -294,6 +323,15 @@
 						<a href="#" id="mypage_setLocationBtn">내 동네 설정</a>
 					</li>
 					<li>
+						<a href="#" id="mypage_locationCheck">동네 인증</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_keyword">키워드 알림 설정</a>
+					</li>
+					<li>
+						<a href="#" id="mypage_collectView">모아보기</a>
+					</li>
+					<li>
 						<button class="dropdown-btn">동네생활
 							<i class="fa fa-caret-down"></i>
 						</button>
@@ -304,7 +342,7 @@
 						</div>
 					</li>
 					<li>
-						<a href="#">받은 매너 평가</a>
+						<a href="#" id="mypage_mannerGrade">받은 매너 평가</a>
 					</li>
 					<li>
 						<a href="#">받은 거래 후기</a>
