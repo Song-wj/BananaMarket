@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class DongneLifeController {
+public class DongneController {
 	
 	/**
 	 * 동네생활 - 글정보 삭제화면
@@ -56,5 +56,6 @@ public class DongneLifeController {
 	
 		return "/dongneLife/dongneLife";
 	}
+	
 }
 
