@@ -13,6 +13,7 @@
 </script>
 <style>
 	.mypage_subjectList {
+		margin-top: 150px;
 		text-align: center;
 	}
 	
@@ -29,12 +30,12 @@
 	
 	.basic-subject {
 		width: 90%;
-		margin-left: 50px;
+		margin-left: 170px;
 	}
 	
 	.interest-subject {
 		width: 90%;
-		margin-left: 50px;
+		margin-left: 170px;
 	}
 	
 	.basic-subject h2,
@@ -78,7 +79,7 @@
 	    bottom: 0;
 	    left: 0;
 	    width: 100%;
-	    height: 225px;
+	    height: 400px;
 	    box-sizing: border-box;
 	    border-radius: 12px;
 	    border: 1px solid transparent;
@@ -87,15 +88,15 @@
 	
 	.subject-card-wrap .subject-card-top .subject-card-title {
 		position: relative;
-		margin-top: -190px;
-		padding-top: 115px;
-		padding-bottom: 30px;
+		margin-top: -340px;
+		padding-top: 190px;
+		padding-bottom: 105px;
 		text-align: left;
 		text-indent: 20px;		
 		font-size: 30px;
 		font-weight: bold;
 		color: white;
-		z-index: 700;
+		z-index: 2;
 		background-color: black;
 		opacity: 0.4;
 		border: 1px solid transparent;
@@ -104,6 +105,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="../header.jsp"/>
 	<div class="mypage_subjectList">
 		<section class="subjectList_title_area">
 			<div class="subjectList_title">동네생활 주제목록</div>
@@ -273,5 +275,6 @@
 			</div>
 		</section>
 	</div>
+	<jsp:include page="../footer.jsp"/>
 </body>
 </html>
