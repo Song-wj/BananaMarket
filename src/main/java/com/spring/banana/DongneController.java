@@ -53,7 +53,7 @@ public class DongneController {
 	 */
 	@RequestMapping(value ="/dongneLife.do", method = RequestMethod.GET)
 	public String dongnelife() {
-	
+		
 		return "/dongneLife/dongneLife";
 	}
 	
