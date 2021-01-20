@@ -35,7 +35,6 @@
 	    margin-top: 25px;
 	    padding-bottom: 23px;
 	    position: relative;
-	    border-bottom: 1px solid #e9ecef;
 	}
   	
   	#article-profile .space-between {
@@ -172,6 +171,7 @@
 	}
 	
 	#article-description {
+		border-top: 1px solid #e9ecef;
 	    padding: 32px 0;
 	    width: 677px;
 	    margin: 0 auto;
@@ -180,7 +180,7 @@
 	}
 	
 	#article-description #article-title {
-	    font-size: 20px;
+	    font-size: 22px;
 	    font-weight: 600;
 	    line-height: 1.5;
 	    letter-spacing: -0.6px;
@@ -188,7 +188,7 @@
 	
 	#article-description #article-category {
 	    margin-top: 4px;
-	    font-size: 13px;
+	    font-size: 15px;
 	    line-height: 1.46;
 	    letter-spacing: -0.6px;
 	    color: #868e96;
@@ -204,6 +204,141 @@
 	    margin-bottom: 16px;
 	    margin-top: 8px;
 	}
+	
+	#article-description #article-detail p {
+	    font-size: 20px;
+	    line-height: 1.6;
+	    letter-spacing: -0.6px;
+	    margin: 16px 0;
+	    word-break: break-all;
+	}
+	
+	#article-description #article-counts {
+	    font-size: 17px;
+	    line-height: 1.46;
+	    letter-spacing: -0.6px;
+	    color: #868e96;
+	}
+	
+	#article-detail-hot-more, #article-detail-related, #search-articles {
+	    width: 677px;
+	    margin: 0 auto;
+	    padding-top: 32px;
+	    position: relative;
+	}
+	
+	#article-detail-hot-more h3 {
+	    font-size: 25px;
+	    text-align: left;
+	    line-height: 1.47;
+	    letter-spacing: -0.6px;
+	    font-weight: 600;
+	    padding-bottom: 0px;
+	    margin-bottom: 30px;		
+	}
+	
+	#article-detail-hot-more #hot-more-link {
+		position: absolute;
+	    top: 32px;
+	    right: 0;
+	    text-align: right;
+	}
+	
+	#article-detail-hot-more #hot-more-link a {
+		font-size: 20px;
+	    line-height: 1.4;
+	    letter-spacing: -0.6px;
+	    text-decoration: none;
+	    color: #FEE500;
+	    background-color: #666;
+	    padding: 3px 15px;
+	    border-radius: 10px;
+	}
+	
+	#article-detail-hot-more #hot-more-link a:active {
+		opacity: 0.6;
+	}
+	
+	.cards-wrap {
+	    display: flex;
+	    justify-content: space-around;
+	    flex-wrap: wrap;
+	    width: 100%;
+	    margin: 0 auto;
+	}
+	
+	.cards-wrap .card {
+	    border:1px solid white;
+	    width: calc(33% - 16px);
+	    margin-right: 16px;
+	    margin-bottom: 56px;
+	}
+	
+	.cards-wrap .card-link {
+   		color: #212529;
+   		text-decoration: none;
+	}	
+	
+	.cards-wrap .card .card-photo {
+	    width: 100%;
+	    padding-top: 100%;
+	    position: relative;
+	    overflow: hidden;
+	    border-radius: 12px;
+	    background-color: #F8F9FA;
+	    box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.15);
+	    box-sizing: border-box;
+	}
+	
+	.cards-wrap .card .card-photo img {
+		position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    width: 100%;
+	    box-sizing: border-box;
+	    border-radius: 12px;
+	    border: 1px solid transparent;
+	}
+	
+	.cards-wrap .card .card-desc {
+    	margin-top: 12px;
+	}
+	
+	.cards-wrap .card .card-desc .card-title {
+	    font-size: 16px;
+	    letter-spacing: -0.02px;
+	    color: #212529;
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    margin-bottom: 4px;
+	    line-height: 1.5;
+	    font-weight: normal;
+	}
+	
+	.cards-wrap .card .card-desc .card-price {
+		font-size: 15px;
+	    font-weight: 700;
+	    line-height: 1.5;
+	    margin-bottom: 4px;
+	}
+	
+	.cards-wrap .card .card-desc .card-region-name {
+		font-size: 13px;
+	    color: #212529;
+	    overflow: hidden;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    margin-bottom: 4px;
+	    line-height: 1.5;
+	}
+	
+	.cards-wrap .card .card-desc .card-counts {
+    	color: #868e96;
+    	font-size: 13px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -267,7 +402,7 @@
 	<section id="article-description">
 		<h1 id="article-title" style="margin-top:0px;">손연재 자세 교정 커블체어</h1>
 		<p id="article-category">기타 중고물품&middot;<time>5시간 전</time></p>
-		<p id="article-price" style="font-size:18px; font-weight: bold;">15,000원</p>
+		<p id="article-price" style="font-size:20px; font-weight: bold;">15,000원</p>
 		<div id="article-detail">
 			<p>상태도 좋고 깨끗합니다</p>
 		</div>
@@ -276,6 +411,90 @@
 		</p>
 	</section>
 </article>
+<section id="article-detail-hot-more">
+	<h3>당근마켓 인기중고</h3>
+	<div id="hot-more-link"><a href="#">더 구경하기</a></div>
+	<section class="cards-wrap">
+		<article class="card">
+			<a class="card-link" href="#">
+				<div class="card-photo">
+					<img src="">
+				</div>
+				<div class="card-desc">
+					<h2 class="card-title">추피와두두</h2>
+					<div class="card-price">50,000원</div>
+					<div class="card-region-name">서울 용산구 한남동</div>
+					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+				</div>
+			</a>
+		</article>
+		<article class="card">
+			<a class="card-link" href="#">
+				<div class="card-photo">
+					<img src="">
+				</div>
+				<div class="card-desc">
+					<h2 class="card-title">추피와두두</h2>
+					<div class="card-price">50,000원</div>
+					<div class="card-region-name">서울 용산구 한남동</div>
+					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+				</div>
+			</a>
+		</article>
+		<article class="card">
+			<a class="card-link" href="#">
+				<div class="card-photo">
+					<img src="">
+				</div>
+				<div class="card-desc">
+					<h2 class="card-title">추피와두두</h2>
+					<div class="card-price">50,000원</div>
+					<div class="card-region-name">서울 용산구 한남동</div>
+					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+				</div>
+			</a>
+		</article>
+		<article class="card">
+			<a class="card-link" href="#">
+				<div class="card-photo">
+					<img src="">
+				</div>
+				<div class="card-desc">
+					<h2 class="card-title">추피와두두</h2>
+					<div class="card-price">50,000원</div>
+					<div class="card-region-name">서울 용산구 한남동</div>
+					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+				</div>
+			</a>
+		</article>
+		<article class="card">
+			<a class="card-link" href="#">
+				<div class="card-photo">
+					<img src="">
+				</div>
+				<div class="card-desc">
+					<h2 class="card-title">추피와두두</h2>
+					<div class="card-price">50,000원</div>
+					<div class="card-region-name">서울 용산구 한남동</div>
+					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+				</div>
+			</a>
+		</article>
+		<article class="card">
+			<a class="card-link" href="#">
+				<div class="card-photo">
+					<img src="">
+				</div>
+				<div class="card-desc">
+					<h2 class="card-title">추피와두두</h2>
+					<div class="card-price">50,000원</div>
+					<div class="card-region-name">서울 용산구 한남동</div>
+					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+				</div>
+			</a>
+		</article>
+	</section>
+</section>
 
 <jsp:include page="../footer.jsp" />
 </body>
