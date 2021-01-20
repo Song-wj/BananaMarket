@@ -9,25 +9,17 @@
 	$(document).ready(function(){
 		
 		$("#section3_contract").hide();
-		$("#section4_contract").hide();
 		
 		$("#contract_ing").click(function(){
 			$("#section3_contract").hide();
-			$("#section4_contract").hide();
 			$("#section2_contract").toggle(1000);
 		});
 		
 		$("#contract_end").click(function(){
 			$("#section2_contract").hide();
-			$("#section4_contract").hide();
 			$("#section3_contract").toggle(1000);
 		});
 		
-		$("#contract_hide").click(function(){
-			$("#section2_contract").hide();
-			$("#section3_contract").hide();
-			$("#section4_contract").toggle(1000);
-		});
 	});
 </script>
 <style>
@@ -86,7 +78,6 @@
 				<ul class="contract_nav">
 					<li><a href="#" id="contract_ing">판매중</a></li>
 					<li><a href="#" id="contract_end">거래완료</a></li>
-					<li><a href="#" id="contract_hide">숨김</a></li>
 				</ul>
 			</div>
 		</section>
@@ -139,44 +130,6 @@
 				</tr>
 				<tr>
 					<td><span class="price">350,000원</span></td>
-				</tr> 
-			</table>
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
-		</section>
-		<section class="section4_contract" id="section4_contract">
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td><span class="product">슈콤마보니 부츠 235(365)</span></td>
-				</tr>
-				<tr>
-					<td><span class="locate">서초1동  35초 전</span></td>
-				</tr>
-				<tr>
-					<td><span class="price">85,000원</span></td>
 				</tr> 
 			</table>
 			<table class="mypage_table">
