@@ -369,6 +369,7 @@
 	  });
 	}
 	</script>
+	<jsp:include page="../chatBanner/chat.jsp"/>
 	
 	<jsp:include page="../footer.jsp"/>
 </body>
