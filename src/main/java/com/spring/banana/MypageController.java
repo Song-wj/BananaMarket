@@ -11,6 +11,11 @@ public class MypageController {
 	 * 마이페이지 - 동네생활 주제 Content
 	 * @return
 	 */
+	@RequestMapping(value="/mypage_mannerGrade.do", method=RequestMethod.GET)
+	public String mypage_mannerGrade() {
+		return "mypage/mypage_mannerGrade";
+	}
+	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
 	public String mypage_subjectContent() {
 		return "mypage/mypage_subjectContent";
