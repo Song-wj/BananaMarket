@@ -8,8 +8,8 @@
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script>
 	$(document).ready(function(){
-		$("select").change(function(){
-			showConfirm();
+		/* $("select").change(function(){
+			showConfirm(); */
 			
 		});
 		
@@ -23,8 +23,12 @@
 			   alert("다음에 꼭 입력해주세요~");
 			   $("select option:eq(0)").prop("selected", true);
 			  }
-			 }
-	});
+			 };
+		 
+		 
+		 
+		 
+
 </script>
 <style>
 	div.mypage_purchased {
@@ -78,7 +82,7 @@
 					<td><span class="product">미스치프 크롭 후드티 팝니다~</span></td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
 						매너점수를 주세요~~~<br>
-						<select  >
+						<select  name="mannerGrade" onchange="showConfirm()">
 							<option value="none">선택</option>
 							<option value="3">😮</option>
 							<option value="5">😆</option>
@@ -101,7 +105,7 @@
 					<td>상품명</td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
 						매너점수를 주세요~~~<br>
-						<select>
+						<select name="mannerGrade" onchange="showConfirm()">
 							<option value="none">선택</option>
 							<option value="3">😮</option>
 							<option value="5">😆</option>
