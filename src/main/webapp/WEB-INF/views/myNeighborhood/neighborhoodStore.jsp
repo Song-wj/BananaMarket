@@ -146,17 +146,16 @@
 	}	
 	
 	.carousel-inner img {
-		margin-left: 280px;
-   		width: 677px;
+   		width: 1024px;
    	 	height: 500px;
    	 	border-radius: 10px;
   	}
 
   	.carousel-control-prev {
-		left: 20%;  		
+		left: 8%;  		
   	}
   	.carousel-control-next {
-		right: 20%;  		
+		right: 8%;  		
   	}
   	
   	.store-info-map .map-detail {
@@ -222,7 +221,7 @@
 			  </ul>
 			  
 			  <!-- The slideshow -->
-			  <div class="carousel-inner">
+			  <div class="carousel-inner" style="width:1024px; margin-left:8.5%;">
 			    <div class="carousel-item active">
 			      <img src="http://localhost:9000/banana/images/store_photo1.jpeg" >
 			    </div>
