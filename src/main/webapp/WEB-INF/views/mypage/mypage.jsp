@@ -289,6 +289,7 @@
 					<li>아이디</li>
 					<li>
 						<a href="mypage_update.do"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
+						<a href="http://localhost:9000/banana/enrollstore.do" id="#"><button type="button" id="mypage_updateBtn">동네 업체 등록</button></a>
 					</li>
 				</ul>
 			</div>
