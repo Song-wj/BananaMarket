@@ -244,17 +244,18 @@
 		color: #FEE500;
 		text-shadow: -1px 0 rgb(98,71,24), 0 1px rgb(98,71,24),  1px 0 rgb(98,71,24), 0 -1px rgb(98,71,24);
 	}
-	section.section6_dongneLife_content div.content_comment_write input {
+	section.section6_dongneLife_content div.content_comment_write textarea {
 		width:75%;
 		height:30px;
 		font-size:18px;
 		padding:5px 5px;
 		margin:0 10px;
+		resize:none;
 	}
 	section.section6_dongneLife_content div.content_comment_write img {
 		width:23px;
 		height:23px;
-		margin-bottom:-7px;
+		margin-bottom:10px;
 	}
 	section.section6_dongneLife_content button.comment_writeBtn,
 	section.section1_dongneLife_content li:nth-child(3) button,
@@ -272,6 +273,11 @@
 	section.section1_dongneLife_content li:nth-child(4) button:hover {
 		cursor:pointer;
 		opacity:0.7;
+	}
+	section.section6_dongneLife_content>div>div {
+		margin-top:-50px;
+		padding-top:2px;
+		padding-left:88%;
 	}
 </style>
 </head>
@@ -365,8 +371,8 @@
 			<div class="content_comment_write">
 				<a href="#"><img src="images/dongneLife_locate.png"><button type="button"></button></a>
 				<a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a>
-				<input type="text" placeholder="따뜻한 댓글을 입력해주세요 :)">
-				<a href="#"><button class="comment_writeBtn">등록</button></a>
+				<textarea placeholder="따뜻한 댓글을 입력해주세요 :)"></textarea>
+				<div><a href="#"><button class="comment_writeBtn">등록</button></a></div>
 			</div>
 		</section>
 		<section class="section7_dongneLife_content">
