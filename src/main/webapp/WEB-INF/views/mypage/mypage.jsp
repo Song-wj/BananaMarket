@@ -59,6 +59,10 @@
 		$("#review").click(function() {
 			$("#contentSection").load("mypage_review.do");
 		});
+
+		$("#mypage_mannerGrade").click(function() {
+			$("#contentSection").load("mypage_mannerGrade.do");
+		});
 		
 	});
 </script>
@@ -342,7 +346,7 @@
 						</div>
 					</li>
 					<li>
-						<a href="#">받은 매너 평가</a>
+						<a href="#" id="mypage_mannerGrade">받은 매너 평가</a>
 					</li>
 					<li>
 						<a href="#" id="review">받은 거래 후기</a>

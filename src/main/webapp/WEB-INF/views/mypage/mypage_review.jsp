@@ -53,7 +53,7 @@
 		all: unset;
 		font-size: 2rem;
 		margin-top: 50px;
-		width: 13rem;
+		width: 13.5rem;
 		height: 7rem;
 		color: #ccc;
 		border-bottom: 1px solid #ccc;
@@ -95,6 +95,41 @@
 	.mypage_review .review_buyer_table_area .review_buyer_table tr td {
 		font-size: 2.1rem;
 	}
+	td.review{
+		margin-top:10px;
+		float:left;
+	}
+	td.review>img{
+		width:35px;
+		height:35px;
+		margin-left:30px;
+		border-radius:50%;
+     	border:2px solid #fff;
+      	box-shadow: 0 0 16px rgb(221,221,221);
+	}
+	td.review>label{
+		position: relative;
+        top: -11px;
+        color: rgb(98,71,24);
+        font-weight:550;
+        font-size:20px;
+	}
+	td.review>label:nth-child(3){
+		margin-left:6px;
+        font-size:15px;
+        font-weight:500;
+        position: relative;
+        top:-10px;
+	}
+	td.review>label.review{
+		margin-left:-70px;
+		font-weight:normal;
+	}
+	td.review>label.date{
+		font-size:15px;
+		margin-left:-70px;
+		color:lightgray;
+	}
 </style>
 </head>
 <body>
@@ -110,9 +145,18 @@
 		<section class="review_all_table_area">
 			<div>
 			<table class="review_all_table">
-				<tr>
+				<!-- <tr>
 					<td style="padding: 230px 0; color: #ccc;">전체후기가 없습니다.</td>
-				</tr> 
+				</tr> -->
+				<tr>
+					<td class="review">
+						<img src="images/banana.jpg">
+						<label>히히</label>
+						<label>이의동</label><div></div>
+						<label class="review">내용</label><div></div>
+						<label class="date">30초전</label>
+					</td>
+				</tr>
 			</table>
 			</div>
 		</section>
