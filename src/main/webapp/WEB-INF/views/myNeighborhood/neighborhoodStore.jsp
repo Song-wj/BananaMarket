@@ -8,6 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 <title>Insert title here</title>
 <style>
 	.store-info-top {
@@ -127,16 +128,19 @@
 		color: #2694AB
 	}
 	
-	.store-info-photo {
+	.store-info-photo,
+	.store-info-map {
 		margin-top: 25px;
 		margin-left: 330px;
 		width: 65%;
 		border-bottom: 10px solid #FEE500;
 		border-left: 1px solid #FEE500;
 		border-right: 1px solid #FEE500;
+		padding-bottom: 50px;
 	}
 	
-	.store-info-photo div h2 {
+	.store-info-photo div h2,
+	.store-info-map div h2 {
 		margin-left: 40px;
 		padding-bottom: 40px;
 	}	
@@ -146,7 +150,6 @@
    		width: 677px;
    	 	height: 500px;
    	 	border-radius: 10px;
-   	 	margin-bottom: 50px;
   	}
 
   	.carousel-control-prev {
@@ -154,6 +157,10 @@
   	}
   	.carousel-control-next {
 		right: 20%;  		
+  	}
+  	
+  	.store-info-map .map-detail {
+  		margin-left: 105px;
   	}
 		
 </style>
@@ -236,6 +243,22 @@
 			  </a>
 		</div>
 </section>
+<section class="store-info-map">
+	<div>
+		<h2>찾아가는 길</h2>
+	</div>
+	<div class="map-detail">
+		<div id="daumRoughmapContainer1611215955729" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+	</div>
+</section>
 <jsp:include page="../footer.jsp"/>
+<script charset="UTF-8">
+	new daum.roughmap.Lander({
+		"timestamp" : "1611215955729",
+		"key" : "242ra",
+		"mapWidth" : "1024",
+		"mapHeight" : "400"
+	}).render();
+</script>
 </body>
 </html>
