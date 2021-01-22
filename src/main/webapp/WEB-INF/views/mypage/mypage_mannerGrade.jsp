@@ -106,6 +106,11 @@ $(document).ready(function(){
 		</section>
 		<section class="section3_manner" id="section3_manner">
 			<table class="mypage_table">
+				 <tr>
+					<th>닉네임</th>
+					<th>내용</th>
+					<th>점수</th>
+				 </tr>	
 				 <tr>					
 					<td><img src="images/mypage_bananaimg.jpg" class="mimg"><span class="mnickname">홀길돌</span></td>
 					<td><span class="mcoment">악마를 보았따</span></td>

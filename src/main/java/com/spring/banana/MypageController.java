@@ -8,6 +8,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 	
 	/**
+	 * 마이페이지 - 동네생활 글 삭제화면
+	 * @return
+	 */
+	@RequestMapping(value ="/mypage_subjectList_delete.do", method = RequestMethod.GET)
+	public String mypage_subjectList_delete() {
+	
+		return "mypage/mypage_subjectList_delete";
+	}
+	
+	/**
+	 * 마이페이지 - 동네생활 글 수정화면
+	 * @return
+	 */
+	@RequestMapping(value ="/mypage_subjectList_update.do", method = RequestMethod.GET)
+	public String mypage_subjectList_update() {
+	
+		return "mypage/mypage_subjectList_update";
+	}
+	
+	
+	/**
+	 * 마이페이지 - 동네생활 ~~~주제로 글쓰기
+	 * @return
+	 */
+	@RequestMapping(value="/mypage_subjectList_write.do", method=RequestMethod.GET)
+	public String mypage_subjectList_write() {
+		return "mypage/mypage_subjectList_write";
+	}
+	
+	/**
 	 * 마이페이지 - 동네생활 주제 Content
 	 * @return
 	 */
