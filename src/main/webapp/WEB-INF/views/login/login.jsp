@@ -114,7 +114,7 @@
 		                     		<a href=""><span>비밀번호 찾기</span></a><div></div>
 		                  		</li>
 		                  		<li>
-		                     		<a href=""><span>회원가입</span></a>
+		                     		<a href="join.do"><span>회원가입</span></a>
 		                  		</li>
 							</ul>
 						</li>

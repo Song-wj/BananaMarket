@@ -159,7 +159,7 @@
 							<img src="http://localhost:9000/banana/images/bananamarket_logo.jpg" id="img" width="200px" height="200px">
 						</div>
 						<label for="input_img">프로필 사진 변경</label>
-						<input type="file" id="input_img">
+						<input type="file" id="input_img" name="msfile">
 					</li>
 					<li>
 						<label>닉네임</label>
@@ -171,7 +171,7 @@
 						<label>아이디</label>
 					</li>
 					<li>
-						<input type="text" name="id" class="f1" id="id">
+						<input type="text" name="mid" class="f1" id="mid">
 					</li>
 					<li>
 						<div>영문 소문자, 숫자로 6-16자리</div>
@@ -180,7 +180,7 @@
 						<label>비밀번호</label>
 					</li>
 					<li>
-						<input type="password" name="pass" class="f1" id="pass">
+						<input type="password" name="pw" class="f1" id="pass">
 					</li>
 					<li>
 						<div>영문 대/소문자 구분주의, 숫자 조합으로 6-16자리</div>
@@ -198,26 +198,26 @@
 						<label>휴대폰</label>
 					</li>
 					<li>
-						<select name="hp1" class="hp" id="hp1">
+						<select name="ph1" class="hp" id="hp1">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="017">017</option>
 						</select>
-						<span>-&nbsp;</span><input type="text" name="hp2" class="hp_number" id="hp2">
-						<span>-&nbsp;</span><input type="text" name="hp3" class="hp_number" id="hp3">
+						<span>-&nbsp;</span><input type="text" name="ph2" class="hp_number" id="hp2">
+						<span>-&nbsp;</span><input type="text" name="ph3" class="hp_number" id="hp3">
 					</li>
 					<li>
 						<label>주소</label>
 					</li>
 					<li>
-						<input type="text" name="addr_num" placeholder="우편번호" class="addr1" id="addr1">
+						<input type="text" name="maddr_num" placeholder="우편번호" class="addr1" id="addr1">
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
-						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2">
-						<input type="text" name="addr3" placeholder="상세주소" class="addr2" id="addr3">
+						<input type="text" name="maddr1" placeholder="도로명주소" class="addr2" id="addr2">
+						<input type="text" name="maddr2" placeholder="상세주소" class="addr2" id="addr3">
 					</li>
 					<li>
-						<button type="button" class="join_btn_style" id="btnJoin">회원가입</button>
+						<button type="submit" class="join_btn_style" id="btnJoin">회원가입</button>
 					</li>
 				</ul>
 				</form>
