@@ -15,11 +15,15 @@
 		margin-top: 130px;
 		padding-bottom: 0;
 	}
-
+	
   	.carousel-inner img {
    		width: 677px;
    	 	height: 500px;
    	 	border-radius: 10px;
+  	}
+  	
+  	.carousel-caption {
+		width: 70%;
   	}
 
   	.carousel-control-prev {
@@ -355,7 +359,7 @@
 			  </ul>
 			  
 			  <!-- The slideshow -->
-			  <div class="carousel-inner">
+			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
 			      <img src="http://localhost:9000/banana/images/card-photo1.jpg" >
 			    </div>

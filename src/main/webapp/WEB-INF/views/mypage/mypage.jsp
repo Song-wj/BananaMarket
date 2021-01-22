@@ -56,6 +56,10 @@
 			$("#contentSection").load("mypage_subjectList.do");
 		});
 		
+		$("#review").click(function() {
+			$("#contentSection").load("mypage_review.do");
+		});
+
 		$("#mypage_mannerGrade").click(function() {
 			$("#contentSection").load("mypage_mannerGrade.do");
 		});
@@ -285,6 +289,7 @@
 					<li>아이디</li>
 					<li>
 						<a href="mypage_update.do"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
+						<a href="http://localhost:9000/banana/enrollstore.do" id="#"><button type="button" id="mypage_updateBtn">동네 업체 등록</button></a>
 					</li>
 				</ul>
 			</div>
@@ -345,7 +350,7 @@
 						<a href="#" id="mypage_mannerGrade">받은 매너 평가</a>
 					</li>
 					<li>
-						<a href="#">받은 거래 후기</a>
+						<a href="#" id="review">받은 거래 후기</a>
 					</li>
 				</ul>
 			</div>
@@ -373,6 +378,7 @@
 	  });
 	}
 	</script>
+	<jsp:include page="../chatBanner/chat.jsp"/>
 	
 	<jsp:include page="../footer.jsp"/>
 </body>
