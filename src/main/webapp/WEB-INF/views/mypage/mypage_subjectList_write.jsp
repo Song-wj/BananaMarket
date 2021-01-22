@@ -24,7 +24,7 @@
 	section.section1_dongneLife_write div.write_nav {
 		border-bottom:1px solid black;
 		text-align:center;
-		padding:10px 0;
+		padding:30px 0;
 	}
 	section.section1_dongneLife_write li {
 		display:inline-block;
@@ -50,31 +50,32 @@
 		height:30px;
 		margin-bottom:-5px;
 	}
-	section.section2_dongneLife_write div.write_topic {
-		padding-top:40px;
-	}
-	section.section2_dongneLife_write div.write_topic label {
-		font-size:19px;
-		font-weight:700;
-	}
-	section.section2_dongneLife_write div.write_topic label:hover {
-		cursor:pointer;
-	}
 	section.section3_dongneLife_write div.write_content textarea {
 		width:92%;
 		height:600px;
 		overflow:auto;
 		resize: none;
 		font-size:18px;
-		padding:10px 10px;
+		padding:0 10px;
 	}
 	section.section4_dongneLife_write a {
-		margin-right:0 30px;
+		margin-right:30px;
 	}
 	section.section4_dongneLife_write img {
 		width:30px;
 		height:30px;
 		margin-bottom:-7px;
+	}
+	section.section2_dongneLife_write div.write_alert {
+		width:92%;
+		color:rgb(98,71,24);
+		border:1px solid #FEE500;
+		background-color: rgb(255,249,176);
+		padding:20px 10px;
+		border-radius:9px;
+	}
+	div.write_alert b {
+		color:rgb(98,71,24);
 	}
 </style>
 </head>
@@ -85,15 +86,18 @@
 		<section class="section1_dongneLife_write">
 			<div class="write_nav">
 				<ul>
-					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li><label>동네생활 글쓰기</label></li>
-					<li><a href="dongneLife_write_proc.do"><button>완료</button></a></li>
+					<li><a href="http://localhost:9000/banana/mypage_subjectContent.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
+					<li><label>동네사건사고 주제로 글쓰기</label></li>
+					<li><a href="mypage_subjectList_write_proc.do"><button>완료</button></a></li>
 				</ul>
 			</div>
 		</section>
 		<section class="section2_dongneLife_write">
-			<div class="write_topic" id="write_topic">
-				<a href="#"><label>게시글의 주제를 선택해주세요.</label></a>
+			<div class="write_alert">
+				<img src="">
+				<b>글 작성하기 전에 알려드려요.</b><br>
+				중고거래 관련, 명예훼손 글은 올리실 수 없어요.<br>
+				또한, 광고/홍보 목적의 글은 동네 홍보 게시판을 이용해주세요.<br>
 			</div>
 		</section>
 		<section class="section3_dongneLife_write">

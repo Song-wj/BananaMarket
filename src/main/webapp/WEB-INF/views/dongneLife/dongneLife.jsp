@@ -104,7 +104,7 @@
 		width:92%;
 		height:90px;
 	}
-	.dl_content2 ul li:nth-child(4) img{
+	.dl_content2 ul li a img{
 		width:20px;
 		height:20px;
 	}
@@ -123,7 +123,6 @@
 		text-shadow: -1px 0 rgb(98,71,24), 0 1px rgb(98,71,24),  1px 0 rgb(98,71,24), 0 -1px rgb(98,71,24);
         
 	}
-	
 	div.dl_content2:hover {
 		cursor:pointer;
 		box-shadow: 0 0 22px #FEE500;
@@ -172,7 +171,7 @@
 					</li>	
 					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
 					<li>
-						<img src="images/smile.png"><button type="button">공감하기</button>
+						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button>
 						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
 					</li>
 				</ul>
@@ -190,7 +189,7 @@
 					</li>	
 					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
 					<li>
-						<img src="images/smile.png"><button type="button">공감하기</button>
+						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button>
 						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
 					</li>
 				</ul>

@@ -102,8 +102,48 @@
 				$("#like-btn6").css("background-color","white");
 			}
 		});
+		
 	});
 </script>
+<script text="javascript/text">
+    $(document).ready(function(){
+
+		 $('.box').each(function(){
+		     var content = $(this).children('.post-body');
+		     var content_txt = content.text();
+		     var content_txt_short = content_txt.substring(0,105)+"...";
+		     var btn_more = $('<a href="javascript:void(0)" class="more">더보기</a>');
+		     
+		     $(this).append(btn_more);
+		     
+		     if(content_txt.length >= 105){
+		         content.html(content_txt_short)
+		         
+		     }else{
+		         btn_more.hide()
+		     }
+		     
+		     btn_more.click(toggle_content);
+ 
+		     
+            function toggle_content(){
+                if($(this).hasClass('short')){
+                    // 접기 상태
+                    $(this).html('더보기');
+                    content.html(content_txt_short)
+                    $(this).removeClass('short');
+                }else{
+                    // 더보기 상태
+                    $(this).html('접기');
+                    content.html(content_txt);
+                    $(this).addClass('short');
+
+                }
+            }
+            
+        });
+    });
+  </script>
 <style>
 	.mypage_subjectContent {
 		margin-top: 6.5rem;
@@ -212,6 +252,9 @@
 		margin-right: 20px;
 	}
 	
+	a {
+		text-decoration:none;
+	}
 	.subjectContent-post .post-list .post-body{
 		text-align: left;
 		margin-top: 50px;
@@ -271,12 +314,28 @@
 		opacity: 0.5;
 	}
 	
+	.subjectContent-post .post-footer a img {
+		width:30px;
+		height:30px;
+	}
+	
 	.display-like {
 		font-size: 30px;
 		float: right;
 		margin-right: 20px;
 		margin-top: 18px;
 	}
+	
+	/** text ...더보기  **/
+	.box {
+		margin:30px;
+	}
+    .post-body{
+        width:90%;
+        padding:10px;
+        /* border:1px solid #ddd;  */
+        font: 400 1rem/1.5rem 'NotoSansKR';
+    }
 </style>
 </head>
 <body>
@@ -297,11 +356,11 @@
 				<a href="http://localhost:9000/banana/mypage_subjectList2.do">다른 관심주제 보기 ></a>
 			</div>
 			<div class="subjectContent-write">
-				<a href="#">동네사건사고 주제로 글쓰기</a>
+				<a href="http://localhost:9000/banana/mypage_subjectList_write.do">동네사건사고 주제로 글쓰기</a>
 			</div>
 		</section>
 		<section class="subjectContent-post">
-			<div class="post-list">
+			<a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
 					<ul>
@@ -310,10 +369,15 @@
 						<li class="regit-date">어제</li>
 					</ul>
 				</div>
-				<div class="post-body">
-					<p>흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요.</p>
-					<img src="http://localhost:9000/banana/images/우리동네사진전.jpg">
+				<div class="box">
+					<div class="post-body">
+						<!-- <p>흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요.</p> -->
+						흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요.
+						흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요. 
+						흑석동에 지노헤어 미용실 현금 결제시 만원!
+					</div>
 				</div>
+				</a>
 				<div class="like-list" style="display: none;">
 					<button type="button" id="like-btn1">👍</button>
 					<button type="button" id="like-btn2">💛</button>
@@ -323,8 +387,8 @@
 					<button type="button" id="like-btn6">😡</button>
 				</div>
 				<div class="post-footer">
-					<button type="button" id="like-btn">🙂 공감하기</button>
-					<button type="button" id="comment-btn">🗨 댓글 16</button>
+					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
+					<a href="#"><img src="images/messenger.png"><button type="button" id="comment-btn">댓글 16</button></a>
 					<div class="display-like"></div>
 				</div>
 			</div>

@@ -274,6 +274,7 @@
 		cursor:pointer;
 		opacity:0.7;
 	}
+
 	section.section6_dongneLife_content>div>div {
 		margin-top:-50px;
 		padding-top:2px;
