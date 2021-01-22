@@ -1,12 +1,19 @@
 package com.spring.banana;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.spring.service.BananaService;
+import com.spring.vo.dongneVO;
+
 @Controller
-public class DongneController {
+public class DongneController  {
 	
+	
+	@Autowired
+	private BananaService bananaService;
 	/**
 	 * 동네생활 - 글정보 삭제화면
 	 * @return
@@ -46,6 +53,11 @@ public class DongneController {
 	
 		return "/dongneLife/dongneLife_write";
 	}
+	
+	@RequestMapping(value ="/dongneLife_write_proc.do", method = RequestMethod.POST)
+	public String dongneLife_write_proc(dongneVO vo) {	
+		return (String) bananaService.insert(vo);
+	}
 
 	/**
 	 * 동네생활 - 홈 화면
@@ -56,6 +68,9 @@ public class DongneController {
 		
 		return "/dongneLife/dongneLife";
 	}
+	
+	
+	
 	
 }
 
