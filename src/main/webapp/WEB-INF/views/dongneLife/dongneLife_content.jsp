@@ -273,6 +273,7 @@
 		cursor:pointer;
 		opacity:0.7;
 	}
+	
 </style>
 </head>
 <body>
