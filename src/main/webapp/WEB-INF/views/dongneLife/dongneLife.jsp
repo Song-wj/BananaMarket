@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,25 +142,28 @@
 				<img src="images/김수현.jpg"><label>히흫님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
 				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
 			</div>	
+			<c:forEach var="vo" items="${list }">
 			<div class="dl_content2" onclick="location.href='dongneLife_content.do'">
 				<ul>	
 					<li>
-						<label>주제</label>
+						<label>${vo.btitle }</label>
 						<label>시간(몇분전)</label>
 					</li>
 					<li>
 						<img src="images/banana.jpg">
-						<label>히히</label>
-						<label>이의동</label>
+						<label>${vo.nickname }</label>
+						<label>${vo.maddr }</label>
 					</li>	
-					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
+					<li><label>${vo.btopic }</label></li>
 					<li>
 						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
 						<a href="dongneLife_content.do"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
 					</li>
 				</ul>
 			</div>
-			<div class="dl_content2">
+			</c:forEach>
+			</section>
+			<!-- <div class="dl_content2">
 				<ul>	
 					<li>
 						<label>주제</label>
@@ -194,7 +199,7 @@
 					</li>
 				</ul>
 			</div>
-		</section>
+		</section> -->
 	</div>
 	<jsp:include page="../footer.jsp"/>
 </body>

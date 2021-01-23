@@ -2,7 +2,23 @@ package com.spring.vo;
 
 public class dongneVO {
 
-	String bid, mid, btitle, bfile, bsfile, btopic, blike, bdate;
+	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate;
+
+	public String getMaddr() {
+		return maddr;
+	}
+
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
 	public String getBid() {
 		return bid;

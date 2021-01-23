@@ -1,7 +1,10 @@
 package com.spring.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.dao.dongneDAO;
 import com.spring.vo.dongneVO;
@@ -24,8 +27,13 @@ public class DongneServiceImpl implements BananaService{
 		return result;
 	}
 	
-	public String  getList() {
-		return ".";
+	public Object  getList() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneVO> list =dongneDAO.getBoardList();
+		mv.addObject("list",list);
+		mv.setViewName("/dongneLife/dongneLife");
+		
+		return mv;
 	}
 	public String  update() {
 		return ".";

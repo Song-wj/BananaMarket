@@ -18,18 +18,18 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/images/**" location="/resources/images/" />
 	
-<<<<<<< HEAD
+
 	<!--  DAO Object -->
 	<beans:bean class ="com.spring.dao.dongneDAO" id="dongneDAO"></beans:bean>
 	
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
-=======
+
 	<!-- Service -->
 	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
 	
 	<!-- DAO -->
 	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
->>>>>>> 8c4a354cab5932e9b7d59551be67d043da55cf11
+
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
