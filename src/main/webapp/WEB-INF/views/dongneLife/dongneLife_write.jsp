@@ -32,7 +32,7 @@
 		font-size:22px;
 		font-weight:800;
 	}
-	section.section1_dongneLife_write li:nth-child(3) button {
+	section.section1_dongneLife_write li:nth-child(5) button {
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
@@ -41,11 +41,11 @@
 		font-size:17px;
 		border-radius:5px;
 	}
-	section.section1_dongneLife_write li:nth-child(3) button:hover{
+	section.section1_dongneLife_write li:nth-child(5) button:hover{
 		cursor:pointer;
 		opacity:0.7;
 	}
-	section.section1_dongneLife_write li:first-child img {
+	section.section1_dongneLife_write li:nth-child(3) img {
 		width:30px;
 		height:30px;
 		margin-bottom:-5px;
@@ -82,12 +82,15 @@
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
+		<form name="board_write_form" action="dongneLife_write_proc.do" method=POST >
 		<section class="section1_dongneLife_write">
 			<div class="write_nav">
 				<ul>
+					<li><input type="hidden" name="mid" value="aa"></li>
+					<li><input type="hidden" name="btitle" value="test"></li>
 					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글쓰기</label></li>
-					<li><a href="dongneLife_write_proc.do"><button>완료</button></a></li>
+					<li><button type="submit">완료</button></li>
 				</ul>
 			</div>
 		</section>
@@ -98,7 +101,7 @@
 		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
-				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요."></textarea>
+				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요." name="btopic"></textarea>
 			</div>
 		</section>
 		<section class="section4_dongneLife_write">
@@ -107,7 +110,9 @@
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>
 		</section>
+		</form>
 	</div>
+	
 	
 	<jsp:include page="../footer.jsp"/>
 

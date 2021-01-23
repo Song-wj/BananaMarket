@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +12,11 @@
 	.dongnelife {
 		width: 70%;
 		margin:auto;
-		height:1000px;
+		height:1050px;
 		padding-top:150px;
 		border:1px solid green;
-		padding-bottom:5%;
+		padding-bottom:5%;	
+		margin-bottom:100px;
 	}
 	.dl_title {
 		border-bottom:4px solid #FEE500;
@@ -54,9 +57,13 @@
 		color:rgb(98,71,24);
         text-shadow: -0.5px 0 #FEE500, 0 0.5px #FEE500,  0.5px 0 #FEE500, 0 -0.5px #FEE500;
 	}
+	div.dongnelife section.sub_section{		
+		height:900px;
+		overflow:auto;
+	}
 	.dl_content2 {
 		width: 60%;
-		height:250px;
+		height:285px;
 		margin:auto;
 		background-color: rgb(251,247,242); 
 		box-shadow: 0 0 16px rgb(221,221,221);
@@ -95,7 +102,7 @@
         color: rgb(98,71,24);
         font-weight:550;
 	}
-	.dl_content2 ul li:nth-child(2) label:nth-child(3){
+	.dl_content2 ul li:nth-child(2) label:last-child{
         margin-left:6px;
         font-size:12px;
         font-weight:500;
@@ -103,6 +110,14 @@
 	.dl_content2 ul li:nth-child(3) {
 		width:92%;
 		height:90px;
+		overflow:hidden;
+      	text-overflow:ellipsis;
+      	display: -webkit-box;
+   	 	-webkit-line-clamp: 5; /* 라인수 */
+        -webkit-box-orient: vertical;
+        word-wrap:break-word; 
+        line-height: 1.2em;
+        height: 6em;
 	}
 	.dl_content2 ul li a img{
 		width:20px;
@@ -128,6 +143,7 @@
 		box-shadow: 0 0 22px #FEE500;
 	}
 	
+	
 </style>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -140,61 +156,30 @@
 				<img src="images/김수현.jpg"><label>히흫님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
 				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
 			</div>	
-			<div class="dl_content2" onclick="location.href='dongneLife_content.do'">
+			<section class="sub_section">
+			<c:forEach var="vo" items="${list }">
+			<div class="dl_content2" onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">
 				<ul>	
 					<li>
-						<label>주제</label>
+						<label>${vo.btitle }</label>
 						<label>시간(몇분전)</label>
 					</li>
 					<li>
 						<img src="images/banana.jpg">
-						<label>히히</label>
-						<label>이의동</label>
+						<label>${vo.nickname }</label>
+						<label>${vo.maddr }</label>
 					</li>	
-					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
+					<li><pre><c:out value="${vo.btopic}" /></pre></li>
 					<li>
 						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
 						<a href="dongneLife_content.do"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
 					</li>
 				</ul>
 			</div>
-			<div class="dl_content2">
-				<ul>	
-					<li>
-						<label>주제</label>
-						<label>시간(몇분전)</label>
-					</li>
-					<li>
-						<img src="images/banana.jpg">
-						<label>히히</label>
-						<label>이의동</label>
-					</li>	
-					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
-					<li>
-						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button>
-						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
-					</li>
-				</ul>
-			</div>
-			<div class="dl_content2">
-				<ul>	
-					<li>
-						<label>주제</label>
-						<label>시간(몇분전)</label>
-					</li>
-					<li>
-						<img src="images/banana.jpg">
-						<label>히히</label>
-						<label>이의동</label>
-					</li>	
-					<li><label>~~~~~~~~~~~ 내용 ~~~~~~~~~~~</label></li>
-					<li>
-						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button>
-						<img src="images/messenger.png"><button type="button">댓글쓰기</button>
-					</li>
-				</ul>
-			</div>
-		</section>
+			</c:forEach>
+			</section>
+			</section>
+			
 	</div>
 	<jsp:include page="../footer.jsp"/>
 </body>

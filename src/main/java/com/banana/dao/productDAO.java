@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.banana.vo.productVO;
-import com.mycgv.vo.CgvBoardVO;
 
 public class productDAO extends DBConn{
 	
