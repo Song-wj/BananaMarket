@@ -6,6 +6,7 @@ import com.spring.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
 
+	// 동네생활 글쓰기
 	public boolean insertBoard(dongneVO vo) {
 		boolean result = false;
 		try {
@@ -27,6 +28,7 @@ public class dongneDAO extends DBConn{
 		return result;
 	}
 	
+	// board 리스트 불러오기
 	public ArrayList<dongneVO> getBoardList(){
 		ArrayList<dongneVO> list = new ArrayList<dongneVO>();
 		try {
@@ -54,5 +56,32 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return list;
+	}
+	
+	public dongneVO getBoardContent(String bid) {
+		dongneVO vo = new dongneVO();
+		try {
+			String sql ="select  nickname, btitle, bfile,bsfile,btopic, maddr, bdate \r\n"
+						+ "from banana_member m , banana_board b\r\n"
+						+ "where m.mid = b.mid and bid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, bid);
+			
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setNickname(rs.getString(1));
+				vo.setBtitle(rs.getString(2));
+				vo.setBfile(rs.getString(3));
+				vo.setBsfile(rs.getString(4));
+				vo.setBtopic(rs.getString(5));
+				vo.setMaddr(rs.getString(6));
+				vo.setBdate(rs.getString(7));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
 	}
 }

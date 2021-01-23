@@ -35,6 +35,14 @@ public class DongneServiceImpl implements BananaService{
 		
 		return mv;
 	}
+	
+	public Object getContent(Object bid) {
+		ModelAndView mv = new ModelAndView();
+		dongneVO vo = dongneDAO.getBoardContent((String)bid);
+		mv.addObject("vo", vo);
+		mv.setViewName("/dongneLife/dongneLife_content");
+		return mv;
+	}
 	public String  update() {
 		return ".";
 	}

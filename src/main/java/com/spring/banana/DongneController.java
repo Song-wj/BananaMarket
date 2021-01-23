@@ -40,9 +40,9 @@ public class DongneController  {
 	 * @return
 	 */
 	@RequestMapping(value ="/dongneLife_content.do", method = RequestMethod.GET)
-	public String dongneLife_content() {
+	public ModelAndView dongneLife_content(String bid) {
 	
-		return "/dongneLife/dongneLife_content";
+		return (ModelAndView)bananaService.getContent(bid);
 	}
 	
 	/**
