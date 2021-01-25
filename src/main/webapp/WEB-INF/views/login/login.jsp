@@ -5,7 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#btnLogin").click(function(){
+			if($("#id").val() == "") {
+				alert("아이디를 입력해주세요.");
+				$("#id").focus();
+				return false;
+			} else if($("#pass").val() == "") {
+				alert("비밀번호를 입력해주세요.");
+				$("#pass").focus();
+				return false;
+			} else {
+				loginForm.submit();
+			}
+		});
+	});
+</script>
 <style>
 	div.login{
 		width:25%;
@@ -96,10 +113,10 @@
 					<h1>로그인</h1>
 					<ul>
 						<li>
-							<input type="text" name="id" placeholder="아이디 입력" id="id">
+							<input type="text" name="mid" placeholder="아이디 입력" id="id">
 						</li>
 						<li>
-							<input type="password" name="pass" placeholder="비밀번호 입력" id="pass">
+							<input type="password" name="pw" placeholder="비밀번호 입력" id="pass">
 							<div id="errMsg">에러메세지</div>
 						</li>
 						<li>
