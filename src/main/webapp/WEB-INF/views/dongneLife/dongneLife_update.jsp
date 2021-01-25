@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src = "http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <style>
 	div.dongnelife_update {
 		width: 70%;
@@ -77,6 +78,19 @@
 		margin-bottom:-7px;
 	}
 </style>
+<script>
+	$(document).ready(function(){
+		$("#board_write_btn").click(function(){
+			if($("#btopic").val() == ""){
+				alert("게시글을 작성해주세요");
+			}
+		});
+		
+		
+	
+		
+	})
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -88,7 +102,7 @@
 				<ul>
 					<li><a href="dongneLife_content.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글수정</label></li>
-					<li><button type="submit">완료</button></li>
+					<li><button type="button">완료</button></li>
 				</ul>
 			</div>
 		</section>
