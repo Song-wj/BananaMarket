@@ -105,4 +105,18 @@ public class dongneDAO extends DBConn{
 		
 		return result;
 	}
+	// board delete
+	public boolean boardDelete(String bid) {
+		boolean result = false;
+		try {
+			String sql="delete from banana_board where bid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, bid);
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

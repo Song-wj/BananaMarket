@@ -20,9 +20,8 @@ public class DongneController  {
 	 * @return
 	 */
 	@RequestMapping(value ="/dongneLife_delete.do", method = RequestMethod.GET)
-	public String dongneLife_delete() {
-	
-		return "/dongneLife/dongneLife_delete";
+	public String dongneLife_delete(String bid) {	
+		return (String)bananaService.delete(bid);
 	}
 	
 	/**

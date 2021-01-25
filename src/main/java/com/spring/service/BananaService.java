@@ -7,6 +7,6 @@ public interface BananaService {
 	Object getContent(Object id);
 	Object update(Object vo);
 	Object getUpdateContent(Object id);
-	Object delete();
+	Object delete(Object id);
 	
 }

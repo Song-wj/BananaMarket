@@ -65,7 +65,12 @@ public class DongneServiceImpl implements BananaService{
 		}
 		return ".";
 	}
-	public Object  delete() {
-		return ".";
+	public Object delete(Object bid) {
+		boolean result = dongneDAO.boardDelete((String)bid);
+		String str="";
+		if(result) {
+			str="redirect:/dongneLife.do";
+		}
+		return str;
 	}
 }

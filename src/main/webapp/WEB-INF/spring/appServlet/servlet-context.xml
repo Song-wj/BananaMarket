@@ -20,7 +20,7 @@
 	
 
 	<!--  DAO Object -->
-	<beans:bean class ="com.spring.dao.dongneDAO" id="dongneDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
 	
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
 
