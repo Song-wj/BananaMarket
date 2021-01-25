@@ -82,23 +82,25 @@
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_update">
+	<form name="dongneUpdateForm" action="dongneLife_update_proc.do" method="post">
 		<section class="section1_dongneLife_update">
 			<div class="update_nav">
 				<ul>
 					<li><a href="dongneLife_content.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글수정</label></li>
-					<li><a href="dongneLife_update_proc.do"><button>완료</button></a></li>
+					<li><button type="submit">완료</button></li>
 				</ul>
 			</div>
 		</section>
 		<section class="section2_dongneLife_update">
 			<div class="update_topic">
 				<a href="#"><label>게시글의 주제를 선택해주세요.</label></a>
+				<input type ="hidden" value="cc">
 			</div>
 		</section>
 		<section class="section3_dongneLife_update">
 			<div class="update_content">
-				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요."></textarea>
+				<textarea >${vo.btopic }</textarea>
 			</div>
 		</section>
 		<section class="section4_dongneLife_update">
@@ -107,6 +109,7 @@
 				<a href="#"><img src="images/dongneLife_locate.png">0/5</a>
 			</div>
 		</section>
+		</form>
 	</div>
 	
 	<jsp:include page="../footer.jsp"/>

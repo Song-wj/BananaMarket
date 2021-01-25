@@ -57,11 +57,11 @@ public class dongneDAO extends DBConn{
 		
 		return list;
 	}
-	
+	// board content 
 	public dongneVO getBoardContent(String bid) {
 		dongneVO vo = new dongneVO();
 		try {
-			String sql ="select  nickname, btitle, bfile,bsfile,btopic, maddr, bdate \r\n"
+			String sql ="select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, bdate \r\n"
 						+ "from banana_member m , banana_board b\r\n"
 						+ "where m.mid = b.mid and bid=?";
 			getPreparedStatement(sql);
@@ -69,13 +69,14 @@ public class dongneDAO extends DBConn{
 			
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				vo.setNickname(rs.getString(1));
-				vo.setBtitle(rs.getString(2));
-				vo.setBfile(rs.getString(3));
-				vo.setBsfile(rs.getString(4));
-				vo.setBtopic(rs.getString(5));
-				vo.setMaddr(rs.getString(6));
-				vo.setBdate(rs.getString(7));
+				vo.setBid(rs.getString(1));
+				vo.setNickname(rs.getString(2));
+				vo.setBtitle(rs.getString(3));
+				vo.setBfile(rs.getString(4));
+				vo.setBsfile(rs.getString(5));
+				vo.setBtopic(rs.getString(6));
+				vo.setMaddr(rs.getString(7));
+				vo.setBdate(rs.getString(8));
 
 			}
 		} catch (Exception e) {
@@ -83,5 +84,25 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return vo;
+	}
+	//board update
+	public boolean boardUpdate(dongneVO vo) {
+		boolean result = false;
+		try {
+		/*	String sql ="update banana_board set bfile=? ,bsfile=?, btopic=?, btitle=?";*/
+			String sql ="update banana_board set btopic=?, btitle=? where bid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1,vo.getBtopic());
+			pstmt.setString(2,vo.getBtitle());
+			pstmt.setString(3,vo.getBid());
+			
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }
