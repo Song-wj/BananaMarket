@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.banana.vo.*"%>
+<%
+	SessionVO svo = (SessionVO)session.getAttribute("svo");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,13 +101,49 @@
 			<button id="header-search-button">
 				<img src="http://localhost:9000/banana/images/search-icon.svg">
 			</button>
-			<ul class="header-menu-list">
-				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/login.do">로그인</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/join.do">회원가입</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
-				<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
-			</ul>
+			<%-- <c:choose>
+				<c:when test="${ svo ne null }">
+					<ul class="header-menu-list">
+						<li class="header-menu-item"><a class="menu-link" href="#">${ svo.nickname }님</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/logout.do">로그아웃</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
+					</ul>
+					<c:if test="${ svo.nickname eq '관리자' }">
+						<li class="header-menu-item"><a class="menu-link" href="#">관리자</a></li>
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<ul class="header-menu-list">
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/login.do">로그인</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/join.do">회원가입</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose> --%>
+				<% if(svo != null) {%>
+					<ul class="header-menu-list">
+						<li class="header-menu-item"><a class="menu-link" href="#"><%= svo.getNickname() %>님</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/logout.do">로그아웃</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
+						<% if(svo.getNickname().equals("관리자")) { %>
+						<li class="header-menu-item"><a class="menu-link" href="#">관리자</a></li>
+						<% } %>
+					</ul>
+				<% } else {%>	
+					<ul class="header-menu-list">
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/login.do">로그인</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/join.do">회원가입</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
+					</ul>
+				<% } %>
 		</div>
 	</header>
 </body>

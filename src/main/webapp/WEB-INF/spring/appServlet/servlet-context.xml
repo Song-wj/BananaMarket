@@ -20,16 +20,16 @@
 	
 
 	<!--  DAO Object -->
-	<beans:bean class ="com.spring.dao.dongneDAO" id="dongneDAO"></beans:bean>
-	
-	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
+	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
+	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
 
 	<!-- Service -->
 	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
+	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
 	
-	<!-- DAO -->
-	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
-
+	<!-- multipartResolver -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</beans:bean> 
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
