@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.dao.dongneDAO;
-import com.spring.vo.dongneVO;
+import com.banana.dao.dongneDAO;
+import com.banana.vo.dongneVO;
+
+
 
 @Service("dongneService")
 public class DongneServiceImpl implements BananaService{

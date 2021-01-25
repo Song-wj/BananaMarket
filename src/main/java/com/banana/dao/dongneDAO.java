@@ -1,8 +1,8 @@
-package com.spring.dao;
+package com.banana.dao;
 
 import java.util.ArrayList;
 
-import com.spring.vo.dongneVO;
+import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
 

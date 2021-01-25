@@ -314,7 +314,7 @@
 				<h1 class="home-main-title">우리 동네<br>중고 직거래 마켓</h1>
 				<p class="home-main-txt">동네 주민들과 가깝고 따뜻한 거래를 지금 경험해보세요.</p>
 				<div class="home-buttons">
-					<a class="home-button1" href="#">인기매물 보기</a>
+					<a class="home-button1" href="http://localhost:9000/banana/popularProduct.do">인기매물 보기</a>
 					<a class="home-button2" href="#">믿을 수 있는 중고거래</a>
 				</div>
 			</div>

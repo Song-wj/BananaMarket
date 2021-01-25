@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.dongneVO;
 import com.spring.service.BananaService;
-import com.spring.vo.dongneVO;
 
 @Controller
 public class DongneController  {
