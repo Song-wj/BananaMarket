@@ -20,9 +20,8 @@ public class DongneController  {
 	 * @return
 	 */
 	@RequestMapping(value ="/dongneLife_delete.do", method = RequestMethod.GET)
-	public String dongneLife_delete() {
-	
-		return "/dongneLife/dongneLife_delete";
+	public String dongneLife_delete(String bid) {	
+		return (String)bananaService.delete(bid);
 	}
 	
 	/**
@@ -30,11 +29,16 @@ public class DongneController  {
 	 * @return
 	 */
 	@RequestMapping(value ="/dongneLife_update.do", method = RequestMethod.GET)
-	public String dongneLife_update() {
-	
-		return "/dongneLife/dongneLife_update";
+	public ModelAndView dongneLife_update(String bid) {
+		
+		return (ModelAndView)bananaService.getUpdateContent(bid);
 	}
 	
+	@RequestMapping(value ="/dongneLife_update_proc.do", method = RequestMethod.POST)
+	public String dongneLife_update_proc(dongneVO vo) {	
+		return (String) bananaService.update(vo);
+	}
+
 	/**
 	 * 동네생활 - 글정보 화면
 	 * @return
