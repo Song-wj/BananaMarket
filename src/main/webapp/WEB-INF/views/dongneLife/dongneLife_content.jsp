@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
+
 <script>
 	$(document).ready(function(){
 		
@@ -169,9 +171,9 @@
 		padding-top:30px;
 		border-top:1px solid lightgray;
 	}
-	section.section3_dongneLife_content div.content_detail p {
+	section.section3_dongneLife_content div.content_detail  {
 		font-size:18px;
-		font-weight:800;
+		font-weight:500;
 	}
 	section.section4_dongneLife_content div.content_response ul {
 		list-style-type:none;
@@ -308,8 +310,8 @@
 					</div>
 					<div class="memberSide">
 						<ul class="memberSide">
-							<li>닉네임</li>
-							<li>반포1동 인증 1회  / 1시간 전</li>
+							<li>${vo.nickname }</li>
+							<li>${vo.maddr } / ${vo.bdate }</li>
 						</ul>
 					</div>
 				</div>
@@ -317,11 +319,12 @@
 		</section>
 		<section class="section3_dongneLife_content">
 			<div class="content_detail">
-				<p>~~ 내용 ~~~<br>
-				와아ㅏㅏㅏㅏ아
-				호
-				<br><br>
-				</p>
+				
+			<pre><c:out value="${vo.btopic}" /></pre>
+
+
+				
+				
 			</div>
 		</section>
 		<section class="section4_dongneLife_content">

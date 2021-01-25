@@ -12,7 +12,6 @@ public class DBConn {
 	Statement stmt;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
 	String url ="jdbc:oracle:thin:@localhost:1521";
 	String user ="scott";
 	String pass ="tiger";
