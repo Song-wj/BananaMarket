@@ -77,7 +77,7 @@
 		padding:10px 10px;
 	}
 	section.section4_dongneLife_write a {
-		margin-right:0 30px;
+		margin-left:100px;
 	}
 	section.section4_dongneLife_write img {
 		width:30px;
@@ -98,14 +98,15 @@
 	}
 	form#board_write_form  section.section4_dongneLife_write input[type="file"]{
 		position: absolute; 
-		width: 1px; 
-		height: 1px; 
+	   /*  width: 1px; 
+		height: 1px;  */
 		padding: 0; 
-		margin: -1px; 
-		overflow: hidden; 
-		clip:rect(0,0,0,0); 
-		border: 0;
-	}
+		margin-left: -80px;
+		margin-top: 10px;  
+	 	overflow: hidden;  
+	 	clip:rect(0 180px 150px 75px);  
+		border: 0; 
+	} 
 	
 	
 	
@@ -119,9 +120,9 @@
 			if($("#basic").val() == "none"){
 				alert("게시글의 주제를 선택해주세요");
 				
-			/* }else if($("#btopic").val() == ""){
+			}else if($("#btopic").val() == ""){
 	            alert("게시글을 작성해주세요");
-	            $("#btopic").focus(); */
+	            $("#btopic").focus(); 
 	         }else{
 	        	 board_write_form.submit();
 	         }
@@ -136,8 +137,33 @@
 	})
 		
 		function test(){
+			/* var count=0;
+			for(var i=0 ; i<4; i++){
+				if($("#input_img")[0].files[i].name !=""){
+					count++;
+				}
+			}
 	     	
-	    	  alert($('input[type=file]')[0].files[0].name +";;" +$('input[type=file]')[0].files[1].name);
+			if(count>5){
+				alert("이미지는 5장까지 업로드 가능합니다!");
+				$("#input_img").val("");
+			} */
+			
+			var fileInput = document.getElementById("input_img");
+            
+            var files = fileInput.files;
+            var file;
+             
+            if(files.length>5){
+            	alert("이미지는 5장까지 업로드 가능합니다!");
+            	$("#input_img").val("");
+            }
+           /*  for (var i = 0; i < files.length; i++) {
+                 
+                file = files[i];
+ 
+                alert(file.name);
+            } */
 	      
 		}
 </script>
@@ -194,9 +220,9 @@
 		</section>
 		<section class="section4_dongneLife_write">
 			<div>
-				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png">0/10</label>
+				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
 				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'>
-				<!-- <div id="img_list"></div> -->
+				
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>
 		</section>
