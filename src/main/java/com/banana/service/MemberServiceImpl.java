@@ -20,21 +20,22 @@ public class MemberServiceImpl implements MemberService{
 	BananaMemberDAO memberDAO;
 	
 	@Override
-	public String getResultLogin(BananaMemberVO vo, HttpSession session) {
+	public ModelAndView getResultLogin(BananaMemberVO vo, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
 		SessionVO svo = memberDAO.getLogin(vo);
-		String result = "";
+		//String result = "";
 		
 		if(svo.getResult() != 0) {
 			session.setAttribute("svo", svo);
-			result = "index";
+			mv.addObject("svo", svo);
+			mv.setViewName("index");
+			//result = "index";
 		} else {
-			result = "errorPage";
-			System.out.println("로그인 실패");
-			System.out.println(svo.getResult());
-			System.out.println(svo.getNickname());
+			//result = "errorPage";
+			mv.setViewName("errorPage");
 		}
 		
-		return result;
+		return mv;
 	}
 
 	

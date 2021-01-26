@@ -7,5 +7,5 @@ import com.banana.vo.BananaMemberVO;
 public interface MemberService {
 	Object getResultJoin(BananaMemberVO vo);
 	/* String getResultIdCheck(String id); */
-	String getResultLogin(BananaMemberVO vo, HttpSession seesion);
+	Object getResultLogin(BananaMemberVO vo, HttpSession seesion);
 }
