@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>인기 매물</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <style>
 	div.content{
@@ -161,13 +163,17 @@
 		</div> <!-- select_div -->
 		<div class ="product">
 			<div class="plist">
-				<a href="" >
-					<img src="images/home.png">
-					<label class="ptitle">~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~팔아요</label>
-					<label class="pprice">30,000원</label>
+				<c:forEach var="vo"  items="${list}">
+				 <c:if test="${vo.psfile ne null }">
+					<a href="" >
+                        <img src="http://localhost:9000/banana/resources/upload/${vo.psfile }" width="50%">
+                 </c:if>       
+					<label class="ptitle">${vo.ptitle }</label>
+					<label class="pprice">${vo.pprice }</label>
 					<label class="loc">인천 부평구 부개2동</label>
-					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
+					<span class="interest">${vo.plike }</span>&nbsp;∙&nbsp;<span class="chat">${vo.pchat}</span>
 				</a>
+				</c:forEach>
 			</div>
 			<div class="plist">
 				<a href="" >
@@ -177,23 +183,8 @@
 					<label class="loc">인천 부평구 부개2동</label>
 					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
 				</a>
-			</div><div class="plist">
-				<a href="" style="cursor:hand;">
-					<img src="images/work3.png">
-					<label class="ptitle">~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~팔아요</label>
-					<label class="pprice">30,000원</label>
-					<label class="loc">인천 부평구 부개2동</label>
-					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
-				</a>
-			</div><div class="plist">
-				<a href="" style="cursor:hand;">
-					<img src="images/work3.png">
-					<label class="ptitle">~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~팔아요</label>
-					<label class="pprice">30,000원</label>
-					<label class="loc">인천 부평구 부개2동</label>
-					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
-				</a>
-			</div><div class="plist">
+			</div>
+			<!-- <div class="plist">
 				<a href="" style="cursor:hand;">
 					<img src="images/work3.png">
 					<label class="ptitle">~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~팔아요</label>
@@ -202,6 +193,24 @@
 					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
 				</a>
 			</div>
+			<div class="plist">
+				<a href="" style="cursor:hand;">
+					<img src="images/work3.png">
+					<label class="ptitle">~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~팔아요</label>
+					<label class="pprice">30,000원</label>
+					<label class="loc">인천 부평구 부개2동</label>
+					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
+				</a>
+			</div>
+			<div class="plist">
+				<a href="" style="cursor:hand;">
+					<img src="images/work3.png">
+					<label class="ptitle">~~~~ ~~~~~~~~~~~~~~~~~~~~~~~~~~팔아요</label>
+					<label class="pprice">30,000원</label>
+					<label class="loc">인천 부평구 부개2동</label>
+					<span class="interest">4</span>&nbsp;∙&nbsp;<span class="chat">2</span>
+				</a>
+			</div> -->
 		</div> <!-- product -->
 		<div class="pbanner">
 			<div><a href="promoteDongne.do"><label class="pstore">동네홍보</label><button type="button" id="pstore"><img src="images/pstore.png"></button></a></div>

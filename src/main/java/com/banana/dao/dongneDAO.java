@@ -62,7 +62,7 @@ public class dongneDAO extends DBConn{
 		dongneVO vo = new dongneVO();
 		try {
 			String sql ="select  nickname, btitle, bfile,bsfile,btopic, maddr, bdate \r\n"
-						+ "from banana_member m , banana_board b\r\n"
+						+ "from banana_member m , banana_board b \r\n"
 						+ "where m.mid = b.mid and bid=?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, bid);
