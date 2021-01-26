@@ -90,7 +90,7 @@ div.footer div.fcontent1 ul.nav1>li>a{
 			<ul class="nav1">
 				<li>믿을 수 있는 중고거래</li>
 				<li><a href="http://localhost:9000/banana/question_list.do">자주 묻는 질문</a></li>
-				<li></li>
+				<li><a href="http://localhost:9000/banana/notice_list.do">공지사항</a></li>
 			</ul>
 			<ul class="nav2">
 				<li>회사 소개</li>
