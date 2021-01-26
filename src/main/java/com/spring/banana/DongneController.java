@@ -1,9 +1,17 @@
 package com.spring.banana;
 
+
+import java.util.List;
+
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.dongneVO;
@@ -60,7 +68,15 @@ public class DongneController  {
 	}
 	
 	@RequestMapping(value ="/dongneLife_write_proc.do", method = RequestMethod.POST)
-	public String dongneLife_write_proc(dongneVO vo) {	
+	public String dongneLife_write_proc(dongneVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {
+		
+
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
 		return (String) bananaService.insert(vo);
 	}
 
