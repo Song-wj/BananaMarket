@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src = "http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <style>
 	div.dongnelife_write {
 		width: 70%;
@@ -76,7 +77,26 @@
 		height:30px;
 		margin-bottom:-7px;
 	}
+	
+	
+	
+	
+
 </style>
+
+<script>
+	$(document).ready(function(){
+		$("#board_write_btn").click(function(){
+			if($("#btopic").val() == ""){
+				alert("게시글을 작성해주세요");
+			}
+		});
+		
+		
+	
+		
+	})
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -90,18 +110,30 @@
 					<li><input type="hidden" name="btitle" value="test"></li>
 					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글쓰기</label></li>
-					<li><button type="submit">완료</button></li>
+					<li><button type="button" id="board_write_btn">완료</button></li>
 				</ul>
-			</div>
+			</div>    
 		</section>
 		<section class="section2_dongneLife_write">
 			<div class="write_topic" id="write_topic">
-				<a href="#"><label>게시글의 주제를 선택해주세요.</label></a>
+			
+				<a href="#"><label id="test" >게시글의 주제를 선택해주세요.</label></a>
+				<div class="modal"> 	
+				   <div class="table" >			
+						<button type="button" class="close" >&times;</button>
+						<div class="table--cell"> 
+							<div class="subject-card-wrap">
+				 
+				
 			</div>
+		</div>
+		</div>
+		</div>
+		</div>
 		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
-				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요." name="btopic"></textarea>
+				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요." name="btopic" id="btopic"></textarea>
 			</div>
 		</section>
 		<section class="section4_dongneLife_write">

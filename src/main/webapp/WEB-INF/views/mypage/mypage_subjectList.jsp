@@ -127,7 +127,7 @@
 						<div class="subject-card-title">분실/실종센터</div>
 					</a>
 				</article>
-				</article>
+				
 				<article class="subject-card-top">
 					<a class="subject-card-link" href="#">
 						<div class="subject-card-photo">
@@ -157,7 +157,7 @@
 						<div class="subject-card-title">건강</div>
 					</a>
 				</article>
-				</article>
+			
 				<article class="subject-card-top">
 					<a class="subject-card-link" href="#">
 						<div class="subject-card-photo">
