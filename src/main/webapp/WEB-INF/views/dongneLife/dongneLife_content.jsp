@@ -32,6 +32,7 @@
 		padding-top:150px;
 		padding-bottom:3%;
 		border:1px solid green;
+		overflow:auto;
 	}
 	section.section2_dongneLife_content,
 	section.section3_dongneLife_content,
@@ -283,6 +284,25 @@
 		padding-left:88%;
 	}
 </style>
+
+<script>
+	$(document).ready(function(){
+		$(".comment_deleteBtn").click(function(){
+			
+			showConfirm();
+		});
+		
+		 function showConfirm() {
+			 if (confirm("정말 삭제하시겠습니가?"))
+			  {
+				 window.location.href="dongneLife_delete.do?bid=${vo.bid }"
+			  } 
+			 };
+		 
+	
+		
+	})
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -296,8 +316,8 @@
 						<button type="button" class="btn_unlike" id="btnLike">
   						<span class="img_emoti">좋아요</span></button>
   					</li>
-					<li><a href="dongneLife_update.do"><button class="comment_writeBtn">수정</button></a>
-					<li><a href="dongneLife_delete.do"><button class="comment_writeBtn">삭제</button></a>
+					<li><a href="dongneLife_update.do?bid=${vo.bid }"><button class="comment_updateBtn">수정</button></a>
+					<li><a href=""><button class="comment_deleteBtn">삭제</button></a>
 				</ul>
 			</div>
 		</section>

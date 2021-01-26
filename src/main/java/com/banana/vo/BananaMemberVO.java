@@ -1,10 +1,25 @@
 package com.banana.vo;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class BananaMemberVO {
-	String mid, nickname, pw, ph, maddr_num, maddr, mfile, msfile;
+	String mid, nickname, pw, ph, maddr_num, maddr, mfile, msfile, savepath;
 	String ph1, ph2, ph3, maddr1, maddr2;
 	int score;
+	CommonsMultipartFile file1;
 	
+	public String getSavepath() {
+		return savepath;
+	}
+	public void setSavepath(String savepath) {
+		this.savepath = savepath;
+	}
+	public CommonsMultipartFile getFile1() {
+		return file1;
+	}
+	public void setFile1(CommonsMultipartFile file1) {
+		this.file1 = file1;
+	}
 	public String getMid() {
 		return mid;
 	}
