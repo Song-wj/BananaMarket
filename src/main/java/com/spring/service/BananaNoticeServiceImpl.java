@@ -139,6 +139,4 @@ public class BananaNoticeServiceImpl implements BoardService{
 				
 		return mv;
 	}
-
-
 }

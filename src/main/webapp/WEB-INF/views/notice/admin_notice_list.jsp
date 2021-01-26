@@ -32,6 +32,10 @@
 			$(location).attr('href','http://localhost:9000/banana/admin_notice_list.do?rpage='+e.page);  
 		});
 		
+		/**
+		 * 검색
+		 */
+		
 	});
 </script>
 <style>
@@ -143,7 +147,7 @@
 			            <tr>
 			            	<td colspan="4" class="search">
 				            	<input type="text" placeholder="제목을 입력해주세요" id="svalue">
-								<button type="button" class="noticelist_btn_style">검색</button>
+								<button type="button" class="noticelist_btn_style" id="getSearchList">검색</button>
 							</td>
 			            </tr>
 			            <tr class="table_title">

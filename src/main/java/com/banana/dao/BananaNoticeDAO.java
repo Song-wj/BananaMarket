@@ -196,4 +196,5 @@ public class BananaNoticeDAO extends DBConn{
 		}
 		return result;
 	}
+	
 }

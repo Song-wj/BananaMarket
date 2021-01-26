@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.banana.vo.BananaFAQVO;
 import com.banana.vo.BananaNoticeVO;
+import com.spring.service.BananaNoticeServiceImpl;
 import com.spring.service.BoardService;
 
 @Controller
@@ -15,7 +16,8 @@ public class NoticeController {
 	
 	@Autowired
 	private BoardService noticeService;
-	
+	@Autowired
+	private BananaNoticeServiceImpl noticeServiceimpl;
 	/**
 	 * 관리자 공지사항 리스트
 	 * @return
