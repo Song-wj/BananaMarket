@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.service.MemberService;
 import com.banana.vo.BananaMemberVO;
@@ -35,8 +36,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/login_proc.do", method=RequestMethod.POST)
-	public String login_proc(BananaMemberVO vo, HttpSession session) {
-		return memberService.getResultLogin(vo, session);
+	public ModelAndView login_proc(BananaMemberVO vo, HttpSession session) {
+		return (ModelAndView)memberService.getResultLogin(vo, session);
 	}
 	
 	@RequestMapping(value="/login.do",method=RequestMethod.GET)
