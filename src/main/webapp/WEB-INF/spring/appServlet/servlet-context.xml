@@ -21,8 +21,10 @@
 
 	<!--  DAO Object -->
 	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaShopDAO" id="shopDAO"></beans:bean>
 	
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
+	<beans:bean class="com.enroll.service.EnrollstoreServiceImpl" id="shopService"></beans:bean>
 
 	<!-- Service -->
 	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
