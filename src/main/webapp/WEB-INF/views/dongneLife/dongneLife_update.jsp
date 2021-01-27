@@ -123,7 +123,8 @@
 		border-radius:5px;
 		padding:5px 15px;
 		font-size:15px;
-		margin-left:300px;
+		position:absolute;
+		left:1000px;
 		
 
 		
