@@ -58,11 +58,12 @@
 	<div class="notice_content">
 		<section class="section_notice_content">
 			<div>
-				<form name="notice_deleteForm" action="#" method="get" class="admin_notice_delete">
+				<form name="question_deleteForm" action="admin_question_delete_proc.do" method="get" class="admin_notice_delete">
 					<div>
 						<img src="http://localhost:9000/banana/images/question.jpg" class="title">
 					</div>
 					<table class="admin_notice_delete">
+					
 						<tr>
 							<td class="real"><h1>이 질문을 삭제하시겠습니까?</h1></td>
 						</tr>
@@ -73,13 +74,12 @@
 						</tr>
 						<tr>
 							<td class="button">
-								<button type="button" class="noticelist_btn_style">삭제</button>
+								<a href="admin_question_delete_proc.do?fid=${fid }"><button type="button" class="noticelist_btn_style">삭제</button></a>
 								<a href="admin_question_list.do"><button type="button" class="noticelist_btn_style">목록</button></a>
-								<a href="admin_question_content.do"><button type="button" class="noticelist_btn_style2">이전페이지</button></a>
+								<a href="admin_question_content.do?fid=${fid }"><button type="button" class="noticelist_btn_style2">이전페이지</button></a>
 							</td>
 						</tr>
 					</table>
-				
 				</form>
 			</div>
 		</section>

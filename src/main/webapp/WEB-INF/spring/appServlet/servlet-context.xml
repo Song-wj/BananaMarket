@@ -19,14 +19,19 @@
 	<resources mapping="/images/**" location="/resources/images/" />
 	
 
-	<!--  DAO Object -->
-	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
-	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
 
 	<!-- Service -->
-	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
+	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
+	<beans:bean class="com.spring.service.BananaNoticeServiceImpl" id="noticeService"></beans:bean>
+	<beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
 	
+	<!-- DAO -->
+	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
+	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaNoticeDAO" id="noticeDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaFAQDAO" id="questionDAO"></beans:bean>
+
 	<!-- multipartResolver -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	</beans:bean> 

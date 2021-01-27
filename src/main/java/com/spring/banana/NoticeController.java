@@ -1,19 +1,30 @@
 package com.spring.banana;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.banana.vo.BananaNoticeVO;
+import com.spring.service.BananaNoticeServiceImpl;
+import com.spring.service.BoardService;
 
 @Controller
 public class NoticeController {
 	
+	@Autowired
+	private BoardService noticeService;
+	@Autowired
+	private BananaNoticeServiceImpl noticeServiceimpl;
 	/**
 	 * 관리자 공지사항 리스트
 	 * @return
 	 */
 	@RequestMapping(value="/admin_notice_list.do",method=RequestMethod.GET)
-	public String admin_notice_list() {
-		return "/notice/admin_notice_list";
+	public ModelAndView admin_notice_list(String rpage) {
+		return noticeService.getList(rpage, "admin");
 	}
 	
 	/**
@@ -21,8 +32,8 @@ public class NoticeController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin_notice_content.do",method=RequestMethod.GET)
-	public String admin_notice_content() {
-		return "/notice/admin_notice_content";
+	public ModelAndView admin_notice_content(String nid) {
+		return noticeService.getContent(nid,"admin");
 	}
 	
 	/**
@@ -33,14 +44,27 @@ public class NoticeController {
 	public String admin_notice_write() {
 		return "/notice/admin_notice_write";
 	}
+	@RequestMapping(value="/admin_notice_write_proc.do",method=RequestMethod.POST)
+	public String admin_notice_write_proc(BananaNoticeVO vo) {
+		return (String) noticeService.insert(vo);
+	}
 	
 	/**
 	 * 관리자 공지사항 삭제
 	 * @return
 	 */
 	@RequestMapping(value="/admin_notice_delete.do",method=RequestMethod.GET)
-	public String admin_notice_delete() {
-		return "/notice/admin_notice_delete";
+	public ModelAndView admin_notice_delete(String nid) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("nid",nid);
+		mv.setViewName("/notice/admin_notice_delete");
+		
+		return mv;
+	}
+	@RequestMapping(value="/admin_notice_delete_proc.do",method=RequestMethod.GET)
+	public ModelAndView admin_notice_delete_proc(String nid) {
+		return noticeService.getResultDelete(nid);
 	}
 	
 	/**
@@ -48,8 +72,13 @@ public class NoticeController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin_notice_update.do",method=RequestMethod.GET)
-	public String admin_notice_update() {
-		return "/notice/admin_notice_update";
+	public ModelAndView admin_notice_update(String nid) {
+		return noticeService.getUpdate(nid);
+	}
+	
+	@RequestMapping(value="/admin_notice_update_proc.do",method=RequestMethod.POST)
+	public ModelAndView admin_notice_update_proc(BananaNoticeVO vo) {
+		return noticeService.getResultUpdate(vo);
 	}
 	
 	/**
@@ -57,8 +86,8 @@ public class NoticeController {
 	 * @return
 	 */
 	@RequestMapping(value="/notice_list.do",method=RequestMethod.GET)
-	public String notice_list() {
-		return "/notice/notice_list";
+	public ModelAndView notice_list(String rpage) {
+		return noticeService.getList(rpage,"user");
 	}
 	
 	
@@ -67,9 +96,8 @@ public class NoticeController {
 	 * @return
 	 */
 	@RequestMapping(value="/notice_content.do" , method=RequestMethod.GET)
-	public String notice_content() {
-		
-		return "/notice/notice_content";
+	public ModelAndView notice_content(String nid) {
+		return noticeService.getContent(nid,"user");
 	}
 	
 	

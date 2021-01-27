@@ -5,6 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$("#btnNoticeWrite").click(function(){
+			if($("#ntitle").val() ==""){
+				alert("제목을 입력해주세요");
+				$("#ntitle").focus();
+			}else{
+				notice_updateForm.submit();
+			}
+		});
+	});
+</script>
 <style>
 	div.notice_update{
 		width:70%;
@@ -75,7 +88,7 @@
 	<div class="notice_update">
 		<section class="section_notice_content">
 			<div>
-				<form name="notice_updateForm" action="#" method="get" class="admin_notice_update">
+				<form name="notice_updateForm" action="admin_notice_write_proc.do" method="post" class="admin_notice_update">
 					<div>
 						<img src="http://localhost:9000/banana/images/notice.jpg" class="title">
 					</div>
@@ -83,14 +96,14 @@
 					<ul>
 						<li>
 							<label class="utitle">제목</label>
-							<input type="text" name="ntitle">
+							<input type="text" name="ntitle" id="ntitle">
 						</li>
 						<li>
 							<label class="utitle">내용</label>
 							<textarea name="ncontent" rows="20" cols="100"></textarea>
 						</li>
 						<li class="wbutton">
-							<button class="noticelist_btn_style">등록</button>
+							<button type="button" class="noticelist_btn_style" id="btnNoticeWrite">등록</button>
 							<a href="admin_notice_list.do"><button type="button" class="noticelist_btn_style">목록</button></a>
 						</li>
 					</ul>
