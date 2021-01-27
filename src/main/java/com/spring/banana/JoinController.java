@@ -19,13 +19,17 @@ public class JoinController {
 	@Autowired
 	MemberService memberService;
 	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/idCheck_proc.do", produces =
-	 * "application/String; charset=utf-8") public String idCheck_proc(String id,
-	 * HttpSession session) { return memberService.getResultIdCheck(id); }
-	 */
+	@ResponseBody
+	@RequestMapping(value="/nickCheck_proc.do", method=RequestMethod.POST) 
+	public String getNickCheck(String nickname) { 
+		return memberService.getResultNickCheck(nickname); 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/idCheck_proc.do", method=RequestMethod.POST) 
+	public String idCheck_proc(String id) { 
+		return memberService.getResultIdCheck(id); 
+	}
 	
 	@RequestMapping(value="/jusoPopup.do",method= {RequestMethod.POST, RequestMethod.GET})
 	public String jusoPopup() {

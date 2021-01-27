@@ -103,29 +103,29 @@
 	<div class="notice_content">
 		<section class="section_notice_content">
 			<div>
-				<form name="notice_contentForm" action="notice_content_proc.do" method="get" class="notice_content">
+				<form name="notice_contentForm" action="notice_content_proc.do" method="post" class="notice_content">
 					<div>
 						<img src="http://localhost:9000/banana/images/notice.jpg" class="title">
 					</div>
 					<table class="notice_content">
 						<tr class="table_title">
-							<th>제목들어갈곳</th>
+							<th>${vo.ntitle }</th>
 						</tr>
 						<tr>
 							<td class="right">
-								<img src="http://localhost:9000/banana/images/eye_icon.png">&nbsp;252534 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<img src="http://localhost:9000/banana/images/date_icon.png">&nbsp;2021-01-16
+								<img src="http://localhost:9000/banana/images/eye_icon.png">&nbsp;${vo.nhits } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<img src="http://localhost:9000/banana/images/date_icon.png">&nbsp;${vo.ndate }
 							</td>
 						</tr>
 						<tr>
 							<td class="content">
-								내용내용내용내용내용내용내용내용내용내용내용내용
+								${vo.ncontent }
 							</td>
 						</tr>
 						<tr>
 							<td class="button">
-								<a href="admin_notice_update.do"><button type="button" class="noticelist_btn_style">수정</button></a>
-								<a href="admin_notice_delete.do"><button type="button" class="noticelist_btn_style">삭제</button></a>
+								<a href="admin_notice_update.do?nid=${vo.nid }"><button type="button" class="noticelist_btn_style">수정</button></a>
+								<a href="admin_notice_delete.do?nid=${vo.nid }"><button type="button" class="noticelist_btn_style">삭제</button></a>
 								<a href="admin_notice_list.do"><button type="button" class="noticelist_btn_style">목록</button></a>
 							</td>
 						</tr>

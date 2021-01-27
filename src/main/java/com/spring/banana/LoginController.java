@@ -4,8 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.service.MemberService;
@@ -33,6 +35,12 @@ public class LoginController {
 		}
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/login_chk.do", method=RequestMethod.POST)
+	public String login_chk(String id, String pass) {
+		return memberService.getResultLoginChk(id, pass);
 	}
 	
 	@RequestMapping(value="/login_proc.do", method=RequestMethod.POST)

@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 
 <script>
 	$(document).ready(function(){
@@ -176,6 +181,13 @@
 		font-size:18px;
 		font-weight:500;
 	}
+	section.section3_dongneLife_content img{
+		width:150px;
+		height:150px;
+		object-fit: contain;
+		margin-top:100px;
+		margin-right:20px;
+	}
 	section.section4_dongneLife_content div.content_response ul {
 		list-style-type:none;
 	}
@@ -260,6 +272,8 @@
 		height:23px;
 		margin-bottom:10px;
 	}
+	
+	
 	section.section6_dongneLife_content button.comment_writeBtn,
 	section.section1_dongneLife_content li:nth-child(3) button,
 	section.section1_dongneLife_content li:nth-child(4) button {
@@ -300,6 +314,15 @@
 			 };
 		 
 	
+
+			
+			 
+			 lightbox.option({
+				    resizeDuration: 200,
+				    wrapAround: true,
+				    disableScrolling: false,
+				    fitImagesInViewport:false
+				})
 		
 	})
 </script>
@@ -317,7 +340,7 @@
   						<span class="img_emoti">좋아요</span></button>
   					</li>
 					<li><a href="dongneLife_update.do?bid=${vo.bid }"><button class="comment_updateBtn">수정</button></a>
-					<li><a href=""><button class="comment_deleteBtn">삭제</button></a>
+					<li><a href="dongneLife_delete.do?bid=${vo.bid }"><button class="comment_deleteBtn">삭제</button></a>
 				</ul>
 			</div>
 		</section>
@@ -343,8 +366,15 @@
 			<pre><c:out value="${vo.btopic}" /></pre>
 
 
+			
+			<div id ="img_div">
+			<c:forEach var="list" items="${sfile_list }" >
+			
+					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
 				
-				
+			
+			</c:forEach>
+			</div>	
 			</div>
 		</section>
 		<section class="section4_dongneLife_content">
