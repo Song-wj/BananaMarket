@@ -1,8 +1,53 @@
 package com.banana.vo;
 
+
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+
 public class dongneVO {
 
-	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate;
+	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate ,savepath;
+	
+	String file;
+	String sfile;
+	
+	List<MultipartFile> list ;
+	public String getFile() {
+		return file;
+	}
+	
+	public void setFile(String file) {
+		
+		this.file = file;
+	}
+	
+	public String getSfile() {
+		return sfile;
+	}
+	
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
+
+	public String getSavepath() {
+		return savepath;
+	}
+	
+	public void setSavepath(String savepath) {
+		this.savepath = savepath;
+	}
+
+	public List<MultipartFile> getList() {
+		return list;
+	}
+
+	public void setList(List<MultipartFile> list) {
+		this.list = list;
+	}
+
+	
 
 	public String getMaddr() {
 		return maddr;
