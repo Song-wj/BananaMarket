@@ -77,7 +77,7 @@
 		padding:10px 10px;
 	}
 	section.section4_dongneLife_write a {
-		margin-left:100px;
+		margin:auto;
 	}
 	section.section4_dongneLife_write img {
 		width:30px;
