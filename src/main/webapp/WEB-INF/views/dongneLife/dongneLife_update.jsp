@@ -115,6 +115,20 @@
 		width:100px;
 		background-color:white;
 	}
+	form#dongneUpdateForm  section.section4_dongneLife_update button#cancel_img{
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		border-radius:5px;
+		padding:5px 15px;
+		font-size:15px;
+		margin-left:300px;
+		
+
+		
+		
+	}
 </style>
 <script>
 $(document).ready(function(){
@@ -136,9 +150,25 @@ $(document).ready(function(){
         	 dongneUpdateForm.submit();
          }
       });
+	
+	
+	   $("#cancel_img").click(function(){
+		   		showConfirm();
+	    	
+	      })
+	      
+	      
 
 })	
 	
+	      function showConfirm() {
+			 if (confirm("사진을 삭제하시겠습니까?"))
+			  {
+			   alert("삭제되었습니다!");		
+			   $("input[type='hidden']#cancel_img").val("cancel");
+		    	$("#fake_id").html("선택된 파일 없음");
+			  } 
+			 };
 	
 	function test(){
 		
@@ -222,6 +252,7 @@ $(document).ready(function(){
 					</c:when>
 					<c:otherwise><span id="fake_id">선택한 파일 없음</span></c:otherwise>
 				</c:choose>
+				<button type="button" id="cancel_img">사진 초기화</button> <input type="hidden" name="cancel_img" id="cancel_img"> 
 				<br><br>
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>

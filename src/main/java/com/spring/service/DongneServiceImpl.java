@@ -138,8 +138,11 @@ public class DongneServiceImpl implements BananaService{
 					e.printStackTrace();
 				}
 		       }		       
+		}else if(dvo.getCancel_img().equals("cancel")) {
+			 dvo.setBfile(null);
+		     dvo.setBsfile(null);
+		     result = dongneDAO.boardU((dongneVO)vo);
 		}else {
-			
 			result = dongneDAO.boardUpdateNofile((dongneVO)vo);
 		
 		}

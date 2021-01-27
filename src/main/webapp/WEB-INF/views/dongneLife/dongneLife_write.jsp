@@ -133,6 +133,8 @@
 	      $("#btitle").click(function(){
 	         $("#basic").css("display","inline-block");
 	      });
+	      
+	   
 		
 	})
 		
