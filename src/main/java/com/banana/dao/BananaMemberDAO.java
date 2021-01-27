@@ -1,9 +1,55 @@
 package com.banana.dao;
 
+import java.util.ArrayList;
+
 import com.banana.vo.BananaMemberVO;
 import com.banana.vo.SessionVO;
 
 public class BananaMemberDAO extends DBConn{
+	
+	public ArrayList<BananaMemberVO> getMemberList() {
+		ArrayList<BananaMemberVO> list = new ArrayList<BananaMemberVO>();
+		
+		try {
+			String sql = "select mid, nickname, ph, maddr, mdate from banana_member order by mdate";
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaMemberVO vo = new BananaMemberVO();
+				vo.setMid(rs.getString(1));
+				vo.setNickname(rs.getString(2));
+				vo.setPh(rs.getString(3));
+				vo.setMaddr(rs.getString(4));
+				vo.setMdate(rs.getString(5));
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public int getLoginChk(String id, String pass) {
+		int result = 0;
+		
+		try {
+			String sql = "select count(*) from banana_member where mid=? and pw=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	
 	/**
 	 * 로그인
@@ -30,6 +76,26 @@ public class BananaMemberDAO extends DBConn{
 		return svo;
 	}
 	
+	/**
+	 * 닉네임 중복체크
+	 */
+	public int getNickCheck(String nick) {
+		int result = 0;
+		
+		try {
+			String sql = "select count(*) from banana_member where nickname=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, nick);
+			rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	/** 
 	 * 아이디 중복체크
 	 */
@@ -42,7 +108,6 @@ public class BananaMemberDAO extends DBConn{
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

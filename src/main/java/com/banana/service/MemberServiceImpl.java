@@ -1,6 +1,7 @@
 package com.banana.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,24 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	BananaMemberDAO memberDAO;
 	
+	
+	
+	@Override
+	public Object getMemberList() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<BananaMemberVO> list = memberDAO.getMemberList();
+		mv.addObject("list", list);
+		mv.setViewName("admin/memberManage");
+		return mv;
+	}
+
+	@Override
+	public String getResultLoginChk(String id, String pass) {
+		int result = memberDAO.getLoginChk(id, pass);
+		System.out.println(result);
+		return String.valueOf(result);
+	}
+
 	@Override
 	public ModelAndView getResultLogin(BananaMemberVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -32,19 +51,21 @@ public class MemberServiceImpl implements MemberService{
 			//result = "index";
 		} else {
 			//result = "errorPage";
-			mv.setViewName("errorPage");
+			mv.setViewName("/login/login");
 		}
 		
 		return mv;
 	}
-
 	
-	/*
-	 * @Override public String getResultIdCheck(String id) { 
-	 * int result =  memberDAO.getIdCheck(id); 
-	 * return String.valueOf(result); 
-	 * }
-	 */
+	@Override public String getResultNickCheck(String nick) { 
+		int result =  memberDAO.getNickCheck(nick); 
+		return String.valueOf(result);
+	}
+	
+	@Override public String getResultIdCheck(String id) { 
+	int result =  memberDAO.getIdCheck(id); 
+		return String.valueOf(result); 
+	}
 
 	@Override
 	public Object getResultJoin(BananaMemberVO vo) {

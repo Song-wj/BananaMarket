@@ -3,7 +3,13 @@ package com.banana.vo;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class BananaMemberVO {
-	String mid, nickname, pw, ph, maddr_num, maddr, mfile, msfile, savepath;
+	String mid, nickname, pw, ph, maddr_num, maddr, mfile, msfile, savepath, mdate;
+	public String getMdate() {
+		return mdate;
+	}
+	public void setMdate(String mdate) {
+		this.mdate = mdate;
+	}
 	String ph1, ph2, ph3, maddr1, maddr2;
 	int score;
 	CommonsMultipartFile file1;

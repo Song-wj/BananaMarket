@@ -100,6 +100,14 @@
 				<img src="http://localhost:9000/banana/images/search-icon.svg">
 			</button>
 			<c:choose>
+				<c:when test="${ svo.nickname eq '관리자'}">
+					<ul class="header-menu-list">
+						<li id="name-area" class="header-menu-item"><a class="menu-link" href="#">${ svo.nickname }님</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/logout.do">로그아웃</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/memberManage.do">회원 관리</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLifeManage.do">동네생활 관리</a></li>
+					</ul>
+				</c:when>
 				<c:when test="${ svo ne null }">
 					<ul class="header-menu-list">
 						<li id="name-area" class="header-menu-item"><a class="menu-link" href="#">${ svo.nickname }님</a></li>
@@ -108,9 +116,6 @@
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
 					</ul>
-					<c:if test="${ svo.nickname eq '관리자' }">
-						<li class="header-menu-item"><a class="menu-link" href="#">관리자</a></li>
-					</c:if>
 				</c:when>
 				<c:otherwise>
 					<ul class="header-menu-list">
