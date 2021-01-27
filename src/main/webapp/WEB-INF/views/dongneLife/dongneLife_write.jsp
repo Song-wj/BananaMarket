@@ -110,7 +110,7 @@
 					<li><input type="hidden" name="btitle" value="test"></li>
 					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글쓰기</label></li>
-					<li><button type="button" id="board_write_btn">완료</button></li>
+					<li><button type="submit" id="board_write_btn">완료</button></li>
 				</ul>
 			</div>    
 		</section>

@@ -71,7 +71,7 @@
 						</tr>
 						<tr>
 							<td class="button">
-								<button type="button" class="noticelist_btn_style">삭제</button>
+								<button type="submit" class="noticelist_btn_style">삭제</button>
 								<a href="dongneLife.do"><button type="button" class="noticelist_btn_style">목록</button></a>
 								<a href="dongneLife_content.do"><button type="button" class="noticelist_btn_style2">이전페이지</button></a>
 							</td>

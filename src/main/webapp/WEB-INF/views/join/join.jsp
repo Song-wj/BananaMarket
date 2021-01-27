@@ -8,42 +8,43 @@
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script>
 	var sel_file;
+	var nickChkNum = 0;
 	$(document).ready(function() {
 		$("#input_img").on("change", handleImgFileSelect);
 
-		var pass_chk = /(?=.*\d{1,15})(?=.*[~`!@#$%\^&*()-+=]{1,15})(?=.*[a-zA-Z]{2,15}).{6,16}$/;
 		var id_chk = /(?=.*[a-zA-z])(?=.*[0-9]).{6,16}$/;
+		var pass_chk = /(?=.*\d{1,15})(?=.*[~`!@#$%\^&*()-+=]{1,15})(?=.*[a-zA-Z]{2,15}).{6,16}$/;
 		var idChkNum = 0;
 		var passChkNum = 0;
 		$("#btnJoin").click(function() {
-		if ($("#nickname").val() == "") {
-			alert("닉네임을 입력해주세요.");
-			$("#nickname").focus();
-			return false;
-		} else if ($("#mid").val() == "") {
-			alert("아이디를 입력해주세요.");
-			$("#mid").focus();
-			return false;
-		} else if (!passCheck($("#pass"), pass_chk)) {
-			return false;
-		} else if ($("#cpass").val() == "") {
-			alert("비밀번호 확인을 입력해주세요.");
-			return false;
-		} else if (!phoneCheck()) {
-			return false;
-		} else if ($("#addr1").val() == "") {
-			alert("우편번호를 입력해주세요.");
-			$("#addr1").focus();
-			return false;
-		} else if ($("#addr2").val() == "") {
-			alert("주소를 입력해주세요.");
-			$("#addr2").focus();
-			return false;
-		} else if ($("#addr3").val() == "") {
-			alert("주소를 입력해주세요.");
-			$("#addr3").focus();
-			return false;
-		}
+			if (!nicknameCheck($("#nickname").val())) {
+				return false;
+			} else if (!idCheck($("#mid").val(), id_chk)) {
+				return false;
+			} else if (!passCheck($("#pass").val(), pass_chk)) {
+				return false;
+			} else if ($("#cpass").val() == "") {
+				alert("비밀번호 확인을 입력해주세요.");
+				return false;
+			} else if (!phoneCheck()) {
+				return false;
+			} else if ($("#addr1").val() == "") {
+				alert("우편번호를 입력해주세요.");
+				$("#addr1").focus();
+				return false;
+			} else if ($("#addr2").val() == "") {
+				alert("주소를 입력해주세요.");
+				$("#addr2").focus();
+				return false;
+			} else if ($("#addr3").val() == "") {
+				alert("주소를 입력해주세요.");
+				$("#addr3").focus();
+				return false;
+			} else {
+				if(passChkNum == 0) 
+					alert("환영합니다! "+$("#nickname").val()+"님, 회원가입을 축하합니다.");
+					joinForm.submit();
+			}
 
 	});
 
@@ -69,10 +70,22 @@
 			}
 		});
 		
-		$("#mid").focusout(function(){
-			idCheck();
-		});	
-
+ 		$("#nickname").focusout(function(){
+ 			if ($("#nickname").val() != "") {
+ 				nick_repetition_chk($("#nickname").val());
+ 			}
+		}); 	  
+		
+ 		$("#mid").focusout(function(){
+ 			if(nickChkNum != 0) {
+	 			if(idCheck($("#mid").val(), id_chk)) {
+	 				id_repetition_chk($("#mid").val());
+	 			} 
+ 			} else {
+ 				$("#nickname").focus();
+ 			}
+ 		});  
+ 		
 	});//ready
 
 	function handleImgFileSelect(e) {
@@ -93,52 +106,77 @@
 		});
 	}
 
-	function passCheck(pass, chk) {
-		if (pass.val() == "") {
+ 	function idCheck(id, chk) {
+		if (id == "") {
+			alert("아이디를 입력해주세요.");
+			$("#mid").focus();
+			return false;
+		}  else {
+			if(chk.test(id)) {
+				return true;
+			} else {
+				alert("6-16자리의 영문, 숫자 조합으로 구성해주세요.");
+				$("#mid").focus();
+				return false;
+			} 
+		}
+	}  
+ 	
+ 	function id_repetition_chk(id) {
+ 		$.ajax({
+			url:"idCheck_proc.do?id="+id,
+			type: "POST",
+			success:function(cnt) {
+				if(cnt == 0) {
+					$("#id-chk-msg").text("사용가능한 아이디입니다.").css("font-size","16px").css("color","blue");
+				} else {
+					$("#id-chk-msg").text("이미 사용중인 아이디입니다.").css("font-size","16px").css("color","rgb(200, 10, 30)");
+				}
+			}
+		});
+ 	} 
+ 	
+ 	function nicknameCheck(nick) {
+ 		if(nick == "") {
+ 			alert("닉네임을 입력해주세요.");
+			$("#nickname").focus();
+ 			return false;
+ 		} else {
+			return true;
+ 		}
+ 	}
+ 	
+ 	function nick_repetition_chk(nick) {
+ 		$.ajax({
+				url: "nickCheck_proc.do?nickname="+nick,
+				type: "POST",
+				success: function(cnt) {
+					if(cnt == 0) {
+					$("#nickname-chk-msg").text("사용가능한 닉네임입니다.").css("font-size","16px").css("color","blue");
+					nickChkNum = 1;
+				} else {
+					$("#nickname-chk-msg").text("이미 사용중인 닉네임입니다.").css("font-size","16px").css("color","rgb(200, 10, 30)");
+					$("#nickname").focus();
+				}
+			}
+		}); 
+ 		return nickChkNum;
+ 	} 
+ 	
+ 	function passCheck(pass, chk) {
+		if (pass == "") {
 			alert("비밀번호를 입력해주세요.");
-			pass.focus();
+			$("#pass").val();
 			return false;
 		} else {
-			if (chk.test(pass.val())) {
+			if (chk.test(pass)) {
 				return true;
 			} else {
 				alert("6-16자리의 영문, 숫자, 특수문자 조합으로 구성해주세요.");
-				pass.focus();
-				return false;
+				$("#pass").focus();
 			}
 		}
 	}
-	
- 	/* function idCheck(id, chk) {
-		if (id.val() == "") {
-			alert("아이디를 입력해주세요.");
-			id.focus();
-			return false;
-		} else {
-			if(chk.test(pass.val())) {
-				$.ajax({
-					url:"/idCheck_proc.do",
-					type: "get",
-					success:function(cnt) {
-						if(cnt != 0) {
-							$("#id-chk-msg").text("사용가능한 아이디입니다.").css("font-size","16px").css("color","blue");
-							idChkNum = 1;
-							return true;
-						} else {
-							$("#id-chk-msg").text("이미 사용중인 아이디입니다.").css("font-size","16px").css("color","rgb(200, 10, 30)");
-							id.focus();
-							return false;
-						}
-						
-					}
-				});
-			} else {
-				alert("6-16자리의 영문, 숫자 조합으로 구성해주세요.");
-				id.focus();
-				return false;
-			}
-		}
-	}  */
 
 	function phoneCheck() {
 		var ph1 = $("#hp1").val();
@@ -366,7 +404,7 @@ section.section_join>div>form.join button.join_btn_style:first-child {
 							name="maddr2" placeholder="상세주소" class="addr2" id="addr3">
 						</li>
 						<li>
-							<button type="submit" class="join_btn_style" id="btnJoin">회원가입</button>
+							<button type="button" class="join_btn_style" id="btnJoin">회원가입</button>
 						</li>
 					</ul>
 				</form>

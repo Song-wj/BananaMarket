@@ -18,10 +18,23 @@
 				$("#pass").focus();
 				return false;
 			} else {
+				login_chk($("#id").val(), $("#pass").val());
 				loginForm.submit();
 			}
 		});
 	});
+	
+	function login_chk(id,pass) {
+ 		$.ajax({
+			url:"login_chk.do?id="+id+"&pass="+pass,
+			type: "POST",
+			success:function(cnt) {
+				if(cnt == 0) {
+					alert("아이디 혹은 비밀번호를 다시 확인해주세요.");
+				}
+			}
+		});
+ 	} 
 </script>
 <style>
 	div.login{
@@ -117,7 +130,7 @@
 						</li>
 						<li>
 							<input type="password" name="pw" placeholder="비밀번호 입력" id="pass">
-							<div id="errMsg">에러메세지</div>
+							<span id="errMsg"></span>
 						</li>
 						<li>
 							<button type="button" class="login_btn_style" id="btnLogin">로그인</button>

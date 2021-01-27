@@ -20,6 +20,13 @@ public class MemberServiceImpl implements MemberService{
 	BananaMemberDAO memberDAO;
 	
 	@Override
+	public String getResultLoginChk(String id, String pass) {
+		int result = memberDAO.getLoginChk(id, pass);
+		System.out.println(result);
+		return String.valueOf(result);
+	}
+
+	@Override
 	public ModelAndView getResultLogin(BananaMemberVO vo, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		SessionVO svo = memberDAO.getLogin(vo);
@@ -32,19 +39,21 @@ public class MemberServiceImpl implements MemberService{
 			//result = "index";
 		} else {
 			//result = "errorPage";
-			mv.setViewName("errorPage");
+			mv.setViewName("/login/login");
 		}
 		
 		return mv;
 	}
-
 	
-	/*
-	 * @Override public String getResultIdCheck(String id) { 
-	 * int result =  memberDAO.getIdCheck(id); 
-	 * return String.valueOf(result); 
-	 * }
-	 */
+	@Override public String getResultNickCheck(String nick) { 
+		int result =  memberDAO.getNickCheck(nick); 
+		return String.valueOf(result);
+	}
+	
+	@Override public String getResultIdCheck(String id) { 
+	int result =  memberDAO.getIdCheck(id); 
+		return String.valueOf(result); 
+	}
 
 	@Override
 	public Object getResultJoin(BananaMemberVO vo) {

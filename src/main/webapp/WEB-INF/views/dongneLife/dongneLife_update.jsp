@@ -102,7 +102,7 @@
 				<ul>
 					<li><a href="dongneLife_content.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글수정</label></li>
-					<li><button type="button">완료</button></li>
+					<li><button type="submit">완료</button></li>
 				</ul>
 			</div>
 		</section>
