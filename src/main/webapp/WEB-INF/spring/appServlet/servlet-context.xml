@@ -26,7 +26,6 @@
 	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
 	<beans:bean class="com.spring.service.BananaNoticeServiceImpl" id="noticeService"></beans:bean>
 	<beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
-	<beans:bean class="com.spring.service.ProductServiceImpl" id="productService"></beans:bean>
 	
 	<!-- DAO -->
 	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
