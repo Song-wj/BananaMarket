@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +53,20 @@
 	div.mypage_contract table.mypage_table td {
 		width:800px;
 	}
+	div.mypage_contract table.mypage_table td button {
+		pisition:relative;
+		background-color:RGB(254,229,0);
+		border:1px solid RGB(254,229,0);
+		border-radius:5px;
+		padding:10px 10px;
+		color:RGB(82,67,21);
+		font-size:17px;
+		font-weight:bold;
+		width:80px;
+	}
+	div.mypage_contract table.mypage_table td button#btn_update{
+		margin-left:500px;
+	}
 	div.mypage_contract table.mypage_table td.tdimg {
 		width:10px;
 	}
@@ -83,30 +98,22 @@
 			</div>
 		</section>
 		<section class="section2_contract" id="section2_contract">
+			<%-- <c:forEach vo="vo" items="${list}"> --%>
 			<table class="mypage_table">
 				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td><span class="product">이솝 핸드크림(새상품)</span></td>
+					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
+					<td><span class="product">${vo.ptitle}</span></td>
 				</tr>
 				<tr>
-					<td><span class="locate">논현1동  끌올 6시간 전</span></td>
+					<td><span class="locate">${vo.maddr} 끌올 6시간 전</span></td>
+					<td><a href="updatePage.do"><button type="button" id="btn_update">수정</button></a></td>
+					<td><a href="deletePage.do"><button type="button" id="btn_delete">삭제</button></a></td>
 				</tr>
 				<tr>
-					<td><span class="price">49,000원</span></td>
+					<td><span class="price">${vo.pprice}</span></td>
 				</tr> 
 			</table>
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
+			<%-- </c:forEach> --%>
 			<table class="mypage_table">
 				<tr>
 					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
@@ -119,6 +126,18 @@
 					<td>가격</td>
 				</tr> 
 			</table>
+			<!-- <table class="mypage_table">
+				<tr>
+					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
+					<td>상품명</td>
+				</tr>
+				<tr>
+					<td>지역</td>
+				</tr>
+				<tr>
+					<td>가격</td>
+				</tr> 
+			</table> -->
 		</section>
 		<section class="section3_contract" id="section3_contract">
 			<table class="mypage_table">

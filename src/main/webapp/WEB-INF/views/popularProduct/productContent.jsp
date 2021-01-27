@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,7 @@
 <style>
 	#content {
 		text-align: center;
-		margin-top: 130px;
+		margin-top: 160px;
 		padding-bottom: 0;
 	}
 	
@@ -348,8 +350,7 @@
 <body>
 <jsp:include page="../header.jsp" />
 
-<article id="content">
-	<section id="product-images">
+<div id="content">
 		<div id="demo" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
 			  <ul class="carousel-indicators">
@@ -361,7 +362,7 @@
 			  <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
-			      <img src="http://localhost:9000/banana/images/card-photo1.jpg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" >
 			    </div>
 			    <div class="carousel-item">
 			      <img src="http://localhost:9000/banana/images/card-photo2.jpg" >
@@ -379,42 +380,43 @@
 			    <span class="carousel-control-next-icon"></span>
 			  </a>
 		</div>
-	</section>
-	<section id="article-profile">
-		<a id="article-profile-link" href="#">
-			<div class="space-between">
-				<div>
-					<div id="article-profile-image"><img src="http://localhost:9000/banana/images/mypage_bananaimg.jpg"></div>
-				</div>
-				<div id="article-profile-left">
-					<div id="nickname">바나나</div>
-					<div id="region-name">동작구 흑석동</div>
-				</div>
-				<div id="article-profile-right">
-					<dl id="temperature-wrap">
-						<dt>매너온도</dt>
-						<dd class="text-color-03">36.5℃</dd>
-					</dl>
-					<div class="meters">
-						<div class="bar bar-color-03" style="width: 37%"></div>
+		<div id="article-profile">
+			<a id="article-profile-link" href="#">
+				<div class="space-between">
+					<div>
+						<div id="article-profile-image"><img src="http://localhost:9000/banana/images/mypage_bananaimg.jpg"></div>
 					</div>
-					<div class="face face-03"></div>
+					<div id="article-profile-left">
+						<div id="nickname">${vo.nickname }</div>
+						<div id="region-name">${vo.maddr }</div>
+					</div>
+					<div id="article-profile-right">
+						<dl id="temperature-wrap">
+							<dt>매너온도</dt>
+							<dd class="text-color-03">${vo.score}.5</dd>
+						</dl>
+						<div class="meters">
+							<div class="bar bar-color-03" style="width: 37%"></div>
+						</div>
+						<div class="face face-03"></div>
+					</div>
 				</div>
-			</div>
-		</a>
-	</section>
-	<section id="article-description">
-		<h1 id="article-title" style="margin-top:0px;">손연재 자세 교정 커블체어</h1>
-		<p id="article-category">기타 중고물품&middot;<time>5시간 전</time></p>
-		<p id="article-price" style="font-size:20px; font-weight: bold;">15,000원</p>
-		<div id="article-detail">
-			<p>상태도 좋고 깨끗합니다</p>
+			</a>
 		</div>
-		<p id="article-counts">
-			채팅 45 &middot; 관심 19 &middot; 조회 309
-		</p>
-	</section>
-</article>
+		<div class="description">
+			<section id="article-description">
+				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
+				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} (몇분전으로 수정)</time></p>
+				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice}</p>
+				<div id="article-detail">
+					<p>${vo.pcontent}</p>
+				</div>
+				<p id="article-counts">
+					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
+				</p>
+			</section> 	
+		</div>
+
 <section id="article-detail-hot-more">
 	<h3>당근마켓 인기중고</h3>
 	<div id="hot-more-link"><a href="#">더 구경하기</a></div>
@@ -500,6 +502,7 @@
 	</section>
 </section>
 
+</div>
 <jsp:include page="../footer.jsp" />
 </body>
 </html>

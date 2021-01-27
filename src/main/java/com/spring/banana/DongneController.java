@@ -23,6 +23,7 @@ public class DongneController  {
 	
 	@Autowired
 	private BananaService bananaService;
+	
 	/**
 	 * 동네생활 - 글정보 삭제화면
 	 * @return

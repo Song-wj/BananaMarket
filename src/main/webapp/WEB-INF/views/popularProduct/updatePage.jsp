@@ -141,12 +141,14 @@ $(document).ready(function(){
 <jsp:include page="../header.jsp" />
 	<div class= "content">
 		<h1>상품 수정하기</h1>
-		<form name="pupdateForm" action="" method="post" class="pupdateForm">
+		<form name="pupdateForm" action="updatePage_proc.do" method="post" 
+							class="pupdateForm" enctype="multipart/form-data">
 		<ul>
 			<li><label for="input_img">이미지 추가</label>
-				<input type="file" id="input_img"  multiple>
+		   <!-- <input type="file" id="input_img"  multiple> -->
+				<input type="file" id="input_img">
 				<div id="img_list"></div></li>
-			<li><input type="text" name="ptitle"  id="ptitle"></li>
+			<li><input type="text" name="ptitle" id="ptitle" placeholder="${vo.ptitle}수정 제목"></li>
 			<li><select name="category" id="pcategory">
 				<option value="none">카테고리</option>
 				<option value="디지털/가전">디지털/가전</option>
@@ -165,9 +167,11 @@ $(document).ready(function(){
 				<option value="기타 중고물품">기타 중고물품</option>
 				<option value="삽니다">삽니다.</option>
 			</select></li>
-			<li><input type="text" name="pprice" id="pprice"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
-			<li><textarea cols=10 rows=10 name="pcontent"  id="pcontent" style="resize:none;"></textarea></li>
-			<li><button type="button" id="pupdate_btn">수정하기</button></li>	
+			<li><input type="text" name="pprice" id="pprice" placeholder="${vo.pprice}수정가격"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
+			<li><textarea cols=10 rows=10 name="pcontent"  id="pcontent" style="resize:none;" placeholder="${vo.pcontent}내용~~"></textarea></li>
+			<li><input type="hidden" name="pid" value="pid"></li>
+			<li><input type="hidden" name="mid" value="mid"></li>
+			<li><button type="submit" id="pupdate_btn">수정하기</button></li>	
 		</ul>
 		</form>
 	</div>
