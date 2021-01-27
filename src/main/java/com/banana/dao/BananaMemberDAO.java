@@ -1,9 +1,35 @@
 package com.banana.dao;
 
+import java.util.ArrayList;
+
 import com.banana.vo.BananaMemberVO;
 import com.banana.vo.SessionVO;
 
 public class BananaMemberDAO extends DBConn{
+	
+	public ArrayList<BananaMemberVO> getMemberList() {
+		ArrayList<BananaMemberVO> list = new ArrayList<BananaMemberVO>();
+		
+		try {
+			String sql = "select mid, nickname, ph, maddr, mdate from banana_member order by mdate";
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaMemberVO vo = new BananaMemberVO();
+				vo.setMid(rs.getString(1));
+				vo.setNickname(rs.getString(2));
+				vo.setPh(rs.getString(3));
+				vo.setMaddr(rs.getString(4));
+				vo.setMdate(rs.getString(5));
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	public int getLoginChk(String id, String pass) {
 		int result = 0;

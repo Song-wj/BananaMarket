@@ -10,4 +10,5 @@ public interface MemberService {
 	String getResultNickCheck(String nickname);
 	String getResultLoginChk(String id, String pass);
 	Object getResultLogin(BananaMemberVO vo, HttpSession seesion);
+	Object getMemberList();
 }

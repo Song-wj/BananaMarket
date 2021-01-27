@@ -1,6 +1,7 @@
 package com.banana.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,17 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	BananaMemberDAO memberDAO;
 	
+	
+	
+	@Override
+	public Object getMemberList() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<BananaMemberVO> list = memberDAO.getMemberList();
+		mv.addObject("list", list);
+		mv.setViewName("admin/memberManage");
+		return mv;
+	}
+
 	@Override
 	public String getResultLoginChk(String id, String pass) {
 		int result = memberDAO.getLoginChk(id, pass);
