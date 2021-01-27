@@ -1,10 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href = "http://localhost:9000/banana/css/am-pagination.css">
+<script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
+<script src="http://localhost:9000/banana/js/am-pagination.js"></script>  
+<script>
+	$(document).ready(function(){
+		
+		//페이지 번호 및 링크 		
+		var pager = jQuery("#ampaginationsm").pagination({
+			maxSize : 5,			
+			totals:'${dbCount}',
+			page : '${reqPage}',
+			pageSize : '${pageSize}',
+					
+			
+			lastText : '&raquo;&raquo;',
+			firstText : '&laquo;&laquo',
+			prevTest : '&laquo;',
+			nextTest : '&raquo;',
+			
+			btnSize : 'sm' 			
+		}); 
+		
+		//
+		jQuery("#ampaginationsm").on('am.pagination.change',function(e){
+			$(location).attr('href','http://localhost:9000/banana/notice_list.do?rpage='+e.page);  
+		});
+		
+	});
+</script>
 <style>
 	div.notice_list{
 		width:70%;
@@ -49,6 +79,12 @@
 	}
 	section.section_notice_list>div>form.notice_list>table.notice_list tr td.left:first-child{
 		width:13%;
+	}
+	section.section_notice_list>div>form.notice_list>table.notice_list tr td>a.list{
+		text-decoration:none;
+	}
+	section.section_notice_list>div>form.notice_list>table.notice_list tr td>a.list:hover{
+		border-bottom:1px solid black;
 	}
 	section.section_notice_list>div>form.notice_list>table.notice_list tr td:nth-child(2){
 		text-align:left;
@@ -109,35 +145,16 @@
 			                <th>등록일</th>
 			                <th>조회수</th>
 			            </tr>
+			            <c:forEach var="vo" items="${list }">
 			            <tr>
-			               	<td class="left">1</td>
-			               	<td class="left"><a href="notice_content.do">공지사항1</a></td>
-			               	<td class="left">2021.01.15</td>
-			               	<td class="left">3134</td>
+			               	<td class="left">${vo.rno }</td>
+			               	<td class="left"><a href="notice_content.do?nid=${vo.nid }" class="list">${vo.ntitle }</a></td>
+			               	<td class="left">${vo.ndate }</td>
+			               	<td class="left">${vo.nhits }</td>
 			            </tr>
+			            </c:forEach>
 			            <tr>
-			               	<td class="left">1</td>
-			               	<td class="left">공지사항1</td>
-			               	<td class="left">2021.01.15</td>
-			               	<td class="left">3134</td>
-			            </tr><tr>
-			               	<td class="left">1</td>
-			               	<td class="left">공지사항1</td>
-			               	<td class="left">2021.01.15</td>
-			               	<td class="left">3134</td>
-			            </tr><tr>
-			               	<td class="left">1</td>
-			               	<td class="left">공지사항1</td>
-			               	<td class="left">2021.01.15</td>
-			               	<td class="left">3134</td>
-			            </tr><tr>
-			               	<td class="left">1</td>
-			               	<td class="left">공지사항1</td>
-			               	<td class="left">2021.01.15</td>
-			               	<td class="left">3134</td>
-			            </tr>
-			            <tr>
-			            	<td colspan="4" class="page">1 2 3 4 5</td>
+			            	<td colspan="4" class="page"><div id="ampaginationsm"></div></td>
 			            </tr>
 			        </table>
 				</form>
