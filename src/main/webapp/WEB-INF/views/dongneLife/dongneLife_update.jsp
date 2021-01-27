@@ -173,11 +173,7 @@ $(document).ready(function(){
 				<ul>
 					<li><a href="dongneLife_content.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글수정</label></li>
-<<<<<<< HEAD
 					<li><button type="button" id="board_update_btn">완료</button></li>
-=======
-					<li><button type="submit">완료</button></li>
->>>>>>> ceb3cfda8900e3ace357bcddc1c0854e4c3e2a10
 				</ul>
 			</div>
 		</section>
