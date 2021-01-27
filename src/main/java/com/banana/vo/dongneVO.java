@@ -8,12 +8,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class dongneVO {
 
-	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate ,savepath;
+	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate ,savepath ,cancel_img;
 	
+
 	String file;
 	String sfile;
 	
 	List<MultipartFile> list ;
+	public String getCancel_img() {
+		return cancel_img;
+	}
+	
+	public void setCancel_img(String cancel_img) {
+		this.cancel_img = cancel_img;
+	}
 	public String getFile() {
 		return file;
 	}

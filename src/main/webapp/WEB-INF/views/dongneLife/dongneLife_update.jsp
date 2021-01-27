@@ -76,8 +76,7 @@
 		font-size:18px;
 		padding:10px 10px;
 	}
-	section.section4_dongneLife_update a {
-			
+	section.section4_dongneLife_update a {		
 		margin:auto;
 	}
 	section.section4_dongneLife_update img {
@@ -85,7 +84,8 @@
 		height:30px;
 		margin-bottom:-7px;
 	}
-	}form#dongneUpdateForm  section.section4_dongneLife_update label{
+	
+	form#dongneUpdateForm  section.section4_dongneLife_update label{
 		display: inline-block; 
 		padding: .5em .75em; 
 		color: #999; 
@@ -102,18 +102,35 @@
 		position: absolute; 	
 		padding: 0; 
 		width:1px;
-		height:1px; 
+		height:1px;  
 		margin-left: -80px;
-		margin-top: 3px;  
+		margin-top: 14px;  
 	 	overflow: hidden;  
 	 	clip:rect(0 180px 150px 75px);  
 		border: 0; 
+		
 	} 
+	
 	form#dongneUpdateForm  section.section4_dongneLife_update span{
 		display:inline-block;
 		font-size:13.7px;
 		width:100px;
-		background-color:white;
+		margin-left:-5px;
+	}
+	form#dongneUpdateForm  section.section4_dongneLife_update button#cancel_img{
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		border-radius:5px;
+		padding:5px 15px;
+		font-size:15px;
+		position:absolute;
+		left:1000px;
+		
+
+		
+		
 	}
 </style>
 <script>
@@ -136,9 +153,25 @@ $(document).ready(function(){
         	 dongneUpdateForm.submit();
          }
       });
+	
+	
+	   $("#cancel_img").click(function(){
+		   		showConfirm();
+	    	
+	      })
+	      
+	      
 
 })	
 	
+	      function showConfirm() {
+			 if (confirm("사진을 삭제하시겠습니까?"))
+			  {
+			   alert("삭제되었습니다!");		
+			   $("input[type='hidden']#cancel_img").val("cancel");
+		    	$("#fake_id").html("선택된 파일 없음");
+			  } 
+			 };
 	
 	function test(){
 		
@@ -218,10 +251,11 @@ $(document).ready(function(){
 				<input type="file" name="file1" id="update_img"  multiple  onchange='test()'>
 				<c:choose >
 					<c:when test="${count ne 0 }">
-						<span id="fake_id">파일${count}개</span>
+						<span id="fake_id">파일 ${count}개</span>
 					</c:when>
 					<c:otherwise><span id="fake_id">선택한 파일 없음</span></c:otherwise>
 				</c:choose>
+				<button type="button" id="cancel_img">사진 초기화</button> <input type="hidden" name="cancel_img" id="cancel_img"> 
 				<br><br>
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>
