@@ -159,7 +159,7 @@ $(document).ready(function(){
 			$("#inputMain").hide();
 			$("#storename").focus();
 		}
-		alert("sel_files"+sel_files);
+		/* alert("sel_files"+sel_files); */
 		
 	});
 	
@@ -189,7 +189,7 @@ $(document).ready(function(){
 			$("#btnEnroll").focus();
 		}
 		
-		alert(sel_files2);
+		/* alert(sel_files2); */
 		
 	});
 	
@@ -236,6 +236,21 @@ $(document).ready(function(){
 	});
 	
 });
+	var goPopup = function() {
+		var pop = window.open("enroll_jusoPopup.do", "pop",
+				"width=570,height=420, scrollbars=yes, resizable=yes");
+	}
+	
+	var jusoCallBack = function(roadFullAddr, roadAddrPart1, addrDetail,
+			roadAddrPart2, engAddr, jibunAddr, zipNo) {
+		document.getElementById("addr1").value = zipNo;
+		document.getElementById("addr2").value = roadAddrPart1;
+		if (addrDetail.length > 30) {
+			alert('상세주소가 너무 길어 다시 입력해야 합니다.');
+			return;
+		}
+		document.getElementById("addr3").value = addrDetail+" "+roadAddrPart2;
+	}
 </script>
 </head>
 <body>
@@ -327,7 +342,7 @@ $(document).ready(function(){
 						<div class="img_list" id="img_carousel_list"></div>
 		    		</li>	
 					<li>
-						<button type="button" class="join_btn_style" id="btnEnroll">완료</button>
+						<button type="submit" class="join_btn_style" id="btnEnroll">완료</button>
 					</li>
 				</ul>
 				</form>

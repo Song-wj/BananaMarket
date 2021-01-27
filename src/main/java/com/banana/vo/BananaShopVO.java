@@ -9,6 +9,15 @@ public class BananaShopVO {
 		   scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3;
 	CommonsMultipartFile file1;
 	String savepath1;
+	StringBuilder dong = new StringBuilder();
+
+	public StringBuilder getDong() {
+		return dong;
+	}
+
+	public void setDong(StringBuilder dong) {
+		this.dong = dong;
+	}
 
 	public String getSavepath1() {
 		return savepath1;
@@ -86,9 +95,11 @@ public class BananaShopVO {
 
 	public void setSaddr(String saddr) {
 		this.saddr = saddr;
-		String[] addrlist = saddr.split(" ");
-		setAddr2(addrlist[0]);
-		setAddr3(addrlist[1]);
+		
+		for(int i=saddr.indexOf("(")+1; i<=saddr.indexOf("µ¿"); i++) {
+			dong.append(Character.toString(saddr.charAt(i)));
+		}
+		
 	}
 
 	public String getSph() {

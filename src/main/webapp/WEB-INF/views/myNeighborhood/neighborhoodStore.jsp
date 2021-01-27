@@ -175,7 +175,7 @@
 	</div>
 	<div class="desc-container">
 		<div>
-			<a href="#">옥정동</a> &middot; <a href="#">${vo.skinds} <!-- 뷰티/미용 --></a>
+			<a href="#">${vo.dong}</a> &middot; <a href="#">${vo.skinds} <!-- 뷰티/미용 --></a>
 		</div>
 		<h1>${vo.sname}<!-- 뷰림헤어살롱 옥정점 --></h1>
 	</div>

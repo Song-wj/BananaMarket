@@ -222,9 +222,9 @@ $(document).ready(function(){
 	
 	
 	$('#btnEnroll').click(function(){
-		if($("#input_img").val() ==""){
+		/* if($("#input_img").val() ==""){
 			alert("업체이미지를 등록해주세요");
-			$("#input_img").focus();
+			$("#input_img").focus(); */
 		if($("#storename").val() ==""){
 			alert("상호명을 입력해주세요");
 			$("#storename").focus();
@@ -264,6 +264,22 @@ $(document).ready(function(){
 	});
 	
 });
+
+	var goPopup = function() {
+		var pop = window.open("enroll_jusoPopup.do", "pop",
+				"width=570,height=420, scrollbars=yes, resizable=yes");
+	}
+	
+	var jusoCallBack = function(roadFullAddr, roadAddrPart1, addrDetail,
+			roadAddrPart2, engAddr, jibunAddr, zipNo) {
+		document.getElementById("addr1").value = zipNo;
+		document.getElementById("addr2").value = roadAddrPart1;
+		if (addrDetail.length > 30) {
+			alert('상세주소가 너무 길어 다시 입력해야 합니다.');
+			return;
+		}
+		document.getElementById("addr3").value = addrDetail+" "+roadAddrPart2;
+	}
 </script>
 </head>
 <body>
@@ -334,7 +350,7 @@ $(document).ready(function(){
 						<label>주소</label>
 					</li>
 					<li>
-						<input type="text" name="saddr_num" value="${vo.saddr_num }" placeholder="우편번호" class="addr1" id="addr1">
+						<input type="text" name="saddr_num" placeholder="우편번호" class="addr1" id="addr1">
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
 						<input type="text" name="addr2" value="${vo.addr2 }" placeholder="도로명주소" class="addr2" id="addr2">

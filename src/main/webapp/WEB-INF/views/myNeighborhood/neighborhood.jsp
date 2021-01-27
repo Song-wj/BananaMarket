@@ -108,6 +108,9 @@
 		outline:none;
 		border-radius:15px;
 	}
+	div.store_recommand {
+		margin-bottom:10px;
+	}
 	div.store_news img{
 		width:290px;
 		height:70px;
@@ -205,7 +208,7 @@
 			<a href="enrollstore.do"><button type="button">업체 등록</button></a>
 			<label>이웃들의 추천 가게</label>
 			<c:forEach var="vo" items="${list }">
-			<div>
+			<div class="store_recommand">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
 				</div>
@@ -220,10 +223,10 @@
 			</c:forEach>
 			<button type="button">더 보러가기</button>				
 		</div>  <!-- recommand_store -->
-		<div class="store_news">
+		<div class="recommand_store">
 			<label>내 근처 가게 소식</label>
 			<c:forEach var="vo" items="${list }">
-			<div>
+			<div class="store_recommand">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
 				</div>

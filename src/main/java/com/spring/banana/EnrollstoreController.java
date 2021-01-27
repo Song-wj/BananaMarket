@@ -17,6 +17,11 @@ public class EnrollstoreController {
 	@Autowired
 	private EnrollService shopService;
 	
+	@RequestMapping(value="/enroll_jusoPopup.do",method= {RequestMethod.POST, RequestMethod.GET})
+	public String enroll_jusoPopup() {
+		return "/enrollstore/jusoPopup";
+	}
+	
 	/**
 	 * 업체 삭제 처리
 	 * @return
