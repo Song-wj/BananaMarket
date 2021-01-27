@@ -122,7 +122,7 @@
 				
 			}else if($("#btopic").val() == ""){
 	            alert("게시글을 작성해주세요");
-	            $("#btopic").focus(); 
+	            $("#btopic").focus();  
 	         }else{
 	        	 board_write_form.submit();
 	         }
@@ -130,24 +130,14 @@
 	      
 	      
 	      
-	      $("#btopic").click(function(){
+	      $("#btitle").click(function(){
 	         $("#basic").css("display","inline-block");
 	      });
 		
 	})
 		
 		function test(){
-			/* var count=0;
-			for(var i=0 ; i<4; i++){
-				if($("#input_img")[0].files[i].name !=""){
-					count++;
-				}
-			}
-	     	
-			if(count>5){
-				alert("이미지는 5장까지 업로드 가능합니다!");
-				$("#input_img").val("");
-			} */
+			
 			
 			var fileInput = document.getElementById("input_img");
             
@@ -186,7 +176,7 @@
 		<section class="section2_dongneLife_write">
 			<div class="write_topic" id="write_topic">
 			
-				<a href="#"><label id="btopic" >게시글의 주제를 선택해주세요.</label></a><br>
+				<a href="#"><label id="btitle" >게시글의 주제를 선택해주세요.</label></a><br>
 				<select id="basic" name ="btitle" style="display:none;">
 	               <option value="none" >=== 선택 ===</option>
 	               <option value="none" style="color:blue;" disabled>동네 기본주제</option>
@@ -221,7 +211,7 @@
 		<section class="section4_dongneLife_write">
 			<div>
 				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
-				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'>
+				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'><br><br>
 				
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>

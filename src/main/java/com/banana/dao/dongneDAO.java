@@ -34,7 +34,7 @@ public class dongneDAO extends DBConn{
 		try {
 			String sql = "select bid, nickname, btitle, bfile,bsfile,btopic,maddr, bdate\r\n"
 						+ "from banana_member m , banana_board b\r\n"
-						+ "where m.mid = b.mid";
+						+ "where m.mid = b.mid order by bdate desc";
 			getStatement();
 			rs= stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -77,7 +77,7 @@ public class dongneDAO extends DBConn{
 				vo.setBtopic(rs.getString(6));
 				vo.setMaddr(rs.getString(7));
 				vo.setBdate(rs.getString(8));
-
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,10 +86,51 @@ public class dongneDAO extends DBConn{
 		return vo;
 	}
 	//board update
-	public boolean boardUpdate(dongneVO vo) {
+	
+	public boolean boardU(dongneVO vo) {
 		boolean result = false;
 		try {
-		/*	String sql ="update banana_board set bfile=? ,bsfile=?, btopic=?, btitle=?";*/
+			String sql = "update banana_board set btitle=? , btopic=?, bfile=? , bsfile=? where bid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, vo.getBtitle());
+			pstmt.setString(2, vo.getBtopic());
+			pstmt.setString(3, vo.getBfile());
+			pstmt.setString(4, vo.getBsfile());
+			pstmt.setString(5, vo.getBid());
+			
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	/*
+	 * public boolean boardUpdate(dongneVO vo) { boolean result = false; try {
+	 * String sql
+	 * ="update banana_board set btitle=?, btopic=?, bfile=?, bsfile=? where bid=?";
+	 * 
+	 * getPreparedStatement(sql); pstmt.setString(1,vo.getBtitle());
+	 * pstmt.setString(2,vo.getBtopic()); pstmt.setString(3,vo.getBfile());
+	 * pstmt.setString(4,vo.getBsfile()); pstmt.setString(5,vo.getBid());
+	 * System.out.println(sql);
+	 * 
+	 * int count = pstmt.executeUpdate(); System.out.println(count); if(count != 0)
+	 * result = true;
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); }
+	 * 
+	 * return result; }
+	 */
+	public boolean boardUpdateNofile(dongneVO vo) {
+		boolean result = false;
+		try {
+		
 			String sql ="update banana_board set btopic=?, btitle=? where bid=?";
 			getPreparedStatement(sql);
 			pstmt.setString(1,vo.getBtopic());
@@ -105,6 +146,8 @@ public class dongneDAO extends DBConn{
 		
 		return result;
 	}
+	
+	
 	// board delete
 	public boolean boardDelete(String bid) {
 		boolean result = false;

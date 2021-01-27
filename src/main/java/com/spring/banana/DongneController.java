@@ -43,8 +43,18 @@ public class DongneController  {
 	}
 	
 	@RequestMapping(value ="/dongneLife_update_proc.do", method = RequestMethod.POST)
-	public String dongneLife_update_proc(dongneVO vo) {	
-		return (String) bananaService.update(vo);
+	public ModelAndView dongneLife_update_proc(dongneVO vo ,  MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {	
+		
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		
+		return (ModelAndView) bananaService.update(vo);
 	}
 
 	/**
