@@ -108,21 +108,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
-		<!-- FileUpload - MultipartHttpServletRequset -->
-		<dependency>
-    		<groupId>commons-io</groupId>
-    		<artifactId>commons-io</artifactId>
-    		<version>2.0.1</version>
-		</dependency>
-
-		<dependency>
-		  <groupId>commons-fileupload</groupId>
-		  <artifactId>commons-fileupload</artifactId>
-		  <version>1.4</version>
-		</dependency>
-		
-	
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -130,7 +115,7 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>   
-		
+	
 		<!-- FileUpload - MultipartHttpServletRequset -->
 		<dependency>
     		<groupId>commons-io</groupId>
@@ -143,19 +128,8 @@
 		  <artifactId>commons-fileupload</artifactId>
 		  <version>1.4</version>
 		</dependency>
-		     
-		 <!-- FileUpload - MultipartHttpServletRequset -->
-		<dependency>
-    		<groupId>commons-io</groupId>
-    		<artifactId>commons-io</artifactId>
-    		<version>2.0.1</version>
-		</dependency>
-
-		<dependency>
-		  <groupId>commons-fileupload</groupId>
-		  <artifactId>commons-fileupload</artifactId>
-		  <version>1.4</version>
-		</dependency>    
+		
+		
 	</dependencies>
     <build>
         <plugins>

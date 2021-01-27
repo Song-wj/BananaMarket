@@ -4,7 +4,6 @@ package com.banana.dao;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 
 public class productDAO extends DBConn{

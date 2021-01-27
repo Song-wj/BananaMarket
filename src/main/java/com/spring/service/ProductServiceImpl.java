@@ -10,11 +10,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.productDAO;
-import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 
 @Service("productService")
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private productDAO productDAO;
@@ -86,7 +85,7 @@ public class ProductServiceImpl {
 	  }
 	 
 	 
-	 public Object getUpdate(Object vo) {
+	 public Object update(Object vo) {
 			ModelAndView mv = new ModelAndView();
 			boolean result = productDAO.getProductUpdate((productVO)vo);
 			
@@ -97,9 +96,10 @@ public class ProductServiceImpl {
 			return mv;
 		}
 	 
-	 /* 
-	 * } public Object delete() {
-	 * 
-	 * }
-	 */
+	 
+	 public Object delete(Object pid) {
+	 
+		 return "...";
+	 }
+	 
 }

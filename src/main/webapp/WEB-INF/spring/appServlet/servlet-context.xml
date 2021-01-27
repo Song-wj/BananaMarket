@@ -24,6 +24,7 @@
 
 	<!-- Service -->
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
+	<beans:bean class="com.spring.service.ProductServiceImpl" id="productService"></beans:bean>
 	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
 	<beans:bean class="com.spring.service.BananaNoticeServiceImpl" id="noticeService"></beans:bean>
 	<beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
@@ -33,11 +34,9 @@
 	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
 	<beans:bean class ="com.banana.dao.BananaNoticeDAO" id="noticeDAO"></beans:bean>
 	<beans:bean class ="com.banana.dao.BananaFAQDAO" id="questionDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.productDAO" id="productDAO"></beans:bean>
 
-	<!-- multipartResolver -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	</beans:bean> 
-	
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -45,7 +44,6 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.spring.banana" />
-	
 	
 	
 </beans:beans>
