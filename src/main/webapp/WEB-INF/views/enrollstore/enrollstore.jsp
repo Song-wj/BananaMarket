@@ -342,7 +342,7 @@ $(document).ready(function(){
 						<div class="img_list" id="img_carousel_list"></div>
 		    		</li>	
 					<li>
-						<button type="submit" class="join_btn_style" id="btnEnroll">완료</button>
+						<button type="button" class="join_btn_style" id="btnEnroll">완료</button>
 					</li>
 				</ul>
 				</form>
