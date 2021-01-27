@@ -1,9 +1,12 @@
 package com.spring.service;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.dongneDAO;
@@ -20,8 +23,38 @@ public class DongneServiceImpl implements BananaService{
 	public Object  insert(Object vo) {
 		String result="";
 		dongneVO dvo = (dongneVO)vo;
+		ArrayList<String> file_list = new ArrayList<String>();
+		ArrayList<String> sfile_list = new ArrayList<String>();
+		
+		if(dvo.getList().size() != 0) {
+			 	UUID uuid = UUID.randomUUID();
+			 	
+		       for (MultipartFile mf : dvo.getList()) {    	   
+		           System.out.println(mf.getOriginalFilename()); 
+		           
+		           file_list.add(mf.getOriginalFilename());
+		           sfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
+		           
+		        
+		          
+		       }
+		      
+		       dvo.setBfile(String.join(",", file_list));
+		       dvo.setBsfile(String.join(",", sfile_list));
+		}
+		
+		
 		boolean dao_result = dongneDAO.insertBoard(dvo);
 		if(dao_result) {
+			try {
+				 for (MultipartFile mf : dvo.getList()) { 
+					File file = new File(dvo.getSavepath()+mf);
+					mf.transferTo(file);
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			result= "redirect:/dongneLife.do";
 		}else
 			result ="errorPage";
