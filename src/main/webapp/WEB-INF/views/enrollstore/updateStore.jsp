@@ -126,6 +126,9 @@
 		margin-top:30px;
 		width:49.5%;
 	}
+	span#fname{
+		margin-left:10px;
+	}
 </style>
 <script>
 
@@ -144,6 +147,14 @@ $(document).ready(function(){
 	$("select[name='skinds'] option").each(function(){
 		if($(this).val() == sKinds){
 			$(this).prop("selected",true);
+		}
+	});
+	
+	//파일선택
+	$("input[type=file]").on('change', function(){
+		if(window.FileReader){
+			var fileName = $(this)[0].files[0].name;  //파일선택 0번지의 첫번째 파일의 이름을 fileName변수에 넣는다
+			$("#fname").text("").text(fileName);	  //기존 데이터 지우고 fileName 값을 넣음
 		}
 	});
 	
@@ -211,9 +222,9 @@ $(document).ready(function(){
 	
 	
 	$('#btnEnroll').click(function(){
-		/* if($("#input_img").val() ==""){
+		if($("#input_img").val() ==""){
 			alert("업체이미지를 등록해주세요");
-			$("#input_img").focus(); */
+			$("#input_img").focus();
 		if($("#storename").val() ==""){
 			alert("상호명을 입력해주세요");
 			$("#storename").focus();
@@ -262,16 +273,23 @@ $(document).ready(function(){
 		<section class="section_join">
 			<div>
 				<form name="UpdateStoreForm" action="updateStore_update_proc.do" method="post" 
-				class="join">
+				class="join" enctype="multipart/form-data">
 				<input type="hidden" name="mid" value="test12"> <!-- mid 임의로 설정  -->
 				<input type="hidden" name="sid" value="${vo.sid }">
 				<h1>동네업체 수정</h1>
 				<ul>
 					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>
-						<input type="file" id="input_img" name="smain_img" multiple>
+						<c:choose>
+							<c:when test="${vo.smain_img ne null }">
+								<input type="file" id="input_img" name="file1" multiple><span id="fname">${vo.smain_img }</span>
+							</c:when>
+							<c:otherwise>
+								<input type="file" id="input_img" name="file1" multiple><span id="fname">선택된 파일 없음</span>
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="img_list" id="img_list"></div>
-		    		</li>	
+		    		</li>		
 					<li>
 						<label>상호명</label>
 					</li>

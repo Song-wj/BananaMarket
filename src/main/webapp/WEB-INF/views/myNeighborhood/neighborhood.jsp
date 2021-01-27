@@ -207,7 +207,7 @@
 			<c:forEach var="vo" items="${list }">
 			<div>
 				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
 				</div>
 				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
 				<label class="store_info">${vo.sintro }</label>
@@ -218,77 +218,24 @@
 				</div>	
 			</div>	
 			</c:forEach>
-			<div>
-				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
-				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
-				<div class="store_review">
-					<span>oo님</span>
-					<label>~~~~</label>
-				</div>	
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
-				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
-				<div class="store_review">
-					<span>oo님</span>
-					<label>~~~~</label>
-				</div>	
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
-				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
-				<div class="store_review">
-					<span>oo님</span>
-					<label>~~~~</label>
-				</div>	
-			</div>	
 			<button type="button">더 보러가기</button>				
 		</div>  <!-- recommand_store -->
 		<div class="store_news">
 			<label>내 근처 가게 소식</label>
+			<c:forEach var="vo" items="${list }">
 			<div>
 				<div>				
-					<img src="images/clothes.png">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
 				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>
-				
+				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
+				<label class="store_info">${vo.sintro }</label>
+				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
+				<div class="store_review">
+					<span>oo님</span>
+					<label>호호호호</label>
+				</div>	
 			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png">
-				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>
-				
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png">
-				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>
-				
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png">
-				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>	
-			</div>	
+			</c:forEach>
 			<button type="button">가게 소식 전체 보기 > </button>
 		</div><!-- store_news -->
 		

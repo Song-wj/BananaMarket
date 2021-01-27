@@ -171,7 +171,7 @@
 <section class="store-info-top">
 	<div id="dark-cover">배경</div>
 	<div class="image-container">
-		<img src="http://localhost:9000/banana/images/store1.jpeg">
+		<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg }">
 	</div>
 	<div class="desc-container">
 		<div>

@@ -227,9 +227,9 @@ $(document).ready(function(){
 		}else if($("#storeintro").val() ==""){
 			alert("업체 소개를 입력해주세요");
 			$("#storeintro").focus();
-		}else if($("#input_carousel_img").val() ==""){
+		/* }else if($("#input_carousel_img").val() ==""){
 			alert("광고사진을 등록해주세요");
-			$("#input_carousel_img").focus();
+			$("#input_carousel_img").focus(); */
 		}else
 			EnrollForm.submit();
 		
@@ -245,12 +245,12 @@ $(document).ready(function(){
 		<section class="section_join">
 			<div>
 				<form name="EnrollForm" action="enrollstore_write_proc.do" method="post" 
-				class="join">
+				class="join" enctype="multipart/form-data">
 				<input type="hidden" name="mid" value="test12"> <!-- mid 임의로 설정  -->
 				<h1>동네업체 등록</h1>
 				<ul>
 					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>
-						<input type="file" id="input_img" name="smain_img" multiple>
+						<input type="file" id="input_img" name="file1" multiple>
 						</div>
 						<div class="img_list" id="img_list"></div>
 		    		</li>	

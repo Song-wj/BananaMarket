@@ -1,5 +1,7 @@
 package com.spring.banana;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,8 +45,15 @@ public class EnrollstoreController {
 	 * @return
 	 */
 	@RequestMapping(value ="/updateStore_update_proc.do", method = RequestMethod.POST)
-	public String updateStore_update_proc(BananaShopVO vo) {	
-		return (String)shopService.update(vo);
+	public ModelAndView updateStore_update_proc(BananaShopVO vo, HttpServletRequest request) {	
+		//서버의 저장경로
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "\\resources\\upload\\";
+						
+		//vo에 저장경로 추가
+		vo.setSavepath1(path1+path2);
+		
+		return (ModelAndView)shopService.update(vo);
 	}
 	
 	/**
@@ -61,7 +70,14 @@ public class EnrollstoreController {
 	 * @return
 	 */
 	@RequestMapping(value="/enrollstore_write_proc.do",method=RequestMethod.POST)
-	public ModelAndView enrollstore_write_proc(BananaShopVO vo) {
+	public ModelAndView enrollstore_write_proc(BananaShopVO vo, HttpServletRequest request) {
+		//서버의 저장경로
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "\\resources\\upload\\";
+				
+		//vo에 저장경로 추가
+		vo.setSavepath1(path1+path2);
+		
 		return (ModelAndView)shopService.insert(vo);
 	}
 

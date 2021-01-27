@@ -1,10 +1,30 @@
 package com.banana.vo;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class BananaShopVO {
 	String sid, mid, sname, skinds, skinds2, sintro, saddr_num, saddr, sph, sdate;
 	String addr2, addr3, hp1, hp2, hp3;
-	String smain_img, smain_simage, 
+	String smain_img, smain_simg, 
 		   scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3;
+	CommonsMultipartFile file1;
+	String savepath1;
+
+	public String getSavepath1() {
+		return savepath1;
+	}
+
+	public void setSavepath1(String savepath1) {
+		this.savepath1 = savepath1;
+	}
+
+	public CommonsMultipartFile getFile1() {
+		return file1;
+	}
+
+	public void setFile1(CommonsMultipartFile file1) {
+		this.file1 = file1;
+	}
 
 	public String getSid() {
 		return sid;
@@ -105,12 +125,12 @@ public class BananaShopVO {
 		this.smain_img = smain_img;
 	}
 
-	public String getSmain_simage() {
-		return smain_simage;
+	public String getSmain_simg() {
+		return smain_simg;
 	}
 
-	public void setSmain_simage(String smain_simage) {
-		this.smain_simage = smain_simage;
+	public void setSmain_simg(String smain_simg) {
+		this.smain_simg = smain_simg;
 	}
 
 	public String getScaro_img1() {
