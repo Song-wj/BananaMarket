@@ -37,8 +37,8 @@
 	<div class="content">
 		<h1>등록 상품 삭제하기</h1>
 		<img src="images/deleteimg.png" class="delete_img"><br>
-		<a href=""><button type="button" class="pdelete_btn">삭제하기</button></a>
-		<a href=""><button type="button" class="plist_btn">목록으로</button></a>
+		<a href="deletePage_proc.do"><button type="button" class="pdelete_btn">삭제하기</button></a>
+		<a href="mypage.do"><button type="button" class="plist_btn">목록으로</button></a>
 	</div>
 <jsp:include page="../footer.jsp" />
 </body>

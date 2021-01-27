@@ -7,7 +7,34 @@ public class productVO {
 	String pfile, psfile, savepath, pimg1, psimg1, pimg2, psimg2, pimg3, psimg3, pimg4, psimg4, pimg5, psimg5;
 	CommonsMultipartFile[] file_list;
 
+	String maddr, nickname, score;
 	
+	
+	
+	public String getMaddr() {
+		return maddr;
+	}
+
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
 	public String getPimg1() {
 		return pimg1;
 	}

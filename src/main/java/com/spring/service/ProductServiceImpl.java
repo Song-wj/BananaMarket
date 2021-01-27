@@ -10,6 +10,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.productDAO;
+import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 
 @Service("productService")
@@ -57,7 +58,7 @@ public class ProductServiceImpl {
 	
 	
 	
-	  public Object getList() {
+	 public Object getList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
 		  
@@ -66,11 +67,37 @@ public class ProductServiceImpl {
 			return mv;
 	  }
 
+	 public Object getContent(Object pid) {
+		 ModelAndView mv = new ModelAndView();
+		 productVO vo = productDAO.getProductContent((String)pid);
+			mv.addObject("vo", vo);
+			mv.setViewName("/popularProduct/productContent");
+			return mv;
+	 }
+	 
+
+	 public Object getUpdateContent(Object pid) {
+		  ModelAndView mv = new ModelAndView();
+			productVO vo = productDAO.getProductContent((String)pid);
+			mv.addObject("vo", vo);
+			mv.setViewName("/popularProduct/updatePage");
+			return mv;
+		  
+	  }
+	 
+	 
+	 public Object getUpdate(Object vo) {
+			ModelAndView mv = new ModelAndView();
+			boolean result = productDAO.getProductUpdate((productVO)vo);
+			
+			if(result) {
+				//mv.setViewName("redirect:/productContent.do");
+				mv.setViewName("/mypage/mypage_contract");
+			}
+			return mv;
+		}
+	 
 	 /* 
-	 * } public Object getContent(Object id) {
-	 * 
-	 * } public Object update() {
-	 * 
 	 * } public Object delete() {
 	 * 
 	 * }

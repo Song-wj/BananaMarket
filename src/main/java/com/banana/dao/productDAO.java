@@ -1,8 +1,10 @@
 package com.banana.dao;
 
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 
 public class productDAO extends DBConn{
@@ -57,11 +59,14 @@ public class productDAO extends DBConn{
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		try {
 			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile "
-						+ " from banana_product";
+						+ " from banana_product ";
 			getPreparedStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				productVO vo = new productVO();
+				
 				vo.setPid(rs.getString(1));
 				vo.setMid(rs.getString(2));
 				vo.setPtitle(rs.getString(3));
@@ -82,6 +87,108 @@ public class productDAO extends DBConn{
 		}
 		
 		return list;
+	}
+	
+	/**
+	 *  판매내역 - 판매중 제품 리스트 
+	 */
+	public ArrayList<productVO> getProductSellList(){
+		ArrayList<productVO> list = new ArrayList<productVO>();
+		try {
+			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile "
+						+ " from banana_product where pchk='x' ";
+			getPreparedStatement(sql);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				productVO vo = new productVO();
+				
+				vo.setPid(rs.getString(1));
+				vo.setMid(rs.getString(2));
+				vo.setPtitle(rs.getString(3));
+				vo.setPcategory(rs.getString(4));
+				vo.setPprice(rs.getString(5));
+				vo.setPcontent(rs.getString(6));
+				vo.setPlike(rs.getString(7));
+				vo.setPchat(rs.getString(8));
+				vo.setPdate(rs.getString(9));
+				vo.setPchk(rs.getString(10));
+				vo.setPfile(rs.getString(11));
+				vo.setPsfile(rs.getString(12));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	
+	/**
+	 *  중고제품 상세 보기
+	 */
+	public productVO getProductContent(String pid) {
+		productVO vo = new productVO();
+		try {
+			String sql ="select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, "
+					+ "      p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE "
+					+ " from banana_product p, banana_member m "
+					+ " where p.pid = ?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, pid);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setPid(rs.getString(1));
+				vo.setMid(rs.getString(2));
+				vo.setPtitle(rs.getString(3));
+				vo.setPcategory(rs.getString(4));
+				vo.setPprice(rs.getString(5));
+				vo.setPcontent(rs.getString(6));
+				vo.setPlike(rs.getString(7));
+				vo.setPchat(rs.getString(8));
+				vo.setPdate(rs.getString(9));
+				vo.setPfile(rs.getString(10));
+				vo.setPsfile(rs.getString(11));
+				vo.setMaddr(rs.getString(12));
+				vo.setNickname(rs.getString(13));
+				vo.setScore(rs.getString(14));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	/**
+	 *  중고제품 상세 보기
+	 */
+	public boolean getProductUpdate(productVO vo) {
+		boolean result = false;
+		
+		try {
+			String sql ="update banana_product set ptitle=?,pcategory=?,pprice=?, pcontent=?";
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1,vo.getPtitle());
+			pstmt.setString(2,vo.getPcategory());
+			pstmt.setString(3,vo.getPprice());
+			pstmt.setString(4,vo.getPcontent());
+			
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 }

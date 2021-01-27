@@ -1,11 +1,19 @@
 package com.spring.banana;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.banana.vo.productVO;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class MypageController {
+	
+	@Autowired
+	private ProductServiceImpl productService;
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -129,6 +137,24 @@ public class MypageController {
 	@RequestMapping(value="/mypage_like.do", method=RequestMethod.GET)
 	public String mypage_like() {
 		return "mypage/mypage_like";
+	}
+	
+	/**
+	 * 마이페이지 - 판매내역 - 수정
+	 * @param pid
+	 * @return
+	 */
+	@RequestMapping(value="/updatePage.do", method=RequestMethod.GET)
+	public ModelAndView updatePage(String pid) {
+		return (ModelAndView)productService.getUpdateContent(pid);
+	}
+	/**
+	 * 마이페이지 - 판매내역 - 수정 처리
+	 * @return
+	 */
+	@RequestMapping(value="/updatePage_proc.do", method=RequestMethod.POST)
+	public String updatePage_proc(productVO vo) {
+		return (String)productService.getUpdate(vo);
 	}
 	
 	/**
