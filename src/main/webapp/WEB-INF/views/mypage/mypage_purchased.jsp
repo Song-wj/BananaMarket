@@ -79,7 +79,7 @@
 				<table class="mypage_table">
 				<tr>
 					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td><span class="product">미스치프 크롭 후드티 팝니다~</span></td>
+					<td><span class="product">${vo.pname }</span></td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
 						매너점수를 주세요~~~<br>
 						<select  name="mannerGrade" onchange="showConfirm()">
@@ -93,10 +93,10 @@
 					</td>
 				</tr>
 				<tr>
-					<td><span class="locate">역삼동  어제</span></td>
+					<td><span class="locate">역삼동  ${vo.sysdate }</span></td>
 				</tr>
 				<tr>
-					<td><span class="price">20,000원</span></td>
+					<td><span class="price">${vo.price }</span></td>
 				</tr> 
 			</table>
 			<table class="mypage_table">
