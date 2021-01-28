@@ -26,6 +26,7 @@ public class AdminController {
 	public String dongne_subject_write_proc(dongneSubjectVO vo, HttpServletRequest request) {
 		String path1 = request.getSession().getServletContext().getRealPath("/");
 		String path2 = "\\resources\\upload\\";
+		System.out.println(path1 + path2);
 		
 		vo.setSavepath(path1 + path2);
 		
@@ -38,7 +39,7 @@ public class AdminController {
 		 * ModelAndView mv = new ModelAndView();
 		 * mv.setViewName("/admin/boardSubjectManage"); return mv;
 		 */
-		return dongneService.getSubjectList();
+		return dongneService.getSubjectListAdmin();
 	}
 	
 	@RequestMapping(value = "/memberManage.do", method = RequestMethod.GET)

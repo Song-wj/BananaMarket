@@ -7,11 +7,32 @@ import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
 	
+	public dongneSubjectVO getSubjectContent(String bsid) {
+		dongneSubjectVO vo = new dongneSubjectVO();
+		
+		try {
+			String sql = "select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, bsid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setBsid(rs.getString(1));
+				vo.setBstitle(rs.getString(2));
+				vo.setBstopic(rs.getString(3));
+				vo.setBssfile(rs.getString(4));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
 	public ArrayList<dongneSubjectVO> getDongneSubject() {
 		ArrayList<dongneSubjectVO> list = new ArrayList<dongneSubjectVO>();
 		
 		try {
-			String sql = "select bsid, bstitle, bstopic from banana_board_subject";
+			String sql = "select bsid, bstitle, bstopic, bssfile from banana_board_subject";
 			getPreparedStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -19,6 +40,7 @@ public class dongneDAO extends DBConn{
 				vo.setBsid(rs.getString(1));
 				vo.setBstitle(rs.getString(2));
 				vo.setBstopic(rs.getString(3));
+				vo.setBssfile(rs.getString(4));
 				list.add(vo);
 			}
 		} catch (Exception e) {
