@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.productVO;
+import com.spring.service.DongneServiceImpl;
 import com.spring.service.ProductService;
 
 @Controller
@@ -14,6 +15,9 @@ public class MypageController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private DongneServiceImpl dongneService;
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -55,8 +59,8 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
-	public String mypage_subjectContent() {
-		return "mypage/mypage_subjectContent";
+	public ModelAndView mypage_subjectContent(String bsid) {
+		return dongneService.getSubjectListContent(bsid);
 	}
 	
 	/**
@@ -64,8 +68,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_subjectList2.do", method=RequestMethod.GET)
-	public String mypage_subjectList2() {
-		return "mypage/mypage_subjectList2";
+	public ModelAndView mypage_subjectList2() {
+		return dongneService.getSubjectList2();
 	}
 
 	/**
@@ -73,8 +77,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_subjectList.do", method=RequestMethod.GET)
-	public String mypage_subjectList() {
-		return "mypage/mypage_subjectList";
+	public ModelAndView mypage_subjectList() {
+		return dongneService.getSubjectList();
 	}
 	
 	/**

@@ -344,19 +344,19 @@
 	<div class="mypage_subjectContent">
 		<section class="subjectContent_photo_area">
 			<div class="subjectContent_photo">
-				<img src="http://localhost:9000/banana/images/동네사건사고.jpg">
+				<img src="http://localhost:9000/banana/resources/upload/${ vo.bssfile }">
 			</div>
 		</section>
 		<section class="subjectContent-write-area">
-			<h2>동네사건사고</h2>
+			<h2>${ vo.bstitle }</h2>
 			<div class="subjectContent-body">
-				<p>흑석동 근처 이웃들과<br>동네사건사고를 주제로 이야기해보세요.</p>
+				<p>흑석동 근처 이웃들과<br>${ vo.bstitle }를 주제로 이야기해보세요.</p>
 			</div>
 			<div class="subjectContent-goSubjectList">
 				<a href="http://localhost:9000/banana/mypage_subjectList2.do">다른 관심주제 보기 ></a>
 			</div>
 			<div class="subjectContent-write">
-				<a href="http://localhost:9000/banana/mypage_subjectList_write.do">동네사건사고 주제로 글쓰기</a>
+				<a href="http://localhost:9000/banana/mypage_subjectList_write.do">${ vo.bstitle } 주제로 글쓰기</a>
 			</div>
 		</section>
 		<section class="subjectContent-post">

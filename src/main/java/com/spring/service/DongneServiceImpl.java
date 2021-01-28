@@ -21,8 +21,41 @@ public class DongneServiceImpl implements BananaService{
 	@Autowired
 	private dongneDAO dongneDAO;
 	
+	public ModelAndView getSubjectListContent(String bsid) {
+		ModelAndView mv = new ModelAndView();
+		dongneSubjectVO vo = dongneDAO.getSubjectContent(bsid);
+		mv.addObject("vo", vo);
+		mv.setViewName("mypage/mypage_subjectContent");
+		return mv;
+	}
+	
+	public ModelAndView getSubjectList2() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("mypage/mypage_subjectList2");
+		return mv;
+	}
+	
+	public ModelAndView getSubjectList() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("mypage/mypage_subjectList");
+		return mv;
+	}
+	
+	public ModelAndView getSubjectListAdmin() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("admin/boardSubjectManage");
+		return mv;
+	}
+	
 	public String writeSubject(Object vo) {
 		String result = "";
+		
 		dongneSubjectVO dvo = (dongneSubjectVO) vo;
 		if(dvo.getFile1().getSize() != 0) {
 			UUID uuid = UUID.randomUUID();
@@ -33,7 +66,7 @@ public class DongneServiceImpl implements BananaService{
 		boolean dvo_result = dongneDAO.writeSubject(dvo);
 		
 		if(dvo_result) {
-			File file = new File(dvo.getSavepath() + dvo.getBsfile());
+			File file = new File(dvo.getSavepath() + dvo.getBssfile());
 			
 			try {
 				dvo.getFile1().transferTo(file);

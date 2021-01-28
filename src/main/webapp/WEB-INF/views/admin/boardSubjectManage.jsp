@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,6 +127,37 @@
 		margin-top:30px;
 		width:100%;
 	}
+	
+	.subject-list table{
+		border-top: 2px solid #FEE500;
+		border-bottom: 2px solid #FEE500;
+		width: 100%;
+		font-size: 20px;
+		border-spacing: 0 20px;
+	}
+	
+	.subject-list table tr td button {
+		all: unset;
+		padding: 5px;
+		background-color: #666;
+		color: #FEE500;
+		font-size: 20px;
+		border-radius: 10px;
+	}
+	
+	.subject-list table tr td button:active {
+		opacity: 0.6;
+	}
+	
+	.subject-list-head th{
+		border-bottom: 2px solid #FEE500;
+		padding-bottom: 20px;
+	}
+	
+	.subject-list-body td {
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -145,6 +177,16 @@
 			}else {
 				dongne_subject.submit();
 			} 
+		});
+		
+		$("#subjectListBtn").click(function(){
+			if($(".subject-list").css("display") == 'none') {
+				$(".subject-list").show();
+				$(".subject-list").slideDown();
+			} else {
+				$(".subject-list").slideUp();
+			}
+			//$(".subject-list").slideToggle();
 		});
 	});
 	
@@ -180,6 +222,24 @@
 					<li>
 						<div id="inputMain" style="text-align: center;">
 							<button type="button" class="join_btn_style" id="subjectListBtn" style="margin-bottom: 20px;">목록</button>
+							<div class="subject-list" style="display:none;">
+								<table>
+									<tr class="subject-list-head">
+										<th>동네생활 주제</th>
+										<th>주제 분류</th>
+										<th>수정</th>
+										<th>삭제</th>
+									</tr>
+								<c:forEach var="vo" items="${ list }">
+									<tr class="subject-list-body">
+										<td>${ vo.bstitle }</td>
+										<td>${ vo.bstopic }</td>
+										<td><button type="button">수정</button></td>
+										<td><button type="button">삭제</button></td>
+									</tr>
+								</c:forEach>
+								</table>
+							</div>
 							<img src="http://localhost:9000/banana/images/bananamarket_logo.jpg"
 									id="img" width="400px" height="300px" style="border:2px solid #FFE500;
 									padding: 30px; border-radius: 10px"><br>
