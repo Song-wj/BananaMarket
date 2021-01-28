@@ -163,6 +163,19 @@
   	.store-info-map .map-detail {
   		margin-left: 105px;
   	}
+  	ul.storeReview>li {
+  		display:inline-block;
+  		margin-top:20px;
+  	}
+  	a.reviewCount {
+  		font-size:25px;
+  		font-weight:700;
+  		margin-left:45px;
+  	}
+  	button.reviewWriteBtn {
+  		margin-left:40%;
+  		width:150px;
+  	}
 		
 </style>
 </head>
@@ -247,6 +260,15 @@
 			    <span class="carousel-control-next-icon"></span>
 			  </a>
 		</div>
+</section>
+<section class="store-info-map">
+	<div>
+		<ul class="storeReview">
+			<li><a href="neighborStoreReview_list.do?sid=${vo.sid }" class="reviewCount">업체 후기 ${review_count }</a></li>
+			<% String mid = "test1234"; %>
+			<li><a href="neighborStoreReview_write.do?sid=${vo.sid }&mid=<%= mid %>"><button type="button" class="reviewWriteBtn">후기쓰기</button></a></li>
+		</ul>
+	</div>
 </section>
 <section class="store-info-map">
 	<div>

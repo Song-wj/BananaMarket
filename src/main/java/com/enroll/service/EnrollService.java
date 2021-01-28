@@ -8,5 +8,5 @@ public interface EnrollService {
 	Object update(Object vo);
 	Object getUpdateContent(Object id);
 	Object delete(Object id);
-	
+	Object getList(String sid);
 }
