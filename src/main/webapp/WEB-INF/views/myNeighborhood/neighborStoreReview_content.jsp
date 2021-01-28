@@ -337,60 +337,6 @@
 			<pre><c:out value="${vo.srcontent}" /></pre>
 			</div>
 		</section>
-		<section class="section4_dongneLife_content">
-			<div class="content_response">
-				<ul>
-					<li>
-						<a href="#"><img src="images/messenger.png"><button type="button">댓글 2</button></a>
-					</li>
-				</ul>
-			</div>
-		</section>
-		<section class="section5_dongneLife_content">
-			<div class="content_comment">
-				<div class="commentMemberImg">
-					<img src="images/mypage_bananaimg.jpg" class="commentMemberImg">
-				</div>
-				<div class="commentMemberSide">
-					<ul class="commentMemberSide">
-						<li>닉네임</li>
-						<li>반포동  / 29분 전</li>
-						<li>있어요</li>
-						<li>
-							<a href="#"><button type="button">공감하기</button></a>
-							<a href="#"><button type="button">답글쓰기</button></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="content_comment">
-				<div class="commentMemberImg">
-					<img src="images/mypage_bananaimg.jpg" class="commentMemberImg">
-				</div>
-				<div class="commentMemberSide">
-					<ul class="commentMemberSide">
-						<li>닉네임</li>
-						<li>서초동  / 1시간 전</li>
-						<li>몰라요</li>
-						<li>
-							<a href="#"><button type="button">공감하기</button></a>
-							<a href="#"><button type="button">답글쓰기</button></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		<section class="section6_dongneLife_content">
-			<div class="content_comment_write">
-				<a href="#"><img src="images/dongneLife_locate.png"><button type="button"></button></a>
-				<a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a>
-				<textarea placeholder="따뜻한 댓글을 입력해주세요 :)"></textarea>
-				<div><a href="#"><button class="comment_writeBtn">등록</button></a></div>
-			</div>
-		</section>
-		<section class="section7_dongneLife_content">
-			
-		</section>
 	</div>
 	
 	<jsp:include page="../footer.jsp"/>
