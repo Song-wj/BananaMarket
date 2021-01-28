@@ -63,6 +63,7 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	public Object getContent(Object sid) {
 		ModelAndView mv = new ModelAndView();
 		BananaShopVO svo = shopDAO.getShopContent((String)sid);
+		svo.getSintro().replace("\r\n", "<br>");
 		
 		mv.addObject("vo", svo);
 		mv.setViewName("/myNeighborhood/neighborhoodStore");

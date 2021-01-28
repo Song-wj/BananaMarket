@@ -96,10 +96,13 @@ public class BananaShopVO {
 	public void setSaddr(String saddr) {
 		this.saddr = saddr;
 		
-		for(int i=saddr.indexOf("(")+1; i<=saddr.indexOf("µ¿"); i++) {
-			dong.append(Character.toString(saddr.charAt(i)));
+		if(saddr.contains("(")) {
+			for(int i=saddr.indexOf("(")+1; i<=saddr.indexOf("µ¿"); i++) {
+				dong.append(Character.toString(saddr.charAt(i)));
+			}
+		}else {
+			dong.append("-");
 		}
-		
 	}
 
 	public String getSph() {
