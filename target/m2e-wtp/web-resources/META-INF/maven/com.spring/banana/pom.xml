@@ -108,17 +108,21 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+<<<<<<< HEAD
 	
 		
 	
+=======
+>>>>>>> 72f05395fb2b46d495b584578a699703c9c33172
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
+
 		</dependency>   
-		
+	
 		<!-- FileUpload - MultipartHttpServletRequset -->
 		<dependency>
     		<groupId>commons-io</groupId>
@@ -131,7 +135,10 @@
 		  <artifactId>commons-fileupload</artifactId>
 		  <version>1.4</version>
 		</dependency>
+<<<<<<< HEAD
 		     
+=======
+>>>>>>> 72f05395fb2b46d495b584578a699703c9c33172
 		
 	</dependencies>
     <build>

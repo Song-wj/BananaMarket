@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.productVO;
-import com.spring.service.ProductServiceImpl;
+import com.spring.service.ProductService;
 
 @Controller
 public class MypageController {
 	
 	@Autowired
-	private ProductServiceImpl productService;
+	private ProductService productService;
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -154,7 +154,7 @@ public class MypageController {
 	 */
 	@RequestMapping(value="/updatePage_proc.do", method=RequestMethod.POST)
 	public String updatePage_proc(productVO vo) {
-		return (String)productService.getUpdate(vo);
+		return (String)productService.update(vo);
 	}
 	
 	/**

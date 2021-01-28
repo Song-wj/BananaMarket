@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.productVO;
-import com.spring.service.ProductServiceImpl;
+import com.spring.service.ProductService;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
-	private ProductServiceImpl productService;
+	private ProductService productService;
 	
 	
 	@RequestMapping(value="/productContent.do", method=RequestMethod.GET)

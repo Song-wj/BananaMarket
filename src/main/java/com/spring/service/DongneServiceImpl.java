@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.dongneDAO;
+import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
 
@@ -19,6 +20,33 @@ public class DongneServiceImpl implements BananaService{
 
 	@Autowired
 	private dongneDAO dongneDAO;
+	
+	public String writeSubject(Object vo) {
+		String result = "";
+		dongneSubjectVO dvo = (dongneSubjectVO) vo;
+		if(dvo.getFile1().getSize() != 0) {
+			UUID uuid = UUID.randomUUID();
+			dvo.setBsfile(dvo.getFile1().getOriginalFilename());
+			dvo.setBssfile(uuid + "_" + dvo.getFile1().getOriginalFilename());
+		}
+		
+		boolean dvo_result = dongneDAO.writeSubject(dvo);
+		
+		if(dvo_result) {
+			File file = new File(dvo.getSavepath() + dvo.getBsfile());
+			
+			try {
+				dvo.getFile1().transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result = "redirect:/boardSubjectManage.do";
+		}else {
+			result = "errorPage";
+		}
+		
+		return result;
+	}
 	
 	public Object  insert(Object vo) {
 		String result="";

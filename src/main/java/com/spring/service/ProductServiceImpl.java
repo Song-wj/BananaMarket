@@ -10,11 +10,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.productDAO;
-import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 
 @Service("productService")
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private productDAO productDAO;
@@ -25,12 +24,11 @@ public class ProductServiceImpl {
 		UUID uuid = UUID.randomUUID(); 
 		
 			System.out.println(pvo.getFile_list().length);
-			
 			for(CommonsMultipartFile file : pvo.getFile_list()) {
 				//파일이 존재하면 nfile nsfile
-				System.out.println(file.getOriginalFilename());
-				
+				//System.out.println(file.getOriginalFilename());
 				if(pvo.getFile_list().length != 0 ) {
+					
 					pvo.setPfile(file.getOriginalFilename());
 					pvo.setPsfile(uuid+"_"+file.getOriginalFilename());
 				}	
@@ -86,7 +84,7 @@ public class ProductServiceImpl {
 	  }
 	 
 	 
-	 public Object getUpdate(Object vo) {
+	 public Object update(Object vo) {
 			ModelAndView mv = new ModelAndView();
 			boolean result = productDAO.getProductUpdate((productVO)vo);
 			
@@ -97,9 +95,10 @@ public class ProductServiceImpl {
 			return mv;
 		}
 	 
-	 /* 
-	 * } public Object delete() {
-	 * 
-	 * }
-	 */
+	 
+	 public Object delete(Object pid) {
+	 
+		 return "...";
+	 }
+	 
 }
