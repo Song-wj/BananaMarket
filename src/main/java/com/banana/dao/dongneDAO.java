@@ -6,6 +6,27 @@ import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
+	
+	public ArrayList<dongneSubjectVO> getDongneSubject() {
+		ArrayList<dongneSubjectVO> list = new ArrayList<dongneSubjectVO>();
+		
+		try {
+			String sql = "select bsid, bstitle, bstopic from banana_board_subject";
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dongneSubjectVO vo = new dongneSubjectVO();
+				vo.setBsid(rs.getString(1));
+				vo.setBstitle(rs.getString(2));
+				vo.setBstopic(rs.getString(3));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 	public boolean writeSubject(dongneSubjectVO vo) {
 		boolean result = false;

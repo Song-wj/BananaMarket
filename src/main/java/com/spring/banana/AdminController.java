@@ -34,9 +34,11 @@ public class AdminController {
 	
 	@RequestMapping(value = "/boardSubjectManage.do", method = RequestMethod.GET)
 	public ModelAndView boardSubjectManage() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("/admin/boardSubjectManage");
-		return mv;
+		/*
+		 * ModelAndView mv = new ModelAndView();
+		 * mv.setViewName("/admin/boardSubjectManage"); return mv;
+		 */
+		return dongneService.getSubjectList();
 	}
 	
 	@RequestMapping(value = "/memberManage.do", method = RequestMethod.GET)

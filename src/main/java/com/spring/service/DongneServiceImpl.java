@@ -21,6 +21,14 @@ public class DongneServiceImpl implements BananaService{
 	@Autowired
 	private dongneDAO dongneDAO;
 	
+	public ModelAndView getSubjectList() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("admin/boardSubjectManage");
+		return mv;
+	}
+	
 	public String writeSubject(Object vo) {
 		String result = "";
 		dongneSubjectVO dvo = (dongneSubjectVO) vo;
