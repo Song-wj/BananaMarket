@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,13 +107,12 @@
 	section.section_join>div>form.join input.addr2{
 		width:48.8%
 	}
-	section.section_join>div>form.join button.join_btn_style{
-		position:relative;
+	section.section_join>div>form.join button.join_btn_style {
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
 		border:1px solid RGB(254,229,0);
-		padding:15px 17px;
+		padding:15px 15px;
 		font-size:17px;
 		border-radius:5px;
 	}
@@ -124,12 +124,39 @@
 	}
 	section.section_join>div>form.join button.join_btn_style:first-child{
 		margin-top:30px;
-		width:100%;
+		width:49.5%;
+	}
+	span#fname{
+		margin-left:10px;
 	}
 </style>
 <script>
 
 $(document).ready(function(){
+	
+	//핸드폰 선택 준비 (010,011..)
+	var splitSph = $("#splitSph").val();
+	$("select[name='hp1'] option").each(function(){
+		if($(this).val() == splitSph){
+			$(this).prop("selected",true);
+		}
+	});
+
+	//업종 선택 준비
+	var sKinds = $("#checkedSkinds").val();
+	$("select[name='skinds'] option").each(function(){
+		if($(this).val() == sKinds){
+			$(this).prop("selected",true);
+		}
+	});
+	
+	//파일선택
+	$("input[type=file]").on('change', function(){
+		if(window.FileReader){
+			var fileName = $(this)[0].files[0].name;  //파일선택 0번지의 첫번째 파일의 이름을 fileName변수에 넣는다
+			$("#fname").text("").text(fileName);	  //기존 데이터 지우고 fileName 값을 넣음
+		}
+	});
 	
 	var sel_files = [];
 	var sel_files2 = [];
@@ -193,11 +220,12 @@ $(document).ready(function(){
 		
 	});
 	
+	
 	$('#btnEnroll').click(function(){
-		if($("#input_img").val() ==""){
+		/* if($("#input_img").val() ==""){
 			alert("업체이미지를 등록해주세요");
-			$("#input_img").focus();
-		}else if($("#storename").val() ==""){
+			$("#input_img").focus(); */
+		if($("#storename").val() ==""){
 			alert("상호명을 입력해주세요");
 			$("#storename").focus();
 		}else if($("#storekind1").val() =="select"){
@@ -231,11 +259,12 @@ $(document).ready(function(){
 			alert("광고사진을 등록해주세요");
 			$("#input_carousel_img").focus(); */
 		}else
-			EnrollForm.submit();
+			UpdateStoreForm.submit();
 		
 	});
 	
 });
+
 	var goPopup = function() {
 		var pop = window.open("enroll_jusoPopup.do", "pop",
 				"width=570,height=420, scrollbars=yes, resizable=yes");
@@ -259,26 +288,35 @@ $(document).ready(function(){
 	<div class="join">
 		<section class="section_join">
 			<div>
-				<form name="EnrollForm" action="enrollstore_write_proc.do" method="post" 
+				<form name="UpdateStoreForm" action="updateStore_update_proc.do" method="post" 
 				class="join" enctype="multipart/form-data">
 				<input type="hidden" name="mid" value="test12"> <!-- mid 임의로 설정  -->
-				<h1>동네업체 등록</h1>
+				<input type="hidden" name="sid" value="${vo.sid }">
+				<h1>동네업체 수정</h1>
 				<ul>
 					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>
-						<input type="file" id="input_img" name="file1" multiple>
+						<c:choose>
+							<c:when test="${vo.smain_img ne null }">
+								<input type="file" id="input_img" name="file1" multiple><span id="fname">${vo.smain_img }</span>
+							</c:when>
+							<c:otherwise>
+								<input type="file" id="input_img" name="file1" multiple><span id="fname">선택된 파일 없음</span>
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="img_list" id="img_list"></div>
-		    		</li>	
+		    		</li>		
 					<li>
 						<label>상호명</label>
 					</li>
 					<li>
-						<input type="text" name="sname" class="f1" id="storename" placeholder="예) 바나나 슈퍼">
+						<input type="text" name="sname" value="${vo.sname }" class="f1" id="storename" placeholder="예) 바나나 슈퍼">
 					</li>
 					<li>
 						<label>업종</label>
 					</li>
 					<li>
+						<input type="hidden" id="checkedSkinds" value="${vo.skinds }">
 						<select name="skinds" class="storekind" id="storekind1">
 							<option value="select">선택해주세요</option>
 							<option value="병원/의료">병원/의료</option>
@@ -306,7 +344,7 @@ $(document).ready(function(){
 						<label>상세 업종</label>
 					</li>
 					<li>
-						<input type="text" name="skinds2" class="f1" id="storekind2" placeholder="예) 카페, 한식전문점, 옷수선, 반찬가게 등">
+						<input type="text" name="skinds2" value="${vo.skinds2 }" class="f1" id="storekind2" placeholder="예) 카페, 한식전문점, 옷수선, 반찬가게 등">
 					</li>
 					<li>
 						<label>주소</label>
@@ -315,26 +353,27 @@ $(document).ready(function(){
 						<input type="text" name="saddr_num" placeholder="우편번호" class="addr1" id="addr1">
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
-						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2">
-						<input type="text" name="addr3" placeholder="상세주소" class="addr2" id="addr3">
+						<input type="text" name="addr2" value="${vo.addr2 }" placeholder="도로명주소" class="addr2" id="addr2">
+						<input type="text" name="addr3" value="${vo.addr3 }" placeholder="상세주소" class="addr2" id="addr3">
 					</li>
 					<li>
 						<label>전화번호</label>
 					</li>
 					<li>
+						<input type="hidden" id="splitSph" value="${vo.hp1 }">
 						<select name="hp1" class="hp" id="hp1">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="017">017</option>
 						</select>
-						<span>-&nbsp;</span><input type="text" name="hp2" class="hp_number" id="hp2">
-						<span>-&nbsp;</span><input type="text" name="hp3" class="hp_number" id="hp3">
+						<span>-&nbsp;</span><input type="text" name="hp2" value="${vo.hp2 }" class="hp_number" id="hp2">
+						<span>-&nbsp;</span><input type="text" name="hp3" value="${vo.hp3 }" class="hp_number" id="hp3">
 					</li>
 					<li>
 						<label>업체 소개</label>
 					</li>
 					<li>
-						<textarea name="sintro" rows="5" class="f1" id="storeintro"></textarea>
+						<textarea name="sintro" rows="5" class="f1" id="storeintro">${vo.sintro }</textarea>
 					</li>
 					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가</label>
 						<input type="file" id="input_carousel_img" name="" multiple>
@@ -342,7 +381,8 @@ $(document).ready(function(){
 						<div class="img_list" id="img_carousel_list"></div>
 		    		</li>	
 					<li>
-						<button type="button" class="join_btn_style" id="btnEnroll">완료</button>
+						<button type="button" class="join_btn_style" id="btnEnroll">수정완료</button>
+						<a href="deleteStore_delete.do?sid=${vo.sid }"><button type="button" class="join_btn_style">업체 삭제</button></a>
 					</li>
 				</ul>
 				</form>

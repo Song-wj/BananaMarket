@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,6 +108,9 @@
 		outline:none;
 		border-radius:15px;
 	}
+	div.store_recommand {
+		margin-bottom:10px;
+	}
 	div.store_news img{
 		width:290px;
 		height:70px;
@@ -201,90 +205,40 @@
 			</div>		
 		</div> <!-- category -->
 		<div class="recommand_store">
+			<a href="enrollstore.do"><button type="button">업체 등록</button></a>
 			<label>이웃들의 추천 가게</label>
-			<div>
+			<c:forEach var="vo" items="${list }">
+			<div class="store_recommand">
 				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
 				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
+				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
+				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
 				<div class="store_review">
 					<span>oo님</span>
 					<label>호호호호</label>
 				</div>	
 			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
-				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
-				<div class="store_review">
-					<span>oo님</span>
-					<label>~~~~</label>
-				</div>	
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
-				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
-				<div class="store_review">
-					<span>oo님</span>
-					<label>~~~~</label>
-				</div>	
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png"><img src="images/clothes.png">
-				</div>
-				<label class="store_name">소문난반찬가게</label>
-				<label class="store_info">~~~~~</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
-				<div class="store_review">
-					<span>oo님</span>
-					<label>~~~~</label>
-				</div>	
-			</div>	
+			</c:forEach>
 			<button type="button">더 보러가기</button>				
 		</div>  <!-- recommand_store -->
-		<div class="store_news">
+		<div class="recommand_store">
 			<label>내 근처 가게 소식</label>
-			<div>
+			<c:forEach var="vo" items="${list }">
+			<div class="store_recommand">
 				<div>				
-					<img src="images/clothes.png">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
 				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>
-				
+				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
+				<label class="store_info">${vo.sintro }</label>
+				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
+				<div class="store_review">
+					<span>oo님</span>
+					<label>호호호호</label>
+				</div>	
 			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png">
-				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>
-				
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png">
-				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>
-				
-			</div>	
-			<div>
-				<div>				
-					<img src="images/clothes.png">
-				</div>
-				<label class="news_title">맛난 고기 팔아요~~~~~~~~~~~~~~~~~~~~~~~~~~~</label>
-				<span class="nickname">한우파는 카우보이</span>	
-			</div>	
+			</c:forEach>
 			<button type="button">가게 소식 전체 보기 > </button>
 		</div><!-- store_news -->
 		
