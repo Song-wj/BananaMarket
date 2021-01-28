@@ -86,7 +86,7 @@ public class BananaShopVO {
 	public String getSaddr() {
 		String str="";
 		if(addr2 != null) {
-			str = addr2+" "+addr3;
+			str = addr2+","+addr3;
 		}else {
 			str = saddr;
 		}
@@ -96,8 +96,16 @@ public class BananaShopVO {
 	public void setSaddr(String saddr) {
 		this.saddr = saddr;
 		
-		for(int i=saddr.indexOf("(")+1; i<=saddr.indexOf("µ¿"); i++) {
-			dong.append(Character.toString(saddr.charAt(i)));
+		String[] addrlist = saddr.split(",");
+		setAddr2(addrlist[0]);
+		setAddr3(addrlist[1]);
+		
+		if(addrlist[1].contains("(")) {
+			for(int i=addrlist[1].indexOf("(")+1; i<=addrlist[1].indexOf("µ¿"); i++) {
+				dong.append(Character.toString(addrlist[1].charAt(i)));
+			}
+		}else {
+			dong.append("-");
 		}
 		
 	}
