@@ -25,7 +25,7 @@
 	
 		$(window).scroll(function() {
 			// 현재 스크롤 위치를 가져온다.
-			var scrollTop = $(window).scrollTop()+800;
+			var scrollTop = $(window).scrollTop()+700;
 			var newPosition = scrollTop + floatPosition + "px";
 	
 			/* 애니메이션 없이 바로 따라감
