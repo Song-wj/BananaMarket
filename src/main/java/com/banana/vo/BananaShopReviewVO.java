@@ -2,6 +2,39 @@ package com.banana.vo;
 
 public class BananaShopReviewVO {
 	String srid, sid, mid, srcontent, srdate;
+	String nickname, maddr, msfile, sname;
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getMaddr() {
+		return maddr;
+	}
+
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
+
+	public String getMsfile() {
+		return msfile;
+	}
+
+	public void setMsfile(String msfile) {
+		this.msfile = msfile;
+	}
+
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
 
 	public String getSid() {
 		return sid;

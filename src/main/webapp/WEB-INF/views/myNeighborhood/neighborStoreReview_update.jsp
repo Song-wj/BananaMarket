@@ -108,10 +108,6 @@
 	 	clip:rect(0 180px 150px 75px);  
 		border: 0; 
 	} 
-	
-	
-	
-	
 
 </style>
 
@@ -122,7 +118,7 @@
 	            alert("후기를 작성해주세요");
 	            $("#srcontent").focus();  
 	         }else{
-	        	 review_write_form.submit();
+	        	 board_update_form.submit();
 	         }
 	      });
 	});
@@ -132,7 +128,7 @@
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
-		<form name="review_write_form" action="neighborStoreReview_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
+		<form name="board_update_form" action="neighborStoreReview_update_proc.do?srid=${srid }" method=POST id="board_update_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
 			<div class="write_nav">
 				<ul>

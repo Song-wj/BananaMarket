@@ -149,12 +149,13 @@
 	<jsp:include page="../header.jsp"/>
 	<div class="dongnelife">
 		<section class="section1">
+		
 			<div class="dl_title">
 				<h1>전체 후기 목록</h1>
 			</div>
 			<div class="dl_content1">
 				<img src="images/김수현.jpg"><label>업체 후기 ${review_count }</label><hr><br>
-				<a href="neighborStoreReview_write.do?sid=${vo.sid }&mid=${vo.mid }"><button type="button">후기 작성하기</button></a><hr>
+				<%-- <a href="neighborStoreReview_write.do?sid=${vo.sid }&mid=${vo.mid }"><button type="button">후기 작성하기</button></a><hr> --%>
 			</div>	
 			<section class="sub_section">
 			<c:forEach var="vo" items="${list }">
@@ -164,16 +165,17 @@
 						<label>${vo.srdate }</label>
 					</li>
 					<li>
-						<img src="images/banana.jpg">
-						<label>${vo.sid }</label>
-						<label>${vo.mid }</label>
+						<img src="http://localhost:9000/banana/resources/upload/${vo.msfile }">
+						<label>${vo.nickname }</label>
+						<label>${vo.maddr }</label>
 					</li>	
 					<li><pre><c:out value="${vo.srcontent}" /></pre></li>
 					<li>
-						<a href="dongneLife_content.do"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
+						<a href="neighborStoreReview_content.do?srid=${vo.srid}"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
 					</li>
 				</ul>
 			</div>
+			
 			</c:forEach>
 			</section>
 			</section>

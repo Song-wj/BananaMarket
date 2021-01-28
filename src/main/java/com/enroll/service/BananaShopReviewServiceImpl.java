@@ -31,7 +31,7 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<BananaShopReviewVO> list = shopReviewDAO.getShopReviewList(sid);
 		int review_count = shopReviewDAO.getShopReviewCount(sid);
-		
+
 		mv.addObject("review_count", review_count);
 		mv.addObject("list",list);
 		mv.setViewName("/myNeighborhood/neighborStoreReview_list");
@@ -60,7 +60,9 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 		ModelAndView mv = new ModelAndView();
 		BananaShopReviewVO srvo = shopReviewDAO.getShopReviewContent((String)srid);
 		srvo.getSrcontent().replace("\r\n", "<br>");
+		BananaShopReviewVO srvo1 = shopReviewDAO.getShopReviewDetail((String)srid);
 		
+		mv.addObject("srvo1", srvo1);
 		mv.addObject("vo", srvo);
 		mv.setViewName("/myNeighborhood/neighborStoreReview_content");
 		

@@ -166,9 +166,6 @@
 		padding-bottom:30px;
 		border-bottom:1px solid lightgray;
 	}
-	section.section2_dongneLife_content {
-		padding-bottom:70px;
-	}
 	section.section4_dongneLife_content {
 		padding-top:0;
 		margin-top:-30px;
@@ -323,12 +320,12 @@
 			<div class="content_top">
 				<div class="content_member">
 					<div class="memberImg">
-						<img src="images/mypage_bananaimg.jpg" class="memberImg">
+						<img src="http://localhost:9000/banana/resources/upload/${srvo1.msfile }" class="memberImg">
 					</div>
 					<div class="memberSide">
 						<ul class="memberSide">
-							<%-- <li>${vo.nickname }</li>
-							<li>${vo.maddr } / ${vo.bdate }</li> --%>
+							<li>${srvo1.nickname }</li>
+							<li>${srvo1.maddr } / ${vo.srdate }</li>
 						</ul>
 					</div>
 				</div>
@@ -338,17 +335,6 @@
 			<div class="content_detail">
 				
 			<pre><c:out value="${vo.srcontent}" /></pre>
-
-
-			
-			<div id ="img_div">
-			<%-- <c:forEach var="list" items="${sfile_list }" >
-			
-					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
-				
-			
-			</c:forEach> --%>
-			</div>	
 			</div>
 		</section>
 		<section class="section4_dongneLife_content">
