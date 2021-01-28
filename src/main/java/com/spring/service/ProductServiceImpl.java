@@ -24,12 +24,11 @@ public class ProductServiceImpl implements ProductService{
 		UUID uuid = UUID.randomUUID(); 
 		
 			System.out.println(pvo.getFile_list().length);
-			
 			for(CommonsMultipartFile file : pvo.getFile_list()) {
 				//파일이 존재하면 nfile nsfile
-				System.out.println(file.getOriginalFilename());
-				
+				//System.out.println(file.getOriginalFilename());
 				if(pvo.getFile_list().length != 0 ) {
+					
 					pvo.setPfile(file.getOriginalFilename());
 					pvo.setPsfile(uuid+"_"+file.getOriginalFilename());
 				}	

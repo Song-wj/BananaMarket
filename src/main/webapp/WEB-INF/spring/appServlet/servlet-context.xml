@@ -18,7 +18,9 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/images/**" location="/resources/images/" />
 	
-	 
+	<!-- multipartResolver -->
+  	 <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   	 </beans:bean>  
 
 	<!-- Service -->
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
