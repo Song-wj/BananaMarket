@@ -108,12 +108,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-<<<<<<< HEAD
-	
-		
-	
-=======
->>>>>>> 72f05395fb2b46d495b584578a699703c9c33172
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -135,10 +130,7 @@
 		  <artifactId>commons-fileupload</artifactId>
 		  <version>1.4</version>
 		</dependency>
-<<<<<<< HEAD
-		     
-=======
->>>>>>> 72f05395fb2b46d495b584578a699703c9c33172
+
 		
 	</dependencies>
     <build>
