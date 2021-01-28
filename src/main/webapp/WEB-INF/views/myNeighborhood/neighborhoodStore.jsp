@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,16 +167,17 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+
 <section class="store-info-top">
 	<div id="dark-cover">배경</div>
 	<div class="image-container">
-		<img src="http://localhost:9000/banana/images/store1.jpeg">
+		<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg }">
 	</div>
 	<div class="desc-container">
 		<div>
-			<a href="#">옥정동</a> &middot; <a href="#">뷰티/미용</a>
+			<a href="#">${vo.dong}</a> &middot; <a href="#">${vo.skinds} <!-- 뷰티/미용 --></a>
 		</div>
-		<h1>뷰림헤어살롱 옥정점</h1>
+		<h1>${vo.sname}<!-- 뷰림헤어살롱 옥정점 --></h1>
 	</div>
 </section>
 <section class="store-info-body">
@@ -185,25 +187,28 @@
 				<div class="shop-img">
 					<img src="http://localhost:9000/banana/images/market.svg">
 				</div>
-				<p class="info-content">
-					안녕하세요^^<br>
+				<p class="info-content">${vo.sintro }
+					<!-- 안녕하세요^^<br>
 					옥정동 뷰림헤어입니다.<br>
 					요즘 코로나 때문에 마음대로 다니시길 어려우시져?<br>
 					저희샵은 공간을 최대한 분리되어있어서 좀더 쾌적하고 편안하게 시술받을 수 있는 장점이 있어요<br>
-					신규고객님들은 30%할인 적용도 있으시니 방문해주셔서 예쁘게 머리하시고 기분전환하세요!
+					신규고객님들은 30%할인 적용도 있으시니 방문해주셔서 예쁘게 머리하시고 기분전환하세요! -->
 				</p>
 			</li>
 			<li>
 				<div class="location-img">
 					<img src="http://localhost:9000/banana/images/location.svg">
 				</div>
-				<p class="info-location">경기도 양주시 회천남로 76</p>
+				<p class="info-location">${vo.saddr} ${vo.saddr_num} <!-- 경기도 양주시 회천남로 76 --></p>
 			</li>
 			<li>
 				<div class="phone-img">
 					<img src="http://localhost:9000/banana/images/phone.svg">
 				</div>
-				<p class="info-phone"><a href="#">0318623555</a></p>
+				<p class="info-phone"><a href="#">${vo.sph} <!-- 0318623555 --></a></p>
+			</li>
+			<li>
+				<a href="updateStore.do?sid=${vo.sid }"><button type="button">업체 관리</button></a>
 			</li>
 		</ul>
 	</div>

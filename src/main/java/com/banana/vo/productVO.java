@@ -5,9 +5,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class productVO {
 	String pid, mid, ptitle, pcategory , pprice, pcontent, plike, pchat, pdate, pchk;
 	String pfile, psfile, savepath, pimg1, psimg1, pimg2, psimg2, pimg3, psimg3, pimg4, psimg4, pimg5, psimg5;
-	CommonsMultipartFile[] file_list;
-
 	String maddr, nickname, score;
+	CommonsMultipartFile[] file_list;
+	
 	
 	
 	
@@ -130,7 +130,7 @@ public class productVO {
 	public void setPsfile(String psfile) {
 		this.psfile = psfile;
 	}
-
+	
 	public CommonsMultipartFile[] getFile_list() {
 		return file_list;
 	}
@@ -138,7 +138,7 @@ public class productVO {
 	public void setFile_list(CommonsMultipartFile[] file_list) {
 		this.file_list = file_list;
 	}
-	
+
 	public String getSavepath() {
 		return savepath;
 	}

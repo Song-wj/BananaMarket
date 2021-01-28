@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.banana.vo.*"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,7 +114,7 @@
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/logout.do">로그아웃</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
-						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood.do">내 근처</a></li>
 					</ul>
 				</c:when>
 				<c:otherwise>
@@ -123,7 +123,7 @@
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/join.do">회원가입</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
-						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood">내 근처</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood.do">내 근처</a></li>
 					</ul>
 				</c:otherwise>
 			</c:choose> 
