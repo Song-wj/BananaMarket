@@ -8,9 +8,7 @@
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script>
 	$(document).ready(function(){
-		/* $("select").change(function(){
-			showConfirm(); */
-			
+		
 		});
 		
 		
@@ -70,6 +68,16 @@
 	div.mypage_purchased table.mypage_table span.price {
 		font-weight:900;
 	}
+	div.mypage_purchased table.mypage_table button#write_btn{
+		background-color:RGB(254,229,0);
+		border:1px solid RGB(254,229,0);
+		border-radius:5px;
+		padding:10px 10px;
+		color:RGB(82,67,21);
+		font-size:17px;
+		font-weight:bold;
+		width:100px;
+	}
 </style>
 </head>
 <body>
@@ -81,15 +89,8 @@
 					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
 					<td><span class="product">미스치프 크롭 후드티 팝니다~</span></td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
-						매너점수를 주세요~~~<br>
-						<select  name="mannerGrade" onchange="showConfirm()">
-							<option value="none">선택</option>
-							<option value="3">😮</option>
-							<option value="5">😆</option>
-							<option value="4">🙂</option>
-							<option value="2">😥</option>
-							<option value="1">😡</option>
-						</select>
+						
+						<a href="mypage_purchase_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
 					</td>
 				</tr>
 				<tr>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.preview">
+	
+	<select id="insert" parameterType="com.banana.vo.ReviewVO">
+		insert into banana_buy_review values
+		<choose>
+  			<when test="rfile != null">
+  				('R_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},#{rfile},#{rsfile},sysdate)
+  			</when>
+  			<otherwise>
+  				('R_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
+  			</otherwise>
+  		</choose>
+	</select>
+</mapper>

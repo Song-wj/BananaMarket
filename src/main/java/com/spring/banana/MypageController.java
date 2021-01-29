@@ -1,12 +1,15 @@
 package com.spring.banana;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
+import com.spring.service.BananaService;
 import com.spring.service.DongneServiceImpl;
 import com.spring.service.ProductService;
 
@@ -18,6 +21,11 @@ public class MypageController {
 	
 	@Autowired
 	private DongneServiceImpl dongneService;
+	
+	
+	@Autowired
+	@Qualifier("mypageReviewService")
+	private BananaService MypageReviewService ;
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -178,6 +186,16 @@ public class MypageController {
 	public String mypage_purchased() {
 		return "mypage/mypage_purchased";
 	}
+	// 구매내역 리뷰 쓰기
+	@RequestMapping(value="/mypage_purchase_review.do", method=RequestMethod.GET)
+	public String mypage_purchase_review() {
+		return "mypage/mypage_purchase_review";
+	}
+	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
+	public String purchase_reivew_write_proc(ReviewVO vo) {
+		return (String)MypageReviewService.insert(vo); 
+	}
+	
 	
 	/**
 	 * 마이페이지 - 프로필 수정
