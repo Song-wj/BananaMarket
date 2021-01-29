@@ -104,7 +104,7 @@
 	td.review>img{
 		width:35px;
 		height:35px;
-		margin-left:30px;
+		margin-left:10px;
 		border-radius:50%;
      	border:2px solid #fff;
       	box-shadow: 0 0 16px rgb(221,221,221);
@@ -116,26 +116,21 @@
         font-weight:550;
         font-size:20px;
 	}
-	/* td.review>label:nth-child(3){
-		margin-left:6px;
-        font-size:15px;
-        font-weight:500;
-        position: relative;
-        top:-10px;
-	} */
-	td.review>label.review{
+	td.review>pre{
 		font-weight:normal;
 		width:650px;
-		overflow:hidden;
-      	text-overflow:ellipsis;
-      	display: -webkit-box;
+        display: -webkit-box;
    	 	-webkit-line-clamp: 3; /* 라인수 */
         -webkit-box-orient: vertical;
         word-wrap:break-word; 
         line-height: 1.2em;
-        height: 3.6em;
+        height: 3.6em; 
+		overflow:hidden;
+      	text-overflow:ellipsis;
 		border:1px solid red;
 		text-align:left;
+		font-size: 20px;
+		
 	}
 	td.review>label.date{
 		font-size:15px;
@@ -170,10 +165,12 @@
 						<label>${vo.mid }</label>
 						<label>${vo.maddr }</label>
 					</td>
+				</tr>
 				<tr>
 					<td class="review" colspan="3">
-						<label class="review">${vo.review }</label>
+						<pre><c:out value="${vo.review}" /></pre>
 					</td>
+				</tr>
 				<tr>
 					<td class="review">	
 						<label class="date">${vo.rdate }</label>
@@ -186,18 +183,68 @@
 		<section class="review_seller_table_area" style="display: none;">
 			<div>
 			<table class="review_seller_table">
-				<tr>
-					<td style="padding: 230px 0; color: #ccc;">판매자 후기가 없습니다.</td>
-				</tr> 
+				<c:choose >
+					<c:when test="${list ne null }">
+						<tr>
+							<td style="padding: 230px 0; color: #ccc;">판매자 후기가 없습니다.</td>
+						</tr> 
+					</c:when>
+				    <c:otherwise>
+						<c:forEach var ="vo" items="${list}">
+						 	<tr>
+								<td class="review">
+									<img src="images/banana.jpg">
+									<label>${vo.mid }</label>
+									<label>${vo.maddr }</label>
+								</td>
+							</tr>
+							<tr>							
+								<td class="review" colspan="3">
+									<pre><c:out value="${vo.review}" /></pre>
+								</td>
+							</tr>
+							<tr>
+								<td class="review">	
+									<label class="date">${vo.rdate }</label>
+								</td>
+							</tr>	
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</table>
 			</div>
 		</section>
 		<section class="review_buyer_table_area" style="display: none;">
 			<div>
 			<table class="review_buyer_table">
-				<tr>
-					<td style="padding: 230px 0; color: #ccc;">구매자 후기가 없습니다.</td>
-				</tr> 
+				<c:choose >
+					<c:when test="${list ne null }">
+						<tr>
+							<td style="padding: 230px 0; color: #ccc;">구매자 후기가 없습니다.</td>
+						</tr> 
+					</c:when>
+				    <c:otherwise>
+						<c:forEach var ="vo" items="${list}">
+						 	<tr>
+								<td class="review">
+									<img src="images/banana.jpg">
+									<label>${vo.mid }</label>
+									<label>${vo.maddr }</label>
+								</td>
+							</tr>
+							<tr>							
+								<td class="review" colspan="3">
+									<pre><c:out value="${vo.review}" /></pre>
+								</td>
+							</tr>
+							<tr>
+								<td class="review">	
+									<label class="date">${vo.rdate }</label>
+								</td>
+							</tr>	
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</table>
 			</div>
 		</section>
