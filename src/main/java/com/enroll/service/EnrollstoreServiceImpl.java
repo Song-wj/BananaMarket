@@ -139,7 +139,19 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	}
 
 	@Override
-	public Object getList(String sid) {
+	public Object getSelectList(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCommentListAjaxProc(String bid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getUpdateContent(Object id, String rno) {
 		// TODO Auto-generated method stub
 		return null;
 	}

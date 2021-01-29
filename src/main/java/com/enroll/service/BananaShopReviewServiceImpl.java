@@ -27,7 +27,7 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 	}
 	
 	//특정 업체 후기 리스트
-	public Object getList(String sid) {
+	public Object getSelectList(String sid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<BananaShopReviewVO> list = shopReviewDAO.getShopReviewList(sid);
 		int review_count = shopReviewDAO.getShopReviewCount(sid);
@@ -107,6 +107,18 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 			str="redirect:/neighborhood.do";
 		}
 		return str;
+	}
+
+	@Override
+	public String getCommentListAjaxProc(String bid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getUpdateContent(Object id, String rno) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

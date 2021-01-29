@@ -33,11 +33,9 @@
 	div.dongnelife_content {
 		width: 70%;
 		margin:auto;
-		height: 1000px;
 		padding-top:150px;
 		padding-bottom:3%;
 		border:1px solid green;
-		overflow:auto;
 	}
 	section.section2_dongneLife_content,
 	section.section3_dongneLife_content,
@@ -196,7 +194,8 @@
 		height:20px;
 	}
 	section.section5_dongneLife_content div.content_comment {
-		padding-bottom:50px;
+		margin-bottom:10px;
+		margin-top:-20px;
 	}
 	section.section5_dongneLife_content img.commentMemberImg {
 		magin-bottom:100px;
@@ -223,6 +222,7 @@
 		margin-left:15px;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide>li:first-child {
+		margin-top:10px;
 		font-size:16px;
 		font-weight:900;
 	}
@@ -232,11 +232,12 @@
 		color:gray;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide>li:nth-child(3) {
+		height:65px;
 		margin-top:8px; 
 		font-size:17px;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide>li:nth-child(4) {
-		margin-top:5px; 
+		padding-bottom:25px;
 		font-size:17px;
 	}
 	section.section4_dongneLife_content div.content_response ul li button,
@@ -260,7 +261,7 @@
 		text-shadow: -1px 0 rgb(98,71,24), 0 1px rgb(98,71,24),  1px 0 rgb(98,71,24), 0 -1px rgb(98,71,24);
 	}
 	section.section6_dongneLife_content div.content_comment_write textarea {
-		width:75%;
+		width:650px;
 		height:30px;
 		font-size:18px;
 		padding:5px 5px;
@@ -297,9 +298,81 @@
 		padding-top:2px;
 		padding-left:88%;
 	}
+	div.content_comment_write ul>li {
+		display:inline-block;
+	}
+	div.content_comment_write>ul>li:first-child {
+		padding-bottom:10px;
+	}
 </style>
-
 <script>
+	$(document).ready(function(){
+		/** 데이터 로딩 시 댓글 전체 리스트 출력 **/
+		comment_list($("#bid").val());
+		
+		/** Ajax를 활용한 댓글 전체 리스트 출력 **/
+		function comment_list(bid){
+			$.ajax({
+				url:"comment_list_ajax_proc.do?bid="+bid,
+				success:function(result){	
+					//alert(result);
+					//JSON 형식으로 parsing
+					var jdata = JSON.parse(result);	//string객체 ->json객체
+
+					//2-1. DHTML을 이용하여 테이블 생성 및 출력
+					//결과물 출력
+					
+					var output="";
+					
+					for(var i in jdata.jlist){	//json객체로 받아야 reference가능
+						output +="<div class='content_comment' id='content_comment'>"
+						output += "<div class='commentMemberImg'>";
+						output += "<img src='images/mypage_bananaimg.jpg' class='commentMemberImg'>";
+						output += "</div>";
+						output += "<div class='commentMemberSide'>";
+						output += "<ul class='commentMemberSide'>";
+						
+						output += "<li>" + jdata.jlist[i].nickname + "</li>";
+						output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
+						output += "<li id='bcomment_area'>" + jdata.jlist[i].bcomment + "</li>";
+						output += "<li>";
+						output += "<a href='dongneLifeComment_update.do?brid=" + jdata.jlist[i].brid + "&rno=" + jdata.jlist[i].rno +"'><button type='button' id='commentUpdate'>수정</button></a>";
+						/* output += "<a id='commentUpdate' href='comment_update.do?brid=" + jdata.jlist[i].brid + "&bcomment=" + jdata.jlist[i].bcomment + "&rno=" + jdata.jlist[i].rno +"'><button type='button'>수정</button></a>" */
+						output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button'>삭제</button></a>";
+						
+						output += "</li>";
+						output += "</ul>";
+						output += "</div>";
+						output += "</div>";
+					}
+					
+					$("#section5_dongneLife_content").append(output);
+					
+					
+				}//success
+			});//ajax
+			
+		}//comment_list
+		
+		//수정 버튼 눌렸을 때
+		$("#commentUpdate").click(function(){
+			alert("fdlke");
+			$("#section5_dongneLife_content").load("dongneLifeComment_update.do");
+		});
+		
+		$("#comment_writeBtn").click(function(){
+			if($("#bcomment").val() == ""){
+				alert("댓글을 입력해주세요");
+				$("#bcomment").focus();
+				return false;
+			}else {
+				board_review_write_form.submit();
+			}
+		});
+	});
+</script>
+<script>
+
 	$(document).ready(function(){
 		$(".comment_deleteBtn").click(function(){
 			
@@ -324,6 +397,7 @@
 				    fitImagesInViewport:false
 				})
 		
+				
 	})
 </script>
 </head>
@@ -332,6 +406,7 @@
 	
 	<div class="dongnelife_content">
 		<section class="section1_dongneLife_content">
+		<input type="hidden" id="bid" value="${vo.bid }">
 			<div class="content_nav">
 				<ul>
 					<li><a href="dongneLife.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
@@ -387,47 +462,18 @@
 				</ul>
 			</div>
 		</section>
-		<section class="section5_dongneLife_content">
-			<div class="content_comment">
-				<div class="commentMemberImg">
-					<img src="images/mypage_bananaimg.jpg" class="commentMemberImg">
-				</div>
-				<div class="commentMemberSide">
-					<ul class="commentMemberSide">
-						<li>닉네임</li>
-						<li>반포동  / 29분 전</li>
-						<li>있어요</li>
-						<li>
-							<a href="#"><button type="button">공감하기</button></a>
-							<a href="#"><button type="button">답글쓰기</button></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="content_comment">
-				<div class="commentMemberImg">
-					<img src="images/mypage_bananaimg.jpg" class="commentMemberImg">
-				</div>
-				<div class="commentMemberSide">
-					<ul class="commentMemberSide">
-						<li>닉네임</li>
-						<li>서초동  / 1시간 전</li>
-						<li>몰라요</li>
-						<li>
-							<a href="#"><button type="button">공감하기</button></a>
-							<a href="#"><button type="button">답글쓰기</button></a>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<section class="section5_dongneLife_content" id="section5_dongneLife_content">
+		
 		</section>
 		<section class="section6_dongneLife_content">
+		<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }&mid=test12345" method=POST id="board_review_write_form"  enctype="multipart/form-data">
 			<div class="content_comment_write">
-				<a href="#"><img src="images/dongneLife_locate.png"><button type="button"></button></a>
-				<a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a>
-				<textarea placeholder="따뜻한 댓글을 입력해주세요 :)"></textarea>
-				<div><a href="#"><button class="comment_writeBtn">등록</button></a></div>
+				<ul>
+					<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
+					<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+				</ul>
 			</div>
+		</form>
 		</section>
 		<section class="section7_dongneLife_content">
 			

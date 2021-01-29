@@ -73,7 +73,7 @@ public class NeighborhoodController {
 	 */
 	@RequestMapping(value="/neighborStoreReview_list.do" , method=RequestMethod.GET)
 	public ModelAndView neighborhoodStoreReview_list(String sid) {
-		return (ModelAndView)shopReviewService.getList(sid);
+		return (ModelAndView)shopReviewService.getSelectList(sid);
 	}
 	
 	/**
