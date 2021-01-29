@@ -1,8 +1,11 @@
 package com.spring.service;
 
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.pReviewDAO;
 import com.banana.vo.ReviewVO;
@@ -24,8 +27,11 @@ public class MypageReviewServiceImpl implements BananaService{
 	
 	
 	public Object getList() {
-		
-		return "";
+		ModelAndView mv = new ModelAndView();
+		ArrayList<ReviewVO> list =reviewDAO.getReviewList();
+		mv.addObject("list", list);
+		mv.setViewName("mypage/mypage_review");
+		return mv;
 	};
 
 	public Object getContent(Object id) {

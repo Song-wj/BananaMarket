@@ -6,7 +6,7 @@
 
 <mapper namespace="mapper.preview">
 	
-	<select id="buyreviewinsert" parameterType="com.banana.vo.ReviewVO">
+	<insert id="buyreviewinsert" parameterType="com.banana.vo.ReviewVO">
 		insert into banana_buy_review values
 		<choose>
   			<when test="rfile != null">
@@ -16,9 +16,9 @@
   				('BR_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
   			</otherwise>
   		</choose>
-	</select>
+	</insert>
 	
-	<select id="sellreviewinsert" parameterType="com.banana.vo.ReviewVO">
+	<insert id="sellreviewinsert" parameterType="com.banana.vo.ReviewVO">
 		insert into banana_sell_review values
 		<choose>
   			<when test="rfile != null">
@@ -28,5 +28,18 @@
   				('SR_'||sqe_banana_sell_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
   			</otherwise>
   		</choose>
-	</select>
+	</insert>
+	
+	<select id="getlist" resultType="com.banana.vo.ReviewVO" >
+	select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
+	from banana_member m ,
+		(select rid,pid,mid,score,review, rfile, rsfile, rdate
+		  from banana_buy_review
+		  union
+		  select rid,pid,mid,score,review, rfile, rsfile, sdate
+		  from banana_sell_review )r
+		where m.mid= r.mid 
+		order by rdate desc
+	</select> 
+	
 </mapper>

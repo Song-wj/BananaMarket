@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,6 +95,7 @@
 	.mypage_review .review_seller_table_area .review_seller_table tr td,
 	.mypage_review .review_buyer_table_area .review_buyer_table tr td {
 		font-size: 2.1rem;
+		
 	}
 	td.review{
 		margin-top:10px;
@@ -114,21 +116,34 @@
         font-weight:550;
         font-size:20px;
 	}
-	td.review>label:nth-child(3){
+	/* td.review>label:nth-child(3){
 		margin-left:6px;
         font-size:15px;
         font-weight:500;
         position: relative;
         top:-10px;
-	}
+	} */
 	td.review>label.review{
-		margin-left:-70px;
 		font-weight:normal;
+		width:650px;
+		overflow:hidden;
+      	text-overflow:ellipsis;
+      	display: -webkit-box;
+   	 	-webkit-line-clamp: 3; /* 라인수 */
+        -webkit-box-orient: vertical;
+        word-wrap:break-word; 
+        line-height: 1.2em;
+        height: 3.6em;
+		border:1px solid red;
+		text-align:left;
 	}
 	td.review>label.date{
 		font-size:15px;
-		margin-left:-70px;
 		color:lightgray;
+	}
+	section.review_all_table_area{
+		height:700px;
+		overflow:auto;
 	}
 </style>
 </head>
@@ -148,15 +163,23 @@
 				<!-- <tr>
 					<td style="padding: 230px 0; color: #ccc;">전체후기가 없습니다.</td>
 				</tr> -->
+				<c:forEach var="vo" items="${list }">
 				<tr>
 					<td class="review">
 						<img src="images/banana.jpg">
-						<label>히히</label>
-						<label>이의동</label><div></div>
-						<label class="review">내용</label><div></div>
-						<label class="date">30초전</label>
+						<label>${vo.mid }</label>
+						<label>${vo.maddr }</label>
 					</td>
-				</tr>
+				<tr>
+					<td class="review" colspan="3">
+						<label class="review">${vo.review }</label>
+					</td>
+				<tr>
+					<td class="review">	
+						<label class="date">${vo.rdate }</label>
+					</td>
+				</tr>	
+				</c:forEach>
 			</table>
 			</div>
 		</section>

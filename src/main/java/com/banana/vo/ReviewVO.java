@@ -1,11 +1,24 @@
 package com.banana.vo;
 
 public class ReviewVO {
-	 String rid, mid, pid, review, rfile, rsfile, date ;
+	 String rid, mid, pid, review, rfile, rsfile, rdate ;
 	 String score;
 	 String param;
-	
+	 String maddr;
 	 
+	
+	 public String getScore() {
+		return score;
+	}
+	public void setScore(String score) {
+		this.score = score;
+	}
+	public String getMaddr() {
+		return maddr;
+	}
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
 	public String getParam() {
 		return param;
 	}
@@ -23,13 +36,6 @@ public class ReviewVO {
 	}
 	public void setPid(String pid) {
 		this.pid = pid;
-	}
-	
-	public String getscore() { 
-		  return score;
-    }
-	public void setscore(String score) { 
-		this.score = score; 
 	}
 	
 	public String getRid() {
@@ -56,11 +62,11 @@ public class ReviewVO {
 	public void setRsfile(String rsfile) {
 		this.rsfile = rsfile;
 	}
-	public String getDate() {
-		return date;
+	public String getRdate() {
+		return rdate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
 	}
 	
 	

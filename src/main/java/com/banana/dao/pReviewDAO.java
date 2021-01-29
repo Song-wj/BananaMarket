@@ -1,5 +1,8 @@
 package com.banana.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +17,7 @@ public class pReviewDAO {
 	@Autowired
 	private static String namespace ="mapper.preview";
 	
-	
+	// 리뷰 등록
 	public int reviewInsert(ReviewVO vo) {	
 		
 		if(vo.getParam().equals("구매자리뷰")) {
@@ -22,5 +25,10 @@ public class pReviewDAO {
 		}else {
 			return sqlSession.insert(namespace+".sellreviewinsert" , vo);
 		}
+	}
+	// 리스트 불러오기
+	public ArrayList<ReviewVO> getReviewList(){
+		List<ReviewVO> list =sqlSession.selectList(namespace+".getlist");
+		return (ArrayList<ReviewVO>)list ; 
 	}
 }

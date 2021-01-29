@@ -229,8 +229,9 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
-	public String mypage_review() {
-		return "mypage/mypage_review";
+	public ModelAndView mypage_review() {
+		return (ModelAndView)MypageReviewService.getList();
+		
 	}
 
 }
