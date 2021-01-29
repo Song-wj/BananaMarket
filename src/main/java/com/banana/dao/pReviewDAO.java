@@ -17,6 +17,10 @@ public class pReviewDAO {
 	
 	public int reviewInsert(ReviewVO vo) {	
 		
-		return sqlSession.insert(namespace+".insert" , vo);
+		if(vo.getParam().equals("구매자리뷰")) {
+			return sqlSession.insert(namespace+".buyreviewinsert" , vo);
+		}else {
+			return sqlSession.insert(namespace+".sellreviewinsert" , vo);
+		}
 	}
 }

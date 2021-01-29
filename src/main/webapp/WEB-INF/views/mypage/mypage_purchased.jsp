@@ -47,9 +47,7 @@
 	div.mypage_purchased table.mypage_table td.manner_grade{
 		text-align:center;
 	}
-	div.mypage_purchased table.mypage_table td.manner_grade select{
-		width:70px;
-	}
+	
 	div.mypage_purchased table.mypage_table td.tdimg {
 		width:10px;
 	}
@@ -105,15 +103,8 @@
 					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
 					<td>상품명</td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
-						매너점수를 주세요~~~<br>
-						<select name="mannerGrade" onchange="showConfirm()">
-							<option value="none">선택</option>
-							<option value="3">😮</option>
-							<option value="5">😆</option>
-							<option value="4">🙂</option>
-							<option value="2">😥</option>
-							<option value="1">😡</option>
-						</select>
+					
+						
 					</td>
 				</tr>
 				<tr>

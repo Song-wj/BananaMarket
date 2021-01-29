@@ -17,7 +17,7 @@ public class MypageReviewServiceImpl implements BananaService{
 		String path="";
 		int val = reviewDAO.reviewInsert((ReviewVO)vo);
 		if(val !=0) {
-			path="/mypage/mypage";
+			path="redirect:/mypage.do";
 		}
 		return path;
 	}

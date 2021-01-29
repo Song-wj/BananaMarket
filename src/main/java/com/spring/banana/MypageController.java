@@ -177,7 +177,15 @@ public class MypageController {
 	public String mypage_contract() {
 		return "mypage/mypage_contract";
 	}
-	
+	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
+	public String mypage_contract_review() {
+		return "mypage/mypage_contract_review";
+	}
+	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
+	public String contract_reivew_write_proc(ReviewVO vo) {
+		vo.setParam("판매자리뷰");
+		return (String)MypageReviewService.insert(vo); 
+	}
 	/**
 	 * 마이페이지 - 구매내역
 	 * @return
@@ -193,6 +201,7 @@ public class MypageController {
 	}
 	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
 	public String purchase_reivew_write_proc(ReviewVO vo) {
+		vo.setParam("구매자리뷰");
 		return (String)MypageReviewService.insert(vo); 
 	}
 	

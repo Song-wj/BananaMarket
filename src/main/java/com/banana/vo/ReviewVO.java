@@ -3,9 +3,16 @@ package com.banana.vo;
 public class ReviewVO {
 	 String rid, mid, pid, review, rfile, rsfile, date ;
 	 String score;
+	 String param;
 	
 	 
-	 public String getMid() {
+	public String getParam() {
+		return param;
+	}
+	public void setParam(String param) {
+		this.param = param;
+	}
+	public String getMid() {
 		return mid;
 	}
 	public void setMid(String mid) {

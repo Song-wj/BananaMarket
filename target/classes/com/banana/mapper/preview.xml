@@ -6,14 +6,26 @@
 
 <mapper namespace="mapper.preview">
 	
-	<select id="insert" parameterType="com.banana.vo.ReviewVO">
+	<select id="buyreviewinsert" parameterType="com.banana.vo.ReviewVO">
 		insert into banana_buy_review values
 		<choose>
   			<when test="rfile != null">
-  				('R_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},#{rfile},#{rsfile},sysdate)
+  				('BR_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},#{rfile},#{rsfile},sysdate)
   			</when>
   			<otherwise>
-  				('R_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
+  				('BR_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
+  			</otherwise>
+  		</choose>
+	</select>
+	
+	<select id="sellreviewinsert" parameterType="com.banana.vo.ReviewVO">
+		insert into banana_sell_review values
+		<choose>
+  			<when test="rfile != null">
+  				('SR_'||sqe_banana_sell_review.nextval,#{pid},#{mid},#{score},#{review},#{rfile},#{rsfile},sysdate)
+  			</when>
+  			<otherwise>
+  				('SR_'||sqe_banana_sell_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
   			</otherwise>
   		</choose>
 	</select>
