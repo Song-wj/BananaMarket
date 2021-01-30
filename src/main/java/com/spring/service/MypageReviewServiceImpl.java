@@ -14,7 +14,8 @@ public class MypageReviewServiceImpl implements BananaService {
 
 	@Autowired
 	private pReviewDAO reviewDAO;
-
+	
+	@Override
 	public Object insert(Object vo) {
 
 		String path = "";
@@ -24,7 +25,7 @@ public class MypageReviewServiceImpl implements BananaService {
 		}
 		return path;
 	}
-
+	@Override
 	public Object getList() {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<ReviewVO> list = reviewDAO.getReviewList();
@@ -34,6 +35,15 @@ public class MypageReviewServiceImpl implements BananaService {
 		mv.addObject("blist", blist);
 		mv.addObject("slist", slist);
 		mv.setViewName("mypage/mypage_review");
+		return mv;
+	};
+	
+	public Object getMyReviewList(String mid) {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<ReviewVO> list = reviewDAO.getMyReviewList(mid);
+		mv.addObject("list", list);
+	
+		mv.setViewName("mypage/mypage_MyReview");
 		return mv;
 	};
 	/*
@@ -54,20 +64,20 @@ public class MypageReviewServiceImpl implements BananaService {
 	 * 
 	 * return gson.toJson(jobj); };
 	 */
-
+	@Override
 	public Object getContent(Object id) {
 		return "";
 	};
-
+	@Override
 	public Object update(Object vo) {
 		return "";
 	};
-
+	@Override
 	public Object getUpdateContent(Object id) {
 		return "";
 
 	};
-
+	@Override
 	public Object delete(Object id) {
 		return "";
 	};

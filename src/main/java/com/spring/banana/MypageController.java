@@ -1,7 +1,6 @@
 package com.spring.banana;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,8 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
-import com.spring.service.BananaService;
 import com.spring.service.DongneServiceImpl;
+import com.spring.service.MypageReviewServiceImpl;
 import com.spring.service.ProductService;
 
 @Controller
@@ -24,8 +23,10 @@ public class MypageController {
 	
 	
 	@Autowired
-	@Qualifier("mypageReviewService")
-	private BananaService MypageReviewService ;
+
+	private MypageReviewServiceImpl MypageReviewService ;
+	
+	
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -228,10 +229,18 @@ public class MypageController {
 	 * 마이페이지 - 내 댓글
 	 * @return
 	 */
-	
+	// 전체 리뷰
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
 	public ModelAndView mypage_review() {
 		return (ModelAndView)MypageReviewService.getList();
+		
+	}
+	
+	// 내리뷰
+	@RequestMapping(value="/mypage_myReview.do", method=RequestMethod.GET)
+	public ModelAndView mypage_myRreview() {
+		String mid ="aa";
+		return (ModelAndView)MypageReviewService.getMyReviewList(mid);
 		
 	}
 	/*

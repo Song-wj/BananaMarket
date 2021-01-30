@@ -182,7 +182,7 @@
 <body>
 	<div class="mypage_review">
 		<section class="review_change_area">
-			<div class="review_title">받은 거래 후기</div>
+			<div class="review_title">전체 거래 후기</div>
 			<div>
 				<button type="button" class="review_all">전체후기</button>
 				<button type="button" class="review_seller">판매자 후기</button>
