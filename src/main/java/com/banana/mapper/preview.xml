@@ -31,15 +31,29 @@
 	</insert>
 	
 	<select id="getlist" resultType="com.banana.vo.ReviewVO" >
-	select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
-	from banana_member m ,
-		(select rid,pid,mid,score,review, rfile, rsfile, rdate
-		  from banana_buy_review
-		  union
-		  select rid,pid,mid,score,review, rfile, rsfile, sdate
-		  from banana_sell_review )r
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
+		from banana_member m ,
+			(select rid,pid,mid,score,review, rfile, rsfile, rdate
+			  from banana_buy_review
+			  union
+			  select rid,pid,mid,score,review, rfile, rsfile, sdate
+			  from banana_sell_review )r
+			where m.mid= r.mid 
+			order by rdate desc
+	</select> 
+	
+	
+	<select id="getbuylist" resultType="com.banana.vo.ReviewVO" >
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
+		from banana_member m , banana_buy_review r
 		where m.mid= r.mid 
 		order by rdate desc
 	</select> 
 	
+	<select id="getselllist" resultType="com.banana.vo.ReviewVO" >
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, sdate, maddr
+		from banana_member m , banana_sell_review r
+		where m.mid= r.mid 
+		order by sdate desc
+	</select> 
 </mapper>

@@ -31,4 +31,14 @@ public class pReviewDAO {
 		List<ReviewVO> list =sqlSession.selectList(namespace+".getlist");
 		return (ArrayList<ReviewVO>)list ; 
 	}
+	// 판매자 리뷰
+	public ArrayList<ReviewVO> getSellReviewList(){
+		List<ReviewVO> list =sqlSession.selectList(namespace+".getselllist");
+		return (ArrayList<ReviewVO>)list ; 
+	}
+	// 구매자 리뷰
+	public ArrayList<ReviewVO> getBuyReviewList(){
+		List<ReviewVO> list =sqlSession.selectList(namespace+".getbuylist");
+		return (ArrayList<ReviewVO>)list ; 
+	}
 }

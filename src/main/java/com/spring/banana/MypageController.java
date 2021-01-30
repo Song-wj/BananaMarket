@@ -228,10 +228,18 @@ public class MypageController {
 	 * 마이페이지 - 내 댓글
 	 * @return
 	 */
+	
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
 	public ModelAndView mypage_review() {
 		return (ModelAndView)MypageReviewService.getList();
 		
 	}
-
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/mypage_review.do", method=RequestMethod.GET) public
+	 * String mypage_review() { return (String)MypageReviewService.getList();
+	 * 
+	 * }
+	 */
 }
