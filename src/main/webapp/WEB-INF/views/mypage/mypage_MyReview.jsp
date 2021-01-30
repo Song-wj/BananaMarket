@@ -37,7 +37,6 @@
 		color: #ccc;
 		border-bottom: 1px solid #ccc;
 		font-weight: bold;
-		margin-left:-150px;
 	}
 	
 	.review_change_area div .review_all {
@@ -62,7 +61,6 @@
 	.mypage_review .review_all_table_area .review_all_table{
 		border-bottom: 1px solid #ccc;
 		width: 650px;
-		margin-left:-150px;
 	}
 	
 	.mypage_review .review_all_table_area .review_all_table tr td {
@@ -101,14 +99,13 @@
       	text-overflow:ellipsis;
 		border:1px solid red;
 		text-align:left;
-		font-size: 20px;
-		
+		font-size: 20px;	
 	}
 	
 	td.review>label.date{
 		font-size:15px;
-		color:lightgray
-		/* margin-right:330px;	 */
+		color:lightgray;
+		margin-right:30px;	
 	}
 	section.review_all_table_area{
 		height:700px;
@@ -124,7 +121,8 @@
 		padding:10px 10px;
 		font-size:13px;
 		font-weight:bold;
-
+		display:inline-block;
+		vertical-align:text-top;
 	}
 
 	
