@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.service.MemberService;
@@ -21,6 +22,28 @@ public class AdminController {
 	
 	@Autowired
 	DongneServiceImpl dongneService;
+	
+	@ResponseBody
+	@RequestMapping(value = "/dongne_subject_delete_proc.do", method = RequestMethod.GET)
+	public String dongne_subject_delete_proc(String bsid) {
+		return dongneService.deleteSubjectProc(bsid);
+	}
+	
+	@RequestMapping(value = "/dongne_subject_update_proc.do", method = RequestMethod.POST)
+	public String dongne_subject_update_proc(dongneSubjectVO vo, HttpServletRequest request) {
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "\\resources\\upload\\";
+		System.out.println(path1 + path2);
+		
+		vo.setSavepath(path1 + path2);
+		
+		return dongneService.updateSubjectProc(vo);
+	}
+	
+	@RequestMapping(value = "/boardSubjectManageUpdate.do", method = RequestMethod.GET)
+	public ModelAndView dongne_subject_update(String bsid) {
+		return dongneService.updateSubject(bsid);
+	}
 	
 	@RequestMapping(value = "/dongne_subject_write_proc.do", method = RequestMethod.POST)
 	public String dongne_subject_write_proc(dongneSubjectVO vo, HttpServletRequest request) {

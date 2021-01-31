@@ -229,19 +229,9 @@
 				alert("주제 분류를 선택해주세요.");
 				return false;
 			}else {
-				dongne_subject.submit();
+				dongne_subject_update.submit();
 			} 
 		});
-		
-		$("#subjectListBtn").click(function(){
-			if($(".subject-list").css("display") == 'none') {
-				$(".subject-list").show();
-				$(".subject-list").slideDown();
-			} else {
-				$(".subject-list").slideUp();
-			}
-		});
-		
 	});
 	
 	function handleImgFileSelect(e) {
@@ -261,26 +251,6 @@
 			reader.readAsDataURL(f);
 		});
 	}
-	
-	function subjectDel(id) {
-		var chk = confirm("정말로 삭제하시겠습니까?");
-		if(chk) {
-			$.ajax({
-				url: "dongne_subject_delete_proc.do?bsid="+id,
-				type: "GET",
-				success: function(result) {
-					if(result) {
-						alert("삭제가 완료되었습니다.");
-						location.reload();
-					} else {
-						alert("삭제에 실패하였습니다.");
-					}
-				}
-			});
-		} else {
-			alert("삭제를 취소합니다.");			
-		}
-	}
 </script>
 </head>
 <body>
@@ -289,32 +259,14 @@
 	<div class="join">
 		<section class="section_join">
 			<div>
-				<form name="dongne_subject" action="dongne_subject_write_proc.do" method="post" 
+				<form name="dongne_subject_update" action="dongne_subject_update_proc.do" method="post" 
 				class="join" enctype="multipart/form-data">
+				<input type="hidden" name="bsid" value="${ vo.bsid }">
 				<h1>동네생활 주제 관리</h1>
 				<ul>
 					<li>
 						<div id="inputMain" style="text-align: center;">
-							<button type="button" class="join_btn_style" id="subjectListBtn" style="margin-bottom: 20px;">목록</button>
-							<div class="subject-list" style="display:none;">
-								<table>
-									<tr class="subject-list-head">
-										<th>동네생활 주제</th>
-										<th>주제 분류</th>
-										<th>수정</th>
-										<th>삭제</th>
-									</tr>
-								<c:forEach var="vo" items="${ list }">
-									<tr class="subject-list-body">
-										<td>${ vo.bstitle }</td>
-										<td>${ vo.bstopic }</td>
-										<td><button type="button" onclick="location.href='boardSubjectManageUpdate.do?bsid=${ vo.bsid }'">수정</button></td>
-										<td><button type="button" id="" onclick="subjectDel('${vo.bsid}')">삭제</button></td>
-									</tr>
-								</c:forEach>
-								</table>
-							</div>
-							<img src="http://localhost:9000/banana/images/bananamarket_logo.jpg"
+							<img src="http://localhost:9000/banana/resources/upload/${ vo.bssfile }"
 									id="img" width="400px" height="300px" style="border:2px solid #FFE500;
 									padding: 30px; border-radius: 10px"><br>
 							<label for="input_img">이미지 추가</label>
@@ -325,20 +277,21 @@
 						<label>동네생활 주제</label>
 					</li>
 					<li>
-						<input type="text" name="bstitle" class="f1" id="bstitle" placeholder="예) 우리동네 질문">
+						<input type="text" name="bstitle" class="f1" id="bstitle" value="${ vo.bstitle }">
 					</li>
 					<li>
 						<label>주제 분류</label>
 					</li>
 					<li>
 						<select name="bstopic" class="storekind" id="bstopic">
+							<option style="color:blue;"value="${ vo.bstopic }">${ vo.bstopic }</option>
 							<option value="select">선택해주세요</option>
 							<option value="동네 기본주제">동네 기본주제</option>
 							<option value="관심주제">관심주제</option>
 						</select>
 					</li>
 					<li>
-						<button type="button" class="join_btn_style" id="subjectEnrollBtn">등록</button>
+						<button type="button" class="join_btn_style" id="subjectEnrollBtn">수정</button>
 					</li>
 				</ul>
 				</form>

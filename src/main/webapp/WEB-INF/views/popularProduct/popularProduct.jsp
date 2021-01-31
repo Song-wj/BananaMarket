@@ -166,9 +166,10 @@
 		<div class ="product">
 			<c:forEach var="vo"  items="${list}">
 			<div class="plist">
-				 <c:if test="${vo.psfile ne null }"> 
+				<c:if test="${vo.psfile ne null }"> 
 					<a href="productContent.do?pid=${vo.pid}">
-                        <img src="http://localhost:9000/banana/resources/upload/${vo.psfile}">
+                         <img src="http://localhost:9000/banana/resources/upload/${vo.psfile }">
+						</a> 
                  </c:if>      
 					<label class="ptitle">${vo.ptitle }</label>
 					<label class="pprice">${vo.pprice }</label>

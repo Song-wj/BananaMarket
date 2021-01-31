@@ -1,9 +1,15 @@
 package com.spring.banana;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.ReviewVO;
@@ -153,6 +159,16 @@ public class MypageController {
 	}
 	
 	/**
+	 * 마이페이지 - 판매내역 - 삭제
+	 * @return
+	 */
+	@RequestMapping(value ="/deletePage.do", method = RequestMethod.GET)
+	public String deletePage(String pid) {	
+		return (String)productService.delete(pid);
+	}
+	
+	
+	/**
 	 * 마이페이지 - 판매내역 - 수정
 	 * @param pid
 	 * @return
@@ -166,8 +182,16 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/updatePage_proc.do", method=RequestMethod.POST)
-	public String updatePage_proc(productVO vo) {
-		return (String)productService.update(vo);
+	public ModelAndView updatePage_proc(productVO vo,  MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {
+			
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		
+		return (ModelAndView)productService.update(vo);
 	}
 	
 	/**
@@ -175,8 +199,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_contract.do", method=RequestMethod.GET)
-	public String mypage_contract() {
-		return "mypage/mypage_contract";
+	public ModelAndView mypage_contract() {
+		return (ModelAndView)productService.getSellList();
 	}
 	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
 	public String mypage_contract_review() {

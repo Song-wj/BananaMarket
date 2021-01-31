@@ -31,14 +31,30 @@
 		cursor:pointer;
 	}
 </style>
+<script>
+	$(document).ready(function(){
+		$("#btn_delete").click(function(){
+			showConfirm();
+		});
+	
+		function showConfirm() {
+		if(confirm("정말 삭제하시겠습니까?")){
+				 window.location.href="mypage.do"
+			} 
+		};
+	
+});	
+</script>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
 	<div class="content">
-		<h1>등록 상품 삭제하기</h1>
-		<img src="images/deleteimg.png" class="delete_img"><br>
-		<a href="deletePage_proc.do"><button type="button" class="pdelete_btn">삭제하기</button></a>
-		<a href="mypage.do"><button type="button" class="plist_btn">목록으로</button></a>
+		<form name="product_deleteForm" action="mypage.do" method="get" class="product_delete">
+			<h1>등록 상품 삭제하기</h1>
+			<img src="images/deleteimg.png" class="delete_img"><br>
+			<button type="submit" class="pdelete_btn" id="pdelete_btn">삭제하기</button>
+			<a href="mypage.do"><button type="button" class="plist_btn">목록으로</button></a>
+		</form>	
 	</div>
 <jsp:include page="../footer.jsp" />
 </body>

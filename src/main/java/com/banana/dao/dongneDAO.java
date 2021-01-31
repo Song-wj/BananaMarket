@@ -7,6 +7,44 @@ import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
 	
+	public boolean deleteSubjectProc(String bsid) {
+		boolean result = false;
+		
+		try {
+			String sql = "delete from banana_board_subject where bsid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, bsid);
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public boolean updateSubjectProc(dongneSubjectVO vo) {
+		boolean result = false;
+		try {
+			String sql = "update banana_board_subject set bstitle=?, bstopic=?, bsfile=?, bssfile=? where bsid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, vo.getBstitle());
+			pstmt.setString(2, vo.getBstopic());
+			pstmt.setString(3, vo.getBsfile());
+			pstmt.setString(4, vo.getBssfile());
+			pstmt.setString(5, vo.getBsid());
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	public dongneSubjectVO getSubjectContent(String bsid) {
 		dongneSubjectVO vo = new dongneSubjectVO();
 		

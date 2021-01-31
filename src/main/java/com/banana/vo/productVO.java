@@ -1,18 +1,69 @@
 package com.banana.vo;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class productVO {
-	String pid, mid, ptitle, pcategory , pprice, pcontent, plike, pchat, pdate, pchk;
-	String pfile, psfile, savepath, pimg1, psimg1, pimg2, psimg2, pimg3, psimg3, pimg4, psimg4, pimg5, psimg5;
+	String pid, mid, ptitle, pcategory , pprice, pcontent, plike, pchat, pdate, pchk, buy_mid;
+	String pfile, psfile, savepath;
 	String maddr, nickname, score;
-	CommonsMultipartFile[] file_list;
+	String file, sfile, cancel_file;
+	List<MultipartFile> list ;
+	//CommonsMultipartFile[] file_list;
 	
-	
+	/*
+	public CommonsMultipartFile[] getFile_list() {
+		return file_list;
+	}
+	public void setFile_list(CommonsMultipartFile[] file_list) {
+		this.file_list = file_list;
+	}
+	*/
 	
 	
 	public String getMaddr() {
 		return maddr;
+	}
+
+	public String getBuy_mid() {
+		return buy_mid;
+	}
+
+	public void setBuy_mid(String buy_mid) {
+		this.buy_mid = buy_mid;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	public String getSfile() {
+		return sfile;
+	}
+
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
+
+	public String getCancel_file() {
+		return cancel_file;
+	}
+
+	public void setCancel_file(String cancel_file) {
+		this.cancel_file = cancel_file;
+	}
+
+	public List<MultipartFile> getList() {
+		return list;
+	}
+
+	public void setList(List<MultipartFile> list) {
+		this.list = list;
 	}
 
 	public void setMaddr(String maddr) {
@@ -35,86 +86,6 @@ public class productVO {
 		this.score = score;
 	}
 
-	public String getPimg1() {
-		return pimg1;
-	}
-
-	public void setPimg1(String pimg1) {
-		this.pimg1 = pimg1;
-	}
-
-	public String getPsimg1() {
-		return psimg1;
-	}
-
-	public void setPsimg1(String psimg1) {
-		this.psimg1 = psimg1;
-	}
-
-	public String getPimg2() {
-		return pimg2;
-	}
-
-	public void setPimg2(String pimg2) {
-		this.pimg2 = pimg2;
-	}
-
-	public String getPsimg2() {
-		return psimg2;
-	}
-
-	public void setPsimg2(String psimg2) {
-		this.psimg2 = psimg2;
-	}
-
-	public String getPimg3() {
-		return pimg3;
-	}
-
-	public void setPimg3(String pimg3) {
-		this.pimg3 = pimg3;
-	}
-
-	public String getPsimg3() {
-		return psimg3;
-	}
-
-	public void setPsimg3(String psimg3) {
-		this.psimg3 = psimg3;
-	}
-
-	public String getPimg4() {
-		return pimg4;
-	}
-
-	public void setPimg4(String pimg4) {
-		this.pimg4 = pimg4;
-	}
-
-	public String getPsimg4() {
-		return psimg4;
-	}
-
-	public void setPsimg4(String psimg4) {
-		this.psimg4 = psimg4;
-	}
-
-	public String getPimg5() {
-		return pimg5;
-	}
-
-	public void setPimg5(String pimg5) {
-		this.pimg5 = pimg5;
-	}
-
-	public String getPsimg5() {
-		return psimg5;
-	}
-
-	public void setPsimg5(String psimg5) {
-		this.psimg5 = psimg5;
-	}
-
 	public String getPfile() {
 		return pfile;
 	}
@@ -129,14 +100,6 @@ public class productVO {
 
 	public void setPsfile(String psfile) {
 		this.psfile = psfile;
-	}
-	
-	public CommonsMultipartFile[] getFile_list() {
-		return file_list;
-	}
-
-	public void setFile_list(CommonsMultipartFile[] file_list) {
-		this.file_list = file_list;
 	}
 
 	public String getSavepath() {
