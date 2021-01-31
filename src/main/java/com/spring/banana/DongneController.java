@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,8 @@ public class DongneController  {
 	
 	
 	@Autowired
-	private BananaService bananaService;
+	@Qualifier("dongneService")
+	private BananaService dongneService;
 	
 	/**
 	 * 동네생활 - 글정보 삭제화면
@@ -30,7 +32,7 @@ public class DongneController  {
 	 */
 	@RequestMapping(value ="/dongneLife_delete.do", method = RequestMethod.GET)
 	public String dongneLife_delete(String bid) {	
-		return (String)bananaService.delete(bid);
+		return (String)dongneService.delete(bid);
 	}
 	
 	/**
@@ -40,7 +42,7 @@ public class DongneController  {
 	@RequestMapping(value ="/dongneLife_update.do", method = RequestMethod.GET)
 	public ModelAndView dongneLife_update(String bid) {
 		
-		return (ModelAndView)bananaService.getUpdateContent(bid);
+		return (ModelAndView)dongneService.getUpdateContent(bid);
 	}
 	
 	@RequestMapping(value ="/dongneLife_update_proc.do", method = RequestMethod.POST)
@@ -55,7 +57,7 @@ public class DongneController  {
 		 vo.setSavepath(path1+path2);
 		 vo.setList(fileList);
 		
-		return (ModelAndView) bananaService.update(vo);
+		return (ModelAndView) dongneService.update(vo);
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class DongneController  {
 	@RequestMapping(value ="/dongneLife_content.do", method = RequestMethod.GET)
 	public ModelAndView dongneLife_content(String bid) {
 	
-		return (ModelAndView)bananaService.getContent(bid);
+		return (ModelAndView)dongneService.getContent(bid);
 	}
 	
 	/**
@@ -88,7 +90,7 @@ public class DongneController  {
 		
 		 vo.setSavepath(path1+path2);
 		 vo.setList(fileList);
-		return (String) bananaService.insert(vo);
+		return (String) dongneService.insert(vo);
 	}
 
 	/**
@@ -98,7 +100,7 @@ public class DongneController  {
 	@RequestMapping(value ="/dongneLife.do", method = RequestMethod.GET)
 	public ModelAndView dongnelife() {
 		
-		return (ModelAndView)bananaService.getList();
+		return (ModelAndView)dongneService.getList();
 	}
 	
 	

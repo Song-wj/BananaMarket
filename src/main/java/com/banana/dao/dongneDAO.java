@@ -2,10 +2,114 @@ package com.banana.dao;
 
 import java.util.ArrayList;
 
+import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
+	
+	public boolean deleteSubjectProc(String bsid) {
+		boolean result = false;
+		
+		try {
+			String sql = "delete from banana_board_subject where bsid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, bsid);
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public boolean updateSubjectProc(dongneSubjectVO vo) {
+		boolean result = false;
+		try {
+			String sql = "update banana_board_subject set bstitle=?, bstopic=?, bsfile=?, bssfile=? where bsid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, vo.getBstitle());
+			pstmt.setString(2, vo.getBstopic());
+			pstmt.setString(3, vo.getBsfile());
+			pstmt.setString(4, vo.getBssfile());
+			pstmt.setString(5, vo.getBsid());
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public dongneSubjectVO getSubjectContent(String bsid) {
+		dongneSubjectVO vo = new dongneSubjectVO();
+		
+		try {
+			String sql = "select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, bsid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				vo.setBsid(rs.getString(1));
+				vo.setBstitle(rs.getString(2));
+				vo.setBstopic(rs.getString(3));
+				vo.setBssfile(rs.getString(4));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	public ArrayList<dongneSubjectVO> getDongneSubject() {
+		ArrayList<dongneSubjectVO> list = new ArrayList<dongneSubjectVO>();
+		
+		try {
+			String sql = "select bsid, bstitle, bstopic, bssfile from banana_board_subject";
+			getPreparedStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dongneSubjectVO vo = new dongneSubjectVO();
+				vo.setBsid(rs.getString(1));
+				vo.setBstitle(rs.getString(2));
+				vo.setBstopic(rs.getString(3));
+				vo.setBssfile(rs.getString(4));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
+	public boolean writeSubject(dongneSubjectVO vo) {
+		boolean result = false;
+		
+		try {
+			String sql = "insert into banana_board_subject values('bs_'||SQE_BANANA_BOARD_SUBJECT.NEXTVAL,"
+					+ "?,?,?,?)";
+			getPreparedStatement(sql);
+			pstmt.setString(1, vo.getBstitle());
+			pstmt.setString(2, vo.getBstopic());
+			pstmt.setString(3, vo.getBsfile());
+			pstmt.setString(4, vo.getBssfile());
+			
+			int cnt = pstmt.executeUpdate();
+			if(cnt != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	// 동네생활 글쓰기
 	public boolean insertBoard(dongneVO vo) {
 		boolean result = false;
