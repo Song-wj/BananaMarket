@@ -161,7 +161,7 @@
 		<form name="purchase_reivew_form" action="purchase_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
 			<input type="hidden" name="pid" value="p_1">	
-			<input type="hidden" name="mid" value="aa">
+			<input type="hidden" name="mid" value="qqq123">
 			<div class="write_nav">
 				<ul>				
 					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>

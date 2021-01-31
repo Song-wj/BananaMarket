@@ -10,6 +10,11 @@
 <script src="http://localhost:9000/banana//js/jqbar.js"></script>
 <script>
 	$(document).ready(function () {
+		var message = "${msg}";
+		if(message != ""){
+			alert(message);
+		}
+		
 		$('#mannerbar').jqbar({ 
 			label: '', 
 			value: 36.5, 
@@ -69,6 +74,8 @@
 		});
 		
 	});
+	
+	
 </script>
 <style>
 	div.mypage_mainDiv {

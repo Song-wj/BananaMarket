@@ -116,8 +116,8 @@
 
 <script>
 	$(document).ready(function(){
-		
-		$("#contract_review_btn").click(function(){
+		$("#mannerGrade").val("${vo.score}");
+		$("#update_myReview_btn").click(function(){
 			if($("#mannerGrade").val() == "none"){
 				alert("매너점수를 선택해주세요");
 				
@@ -125,7 +125,7 @@
 	            alert("리뷰를 작성해주세요");
 	            $("#breview").focus();  
 	         }else{
-	        	 contract_reivew_form.submit();
+	        	 update_myReivew_form.submit();
 	         }
 	      });
 	      
@@ -158,22 +158,21 @@
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
-		<form name="contract_reivew_form" action="contract_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
+		<form name="update_myReivew_form" action="update_myReview_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
-			<input type="hidden" name="pid" value="p_1">	
-			<input type="hidden" name="mid" value="qqq123">
+			<input type="hidden" name="rid" value="${vo.rid }">	
 			<div class="write_nav">
 				<ul>				
 					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li><label>판매상품 리뷰</label></li>
-					<li><button type="submit" id="contact_review_btn">완료</button></li>
+					<li><label>리뷰 수정</label></li>
+					<li><button type="submit" id="update_myReview_btn">완료</button></li>
 				</ul>
 			</div>    
 		</section>
 		<section class="section2_dongneLife_write">
 			<div class="write_topic" id="write_topic">
 			 	<label>매너점수를 주세요</label><br>
-						<select  name="score" onchange="showConfirm()" id="mannerGrade">
+						<select  name="score" onchange="showConfirm()" id="mannerGrade" >
 							<option value="none">선택</option>
 							<option value="5">😆 (최고에요)</option>
 							<option value="4">🙂 (좋아요)</option>
@@ -185,7 +184,7 @@
 		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
-				<textarea placeholder="판매상품에 대한 리뷰를 남겨주세요." name="review" id="preview"></textarea>
+				<textarea  name="review" id="preview">${vo.review }</textarea>
 			</div>
 		</section>
 		<section class="section4_dongneLife_write">

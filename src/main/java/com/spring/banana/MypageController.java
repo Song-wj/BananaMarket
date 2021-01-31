@@ -239,10 +239,32 @@ public class MypageController {
 	// ³»¸®ºä
 	@RequestMapping(value="/mypage_myReview.do", method=RequestMethod.GET)
 	public ModelAndView mypage_myRreview() {
-		String mid ="aa";
+		String mid ="qqq123";
 		return (ModelAndView)MypageReviewService.getMyReviewList(mid);
 		
 	}
+	// ¸®ºä ¼öÁ¤
+	@RequestMapping(value="MyReview_update.do", method=RequestMethod.GET)
+	public ModelAndView MyReview_update_proc(String rid) {
+		
+		return (ModelAndView)MypageReviewService.getUpdateContent(rid);	
+	}
+	
+	
+		
+	@RequestMapping(value="update_myReview_proc.do", method=RequestMethod.POST)
+	public ModelAndView update_myReview_proc(ReviewVO vo) {
+		return (ModelAndView)MypageReviewService.update(vo);
+		
+	}
+	// ¸®ºä »èÁ¦
+		@RequestMapping(value="MyReview_delete_proc.do", method=RequestMethod.GET)
+		public ModelAndView MyReview_delete_proc(String rid) {
+			
+			return (ModelAndView)MypageReviewService.delete(rid); 
+		
+			
+		}
 	/*
 	 * @ResponseBody
 	 * 
