@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
 import com.spring.service.DongneServiceImpl;
+import com.spring.service.MypageReviewServiceImpl;
 import com.spring.service.ProductService;
 
 @Controller
@@ -18,6 +20,13 @@ public class MypageController {
 	
 	@Autowired
 	private DongneServiceImpl dongneService;
+	
+	
+	@Autowired
+
+	private MypageReviewServiceImpl MypageReviewService ;
+	
+	
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -169,7 +178,15 @@ public class MypageController {
 	public String mypage_contract() {
 		return "mypage/mypage_contract";
 	}
-	
+	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
+	public String mypage_contract_review() {
+		return "mypage/mypage_contract_review";
+	}
+	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
+	public String contract_reivew_write_proc(ReviewVO vo) {
+		vo.setParam("판매자리뷰");
+		return (String)MypageReviewService.insert(vo); 
+	}
 	/**
 	 * 마이페이지 - 구매내역
 	 * @return
@@ -178,6 +195,17 @@ public class MypageController {
 	public String mypage_purchased() {
 		return "mypage/mypage_purchased";
 	}
+	// 구매내역 리뷰 쓰기
+	@RequestMapping(value="/mypage_purchase_review.do", method=RequestMethod.GET)
+	public String mypage_purchase_review() {
+		return "mypage/mypage_purchase_review";
+	}
+	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
+	public String purchase_reivew_write_proc(ReviewVO vo) {
+		vo.setParam("구매자리뷰");
+		return (String)MypageReviewService.insert(vo); 
+	}
+	
 	
 	/**
 	 * 마이페이지 - 프로필 수정
@@ -201,9 +229,26 @@ public class MypageController {
 	 * 마이페이지 - 내 댓글
 	 * @return
 	 */
+	// 전체 리뷰
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
-	public String mypage_review() {
-		return "mypage/mypage_review";
+	public ModelAndView mypage_review() {
+		return (ModelAndView)MypageReviewService.getList();
+		
 	}
-
+	
+	// 내리뷰
+	@RequestMapping(value="/mypage_myReview.do", method=RequestMethod.GET)
+	public ModelAndView mypage_myRreview() {
+		String mid ="aa";
+		return (ModelAndView)MypageReviewService.getMyReviewList(mid);
+		
+	}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/mypage_review.do", method=RequestMethod.GET) public
+	 * String mypage_review() { return (String)MypageReviewService.getList();
+	 * 
+	 * }
+	 */
 }

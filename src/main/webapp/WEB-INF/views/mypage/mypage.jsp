@@ -59,6 +59,10 @@
 		$("#review").click(function() {
 			$("#contentSection").load("mypage_review.do");
 		});
+		
+		$("#myreview").click(function() {
+			$("#contentSection").load("mypage_myReview.do");
+		});
 
 		$("#mypage_mannerGrade").click(function() {
 			$("#contentSection").load("mypage_mannerGrade.do");
@@ -350,7 +354,14 @@
 						<a href="#" id="mypage_mannerGrade">받은 매너 평가</a>
 					</li>
 					<li>
-						<a href="#" id="review">받은 거래 후기</a>
+						<button class="dropdown-btn">거래 후기
+							<i class="fa fa-caret-down"></i>
+						</button>
+						<div class="dropdown-container">
+							<div><a href="#" id="review">전체 리뷰</a></div>
+							<div><a href="#" id="myreview">내 리뷰</a></div>					
+						</div>
+					
 					</li>
 				</ul>
 			</div>

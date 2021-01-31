@@ -85,6 +85,17 @@
 	div.mypage_contract table.mypage_table span.price {
 		font-weight:900;
 	}
+	div.mypage_contract table.mypage_table button#write_btn{
+		background-color:RGB(254,229,0);
+		border:1px solid RGB(254,229,0);
+		border-radius:5px;
+		padding:10px 10px;
+		color:RGB(82,67,21);
+		font-size:17px;
+		font-weight:bold;
+		width:100px;
+		margin-left:350px;
+	}
 </style>
 </head>
 <body>
@@ -126,24 +137,16 @@
 					<td>가격</td>
 				</tr> 
 			</table>
-			<!-- <table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table> -->
+			
 		</section>
 		<section class="section3_contract" id="section3_contract">
 			<table class="mypage_table">
 				<tr>
 					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
 					<td><span class="product">칙스라벨 제이에스뉴욕 무스탕코트</span></td>
+					<td rowspan="3" rowspan="3" class="manner_grade">
+					<a href="mypage_contract_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
+					</td>
 				</tr>
 				<tr>
 					<td><span class="locate">반포1동  끌올 49초 전</span></td>

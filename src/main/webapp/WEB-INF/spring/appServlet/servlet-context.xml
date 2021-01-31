@@ -29,6 +29,8 @@
 	<beans:bean class="com.spring.service.BananaNoticeServiceImpl" id="noticeService"></beans:bean>
 	<beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
 	<beans:bean class="com.enroll.service.EnrollstoreServiceImpl" id="shopService"></beans:bean>
+	<beans:bean class="com.spring.service.MypageReviewServiceImpl" id="mypageReviewService"></beans:bean>
+	
 	
 	<!-- DAO -->
 	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
@@ -37,6 +39,7 @@
 	<beans:bean class ="com.banana.dao.BananaFAQDAO" id="questionDAO"></beans:bean>
 	<beans:bean class ="com.banana.dao.productDAO" id="productDAO"></beans:bean>
 	<beans:bean class ="com.banana.dao.BananaShopDAO" id="shopDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.pReviewDAO" id="reviewDAO"></beans:bean>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

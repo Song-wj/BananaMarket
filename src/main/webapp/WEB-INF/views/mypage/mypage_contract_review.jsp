@@ -116,24 +116,22 @@
 
 <script>
 	$(document).ready(function(){
-		$("#board_write_btn").click(function(){
-			if($("#basic").val() == "none"){
-				alert("게시글의 주제를 선택해주세요");
+		
+		$("#contract_review_btn").click(function(){
+			if($("#mannerGrade").val() == "none"){
+				alert("매너점수를 선택해주세요");
 				
-			}else if($("#btopic").val() == ""){
-	            alert("게시글을 작성해주세요");
-	            $("#btopic").focus();  
+			}else if($("#preview").val() == ""){
+	            alert("리뷰를 작성해주세요");
+	            $("#breview").focus();  
 	         }else{
-	        	 board_write_form.submit();
+	        	 contract_reivew_form.submit();
 	         }
 	      });
 	      
 	      
 	      
-	      $("#btitle").click(function(){
-	         $("#basic").css("display","inline-block");
-	      });
-	      
+	     
 	   
 		
 	})
@@ -141,21 +139,17 @@
 		function test(){
 			
 			
-			var fileInput = document.getElementById("input_img");
+			var fileInput = document.getElementById("review_img");
             
             var files = fileInput.files;
             var file;
              
             if(files.length>5){
             	alert("이미지는 5장까지 업로드 가능합니다!");
-            	$("#input_img").val("");
+            	$("#review_img").val("");
             }
-           /*  for (var i = 0; i < files.length; i++) {
-                 
-                file = files[i];
- 
-                alert(file.name);
-            } */
+          
+          
 	      
 		}
 </script>
@@ -164,56 +158,40 @@
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
-		<form name="board_write_form" action="dongneLife_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
+		<form name="contract_reivew_form" action="contract_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
-			<input type="hidden" name="mid" value="aa">		
+			<input type="hidden" name="pid" value="p_1">	
+			<input type="hidden" name="mid" value="aa">
 			<div class="write_nav">
-				<ul>
-					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li><label>동네생활 글쓰기</label></li>
-					<li><button type="submit" id="board_write_btn">완료</button></li>
+				<ul>				
+					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
+					<li><label>판매상품 리뷰</label></li>
+					<li><button type="submit" id="contact_review_btn">완료</button></li>
 				</ul>
 			</div>    
 		</section>
 		<section class="section2_dongneLife_write">
 			<div class="write_topic" id="write_topic">
-			
-				<a href="#"><label id="btitle" >게시글의 주제를 선택해주세요.</label></a><br>
-				<select id="basic" name ="btitle" style="display:none;">
-	               <option value="none" >=== 선택 ===</option>
-	               <option value="none" style="color:blue;" disabled>동네 기본주제</option>
-	               <option value="동네사건사고">동네사건사고</option>
-	               <option value="분실/실종센터">분실/실종센터</option>
-	               <option value="우리동네질문">우리동네질문</option>
-	               <option value="none" style="color:blue;" disabled>관심주제</option>
-	               <option value="일상">일상</option>
-	               <option value="동네소식">동네소식</option>
-	               <option value="동네맛집">동네맛집</option>
-	               <option value="우리동네사진전">우리동네사진전</option>
-	               <option value="취미/자기계발">취미/자기계발</option>
-	               <option value="겨울간식대전">겨울간식대전</option>
-	               <option value="강아지">강아지</option>
-	               <option value="고양이">고양이</option>
-	               <option value="건강">건강</option>
-	               <option value="살림/청소/정리">살림/청소/정리</option>
-	               <option value="집꾸미기">집꾸미기</option>
-	               <option value="아이교육/학원">아이교육/학원</option>
-	               <option value="동네카페">동네카페</option>
-	               <option value="식물">식물</option>
-	               <option value="임신/출산/육아">임신/출산/육아</option>
-	               <option value="기타">기타</option>                        
-            </select>
+			 	<label>매너점수를 주세요</label><br>
+						<select  name="score" onchange="showConfirm()" id="mannerGrade">
+							<option value="none">선택</option>
+							<option value="5">😆 (최고에요)</option>
+							<option value="4">🙂 (좋아요)</option>
+							<option value="3">😮 (보통이에요))</option>
+							<option value="2">😥 (별로에요)</option>
+							<option value="1">😡 (나빠요)</option>
+						</select> 			
 		</div>
 		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
-				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요." name="btopic" id="btopic"></textarea>
+				<textarea placeholder="판매상품에 대한 리뷰를 남겨주세요." name="review" id="preview"></textarea>
 			</div>
 		</section>
 		<section class="section4_dongneLife_write">
 			<div>
 				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
-				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'><br><br>
+				<input type="file" name="file" id="reivew_img"  multiple  onchange='test()'><br><br>
 				
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>
