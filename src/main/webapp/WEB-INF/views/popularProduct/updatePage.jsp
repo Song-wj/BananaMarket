@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,31 +19,46 @@
 		list-style:none;
 		margin-top:30px;
 	}
+	
 	div.content form.pupdateForm ul li:first-child>label{
 		display: inline-block; 
 		padding: .5em .75em; 
 		color: #999; 
-		font-size: inherit; 
 		line-height: normal; 
 		background-color: #fdfdfd; 
 		cursor: pointer; 
-		border: 1px solid #ebebeb; 
-		border-bottom-color: #e2e2e2; 
+		border: 1px solid lightgray; 
+		/*border-bottom-color: #e2e2e2; */
 		border-radius: .25em;
-		margin-left:-400px;
+		margin-left:-10px;
 	}
+	div.content form.pupdateForm ul li:first-child img {
+		width:30px;
+		height:30px;
+		margin:5px 10px 0 0;
+	}
+
 	div.content form.pupdateForm ul li:first-child>input[type="file"]{
 		position: absolute; 
-		width: 1px; 
+		/* width: 1px; 
 		height: 1px; 
-		padding: 0; 
-		margin: -1px; 
+		margin: -1px;  */
 		overflow: hidden; 
 		clip:rect(0,0,0,0); 
-		border: 0;
+		margin:-150px;
 	}
+	div.content form.pupdateForm ul li:first-child button{
+		color:#999;
+		background-color:#fdfdfd;
+		border:1px solid lightgray;
+		padding:20px 15px;
+		font-size:15px;
+		border-radius:5px; 
+		cursor:pointer;
+		
+	}
+	
 	div.content form.pupdateForm ul li:first-child div{
-
 		margin-top:20px;
 		margin-bottom:20px;
 	}
@@ -56,6 +72,7 @@
 		text-indent:10px;
 		font-size:17px;
 	}
+	
 	div.content form.pupdateForm ul li:nth-child(4){
 		margin-left:170px;
 	}
@@ -77,7 +94,6 @@
 	}
 </style>
 <script>
-
 $(document).ready(function(){
 	
 	
@@ -134,45 +150,84 @@ $(document).ready(function(){
         }
     });
 	
+	
+	$("#cancel_img").click(function(){
+   		showConfirm();
+	});
+	
 });
+
+	function showConfirm() {
+		 if (confirm("사진을 삭제하시겠습니까?")){
+		   alert("삭제되었습니다!");		
+		   $("input[type='hidden']#cancel_img").val("cancel");
+	   	   $("#fake_id").html("선택된 파일 없음");
+		  } 
+	};
+
+	function test(){
+		var fileInput = document.getElementById("update_img");
+		var files = fileInput.files;
+		var file;
+		
+		if(files.length>5){
+			alert("이미지는 5장까지 업로드 가능합니다!");
+			$("#update_img").val("");
+		}
+		
+		$("#fake_id").css("display","none");
+		$("input[type='file']#update_img").css("width","400px").css("height","25px").css("font-size","13.7px"); 
+	}
+
+
 </script>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
 	<div class= "content">
 		<h1>상품 수정하기</h1>
-		<form name="pupdateForm" action="updatePage_proc.do" method="post" 
-							class="pupdateForm" enctype="multipart/form-data">
-		<ul>
-			<li><label for="input_img">이미지 추가</label>
-		   <!-- <input type="file" id="input_img"  multiple> -->
-				<input type="file" id="input_img">
-				<div id="img_list"></div></li>
-			<li><input type="text" name="ptitle" id="ptitle" placeholder="${vo.ptitle}수정 제목"></li>
-			<li><select name="category" id="pcategory">
-				<option value="none">카테고리</option>
-				<option value="디지털/가전">디지털/가전</option>
-				<option value="가구/인테리어">가구/인테리어</option>
-				<option value="유아동/유아도서">유아동/유아도서</option>
-				<option value="생활/가공식품">생활/가공식품</option>
-				<option value="스포츠/레저">스포츠/레저</option>
-				<option value="여성잡화">여성잡화</option>
-				<option value="여성의류">여성의류</option>
-				<option value="남성패션/잡화">남성패션/잡화</option>
-				<option value="게임/취미">게임/취미</option>
-				<option value="뷰티/미용">뷰티/미용</option>
-				<option value="반려동물용품">반려동물용품</option>
-				<option value="도서/티켓/음반">도서/티켓/음반</option>
-				<option value="식물">식물</option>
-				<option value="기타 중고물품">기타 중고물품</option>
-				<option value="삽니다">삽니다.</option>
-			</select></li>
-			<li><input type="text" name="pprice" id="pprice" placeholder="${vo.pprice}수정가격"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
-			<li><textarea cols=10 rows=10 name="pcontent"  id="pcontent" style="resize:none;" placeholder="${vo.pcontent}내용~~"></textarea></li>
-			<li><input type="hidden" name="pid" value="pid"></li>
-			<li><input type="hidden" name="mid" value="mid"></li>
-			<li><button type="submit" id="pupdate_btn">수정하기</button></li>	
-		</ul>
+		<form name="pupdateForm" action="updatePage_proc.do" method="post" class="pupdateForm" enctype="multipart/form-data">
+			<input type="hidden" value="${vo.pid }" name="pid">
+			<input type="hidden" value="${vo.mid }" name="mid">
+			<ul>
+				<li><label for="update_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png">이미지 변경</label>
+					<input type="file" name="file1" id="update_img"  multiple  onchange='test()'>
+					<button type="button" id="cancel_img">초기화</button><input type="hidden" name="cancel_img" id="cancel_img"><br><br> 
+					<c:choose>
+						<c:when test="${count ne 0 }">
+							<span id="fake_id">파일 ${count}개</span>
+						</c:when>
+						<c:otherwise>
+							<span id="fake_id">선택한 파일 없음</span>
+						</c:otherwise>
+					</c:choose>
+				<!--  <li><label for="input_img">이미지 추가</label>
+			    <input type="file" id="input_img"  multiple> -->
+					<div id="img_list"></div></li>
+				<li><input type="text" name="ptitle" id="ptitle" value="${vo.ptitle}"></li>
+				<li><select name="pcategory" id="pcategory">
+					<option value="${vo.pcategory}">${vo.pcategory}</option>
+					<option value="none" disabled>------</option>
+					<option value="디지털/가전">디지털/가전</option>
+					<option value="가구/인테리어">가구/인테리어</option>
+					<option value="유아동/유아도서">유아동/유아도서</option>
+					<option value="생활/가공식품">생활/가공식품</option>
+					<option value="스포츠/레저">스포츠/레저</option>
+					<option value="여성잡화">여성잡화</option>
+					<option value="여성의류">여성의류</option>
+					<option value="남성패션/잡화">남성패션/잡화</option>
+					<option value="게임/취미">게임/취미</option>
+					<option value="뷰티/미용">뷰티/미용</option>
+					<option value="반려동물용품">반려동물용품</option>
+					<option value="도서/티켓/음반">도서/티켓/음반</option>
+					<option value="식물">식물</option>
+					<option value="기타 중고물품">기타 중고물품</option>
+					<option value="삽니다">삽니다.</option>
+				</select></li>
+				<li><input type="text" name="pprice" id="pprice" value="${vo.pprice}"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
+				<li><textarea cols=10 rows=10 name="pcontent"  id="pcontent" style="resize:none;">${vo.pcontent}</textarea></li>
+				<li><button type="submit" id="pupdate_btn">수정하기</button></li>	
+			</ul>
 		</form>
 	</div>
 <jsp:include page="../footer.jsp" />

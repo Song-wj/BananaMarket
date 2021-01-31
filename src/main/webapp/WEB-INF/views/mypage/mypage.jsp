@@ -19,7 +19,7 @@
 		$("#mypage_purchasedBtn").click(function(){
 			$("#contentSection").load("mypage_purchased.do");
 		});
-		
+	
 		$("#mypage_contractBtn").click(function(){
 			$("#contentSection").load("mypage_contract.do");
 		});
@@ -304,7 +304,7 @@
 			<div class="sideMenu">
 				<ul>
 					<li>
-						<a href="#" id="mypage_contractBtn">
+						<a id="mypage_contractBtn">
 						<img src="images/mypage_contract.png">
 						<span>판매내역</span></a>
 					</li>
