@@ -304,17 +304,17 @@
 			<div class="sideMenu">
 				<ul>
 					<li>
-						<a href="#" id="mypage_contractBtn">
+						<a href="javascript:void(0)" id="mypage_contractBtn">
 						<img src="images/mypage_contract.png">
 						<span>판매내역</span></a>
 					</li>
 					<li>
-						<a href="#" id="mypage_purchasedBtn">
+						<a href="javascript:void(0)" id="mypage_purchasedBtn">
 						<img src="images/mypage_purchased.png">
 						<span>구매내역</span></a>
 					</li>
 					<li>
-						<a href="#" id="mypage_likeBtn">
+						<a href="javascript:void(0)" id="mypage_likeBtn">
 						<img src="images/mypage_like.png">
 						<span>관심목록</span></a>
 					</li>
@@ -325,32 +325,32 @@
 			<div class="profileDetails">
 				<ul>
 					<li>
-						<a href="#" id="mypage_setLocationBtn">내 동네 설정</a>
+						<a href="javascript:void(0)" id="mypage_setLocationBtn">내 동네 설정</a>
 					</li>
 					<li>
-						<a href="#" id="mypage_locationCheck">동네 인증</a>
+						<a href="javascript:void(0)" id="mypage_locationCheck">동네 인증</a>
 					</li>
 					<li>
-						<a href="#" id="mypage_keyword">키워드 알림 설정</a>
+						<a href="javascript:void(0)" id="mypage_keyword">키워드 알림 설정</a>
 					</li>
 					<li>
-						<a href="#" id="mypage_collectView">모아보기</a>
+						<a href="javascript:void(0)" id="mypage_collectView">모아보기</a>
 					</li>
 					<li>
 						<button class="dropdown-btn">동네생활
 							<i class="fa fa-caret-down"></i>
 						</button>
 						<div class="dropdown-container">
-							<div><a href="#" id="mypost">동네생활 글</a></div>
-							<div><a href="#" id="mycomment">동네생활 댓글</a></div>
-							<div><a href="#" id="subjectList">동네생활 주제 목록</a></div>
+							<div><a href="javascript:void(0)" id="mypost">동네생활 글</a></div>
+							<div><a href="javascript:void(0)" id="mycomment">동네생활 댓글</a></div>
+							<div><a href="javascript:void(0)" id="subjectList">동네생활 주제 목록</a></div>
 						</div>
 					</li>
 					<li>
-						<a href="#" id="mypage_mannerGrade">받은 매너 평가</a>
+						<a href="javascript:void(0)" id="mypage_mannerGrade">받은 매너 평가</a>
 					</li>
 					<li>
-						<a href="#" id="review">받은 거래 후기</a>
+						<a href="javascript:void(0)" id="review">받은 거래 후기</a>
 					</li>
 				</ul>
 			</div>
