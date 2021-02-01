@@ -120,7 +120,7 @@ public class DongneCommentServiceImpl implements EnrollService {
 	}
 
 	/**
-	 * 회원리스트 출력 - 검색기능 처리
+	 * 동네생활 리스트 출력
 	 */
 	public String getCommentListAjaxProc(String bid) {
 				
@@ -139,7 +139,7 @@ public class DongneCommentServiceImpl implements EnrollService {
 			jobj.addProperty("msfile", vo.getMsfile());
 			jobj.addProperty("brid", vo.getBrid());
 			jobj.addProperty("bid", vo.getBid());
-			jobj.addProperty("bcomment", vo.getBcomment());
+			jobj.addProperty("bcomment", vo.getBcomment().replace("\r\n", "<br>"));
 			jobj.addProperty("brdate", vo.getBrdate());
 			jobj.addProperty("rno", vo.getRno());
 			

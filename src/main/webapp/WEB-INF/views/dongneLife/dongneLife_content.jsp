@@ -213,6 +213,7 @@
 	} 
 	section.section5_dongneLife_content div.commentMemberSide {
 		margin-top:-10px;
+		padding-bottom:30px;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide {
 		display:inline-block;
@@ -232,12 +233,11 @@
 		color:gray;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide>li:nth-child(3) {
-		height:65px;
+		height:15%;
 		margin-top:8px; 
 		font-size:17px;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide>li:nth-child(4) {
-		padding-bottom:25px;
 		font-size:17px;
 	}
 	section.section4_dongneLife_content div.content_response ul li button,
@@ -334,9 +334,15 @@
 						
 						output += "<li>" + jdata.jlist[i].nickname + "</li>";
 						output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
-						output += "<li id='bcomment_area'>" + jdata.jlist[i].bcomment + "</li>";
+						output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
+						output += "<li id='bcomment_area" + jdata.jlist[i].rno +"'>"+ "</li>";
 						output += "<li>";
-						output += "<a href='dongneLifeComment_update.do?brid=" + jdata.jlist[i].brid + "&rno=" + jdata.jlist[i].rno +"'><button type='button' id='commentUpdate'>수정</button></a>";
+						/* output += "<form name='comment_update' action='dongneLifeComment_update.do' method=POST id='comment_update' enctype='multipart/form-data'>";
+						output += "<input type='hidden' name='brid' value='"+ jdata.jlist[i].brid +"'>";
+						output += "<input type='hidden' name='rno' value='"+ jdata.jlist[i].rno +"'>";
+						output += "<a id=''><button type='button'>수정</button></a>"; */
+						/*output += "<a href='dongneLifeComment_update.do?brid=" + jdata.jlist[i].brid + "&rno=" + jdata.jlist[i].rno +"'><button type='button' id='update'>수정</button></a>";*/
+						output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
 						/* output += "<a id='commentUpdate' href='comment_update.do?brid=" + jdata.jlist[i].brid + "&bcomment=" + jdata.jlist[i].bcomment + "&rno=" + jdata.jlist[i].rno +"'><button type='button'>수정</button></a>" */
 						output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button'>삭제</button></a>";
 						
@@ -348,11 +354,10 @@
 					
 					$("#section5_dongneLife_content").append(output);
 					
-					
 				}//success
 			});//ajax
-			
 		}//comment_list
+		
 		
 		//수정 버튼 눌렸을 때
 		$("#commentUpdate").click(function(){
@@ -481,6 +486,14 @@
 	</div>
 	
 	<jsp:include page="../footer.jsp"/>
+<script>
+function update_pro(brid,rno) {
+	$("#bcomment_content"+rno).remove();
+	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno);
+	$("button#update").hide();
+}
+</script>
+
 
 </body>
 </html>

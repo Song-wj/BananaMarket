@@ -33,12 +33,12 @@ public class DongneCommentController {
 	}
 	
 	/**
-	 * 내 근처 - 업체 후기 수정 화면
+	 * 내 근처 - 댓글 수정 화면
 	 * @return
 	 */
 	@RequestMapping(value="/dongneLifeComment_update.do",method=RequestMethod.GET)
 	public ModelAndView dongneLifeComment_update(String brid, String rno) {
-		return (ModelAndView)dongneCommentService.getUpdateContent(brid, rno);
+		return (ModelAndView)dongneCommentService.getUpdateContent(brid, rno); 
 	}
 	
 	/**
