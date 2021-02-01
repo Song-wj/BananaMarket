@@ -81,7 +81,7 @@
 			$("."+rid).css("display","block");
 			$("#"+showImg).text("");
 			var output="";
-			 if(rsfile != null) {
+			 if(rsfile != "") {
 				var sfile_list =rsfile.split(','); 
 				for(var i in sfile_list){
 					output = "<a href='http://localhost:9000/banana/resources/upload/"+sfile_list[i]+"' data-lightbox='example-set'><img src='http://localhost:9000/banana/resources/upload/"+sfile_list[i] +"'>"
@@ -200,6 +200,7 @@
 	td.review>label.date{
 		font-size:15px;
 		color:lightgray;
+		
 	}
 	section.review_all_table_area,
 	section.review_buyer_table_area,
@@ -251,6 +252,12 @@
 		margin-top:30px;
 		text-align:left;
 		clear:both;
+	
+	}
+	#mw .fg div:nth-child(2) label.date{
+		color:lightgray;
+		margin-left:10px;
+		font-size:13px;
 	}
 	#mw .fg pre{
 		height:300px;
@@ -305,7 +312,8 @@
 	    		<div>
 	    			<div>
 		    		   <img src="images/banana.jpg">
-								<label>${vo.mid }</label>
+					   <label>${vo.mid }</label>
+					   <label class="date">${vo.rdate }</label>
 	    			</div>
 	    			<div>
 	       			   <pre><c:out value="${vo.review}" /></pre>	    			
@@ -359,7 +367,8 @@
 						    		<div>
 						    			<div>
 							    		   <img src="images/banana.jpg">
-													<label>${vo.mid }</label>
+										   <label>${vo.mid }</label>
+										    <label class="date">${vo.rdate }</label>
 						    			</div>
 						    			<div>
 						       			   <pre><c:out value="${vo.review}" /></pre>	    			
@@ -413,7 +422,8 @@
 						    		<div>
 						    			<div>
 							    		   <img src="images/banana.jpg">
-													<label>${vo.mid }</label>
+										   <label>${vo.mid }</label>
+										    <label class="date">${vo.rdate }</label>
 						    			</div>
 						    			<div>
 						       			   <pre><c:out value="${vo.review}" /></pre>	    			

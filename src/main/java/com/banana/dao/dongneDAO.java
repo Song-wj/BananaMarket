@@ -73,9 +73,9 @@ public class dongneDAO extends DBConn{
 	public ArrayList<dongneVO> getBoardList(){
 		ArrayList<dongneVO> list = new ArrayList<dongneVO>();
 		try {
-			String sql = "select bid, nickname, btitle, bfile,bsfile,btopic,maddr, bdate\r\n"
+			String sql = "select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate\r\n"
 						+ "from banana_member m , banana_board b\r\n"
-						+ "where m.mid = b.mid order by bdate desc";
+						+ "where m.mid = b.mid order by bdate ";
 			getStatement();
 			rs= stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -102,7 +102,7 @@ public class dongneDAO extends DBConn{
 	public dongneVO getBoardContent(String bid) {
 		dongneVO vo = new dongneVO();
 		try {
-			String sql ="select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, bdate \r\n"
+			String sql ="select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate \r\n"
 						+ "from banana_member m , banana_board b\r\n"
 						+ "where m.mid = b.mid and bid=?";
 			getPreparedStatement(sql);
@@ -128,7 +128,7 @@ public class dongneDAO extends DBConn{
 	}
 	//board update
 	
-	public boolean boardU(dongneVO vo) {
+	public boolean boardUpdate(dongneVO vo) {
 		boolean result = false;
 		try {
 			String sql = "update banana_board set btitle=? , btopic=?, bfile=? , bsfile=? where bid=?";
@@ -151,23 +151,7 @@ public class dongneDAO extends DBConn{
 	
 	
 	
-	/*
-	 * public boolean boardUpdate(dongneVO vo) { boolean result = false; try {
-	 * String sql
-	 * ="update banana_board set btitle=?, btopic=?, bfile=?, bsfile=? where bid=?";
-	 * 
-	 * getPreparedStatement(sql); pstmt.setString(1,vo.getBtitle());
-	 * pstmt.setString(2,vo.getBtopic()); pstmt.setString(3,vo.getBfile());
-	 * pstmt.setString(4,vo.getBsfile()); pstmt.setString(5,vo.getBid());
-	 * System.out.println(sql);
-	 * 
-	 * int count = pstmt.executeUpdate(); System.out.println(count); if(count != 0)
-	 * result = true;
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); }
-	 * 
-	 * return result; }
-	 */
+	
 	public boolean boardUpdateNofile(dongneVO vo) {
 		boolean result = false;
 		try {

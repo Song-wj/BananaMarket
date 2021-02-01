@@ -25,17 +25,23 @@
 	}
 	
 	
-	function showReview(rid ,rsfile){
-		document.getElementById(rid).style.display='block';	
+	
+	function showReview(rid ,rsfile ,showImg){
+		
+		$("."+rid).css("display","block");
+		$("#"+showImg).text("");
 		var output="";
-		 if(rsfile != null) {
+		 if(rsfile != "") {
 			var sfile_list =rsfile.split(','); 
 			for(var i in sfile_list){
 				output = "<a href='http://localhost:9000/banana/resources/upload/"+sfile_list[i]+"' data-lightbox='example-set'><img src='http://localhost:9000/banana/resources/upload/"+sfile_list[i] +"'>"
-				$("#showImg").append( output);
-				$(".mw .fg").css("height" , "600px");
+				$("#"+showImg).append( output);
+				$("#mw .fg").css("height" , "600px");
 			} 
 		 } 
+	}
+	function closeReview(rid){
+		$("."+rid).css("display","none");
 	}
 </script>
 <style>
@@ -95,7 +101,7 @@
 		float:left;
 	}
 	td.review>img,
-	.mw .fg div:nth-child(2) div:nth-child(1) img{
+	#mw .fg div:nth-child(2) div:nth-child(1) img{
 		width:35px;
 		height:35px;
 		margin-left:10px;
@@ -103,14 +109,15 @@
      	border:2px solid #fff;
       	box-shadow: 0 0 16px rgb(221,221,221);
 	}
-	.mw .fg div:nth-child(2) div:nth-child(3) img{
+	#mw .fg div:nth-child(2) div:nth-child(3) img{
 	 	width:100px;
 		height:100px;
 		margin-left:10px;
 		border:2px solid #fff;
 		margin-top:10px;
 	}
-	td.review>label{
+	td.review>label,
+	#mw .fg label{
 		position: relative;
         top: -11px;
         color: rgb(98,71,24);
@@ -155,7 +162,7 @@
 		vertical-align:text-top;
 	}
 
-	.mw {
+	#mw {
 		 position:fixed;
 		_position:absolute;
 		top:0;
@@ -165,7 +172,7 @@
 		display:none;
 		z-index:1;
 	}
-	.mw .bg {
+	#mw .bg {
 		position:absolute;
 		top:0;
 		left:0;
@@ -176,7 +183,7 @@
 		filter:alpha(opacity=50);
 		z-index:2;
 		}
-	.mw .fg {
+	#mw .fg {
 		position:absolute;
 		top:30%;
 		left:50%;
@@ -188,19 +195,25 @@
 		background:#fff;
 		z-index:3;
 		}
-	.mw .fg button{
+	#mw .fg button{
 		float:right;
 		background-color:white;
 		border:1px solid white;
 		outline:none;
 	}
 	
-	.mw .fg div:nth-child(2){
+	#mw .fg div:nth-child(2){
 		margin-top:30px;
 		text-align:left;
 		clear:both;
+	
 	}
-	.mw .fg pre{
+	#mw .fg div:nth-child(2) label.date{
+		color:lightgray;
+		margin-left:10px;
+		font-size:13px;
+	}
+	#mw .fg pre{
 		height:300px;
 		border:0.5px solid black;
 	}
@@ -234,7 +247,7 @@
 							<label>${vo.maddr }</label>
 						</td>
 					</tr>
-					<tr onclick="showReview('${vo.rid}','${vo.rsfile }')">
+					<tr onclick="showReview('${vo.rid}','${vo.rsfile }' ,'showImg')">
 						<td class="review" colspan="3" >
 							<pre><c:out value="${vo.review}" /></pre>
 						</td>
@@ -247,16 +260,17 @@
 							<button type="button" class="review_delete_btn" onclick="review_delete('${vo.rid}')">삭제</button>
 						</td>
 					</tr>	
-					<div id="${vo.rid }" class="mw"> 
+					<div class="${vo.rid }" id="mw"> 
 		    		<div class="bg"><!--이란에는 내용을 넣지 마십시오.--></div>
 		    		<div class="fg">
 			    		<div>
-			    			<button onclick="document.getElementById('${vo.rid}').style.display='none'" type="button">x</button>
+			    			<button onclick="closeReview('${vo.rid}')" type="button">x</button>
 			    		</div>
 			    		<div>
 			    			<div>
 				    		   <img src="images/banana.jpg">
 								<label>${vo.mid }</label>
+								 <label class="date">${vo.rdate }</label>
 			    			</div>
 			    			<div>
 			       			   <pre><c:out value="${vo.review}" /></pre>	    			

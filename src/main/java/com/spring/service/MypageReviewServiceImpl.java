@@ -68,6 +68,9 @@ public class MypageReviewServiceImpl implements BananaService {
 		ArrayList<ReviewVO> list = reviewDAO.getReviewList();
 		ArrayList<ReviewVO> blist = reviewDAO.getBuyReviewList();
 		ArrayList<ReviewVO> slist = reviewDAO.getSellReviewList();
+		countDate(list);
+		countDate(blist);
+		countDate(slist);
 		mv.addObject("list", list);
 		mv.addObject("blist", blist);
 		mv.addObject("slist", slist);
@@ -75,11 +78,29 @@ public class MypageReviewServiceImpl implements BananaService {
 		return mv;
 	};
 	
+	//날짜 계산
+	public void countDate(ArrayList<ReviewVO> list) {
+		
+		String str ="";
+		for(ReviewVO vo : list) {
+			int date = Integer.parseInt(vo.getRdate());
+			if(60>date) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/60 + "일";
+			}else if (date == 0) {
+				str="방금";
+			}
+			vo.setRdate(str);
+		}
+	}
 	public Object getMyReviewList(String mid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<ReviewVO> list = reviewDAO.getMyReviewList(mid);
+		countDate(list);
 		mv.addObject("list", list);
-	
 		mv.setViewName("mypage/mypage_MyReview");
 		return mv;
 	};

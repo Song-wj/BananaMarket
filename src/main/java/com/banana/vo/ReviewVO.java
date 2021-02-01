@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ReviewVO {
 	 String rid, mid, pid, review, rfile, rsfile, rdate ,savepath , cancel_img;
-	String score;
+	 String score;
 	 String param;
 	 String maddr;
 	 
