@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService{
 		SessionVO svo = memberDAO.getLogin(vo);
 		//String result = "";
 		
-		if(svo.getResult() != 0) {
+		if(svo.getResult() == 1) {
 			session.setAttribute("svo", svo);
 			mv.addObject("svo", svo);
 			mv.setViewName("index");

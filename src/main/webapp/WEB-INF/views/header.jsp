@@ -121,7 +121,6 @@
 					<ul class="header-menu-list">
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/login.do">로그인</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/join.do">회원가입</a></li>
-						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do#">나의 바나나</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood.do">내 근처</a></li>
 					</ul>
