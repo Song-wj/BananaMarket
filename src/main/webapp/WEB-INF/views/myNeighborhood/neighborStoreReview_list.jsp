@@ -86,8 +86,7 @@
 	.dl_content2 ul li:first-child label:nth-child(2){
 		color: rgb(98,71,24);
 		font-size:14px;
-		float:right;
-		margin-right:20px;
+		margin-left:460px;
 	}
 	.dl_content2 ul li:nth-child(2) img{
 		width:35px;
@@ -150,33 +149,33 @@
 	<jsp:include page="../header.jsp"/>
 	<div class="dongnelife">
 		<section class="section1">
+		
 			<div class="dl_title">
-				<h1>동네 생활</h1>
+				<h1>전체 후기 목록</h1>
 			</div>
 			<div class="dl_content1">
-				<img src="images/김수현.jpg"><label>히흫님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
-				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
+				<img src="images/김수현.jpg"><label>업체 후기 ${review_count }</label><hr><br>
+				<%-- <a href="neighborStoreReview_write.do?sid=${vo.sid }&mid=${vo.mid }"><button type="button">후기 작성하기</button></a><hr> --%>
 			</div>	
 			<section class="sub_section">
 			<c:forEach var="vo" items="${list }">
-			<div class="dl_content2" onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">
+			<div class="dl_content2" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
 				<ul>	
 					<li>
-						<label>${vo.btitle }</label>
-						<label>${vo.bdate }</label>
+						<label>${vo.srdate }</label>
 					</li>
 					<li>
-						<img src="images/banana.jpg">
+						<img src="http://localhost:9000/banana/resources/upload/${vo.msfile }">
 						<label>${vo.nickname }</label>
 						<label>${vo.maddr }</label>
 					</li>	
-					<li><pre><c:out value="${vo.btopic}" /></pre></li>
+					<li><pre><c:out value="${vo.srcontent}" /></pre></li>
 					<li>
-						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
-						<a href="dongneLife_content.do"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
+						<a href="neighborStoreReview_content.do?srid=${vo.srid}"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
 					</li>
 				</ul>
 			</div>
+			
 			</c:forEach>
 			</section>
 			</section>

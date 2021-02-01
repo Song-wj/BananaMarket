@@ -123,14 +123,11 @@
 		font-weight:bold;
 		border:1px solid RGB(254,229,0);
 		border-radius:5px;
-		padding:5px 15px;
+		padding:10px 15px;
 		font-size:15px;
 		position:absolute;
 		left:1000px;
-		
 
-		
-		
 	}
 </style>
 <script>

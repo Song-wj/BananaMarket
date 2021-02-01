@@ -1,13 +1,17 @@
 package com.spring.service;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.pReviewDAO;
 import com.banana.vo.ReviewVO;
+import com.banana.vo.dongneVO;
 
 @Service("mypageReviewService")
 public class MypageReviewServiceImpl implements BananaService {
@@ -17,12 +21,45 @@ public class MypageReviewServiceImpl implements BananaService {
 	
 	@Override
 	public Object insert(Object vo) {
-
+		
 		String path = "";
-		int val = reviewDAO.reviewInsert((ReviewVO) vo);
-		if (val != 0) {
+		
+		ReviewVO rvo = (ReviewVO)vo;
+		ArrayList<String> file_list = new ArrayList<String>();
+		ArrayList<String> sfile_list = new ArrayList<String>();
+		
+		UUID uuid = UUID.randomUUID();
+		if(rvo.getList().get(0).getSize() != 0)  {
+			 	
+		       for (MultipartFile mf : rvo.getList()) {    	   
+		           		           
+		           file_list.add(mf.getOriginalFilename());
+		           sfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
+ 
+		       }
+		      
+		       rvo.setRfile(String.join(",", file_list));
+		       rvo.setRsfile(String.join(",", sfile_list));
+		}
+		
+		
+		int dao_result = reviewDAO.reviewInsert(rvo);
+		if(dao_result !=0) {
+			try {
+				 for (MultipartFile mf : rvo.getList()) { 
+					File file = new File(rvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
+					mf.transferTo(file);
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			path = "redirect:/mypage.do";
 		}
+		
+		
+		
+		
 		return path;
 	}
 	@Override
@@ -31,6 +68,9 @@ public class MypageReviewServiceImpl implements BananaService {
 		ArrayList<ReviewVO> list = reviewDAO.getReviewList();
 		ArrayList<ReviewVO> blist = reviewDAO.getBuyReviewList();
 		ArrayList<ReviewVO> slist = reviewDAO.getSellReviewList();
+		countDate(list);
+		countDate(blist);
+		countDate(slist);
 		mv.addObject("list", list);
 		mv.addObject("blist", blist);
 		mv.addObject("slist", slist);
@@ -38,11 +78,29 @@ public class MypageReviewServiceImpl implements BananaService {
 		return mv;
 	};
 	
+	//날짜 계산
+	public void countDate(ArrayList<ReviewVO> list) {
+		
+		String str ="";
+		for(ReviewVO vo : list) {
+			int date = Integer.parseInt(vo.getRdate());
+			if(60>date) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/60 + "일";
+			}else if (date == 0) {
+				str="방금";
+			}
+			vo.setRdate(str);
+		}
+	}
 	public Object getMyReviewList(String mid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<ReviewVO> list = reviewDAO.getMyReviewList(mid);
+		countDate(list);
 		mv.addObject("list", list);
-	
 		mv.setViewName("mypage/mypage_MyReview");
 		return mv;
 	};
@@ -70,6 +128,14 @@ public class MypageReviewServiceImpl implements BananaService {
 	public Object getUpdateContent(Object rid) {
 		ModelAndView mv = new ModelAndView();
 		ReviewVO vo = reviewDAO.getMyReview((String)rid);	
+		int count =0;
+		if(vo.getRfile() != null) {
+			String[] sfile_list =vo.getRsfile().split(",");
+			for(int i=0; i<sfile_list.length; i++) {
+				count++;
+			}
+		}
+		mv.addObject("count", count);	
 		mv.addObject("vo", vo);
 		mv.setViewName("mypage/mypage_myReview_update");
 		return mv;
@@ -78,15 +144,69 @@ public class MypageReviewServiceImpl implements BananaService {
 	
 	@Override
 	public Object update(Object vo) {
+		
 		ModelAndView mv = new ModelAndView();
+		int val =0;
+		ArrayList<String> file_list = new ArrayList<String>();
+		ArrayList<String> sfile_list = new ArrayList<String>();
 		ReviewVO rvo = (ReviewVO)vo;
-		String msg= "수정이 완료되었습니다.";
-		int val=0;
-		if(rvo.getRid().contains("BR")){
-			val = reviewDAO.updateBuyMyReview(rvo);	
+		
+		UUID uuid = UUID.randomUUID();
+		
+		if(rvo.getList().get(0).getSize() != 0) {
+		
+		       for (MultipartFile mf : rvo.getList()) {    	   
+		    	   
+		    		 file_list.add(mf.getOriginalFilename());
+		    		 sfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
+		    	  
+	          }
+		      
+		       rvo.setRfile(String.join(",", file_list));
+		       rvo.setRsfile(String.join(",", sfile_list));
+		       
+		       
+		      
+				if(rvo.getRid().contains("BR")){
+					val = reviewDAO.updateBuyMyReview(rvo);	
+				}else {
+					val = reviewDAO.updateSellMyReview(rvo);	
+				}
+		       
+		       
+		       if(val !=0) {
+		       try {
+					 for (MultipartFile mf : rvo.getList()) { 									    		   
+							 File file = new File(rvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
+							 mf.transferTo(file);		    	   				
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		       }		       
+		}else if(rvo.getCancel_img().equals("cancel")) {
+			 rvo.setRfile("");
+		     rvo.setRsfile("");
+		     
+		   
+				if(rvo.getRid().contains("BR")){
+					val = reviewDAO.updateBuyMyReview(rvo);	
+				}else {
+					val = reviewDAO.updateSellMyReview(rvo);	
+				}
+		    
 		}else {
-			val = reviewDAO.updateSellMyReview(rvo);	
-		}
+			
+			if(rvo.getRid().contains("BR")){
+				val = reviewDAO.updateBuyMyReview(rvo);	
+			}else {
+				val = reviewDAO.updateSellMyReview(rvo);	
+			}
+		
+		}			
+		
+		String msg= "수정이 완료되었습니다.";
+		
 		if(val !=0) {
 			mv.addObject("msg", msg);
 			mv.setViewName("redirect:/mypage.do");			

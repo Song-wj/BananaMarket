@@ -26,6 +26,7 @@
 		border-bottom:1px solid black;
 		text-align:center;
 		padding:10px 0;
+		margin-bottom:80px;
 	}
 	section.section1_dongneLife_write li {
 		display:inline-block;
@@ -33,7 +34,7 @@
 		font-size:22px;
 		font-weight:800;
 	}
-	section.section1_dongneLife_write li:nth-child(3) button {
+	section.section1_dongneLife_write li:nth-child(4) button {
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
@@ -42,11 +43,11 @@
 		font-size:17px;
 		border-radius:5px;
 	}
-	section.section1_dongneLife_write li:nth-child(3) button:hover{
+	section.section1_dongneLife_write li:nth-child(4) button:hover{
 		cursor:pointer;
 		opacity:0.7;
 	}
-	section.section1_dongneLife_write li:nth-child(1) img {
+	img.backword {
 		width:30px;
 		height:30px;
 		margin-bottom:-5px;
@@ -107,88 +108,38 @@
 	 	clip:rect(0 180px 150px 75px);  
 		border: 0; 
 	} 
-	
-	
-	
-	
-
 </style>
 
 <script>
 	$(document).ready(function(){
-		$("#purchase_review_btn").click(function(){
-			if($("#mannerGrade").val() == "none"){
-				alert("매너점수를 선택해주세요");
-				
-			}else if($("#preview").val() == ""){
-	            alert("리뷰를 작성해주세요");
-	            $("#breview").focus();  
+		$("#board_write_btn").click(function(){
+			if($("#srcontent").val() == ""){
+	            alert("후기를 작성해주세요");
+	            $("#srcontent").focus();  
 	         }else{
-	        	 purchase_reivew_form.submit();
+	        	 review_write_form.submit();
 	         }
 	      });
-	      
-
-	   
-		
-	})
-		
-		function test(){
-			
-			
-			var fileInput = document.getElementById("input_img");
-            
-            var files = fileInput.files;
-            var file;
-             
-            if(files.length>5){
-            	alert("이미지는 5장까지 업로드 가능합니다!");
-            	$("#input_img").val("");
-            }
-          
-	      
-		}
+	});
 </script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
-		<form name="purchase_reivew_form" action="purchase_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
+		<form name="review_write_form" action="neighborStoreReview_write_proc.do?sid=${sid }&mid=${mid }" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
-			<input type="hidden" name="pid" value="p_1">	
 			<div class="write_nav">
 				<ul>
-					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li><label>동네생활 글쓰기</label></li>
-					<li><button type="button" id="purchase_review_btn">완료</button></li>
+					<li><a href="neighborhoodStore.do?sid=${sid }"><img src="http://localhost:9000/banana/images/dongneLife_backword.png" class="backword"><button type="button"></button></a></li>
+					<li><label>추천 후기 작성하기</label></li>
+					<li><button type="button" id="board_write_btn">완료</button></li>
 				</ul>
 			</div>    
 		</section>
-		<section class="section2_dongneLife_write">
-			<div class="write_topic" id="write_topic">
-				<label>매너점수를 주세요</label><br>
-						<select  name="score"  id="mannerGrade">
-							<option value="none">선택</option>
-							<option value="5">😆 (최고에요)</option>
-							<option value="4">🙂 (좋아요)</option>
-							<option value="3">😮 (보통이에요))</option>
-							<option value="2">😥 (별로에요)</option>
-							<option value="1">😡 (나빠요)</option>
-						</select> 			
-		</div>
-		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
-				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요." name="review" id="preview"></textarea>
-			</div>
-		</section>
-		<section class="section4_dongneLife_write">
-			<div>
-				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
-				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'><br><br>
-				
-				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
+				<textarea placeholder="여기에 후기를 남겨주세요." name="srcontent" id="srcontent"></textarea>
 			</div>
 		</section>
 		</form>

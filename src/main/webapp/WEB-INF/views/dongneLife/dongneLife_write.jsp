@@ -165,8 +165,7 @@
 	
 	<div class="dongnelife_write">
 		<form name="board_write_form" action="dongneLife_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
-		<section class="section1_dongneLife_write">
-			<input type="hidden" name="mid" value="aa">		
+		<section class="section1_dongneLife_write">	
 			<div class="write_nav">
 				<ul>
 					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>

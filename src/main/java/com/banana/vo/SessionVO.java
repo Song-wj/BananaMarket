@@ -1,8 +1,14 @@
 package com.banana.vo;
 
 public class SessionVO {
-	String nickname;
+	String nickname ,mid;
 	int result;
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 	public String getNickname() {
 		return nickname;
 	}

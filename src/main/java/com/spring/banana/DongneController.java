@@ -3,8 +3,8 @@ package com.spring.banana;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.SessionVO;
 import com.banana.vo.dongneVO;
 import com.spring.service.BananaService;
 
@@ -76,13 +77,13 @@ public class DongneController  {
 	 */
 	@RequestMapping(value ="/dongneLife_write.do", method = RequestMethod.GET)
 	public String dongnelife_write() {
-	
 		return "/dongneLife/dongneLife_write";
 	}
 	
 	@RequestMapping(value ="/dongneLife_write_proc.do", method = RequestMethod.POST)
-	public String dongneLife_write_proc(dongneVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {
-		
+	public String dongneLife_write_proc(dongneVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		 vo.setMid(svo.getMid());
 
 		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
 		 String path1 = request.getSession().getServletContext().getRealPath("/");
