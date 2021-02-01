@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.BananaShopDAO;
+import com.banana.dao.BananaShopReviewDAO;
 import com.banana.vo.BananaShopVO;
 
 @Service("shopService")
@@ -16,6 +17,9 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	
 	@Autowired
 	private BananaShopDAO shopDAO;
+	
+	@Autowired
+	private BananaShopReviewDAO shopReviewDAO;
 
 	@Override
 	public Object getList() {
@@ -63,7 +67,10 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	public Object getContent(Object sid) {
 		ModelAndView mv = new ModelAndView();
 		BananaShopVO svo = shopDAO.getShopContent((String)sid);
+		svo.getSintro().replace("\r\n", "<br>");
+		int review_count = shopReviewDAO.getShopReviewCount((String)sid);
 		
+		mv.addObject("review_count", review_count);
 		mv.addObject("vo", svo);
 		mv.setViewName("/myNeighborhood/neighborhoodStore");
 		
@@ -129,6 +136,24 @@ public class EnrollstoreServiceImpl implements EnrollService {
 			str="redirect:/neighborhood.do";
 		}
 		return str;
+	}
+
+	@Override
+	public Object getSelectList(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getCommentListAjaxProc(String bid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getUpdateContent(Object id, String rno) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

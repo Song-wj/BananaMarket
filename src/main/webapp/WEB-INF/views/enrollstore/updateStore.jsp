@@ -350,7 +350,7 @@ $(document).ready(function(){
 						<label>주소</label>
 					</li>
 					<li>
-						<input type="text" name="saddr_num" placeholder="우편번호" class="addr1" id="addr1">
+						<input type="text" name="saddr_num" placeholder="우편번호" class="addr1" id="addr1" value="${vo.saddr_num }">
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
 						<input type="text" name="addr2" value="${vo.addr2 }" placeholder="도로명주소" class="addr2" id="addr2">
