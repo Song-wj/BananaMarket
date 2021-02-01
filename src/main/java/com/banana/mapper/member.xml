@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<insert id="join" parameterType="com.banana.vo.BananaMemberVO">
+		insert into banana_member values(#{mid},#{nickname},#{pw},#{ph},#{maddr_num},#{maddr},
+			#{mfile},#{msfile},36,sysdate)
+	</insert>
+	
+	<select id="idcheck" parameterType="java.lang.String" resultType="int">
+		select count(*) from banana_member where mid=#{mid}
+	</select>
+	
+	<select id="nickcheck" parameterType="java.lang.String" resultType="int">
+		select count(*) from banana_member where nickname=#{nickname}
+	</select>
+	
+	<select id="login" parameterType="com.banana.vo.BananaMemberVO" resultType="com.banana.vo.SessionVO">
+		select count(*) result, nickname from banana_member where mid=#{mid} and pw=#{pw} group by nickname
+	</select>
+	
+	<select id="logincheck" parameterType="map" resultType="int">
+		select count(*) from banana_member where mid=#{mid} and pw=#{pw}
+	</select>
+	
+	<select id="memberlist" resultType="com.banana.vo.BananaMemberVO">
+		select mid, nickname, ph, maddr, mdate from banana_member order by mdate
+	</select>
+</mapper>

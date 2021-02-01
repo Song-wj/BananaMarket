@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.preview">
+	
+	<insert id="buyreviewinsert" parameterType="com.banana.vo.ReviewVO">
+		insert into banana_buy_review values
+		<choose>
+  			<when test="rfile != null">
+  				('BR_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},#{rfile},#{rsfile},sysdate)
+  			</when>
+  			<otherwise>
+  				('BR_'||sqe_banana_buy_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
+  			</otherwise>
+  		</choose>
+	</insert>
+	
+	<insert id="sellreviewinsert" parameterType="com.banana.vo.ReviewVO">
+		insert into banana_sell_review values
+		<choose>
+  			<when test="rfile != null">
+  				('SR_'||sqe_banana_sell_review.nextval,#{pid},#{mid},#{score},#{review},#{rfile},#{rsfile},sysdate)
+  			</when>
+  			<otherwise>
+  				('SR_'||sqe_banana_sell_review.nextval,#{pid},#{mid},#{score},#{review},'','',sysdate)
+  			</otherwise>
+  		</choose>
+	</insert>
+	
+	<select id="getlist" resultType="com.banana.vo.ReviewVO" >
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
+		from banana_member m ,
+			(select rid,pid,mid,score,review, rfile, rsfile, rdate
+			  from banana_buy_review
+			  union
+			  select rid,pid,mid,score,review, rfile, rsfile, sdate
+			  from banana_sell_review )r
+			where m.mid= r.mid 
+			order by rdate desc
+	</select> 
+	
+	
+	<select id="getbuylist" resultType="com.banana.vo.ReviewVO" >
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
+		from banana_member m , banana_buy_review r
+		where m.mid= r.mid 
+		order by rdate desc
+	</select> 
+	
+	<select id="getselllist" resultType="com.banana.vo.ReviewVO" >
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, sdate, maddr
+		from banana_member m , banana_sell_review r
+		where m.mid= r.mid 
+		order by sdate desc
+	</select>
+	
+	<select id="getmyreviewlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, rdate, maddr
+		from banana_member m , 
+   			 (select rid,pid,mid,score,review, rfile, rsfile, rdate
+      		  from banana_buy_review
+              union
+              select rid,pid,mid,score,review, rfile, rsfile, sdate
+              from banana_sell_review) r
+		where m.mid= r.mid and m.mid=#{mid}
+		order by rdate desc
+	</select> 
+	
+	<select id="getmyreview" parameterType="java.lang.String"  resultType="com.banana.vo.ReviewVO">
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, maddr
+		from banana_member m ,
+			(select rid,pid,mid,score,review, rfile, rsfile
+			  from banana_buy_review
+			  union
+			  select rid,pid,mid,score,review, rfile, rsfile
+			  from banana_sell_review )r
+			where m.mid= r.mid and rid=#{rid}
+			
+	</select>
+	
+	<update id="updatebuymyreview" parameterType="com.banana.vo.ReviewVO">
+		update banana_buy_review set review = #{review} , score=#{score} where rid=#{rid}
+	</update>
+	
+	<update id="updatesellmyreview" parameterType="com.banana.vo.ReviewVO">
+		update banana_sell_review set review = #{review} , score=#{score} where rid=#{rid}
+	</update>
+	
+	<delete id="deletebuymyreview" parameterType="java.lang.String"  >
+		delete from banana_buy_review where rid= #{rid}
+			
+	</delete>
+	
+	<delete id="deletesellmyreview" parameterType="java.lang.String"  >
+		delete from banana_sell_review where rid= #{rid}
+			
+	</delete>
+</mapper>

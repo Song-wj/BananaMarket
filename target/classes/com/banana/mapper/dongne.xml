@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.dongne">
+	<insert id="writesubject" parameterType="com.banana.vo.dongneSubjectVO">
+		insert into banana_board_subject values('bs_'||SQE_BANANA_BOARD_SUBJECT.NEXTVAL,
+					#{bstitle},#{bstopic},#{bsfile},#{bssfile})
+	</insert>
+	
+	<select id="getDongneSubject" resultType="com.banana.vo.dongneSubjectVO">
+		select bsid, bstitle, bstopic, bssfile from banana_board_subject
+	</select>
+	
+	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
+		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
+	</select>
+	
+	<update id="updateSubject" parameterType="com.banana.vo.dongneSubjectVO">
+		update banana_board_subject set bstitle=#{bstitle}, bstopic=#{bstopic}, bsfile=#{bsfile}, bssfile=#{bssfile} where bsid=#{bsid}
+	</update>
+	
+	<delete id="deleteSubject" parameterType="java.lang.String">
+		delete from banana_board_subject where bsid=#{bsid}
+	</delete>
+</mapper>

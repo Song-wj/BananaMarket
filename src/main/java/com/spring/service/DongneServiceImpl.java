@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.dongneDAO;
 import com.banana.vo.LikeVO;
+import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -23,6 +24,107 @@ public class DongneServiceImpl implements BananaService{
 
 	@Autowired
 	private dongneDAO dongneDAO;
+	
+	public String deleteSubjectProc(String bsid) {
+		boolean result = dongneDAO.deleteSubjectProc(bsid);
+		return String.valueOf(result);
+	}
+	
+	public ModelAndView getSubjectListContent(String bsid) {
+		ModelAndView mv = new ModelAndView();
+		dongneSubjectVO vo = dongneDAO.getSubjectContent(bsid);
+		mv.addObject("vo", vo);
+		mv.setViewName("mypage/mypage_subjectContent");
+		return mv;
+	}
+	
+	public ModelAndView getSubjectList2() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("mypage/mypage_subjectList2");
+		return mv;
+	}
+	
+	public ModelAndView getSubjectList() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("mypage/mypage_subjectList");
+		return mv;
+	}
+	
+	public ModelAndView getSubjectListAdmin() {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		mv.addObject("list", list);
+		mv.setViewName("admin/boardSubjectManage");
+		return mv;
+	}
+	
+	public String updateSubjectProc(Object vo) {
+		String result = "";
+		
+		dongneSubjectVO dvo = (dongneSubjectVO) vo;
+		if(dvo.getFile1().getSize() != 0) {
+			UUID uuid = UUID.randomUUID();
+			dvo.setBsfile(dvo.getFile1().getOriginalFilename());
+			dvo.setBssfile(uuid + "_" + dvo.getFile1().getOriginalFilename());
+		}
+		
+		//DB¿¬µ¿
+		boolean update_result = dongneDAO.updateSubjectProc(dvo);
+		if(update_result) {
+			File file = new File(dvo.getSavepath() + dvo.getBssfile());
+			
+			try {
+				dvo.getFile1().transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result = "redirect:/boardSubjectManage.do";
+		} else {
+			result = "errorPage";
+		}
+		
+		return result;
+	}
+
+	public ModelAndView updateSubject(String bsid) {
+		ModelAndView mv = new ModelAndView();
+		dongneSubjectVO vo = dongneDAO.getSubjectContent(bsid);
+		mv.addObject("vo", vo);
+		mv.setViewName("/admin/boardSubjectManageUpdate");
+		return mv;
+	}
+	
+	public String writeSubject(Object vo) {
+		String result = "";
+		
+		dongneSubjectVO dvo = (dongneSubjectVO) vo;
+		if(dvo.getFile1().getSize() != 0) {
+			UUID uuid = UUID.randomUUID();
+			dvo.setBsfile(dvo.getFile1().getOriginalFilename());
+			dvo.setBssfile(uuid + "_" + dvo.getFile1().getOriginalFilename());
+		}
+		
+		boolean dvo_result = dongneDAO.writeSubject(dvo);
+		
+		if(dvo_result) {
+			File file = new File(dvo.getSavepath() + dvo.getBssfile());
+			
+			try {
+				dvo.getFile1().transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result = "redirect:/boardSubjectManage.do";
+		}else {
+			result = "errorPage";
+		}
+		
+		return result;
+	}
 	
 	public Object  insert(Object vo) {
 		String result="";

@@ -1,15 +1,24 @@
 package com.spring.banana;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
 import com.spring.service.BuylistService;
 import com.spring.service.LikeServiceImpl;
+import com.spring.service.DongneServiceImpl;
+import com.spring.service.MypageReviewServiceImpl;
 import com.spring.service.ProductService;
 import com.spring.service.ProductServiceImpl;
 
@@ -27,6 +36,12 @@ public class MypageController {
 	
 	@Autowired
 	private ProductServiceImpl ProductServiceImpl;
+	private DongneServiceImpl dongneService;
+	
+	
+	@Autowired
+	private MypageReviewServiceImpl MypageReviewService ;
+	
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -68,8 +83,8 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
-	public String mypage_subjectContent() {
-		return "mypage/mypage_subjectContent";
+	public ModelAndView mypage_subjectContent(String bsid) {
+		return dongneService.getSubjectListContent(bsid);
 	}
 	
 	/**
@@ -77,8 +92,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_subjectList2.do", method=RequestMethod.GET)
-	public String mypage_subjectList2() {
-		return "mypage/mypage_subjectList2";
+	public ModelAndView mypage_subjectList2() {
+		return dongneService.getSubjectList2();
 	}
 
 	/**
@@ -86,8 +101,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_subjectList.do", method=RequestMethod.GET)
-	public String mypage_subjectList() {
-		return "mypage/mypage_subjectList";
+	public ModelAndView mypage_subjectList() {
+		return dongneService.getSubjectList();
 	}
 	
 	/**
@@ -165,6 +180,16 @@ public class MypageController {
 	}
 	
 	/**
+	 * 마이페이지 - 판매내역 - 삭제
+	 * @return
+	 */
+	@RequestMapping(value ="/deletePage.do", method = RequestMethod.GET)
+	public String deletePage(String pid) {	
+		return (String)productService.delete(pid);
+	}
+	
+	
+	/**
 	 * 마이페이지 - 판매내역 - 수정
 	 * @param pid
 	 * @return
@@ -178,8 +203,16 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/updatePage_proc.do", method=RequestMethod.POST)
-	public String updatePage_proc(productVO vo) {
-		return (String)productService.update(vo);
+	public ModelAndView updatePage_proc(productVO vo,  MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {
+			
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		
+		return (ModelAndView)productService.update(vo);
 	}
 	
 	/**
@@ -187,10 +220,18 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_contract.do", method=RequestMethod.GET)
-	public String mypage_contract() {
-		return "mypage/mypage_contract";
+	public ModelAndView mypage_contract() {
+		return (ModelAndView)productService.getSellList();
 	}
-	
+	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
+	public String mypage_contract_review() {
+		return "mypage/mypage_contract_review";
+	}
+	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
+	public String contract_reivew_write_proc(ReviewVO vo) {
+		vo.setParam("판매자리뷰");
+		return (String)MypageReviewService.insert(vo); 
+	}
 	/**
 	 * 마이페이지 - 구매내역
 	 * @return
@@ -200,6 +241,21 @@ public class MypageController {
 	 * public ModelAndView mypage_purchased() { return
 	 * (ModelAndView)buylistservice.getList(); }
 	 */
+
+	@RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+	public String mypage_purchased() {
+		return "mypage/mypage_purchased";
+	}
+	// 구매내역 리뷰 쓰기
+	@RequestMapping(value="/mypage_purchase_review.do", method=RequestMethod.GET)
+	public String mypage_purchase_review() {
+		return "mypage/mypage_purchase_review";
+	}
+	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
+	public String purchase_reivew_write_proc(ReviewVO vo) {
+		vo.setParam("구매자리뷰");
+		return (String)MypageReviewService.insert(vo); 
+	}
 	
 	/**
 	 * 마이페이지 - 프로필 수정
@@ -223,9 +279,48 @@ public class MypageController {
 	 * 마이페이지 - 내 댓글
 	 * @return
 	 */
+	// 전체 리뷰
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
-	public String mypage_review() {
-		return "mypage/mypage_review";
+	public ModelAndView mypage_review() {
+		return (ModelAndView)MypageReviewService.getList();
+		
 	}
-
+	
+	// 내리뷰
+	@RequestMapping(value="/mypage_myReview.do", method=RequestMethod.GET)
+	public ModelAndView mypage_myRreview() {
+		String mid ="qqq123";
+		return (ModelAndView)MypageReviewService.getMyReviewList(mid);
+		
+	}
+	// 리뷰 수정
+	@RequestMapping(value="MyReview_update.do", method=RequestMethod.GET)
+	public ModelAndView MyReview_update_proc(String rid) {
+		
+		return (ModelAndView)MypageReviewService.getUpdateContent(rid);	
+	}
+	
+	
+		
+	@RequestMapping(value="update_myReview_proc.do", method=RequestMethod.POST)
+	public ModelAndView update_myReview_proc(ReviewVO vo) {
+		return (ModelAndView)MypageReviewService.update(vo);
+		
+	}
+	// 리뷰 삭제
+		@RequestMapping(value="MyReview_delete_proc.do", method=RequestMethod.GET)
+		public ModelAndView MyReview_delete_proc(String rid) {
+			
+			return (ModelAndView)MypageReviewService.delete(rid); 
+		
+			
+		}
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value="/mypage_review.do", method=RequestMethod.GET) public
+	 * String mypage_review() { return (String)MypageReviewService.getList();
+	 * 
+	 * }
+	 */
 }

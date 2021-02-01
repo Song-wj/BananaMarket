@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService{
 		SessionVO svo = memberDAO.getLogin(vo);
 		//String result = "";
 		
-		if(svo.getResult() != 0) {
+		if(svo.getResult() == 1) {
 			session.setAttribute("svo", svo);
 			mv.addObject("svo", svo);
 			mv.setViewName("index");
@@ -70,12 +70,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Object getResultJoin(BananaMemberVO vo) {
 		ModelAndView mv = new ModelAndView();
-		
+		boolean result = false;
 		if(vo.getFile1().getSize() != 0) {
 			UUID uuid = UUID.randomUUID();
 			vo.setMfile(vo.getFile1().getOriginalFilename());
 			vo.setMsfile(uuid + "_" + vo.getFile1().getOriginalFilename());
-			boolean result = memberDAO.InsertMember(vo);
+			 result = memberDAO.InsertMember(vo);
 			if(result) {
 				File file = new File(vo.getSavepath() + vo.getMsfile());
 				try {
@@ -90,7 +90,11 @@ public class MemberServiceImpl implements MemberService{
 			}
 			
 		} else {
-			System.out.println("해당 파일 없음");
+			result = memberDAO.InsertMember(vo);
+			if(result) {
+				mv.setViewName("/login/login");
+			}
+			/* System.out.println("해당 파일 없음"); */
 		}
 		
 		return mv;

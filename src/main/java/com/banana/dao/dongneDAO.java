@@ -2,12 +2,52 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
-import com.banana.vo.LikeVO;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	private static String namespace = "mapper.dongne";
+	
+	public boolean deleteSubjectProc(String bsid) {
+		boolean result = false;
+		int val = sqlSession.delete(namespace+".deleteSubject", bsid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
+	public boolean updateSubjectProc(dongneSubjectVO vo) {
+		boolean result = false;
+		int val = sqlSession.update(namespace+".updateSubject",vo);
+		if(val != 0) result = true;
+		return result;
+	}
+	
+	public dongneSubjectVO getSubjectContent(String bsid) {
+		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
+	}
+	
+	public ArrayList<dongneSubjectVO> getDongneSubject() {
+		List<dongneSubjectVO> list = sqlSession.selectList(namespace+".getDongneSubject");
+		return (ArrayList<dongneSubjectVO>)list;
+	}
 
+	public boolean writeSubject(dongneSubjectVO vo) {
+		boolean result = false;
+		int val = sqlSession.insert(namespace+".writesubject",vo);
+		if(val != 0) result = true;
+		return result;
+	}
+	
+	
 	// 동네생활 글쓰기
 	public boolean insertBoard(dongneVO vo) {
 		boolean result = false;

@@ -445,6 +445,17 @@
 	}
 </style>
 </head>
+<script>
+$(document).ready(function(){
+	lightbox.option({
+	    resizeDuration: 200,
+	    wrapAround: true,
+	    disableScrolling: false,
+	    fitImagesInViewport:false
+	});
+	
+});	
+</script>
 <body>
 <jsp:include page="../header.jsp" />
 
@@ -460,14 +471,16 @@
 			  <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
-			      <img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" >
-			    </div>
-			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/images/card-photo2.jpg" >
-			    </div>
-			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/images/card-photo3.jpg" >
-			    </div>
+			      <c:forEach var="list" items="${pfile_list }" >
+						<img src="http://localhost:9000/banana/resources/upload/${list}">
+				    </div>
+				    <div class="carousel-item">
+				    	<img src="http://localhost:9000/banana/resources/upload/${list}">
+				    </div>
+				    <div class="carousel-item">
+				      <a href="http://localhost:9000/banana/resources/upload/${st.current}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
+				    </div>
+				   </c:forEach> 
 			  </div>
 			  
 			  <!-- Left and right controls -->

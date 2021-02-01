@@ -133,7 +133,7 @@ public class BananaShopDAO extends DBConn {
 		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
 		try {
 			String sql = "select sid, mid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, smain_simg\r\n"
-						+ "from banana_shop";
+						+ "from banana_shop order by sdate desc";
 			getStatement();
 			rs= stmt.executeQuery(sql);
 			while(rs.next()) {

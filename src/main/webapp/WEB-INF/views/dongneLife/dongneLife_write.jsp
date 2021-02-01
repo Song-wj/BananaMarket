@@ -33,7 +33,7 @@
 		font-size:22px;
 		font-weight:800;
 	}
-	section.section1_dongneLife_write li:nth-child(4) button {
+	section.section1_dongneLife_write li:nth-child(3) button {
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
 		font-weight:bold;
@@ -42,11 +42,11 @@
 		font-size:17px;
 		border-radius:5px;
 	}
-	section.section1_dongneLife_write li:nth-child(4) button:hover{
+	section.section1_dongneLife_write li:nth-child(3) button:hover{
 		cursor:pointer;
 		opacity:0.7;
 	}
-	section.section1_dongneLife_write li:nth-child(2) img {
+	section.section1_dongneLife_write li:nth-child(1) img {
 		width:30px;
 		height:30px;
 		margin-bottom:-5px;
@@ -166,9 +166,13 @@
 	<div class="dongnelife_write">
 		<form name="board_write_form" action="dongneLife_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
+			<input type="hidden" name="mid" value="aa">		
 			<div class="write_nav">
 				<ul>
+<<<<<<< HEAD
 					<li><input type="hidden" name="mid" value="whtjdrnr010"></li>				
+=======
+>>>>>>> branch 'master' of https://github.com/Dex-Park/BananaMarket.git
 					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글쓰기</label></li>
 					<li><button type="submit" id="board_write_btn">완료</button></li>

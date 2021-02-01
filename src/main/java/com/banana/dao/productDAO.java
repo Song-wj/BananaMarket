@@ -1,6 +1,7 @@
 package com.banana.dao;
 
 
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class productDAO extends DBConn{
 		
 		try {
 			String sql = "insert into banana_product values "
-					+ "('p_'||sqe_banana_product.nextval,?,?,?,?,?,0,0,sysdate,?,?,?)";
+					+ "('p_'||sqe_banana_product.nextval,?,?,?,?,?,0,0,sysdate,?,?,?,?)";
 			
 			getPreparedStatement(sql);
 			
@@ -30,16 +31,7 @@ public class productDAO extends DBConn{
 			pstmt.setString(6, vo.getPchk());
 			pstmt.setString(7, vo.getPfile());
 			pstmt.setString(8, vo.getPsfile());
-			//pstmt.setString(7, vo.getPimg1());
-			//pstmt.setString(8, vo.getPsimg1());
-			//pstmt.setString(9, vo.getPimg2());
-			//pstmt.setString(10, vo.getPsimg2());
-			//pstmt.setString(11, vo.getPimg3());
-			//pstmt.setString(12, vo.getPsimg3());
-			//pstmt.setString(13, vo.getPimg4());
-			//pstmt.setString(14, vo.getPsimg4());
-			//pstmt.setString(15, vo.getPimg5());
-			//pstmt.setString(16, vo.getPsimg5());
+			pstmt.setString(9, vo.getBuy_mid());
 			
 			int val = pstmt.executeUpdate();
 			
@@ -59,8 +51,8 @@ public class productDAO extends DBConn{
 	public ArrayList<productVO> getProductList(){
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		try {
-			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile "
-						+ " from banana_product ";
+			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile, buy_mid "
+						+ " from banana_product order by pdate desc ";
 			getPreparedStatement(sql);
 			
 			ResultSet rs = pstmt.executeQuery();
@@ -80,6 +72,7 @@ public class productDAO extends DBConn{
 				vo.setPchk(rs.getString(10));
 				vo.setPfile(rs.getString(11));
 				vo.setPsfile(rs.getString(12));
+				vo.setBuy_mid(rs.getString(13));
 				
 				list.add(vo);
 			}
@@ -96,7 +89,7 @@ public class productDAO extends DBConn{
 	public ArrayList<productVO> getProductSellList(){
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		try {
-			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile "
+			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile, buy_mid "
 						+ " from banana_product where pchk='x' ";
 			getPreparedStatement(sql);
 			
@@ -117,6 +110,7 @@ public class productDAO extends DBConn{
 				vo.setPchk(rs.getString(10));
 				vo.setPfile(rs.getString(11));
 				vo.setPsfile(rs.getString(12));
+				vo.setBuy_mid(rs.getString(13));
 				
 				list.add(vo);
 			}
@@ -168,19 +162,22 @@ public class productDAO extends DBConn{
 	}
 	
 	/**
-	 *  중고제품 상세 보기
+	 *  중고제품 수정
 	 */
 	public boolean getProductUpdate(productVO vo) {
 		boolean result = false;
 		
 		try {
-			String sql ="update banana_product set ptitle=?,pcategory=?,pprice=?, pcontent=?";
+			String sql ="update banana_product set ptitle=?,pcategory=?,pprice=?, pcontent=?, pfile=? , psfile=? where pid=? ";
 			getPreparedStatement(sql);
 			
 			pstmt.setString(1,vo.getPtitle());
 			pstmt.setString(2,vo.getPcategory());
 			pstmt.setString(3,vo.getPprice());
 			pstmt.setString(4,vo.getPcontent());
+			pstmt.setString(5,vo.getPfile());
+			pstmt.setString(6,vo.getPsfile());
+			pstmt.setString(7,vo.getPid());
 			
 			int count = pstmt.executeUpdate();
 			if(count != 0) result = true;
@@ -192,6 +189,7 @@ public class productDAO extends DBConn{
 		return result;
 	}
 	
+
 	/**
 	 * 좋아요
 	 */
@@ -295,5 +293,46 @@ public class productDAO extends DBConn{
 		return result;
 	}
 
+
+	
+	public boolean getUpdateNofile(productVO vo) {
+		boolean result = false;
+		try {
+		
+			String sql ="update banana_product set ptitle=?, pcategory=?, pprice=?, pcontent=?,  where pid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1,vo.getPtitle());
+			pstmt.setString(2,vo.getPcategory());
+			pstmt.setString(3,vo.getPprice());
+			pstmt.setString(4,vo.getPcontent());
+			pstmt.setString(5,vo.getPid());
+			
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	/**
+	 *  중고 물품 삭제
+	 */
+	public boolean getProductDelete(String pid) {
+		boolean result = false;
+		try {
+			String sql="delete from banana_product where pid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, pid);
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

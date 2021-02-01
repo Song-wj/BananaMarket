@@ -12,34 +12,67 @@
    <!-- Enables the Spring MVC @Controller programming model -->
    <annotation-driven />
 
-   <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-   <resources mapping="/resources/**" location="/resources/" />
-   <resources mapping="/css/**" location="/resources/css/" />
-   <resources mapping="/js/**" location="/resources/js/" />
-   <resources mapping="/images/**" location="/resources/images/" />
-   
-   <!-- multipartResolver -->
-      <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-       </beans:bean>  
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/css/**" location="/resources/css/" />
+	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/images/**" location="/resources/images/" />
+	
+	<!-- multipartResolver -->
+  	 <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   	 </beans:bean>  
+   	 
+   	<!-- Interceptor Object -->
+   	<beans:bean class="com.spring.interceptor.AuthHandlerInterceptor" id="authInterceptor"></beans:bean>
+   	<beans:bean class="com.spring.interceptor.AuthHandlerInterceptorAdmin" id="authInterceptorAdmin"></beans:bean>
+   	
+   	<interceptors>
+   		<interceptor>
+   			<mapping path="/mypage*"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/neighborhood*"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/dongneLife*"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/member*"/>
+   			<beans:ref bean="authInterceptorAdmin"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/board*"/>
+   			<beans:ref bean="authInterceptorAdmin"/>
+   		</interceptor>
+   	</interceptors>
 
-   <!-- Service -->
-   <beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
-   <beans:bean class="com.spring.service.ProductServiceImpl" id="productService"></beans:bean>
-   <beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
-   <beans:bean class="com.spring.service.BananaNoticeServiceImpl" id="noticeService"></beans:bean>
-   <beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
-   <beans:bean class="com.enroll.service.EnrollstoreServiceImpl" id="shopService"></beans:bean>
-   <beans:bean class="com.spring.service.BuylistServiceImpl" id="buylistService"></beans:bean>
-   <beans:bean class="com.spring.service.LikeServiceImpl" id="likeService"></beans:bean>
-   
-   <!-- DAO -->
-   <beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
-   <beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
-   <beans:bean class ="com.banana.dao.BananaNoticeDAO" id="noticeDAO"></beans:bean>
-   <beans:bean class ="com.banana.dao.BananaFAQDAO" id="questionDAO"></beans:bean>
-   <beans:bean class ="com.banana.dao.productDAO" id="productDAO"></beans:bean>
-   <beans:bean class ="com.banana.dao.BananaShopDAO" id="shopDAO"></beans:bean>
-   <beans:bean class ="com.banana.dao.BuylistDAO" id="buylistDAO"></beans:bean>
+	<!-- Service -->
+	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
+	<beans:bean class="com.spring.service.ProductServiceImpl" id="productService"></beans:bean>
+	<beans:bean class="com.banana.service.MemberServiceImpl" id="memberService"></beans:bean>
+	<beans:bean class="com.spring.service.BananaNoticeServiceImpl" id="noticeService"></beans:bean>
+	<beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
+	<beans:bean class="com.enroll.service.EnrollstoreServiceImpl" id="shopService"></beans:bean>
+	<beans:bean class="com.spring.service.MypageReviewServiceImpl" id="mypageReviewService"></beans:bean>
+	<beans:bean class="com.enroll.service.BananaShopReviewServiceImpl" id="shopReviewService"></beans:bean>
+	<beans:bean class="com.enroll.service.DongneCommentServiceImpl" id="dongneCommentService"></beans:bean>
+	<beans:bean class="com.spring.service.BuylistServiceImpl" id="buylistService"></beans:bean>
+    <beans:bean class="com.spring.service.LikeServiceImpl" id="likeService"></beans:bean>
+	
+	<!-- DAO -->
+	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
+	<beans:bean class="com.banana.dao.BananaMemberDAO" id="memberDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaNoticeDAO" id="noticeDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaFAQDAO" id="questionDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.productDAO" id="productDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaShopDAO" id="shopDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.pReviewDAO" id="reviewDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BananaShopReviewDAO" id="shopReviewDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.DongneCommentDAO" id="dongneCommentDAO"></beans:bean>
+	<beans:bean class ="com.banana.dao.BuylistDAO" id="buylistDAO"></beans:bean>
 
    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

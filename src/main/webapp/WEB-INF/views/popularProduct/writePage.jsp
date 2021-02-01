@@ -19,6 +19,12 @@
 		list-style:none;
 		margin-top:30px;
 	}
+	div.content form.pwriteForm ul li:first-child img{
+		width:30px;
+		height:30px;
+		margin:0 5px -6px 0;
+	}
+	
 	div.content form.pwriteForm ul li:first-child>label{
 		display: inline-block; 
 		padding: .5em .75em; 
@@ -34,16 +40,14 @@
 	}
 	div.content form.pwriteForm ul li:first-child>input[type="file"]{
 		position: absolute; 
-		width: 1px; 
-		height: 1px; 
 		padding: 0; 
-		margin: -1px; 
-		overflow: hidden; 
-		clip:rect(0,0,0,0); 
-		border: 0;
+		border: 0; 
+		margin-left: -210px;
+		margin-top: 60px;  
+	 	overflow: hidden;  
+	 	clip:rect(0 180px 150px 75px);  
 	}
 	div.content form.pwriteForm ul li:first-child div{
-
 		margin-top:20px;
 		margin-bottom:20px;
 	}
@@ -56,6 +60,9 @@
 		width:500px;
 		text-indent:10px;
 		font-size:17px;
+	}
+	div.content form.pwriteForm ul li:nth-child(2) input[type='text']{
+		margin-top: 30px;
 	}
 	div.content form.pwriteForm ul li:nth-child(4){
 		margin-left:170px;
@@ -82,14 +89,6 @@
 $(document).ready(function(){
 	
 	var sel_files = [];
-	$(document).ready(function(){
-		//$("#input_img").on("change", handleImgFileSelect);
-		$("#input_img1").on("change", handleImgFileSelect);
-		//$("#input_img2").on("change", handleImgFileSelect);
-		//$("#input_img3").on("change", handleImgFileSelect);
-		//$("#input_img4").on("change", handleImgFileSelect);
-		//$("#input_img5").on("change", handleImgFileSelect);
-	});
 	
 	function handleImgFileSelect(e){
 		var files = e.target.files;
@@ -139,7 +138,17 @@ $(document).ready(function(){
         }
     });
 	
-	
+	function test(){
+		var fileInput = document.getElementById("input_img");
+        var files = fileInput.files;
+        //var file;
+         
+	        if(files.length>5){
+	        	alert("이미지는 5장까지 업로드 가능합니다!");
+	        	$("#input_img").val("");
+	        }
+	}
+
 	/* $("#input_img").change(function(){
 		if(window.FileReader){
 			var fileName= $(this)[0].length;
@@ -148,8 +157,6 @@ $(document).ready(function(){
 								
 		}
 	});  */
-	
-	
 });
 </script>
 </head>
@@ -160,16 +167,9 @@ $(document).ready(function(){
 		<form name="pwriteForm" action="writePage_proc.do" method="post"
 								 class="pwriteForm" enctype="multipart/form-data">
 		<ul>
-			<li><label for="input_img1">이미지 추가</label>
-				<!-- <label for="input_img2">이미지 추가</label>
-				<label for="input_img3">이미지 추가</label>
-				<label for="input_img4">이미지 추가</label>
-				<label for="input_img5">이미지 추가</label>
-				<input type="file" id="input_img1"  name="file_list">
-				<input type="file" id="input_img2"  name="file_list">
-				<input type="file" id="input_img3"  name="file_list">
-				<input type="file" id="input_img4"  name="file_list"> -->
-				<input type="file" id="input_img1"  name="file_list">
+			<li><label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png">상품 이미지 추가</label>
+				<!-- <input type="file" id="input_img"  name="file_list"> -->
+				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'>
 				<div id="img_list"></div>
     		</li>
 			<li><input type="text" name="ptitle" placeholder="제목" id="ptitle" ></li>
