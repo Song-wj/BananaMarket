@@ -1,114 +1,51 @@
 package com.banana.dao;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
 public class dongneDAO extends DBConn{
 	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	private static String namespace = "mapper.dongne";
+	
 	public boolean deleteSubjectProc(String bsid) {
 		boolean result = false;
-		
-		try {
-			String sql = "delete from banana_board_subject where bsid=?";
-			getPreparedStatement(sql);
-			pstmt.setString(1, bsid);
-			int val = pstmt.executeUpdate();
-			if(val != 0) result = true;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		int val = sqlSession.delete(namespace+".deleteSubject", bsid);
+		if(val != 0) result = true;
 		return result;
 	}
 	
 	public boolean updateSubjectProc(dongneSubjectVO vo) {
 		boolean result = false;
-		try {
-			String sql = "update banana_board_subject set bstitle=?, bstopic=?, bsfile=?, bssfile=? where bsid=?";
-			getPreparedStatement(sql);
-			pstmt.setString(1, vo.getBstitle());
-			pstmt.setString(2, vo.getBstopic());
-			pstmt.setString(3, vo.getBsfile());
-			pstmt.setString(4, vo.getBssfile());
-			pstmt.setString(5, vo.getBsid());
-			
-			int val = pstmt.executeUpdate();
-			if(val != 0) result = true;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		int val = sqlSession.update(namespace+".updateSubject",vo);
+		if(val != 0) result = true;
 		return result;
 	}
 	
 	public dongneSubjectVO getSubjectContent(String bsid) {
-		dongneSubjectVO vo = new dongneSubjectVO();
-		
-		try {
-			String sql = "select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=?";
-			getPreparedStatement(sql);
-			pstmt.setString(1, bsid);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				vo.setBsid(rs.getString(1));
-				vo.setBstitle(rs.getString(2));
-				vo.setBstopic(rs.getString(3));
-				vo.setBssfile(rs.getString(4));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return vo;
+		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
 	}
 	
 	public ArrayList<dongneSubjectVO> getDongneSubject() {
-		ArrayList<dongneSubjectVO> list = new ArrayList<dongneSubjectVO>();
-		
-		try {
-			String sql = "select bsid, bstitle, bstopic, bssfile from banana_board_subject";
-			getPreparedStatement(sql);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				dongneSubjectVO vo = new dongneSubjectVO();
-				vo.setBsid(rs.getString(1));
-				vo.setBstitle(rs.getString(2));
-				vo.setBstopic(rs.getString(3));
-				vo.setBssfile(rs.getString(4));
-				list.add(vo);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
+		List<dongneSubjectVO> list = sqlSession.selectList(namespace+".getDongneSubject");
+		return (ArrayList<dongneSubjectVO>)list;
 	}
 
 	public boolean writeSubject(dongneSubjectVO vo) {
 		boolean result = false;
-		
-		try {
-			String sql = "insert into banana_board_subject values('bs_'||SQE_BANANA_BOARD_SUBJECT.NEXTVAL,"
-					+ "?,?,?,?)";
-			getPreparedStatement(sql);
-			pstmt.setString(1, vo.getBstitle());
-			pstmt.setString(2, vo.getBstopic());
-			pstmt.setString(3, vo.getBsfile());
-			pstmt.setString(4, vo.getBssfile());
-			
-			int cnt = pstmt.executeUpdate();
-			if(cnt != 0) result = true;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		int val = sqlSession.insert(namespace+".writesubject",vo);
+		if(val != 0) result = true;
 		return result;
 	}
+	
 	
 	// 동네생활 글쓰기
 	public boolean insertBoard(dongneVO vo) {
