@@ -9,4 +9,5 @@ public interface ProductService {
 	Object getUpdateContent(Object id);
 	Object delete(Object id);
 	
+	Object getSellList();
 }

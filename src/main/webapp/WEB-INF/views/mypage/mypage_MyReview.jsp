@@ -14,6 +14,12 @@
 		
 	});
 		
+	function review_delete(rid){
+		if (confirm("정말 삭제하시겠습니가?"))
+		  {
+			 window.location.href="MyReview_delete_proc.do?rid="+rid;
+		  } 
+	}
 </script>
 <style>
 	.mypage_review {
@@ -159,8 +165,8 @@
 						<td class="review" colspan="3">	
 							<label class="date">${vo.rdate }</label>
 					
-							<button type="button" class="review_update_btn">수정</button>
-							<button type="button" class="review_delete_btn">삭제</button>
+							<a href="MyReview_update.do?rid=${vo.rid }"><button type="button" class="review_update_btn">수정</button></a>
+							<button type="button" class="review_delete_btn" onclick="review_delete('${vo.rid}')">삭제</button>
 						</td>
 					</tr>	
 			</c:forEach>

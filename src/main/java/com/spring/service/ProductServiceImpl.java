@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.productDAO;
@@ -21,37 +21,54 @@ public class ProductServiceImpl implements ProductService{
 	public Object insert(Object vo) {
 		String result="";
 		productVO pvo = (productVO)vo;
-		UUID uuid = UUID.randomUUID(); 
 		
-			System.out.println(pvo.getFile_list().length);
+		ArrayList<String> file_list = new ArrayList<String>();
+		ArrayList<String> pfile_list = new ArrayList<String>();
+		
+		UUID uuid = UUID.randomUUID();
+		if(pvo.getList().get(0).getSize() != 0)  {
+			 	
+		       for (MultipartFile mf : pvo.getList()) {    	   
+		           file_list.add(mf.getOriginalFilename());
+		           pfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
+		       }
+		       
+		       pvo.setPfile(String.join(",", file_list));
+		       pvo.setPsfile(String.join(",", pfile_list));
+		}
+		boolean dao_result = productDAO.getInsert(pvo);
+		if(dao_result) {
+			try {
+				 for (MultipartFile mf : pvo.getList()) { 
+					File file = new File(pvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
+					mf.transferTo(file);
+				 }
+			} catch (Exception e) { 	e.printStackTrace(); }
+			result= "redirect:/popularProduct.do";
+		}else
+			result ="errorPage";
+		
+		return result;
+		/*UUID uuid = UUID.randomUUID(); 
+			//System.out.println(pvo.getFile_list().length);
 			for(CommonsMultipartFile file : pvo.getFile_list()) {
-				//파일이 존재하면 nfile nsfile
 				//System.out.println(file.getOriginalFilename());
 				if(pvo.getFile_list().length != 0 ) {
-					
 					pvo.setPfile(file.getOriginalFilename());
 					pvo.setPsfile(uuid+"_"+file.getOriginalFilename());
 				}	
 				//DB저장 
 				boolean dao_result = productDAO.getInsert(pvo);
-			
 				if(dao_result){
 					//서버저장 --> upload 폴더에 저장(폴더위치)
 					File file1 = new File(pvo.getSavepath()+pvo.getPsfile());
-					
 					try {	
 						file.transferTo(file1);
-						
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
+					}catch (Exception e) {	e.printStackTrace();	}
 					result= "redirect:/popularProduct.do";
-				}else {
+				}else 
 					result ="errorPage";
-				}
-			}
-			
-			return result;
+			}return result; */
 		} 
 	
 	
@@ -65,40 +82,98 @@ public class ProductServiceImpl implements ProductService{
 			return mv;
 	  }
 
+	 public Object getSellList() {
+		  ModelAndView mv = new ModelAndView();
+		  ArrayList<productVO> list = productDAO.getProductList();
+		  
+			mv.addObject("list", list);
+			mv.setViewName("/mypage/mypage_contract");
+			return mv;
+	  }
+	 
 	 public Object getContent(Object pid) {
-		 ModelAndView mv = new ModelAndView();
-		 productVO vo = productDAO.getProductContent((String)pid);
-			mv.addObject("vo", vo);
-			mv.setViewName("/popularProduct/productContent");
+		ModelAndView mv = new ModelAndView();
+		productVO vo = productDAO.getProductContent((String)pid);
+			if(vo.getPsfile() != null) {
+				String[] pfile_list =vo.getPsfile().split(",");
+		
+				mv.addObject("pfile_list", pfile_list);
+			}
+				mv.addObject("vo", vo);
+				mv.setViewName("/popularProduct/productContent");
+			
 			return mv;
 	 }
 	 
-
+	 
 	 public Object getUpdateContent(Object pid) {
-		  ModelAndView mv = new ModelAndView();
+		 ModelAndView mv = new ModelAndView();
 			productVO vo = productDAO.getProductContent((String)pid);
+			int count = 0;
+			if(vo.getPfile() != null) {
+				String[] pfile_list =vo.getPsfile().split(",");
+				for(int i=0; i<pfile_list.length; i++) {
+					count++;
+				}
+			}
+			mv.addObject("count", count);	
 			mv.addObject("vo", vo);
 			mv.setViewName("/popularProduct/updatePage");
 			return mv;
-		  
 	  }
 	 
-	 
 	 public Object update(Object vo) {
-			ModelAndView mv = new ModelAndView();
-			boolean result = productDAO.getProductUpdate((productVO)vo);
+		 	ModelAndView mv = new ModelAndView();
+			boolean result = false;
+			ArrayList<String> file_list = new ArrayList<String>();
+			ArrayList<String> pfile_list = new ArrayList<String>();
+			productVO pvo = (productVO)vo;
 			
-			if(result) {
-				//mv.setViewName("redirect:/productContent.do");
-				mv.setViewName("/mypage/mypage_contract");
+			UUID uuid = UUID.randomUUID();
+			if(pvo.getList().get(0).getSize() != 0) {
+			       for (MultipartFile mf : pvo.getList()) {    	   
+			    		 file_list.add(mf.getOriginalFilename());
+			    		 pfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
+			       }
+			       pvo.setPfile(String.join(",", file_list));
+			       pvo.setPsfile(String.join(",", pfile_list));
+			       
+			       result = productDAO.getProductUpdate((productVO)vo);
+			       
+			       if(result) {
+				       try {
+							 for (MultipartFile mf : pvo.getList()) { 									    		   
+									 File file = new File(pvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
+									 mf.transferTo(file);		    	   				
+							 }
+						} catch (Exception e) {	e.printStackTrace();	}
+			       }		       
+			}else if(pvo.getCancel_file().equals("cancel")) {
+				pvo.setPfile(null);
+				pvo.setPsfile(null);
+		        result = productDAO.getProductUpdate((productVO)vo);
 			}
-			return mv;
+			else {
+				result = productDAO.getUpdateNofile((productVO)vo);
+				
+			}
+			
+			
+				if(result) {			
+					mv.setViewName("/mypage/mypage");
+				}
+			
+			return mv;	
 		}
 	 
 	 
 	 public Object delete(Object pid) {
-	 
-		 return "...";
-	 }
-	 
+		 boolean result = productDAO.getProductDelete((String)pid);
+			String str="";
+			if(result) {
+				str="/popularProduct/deletePage";
+			}
+			return str;
+		}
+	
 }

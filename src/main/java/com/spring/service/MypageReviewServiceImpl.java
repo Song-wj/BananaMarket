@@ -64,21 +64,80 @@ public class MypageReviewServiceImpl implements BananaService {
 	 * 
 	 * return gson.toJson(jobj); };
 	 */
+	
+	
+	@Override
+	public Object getUpdateContent(Object rid) {
+		ModelAndView mv = new ModelAndView();
+		ReviewVO vo = reviewDAO.getMyReview((String)rid);	
+		mv.addObject("vo", vo);
+		mv.setViewName("mypage/mypage_myReview_update");
+		return mv;
+
+	};
+	
+	@Override
+	public Object update(Object vo) {
+		ModelAndView mv = new ModelAndView();
+		ReviewVO rvo = (ReviewVO)vo;
+		String msg= "수정이 완료되었습니다.";
+		int val=0;
+		if(rvo.getRid().contains("BR")){
+			val = reviewDAO.updateBuyMyReview(rvo);	
+		}else {
+			val = reviewDAO.updateSellMyReview(rvo);	
+		}
+		if(val !=0) {
+			mv.addObject("msg", msg);
+			mv.setViewName("redirect:/mypage.do");			
+		}
+		
+		return mv;
+		
+	
+	};
+	
+	@Override
+	public Object delete(Object id) {
+		ModelAndView mv = new ModelAndView();
+		String msg= "삭제가 완료되었습니다.";
+		String rid = (String)id;
+		int val=0;
+		if(rid.contains("BR")){
+			val= reviewDAO.deleteBuyMyReview(rid);	
+		}else {
+			val = reviewDAO.deleteSellMyReview(rid);	
+		}
+		if(val !=0) {
+			mv.addObject("msg", msg);
+			mv.setViewName("redirect:/mypage.do");			
+		}
+		
+		return mv;
+	};
+	
+	public ModelAndView deleteMyReview(String rid) {
+		ModelAndView mv = new ModelAndView();
+		String msg= "삭제가 완료되었습니다.";
+		int val=0;
+		if(rid.contains("BR")){
+			val= reviewDAO.deleteBuyMyReview(rid);	
+		}else {
+			val = reviewDAO.deleteSellMyReview(rid);	
+		}
+		if(val !=0) {
+			mv.addObject("msg", msg);
+			mv.setViewName("mypage/mypage");			
+		}
+		
+		return mv;
+	}
+	
+	
 	@Override
 	public Object getContent(Object id) {
 		return "";
 	};
-	@Override
-	public Object update(Object vo) {
-		return "";
-	};
-	@Override
-	public Object getUpdateContent(Object id) {
-		return "";
-
-	};
-	@Override
-	public Object delete(Object id) {
-		return "";
-	};
+	
+	
 }
