@@ -354,6 +354,9 @@
 					
 					$("#section5_dongneLife_content").append(output);
 					
+					//댓글 갯수
+					$("#comment_count").text(jdata.comment_count);
+					
 				}//success
 			});//ajax
 		}//comment_list
@@ -462,7 +465,7 @@
 				<ul>
 					<li>
 						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
-						<a href="#"><img src="images/messenger.png"><button type="button">댓글 2</button></a>
+						<img src="images/messenger.png"><button type="button">댓글 <span id="comment_count"></span></button>
 					</li>
 				</ul>
 			</div>

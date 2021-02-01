@@ -32,6 +32,31 @@ public class DongneCommentDAO extends DBConn{
 	}
 	
 	/**
+	 * Select - 특정 댓글 카운트
+	 * @param sid
+	 * @return
+	 */
+	public int getCommentCount(String bid) {
+		int count = 0;
+		
+		try {
+			String sql ="select count(*) from banana_board_review where bid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, bid);
+				
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				count = Integer.parseInt(rs.getString(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return count;
+	}
+	
+	/**
 	 * Delete - 업체리뷰 삭제
 	 * @param brid
 	 * @return

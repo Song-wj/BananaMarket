@@ -125,6 +125,7 @@ public class DongneCommentServiceImpl implements EnrollService {
 	public String getCommentListAjaxProc(String bid) {
 				
 		ArrayList<DongneCommentVO> list = dongneCommentDAO.getDongneCommentList(bid); 
+		int comment_count = dongneCommentDAO.getCommentCount(bid);
 		
 		//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
 		JsonArray jarray = new JsonArray();
@@ -147,6 +148,7 @@ public class DongneCommentServiceImpl implements EnrollService {
 		}
 		
 		jdata.add("jlist", jarray);		//java객체
+		jdata.addProperty("comment_count", comment_count);
 		
 		return gson.toJson(jdata);
 	}
