@@ -21,6 +21,33 @@
 	<!-- multipartResolver -->
   	 <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    	 </beans:bean>  
+   	 
+   	<!-- Interceptor Object -->
+   	<beans:bean class="com.spring.interceptor.AuthHandlerInterceptor" id="authInterceptor"></beans:bean>
+   	<beans:bean class="com.spring.interceptor.AuthHandlerInterceptorAdmin" id="authInterceptorAdmin"></beans:bean>
+   	
+   	<interceptors>
+   		<interceptor>
+   			<mapping path="/mypage*"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/neighborhood*"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/dongneLife*"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/member*"/>
+   			<beans:ref bean="authInterceptorAdmin"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/board*"/>
+   			<beans:ref bean="authInterceptorAdmin"/>
+   		</interceptor>
+   	</interceptors>
 
 	<!-- Service -->
 	<beans:bean class="com.spring.service.DongneServiceImpl" id="dongneService"></beans:bean>
@@ -30,7 +57,6 @@
 	<beans:bean class="com.spring.service.BananaFAQServiceImpl" id="questionService"></beans:bean>
 	<beans:bean class="com.enroll.service.EnrollstoreServiceImpl" id="shopService"></beans:bean>
 	<beans:bean class="com.spring.service.MypageReviewServiceImpl" id="mypageReviewService"></beans:bean>
-	
 	
 	<!-- DAO -->
 	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
