@@ -17,7 +17,7 @@
 	function review_delete(rid){
 		if (confirm("정말 삭제하시겠습니가?"))
 		  {
-			 window.location.href="MyReview_delete_proc.do?rid="+rid;
+			 window.location.href="myReview_delete_proc.do?rid="+rid;
 		  } 
 	}
 </script>
@@ -147,7 +147,12 @@
 			<div>
 			<table class="review_all_table"> 
 			<c:choose >
-			<c:when test="${list ne null }">
+			<c:when test="${empty list }">
+					<tr>
+						<td style="padding: 230px 0; color: #ccc;">내 후기가 없습니다.</td>
+					</tr> 
+			</c:when>
+			<c:otherwise>
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td class="review">
@@ -165,16 +170,11 @@
 						<td class="review" colspan="3">	
 							<label class="date">${vo.rdate }</label>
 					
-							<a href="MyReview_update.do?rid=${vo.rid }"><button type="button" class="review_update_btn">수정</button></a>
+							<a href="myReview_update.do?rid=${vo.rid }"><button type="button" class="review_update_btn">수정</button></a>
 							<button type="button" class="review_delete_btn" onclick="review_delete('${vo.rid}')">삭제</button>
 						</td>
 					</tr>	
 			</c:forEach>
-			</c:when>
-			<c:otherwise>
-					<tr>
-						<td style="padding: 230px 0; color: #ccc;">내 후기가 없습니다.</td>
-					</tr> 
 			</c:otherwise>
 			</c:choose>
 			</table> 

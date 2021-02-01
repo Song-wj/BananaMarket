@@ -177,6 +177,37 @@
 		height:700px;
 		overflow:auto;
 	}
+	.mw {
+		 position:fixed;
+		_position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		display:none;
+	}
+	.mw .bg {
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background:#000;
+		opacity:.5;
+		filter:alpha(opacity=50)
+		}
+	.mw .fg {
+		position:absolute;
+		top:50%;
+		left:50%;
+		width:360px;
+		height:160px;
+		margin:-100px 0 0 -200px;
+		padding:20px;
+		border:3px solid #ccc;
+		background:#fff;
+		z-index:10;
+		}
 </style>
 </head>
 <body>
@@ -193,8 +224,13 @@
 			<div>
 			<table class="review_all_table"> 
 			<c:choose >
-			<c:when test="${list ne null }">
-				<c:forEach var="vo" items="${list }">
+			<c:when test="${empty list}">
+					<tr>
+						<td style="padding: 230px 0; color: #ccc;">전체후기가 없습니다.</td>
+					</tr> 
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="vo" items="${list }">				
 					<tr>
 						<td class="review">
 							<img src="images/banana.jpg">
@@ -202,7 +238,7 @@
 							<label>${vo.maddr }</label>
 						</td>
 					</tr>
-					<tr>
+					<tr onclick="document.getElementById('mw_temp').style.display='block'">
 						<td class="review" colspan="3">
 							<pre><c:out value="${vo.review}" /></pre>
 						</td>
@@ -212,12 +248,13 @@
 							<label class="date">${vo.rdate }</label>
 						</td>
 					</tr>	
+			<div id="mw_temp" class="mw">
+    		<div class="bg"><!--이란에는 내용을 넣지 마십시오.--></div>
+    		<div class="fg">
+       			 <pre><c:out value="${vo.review}" /></pre><button onclick="document.getElementById('mw_temp').style.display='none'" type="button">x</button>
+   			 </div>
+			</div>
 			</c:forEach>
-			</c:when>
-			<c:otherwise>
-					<tr>
-						<td style="padding: 230px 0; color: #ccc;">전체후기가 없습니다.</td>
-					</tr> 
 			</c:otherwise>
 			</c:choose>
 			</table> 
@@ -227,7 +264,12 @@
 			<div>
 			<table class="review_seller_table">
 				<c:choose >
-					<c:when test="${slist ne null }">
+					<c:when test="${empty slist}">
+						<tr>
+							<td style="padding: 230px 0; color: #ccc;">판매자 후기가 없습니다.</td>
+						</tr> 
+					</c:when>
+				    <c:otherwise>
 						<c:forEach var ="vo" items="${slist}">
 						 	<tr>
 								<td class="review">
@@ -247,11 +289,6 @@
 								</td>
 							</tr>	
 						</c:forEach>
-					</c:when>
-				    <c:otherwise>
-						<tr>
-							<td style="padding: 230px 0; color: #ccc;">판매자 후기가 없습니다.</td>
-						</tr> 
 					</c:otherwise>
 				</c:choose>
 			</table>
@@ -261,7 +298,12 @@
 			<div>
 			<table class="review_buyer_table">
 				<c:choose >
-					<c:when test="${blist ne null }">
+					<c:when test="${empty blist}">
+						<tr>
+							<td style="padding: 230px 0; color: #ccc;">구매자 후기가 없습니다.</td>
+						</tr> 
+					</c:when>
+				    <c:otherwise>
 						<c:forEach var ="vo" items="${blist}">
 						 	<tr>
 								<td class="review">
@@ -281,11 +323,6 @@
 								</td>
 							</tr>	
 						</c:forEach>
-					</c:when>
-				    <c:otherwise>
-						<tr>
-							<td style="padding: 230px 0; color: #ccc;">구매자 후기가 없습니다.</td>
-						</tr> 
 					</c:otherwise>
 				</c:choose>
 			</table>

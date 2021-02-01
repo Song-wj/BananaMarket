@@ -134,13 +134,10 @@ public class DongneServiceImpl implements BananaService{
 		if(dvo.getList().get(0).getSize() != 0)  {
 			 	
 		       for (MultipartFile mf : dvo.getList()) {    	   
-		           
-		           
+		           		           
 		           file_list.add(mf.getOriginalFilename());
 		           sfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
-		           
-		        
-		          
+ 
 		       }
 		      
 		       dvo.setBfile(String.join(",", file_list));

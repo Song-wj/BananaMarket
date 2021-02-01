@@ -82,11 +82,18 @@
 	</select>
 	
 	<update id="updatebuymyreview" parameterType="com.banana.vo.ReviewVO">
-		update banana_buy_review set review = #{review} , score=#{score} where rid=#{rid}
+		<choose>
+		<when test="rfile != null">
+			update banana_buy_review set review = #{review} , score=#{score} , rfile= #{rfile} , rsfile = #{rsfile} where rid=#{rid}
+		</when>
+		<otherwise>
+			update banana_buy_review set review = #{review} , score=#{score} where rid=#{rid}
+		</otherwise>
+		</choose>
 	</update>
 	
 	<update id="updatesellmyreview" parameterType="com.banana.vo.ReviewVO">
-		update banana_sell_review set review = #{review} , score=#{score} where rid=#{rid}
+		update banana_sell_review set review = #{review} , score=#{score}  ,rfile= #{rfile} , rsfile = #{rsfile} where rid=#{rid}
 	</update>
 	
 	<delete id="deletebuymyreview" parameterType="java.lang.String"  >

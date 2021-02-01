@@ -207,7 +207,14 @@ public class MypageController {
 		return "mypage/mypage_contract_review";
 	}
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
-	public String contract_reivew_write_proc(ReviewVO vo) {
+	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		 
 		vo.setParam("ÆÇ¸ÅÀÚ¸®ºä");
 		return (String)MypageReviewService.insert(vo); 
 	}
@@ -225,8 +232,16 @@ public class MypageController {
 		return "mypage/mypage_purchase_review";
 	}
 	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
-	public String purchase_reivew_write_proc(ReviewVO vo) {
-		vo.setParam("±¸¸ÅÀÚ¸®ºä");
+	public String purchase_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {
+		
+
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		 vo.setParam("±¸¸ÅÀÚ¸®ºä");
 		return (String)MypageReviewService.insert(vo); 
 	}
 	
@@ -268,8 +283,8 @@ public class MypageController {
 		
 	}
 	// ¸®ºä ¼öÁ¤
-	@RequestMapping(value="MyReview_update.do", method=RequestMethod.GET)
-	public ModelAndView MyReview_update_proc(String rid) {
+	@RequestMapping(value="myReview_update.do", method=RequestMethod.GET)
+	public ModelAndView myReview_update_proc(String rid ) {
 		
 		return (ModelAndView)MypageReviewService.getUpdateContent(rid);	
 	}
@@ -277,13 +292,22 @@ public class MypageController {
 	
 		
 	@RequestMapping(value="update_myReview_proc.do", method=RequestMethod.POST)
-	public ModelAndView update_myReview_proc(ReviewVO vo) {
+	public ModelAndView update_myReview_proc(ReviewVO vo ,MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {	
+		
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
 		return (ModelAndView)MypageReviewService.update(vo);
 		
 	}
 	// ¸®ºä »èÁ¦
-		@RequestMapping(value="MyReview_delete_proc.do", method=RequestMethod.GET)
-		public ModelAndView MyReview_delete_proc(String rid) {
+		@RequestMapping(value="myReview_delete_proc.do", method=RequestMethod.GET)
+		public ModelAndView myReview_delete_proc(String rid) {
 			
 			return (ModelAndView)MypageReviewService.delete(rid); 
 		

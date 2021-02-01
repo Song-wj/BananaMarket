@@ -191,7 +191,7 @@
 		<section class="section4_dongneLife_write">
 			<div>
 				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
-				<input type="file" name="file" id="reivew_img"  multiple  onchange='test()'><br><br>
+				<input type="file" name="file1" id="reivew_img"  multiple  onchange='test()'><br><br>
 				
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>
