@@ -11,6 +11,46 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
+<script>
+	$(document).ready(function(){
+		
+		/* if(){
+			$("#btnLike").addClass('btn_like');
+		} */
+		
+		$("#btnLike").click(function(){
+			  if($(this).hasClass('btn_like')){
+				  //좋아요 취소
+				  $(this).removeClass('btn_like');
+				  
+				//ajax를 활용한 서버 연동
+				  $.ajax({
+					  url:"product_unlike.do?mid=whtjdrnr010&pid=${vo.pid }", //mid는 로그인한사람id
+					  success:function(result){
+						  alert("좋아요 취소되었습니다");
+						  location.reload();
+						  }
+					});
+				
+			  }
+			  else{
+				  //좋아요 눌렀을 때
+				  $(this).addClass('btn_like');
+
+				//ajax를 활용한 서버 연동
+					$.ajax({
+						url:"product_like.do?mid=whtjdrnr010&pid=${vo.pid }", //mid는 로그인한사람id
+						success:function(result){
+							alert("좋아요 반영되었습니다");
+							location.reload();
+							$(this).addClass('btn_like');
+						}
+					});
+			  }
+			});
+	});
+	
+</script>
 <style>
 	#content {
 		text-align: center;
@@ -344,7 +384,65 @@
     	font-size: 13px;
 	}
 	
+	button.product_btn_style {
+	position: relative;
+	color: RGB(82, 67, 21);
+	background-color: RGB(254, 229, 0);
+	font-weight: bold;
+	border: 1px solid RGB(254, 229, 0);
+	padding: 15px 17px;
+	font-size: 17px;
+	border-radius: 5px;
+	}
+
+	button.product_btn_style:hover {
+		opacity: 0.7;
+	}
 	
+	div.product_btn{
+		text-align:center;
+	}
+	
+	.btn_unlike {
+		float:right;
+	  	position: relative;
+	 	margin:2px 10px;
+	 	margin-right:15px;
+	  	width: 50px;
+	  	height: 50px;
+	  	border: 1px solid #e8e8e8;
+	  	border-radius: 44px;
+	  	font-family: notokr-bold,sans-serif;
+	  	font-size: 14px;
+	  	line-height: 16px;
+	  	background-color: #fff;
+	  	color: #DD5D54;
+	  	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
+	  	transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
+	  	cursor: pointer;
+	}
+	.btn_unlike:hover {
+	  border: 1px solid rgba(228,89,89,0.3);
+	  background-color: rgba(228,89,89,0.02);
+	  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
+	}
+	.btn_like .img_emoti {
+	    background-position: -30px -120px;
+	}
+	.img_emoti {
+	    display: inline-block;
+	    overflow: hidden;
+	    font-size: 0;
+	    line-height: 0;
+	    background: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/img_emoti.png?v=20180410) no-repeat;
+	    text-indent: -9999px;
+	    vertical-align: top;
+	    width: 20px;
+	    height: 17px;
+	    margin-top: 1px;
+	    background-position: 0px -120px;
+	    text-indent: 0;
+	}
 </style>
 </head>
 <body>
@@ -389,6 +487,8 @@
 					<div id="article-profile-left">
 						<div id="nickname">${vo.nickname }</div>
 						<div id="region-name">${vo.maddr }</div>
+						<input type="hidden" name="mid" id="mid" value="whtjdrnr010">
+						<input type="hidden" name="pid" id="pid" value="p_27">
 					</div>
 					<div id="article-profile-right">
 						<dl id="temperature-wrap">
@@ -405,7 +505,14 @@
 		</div>
 		<div class="description">
 			<section id="article-description">
-				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
+				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}
+				<input type="hidden" name="mid" id="mid" value="whtjdrnr010">
+				<input type="hidden" name="pid" id="pid" value="${vo.pid }">
+					<!--  <a href="likeproc.do?mid=test123&pid=${vo.pid}">-->
+						<button type="button" class="btn_unlike" id="btnLike">
+  							<span class="img_emoti">좋아요</span></button>
+     				<!--  </a>-->
+     			</h1>
 				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} (몇분전으로 수정)</time></p>
 				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice}</p>
 				<div id="article-detail">
@@ -414,6 +521,18 @@
 				<p id="article-counts">
 					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
 				</p>
+				<div class="product_btn">
+					<%-- <c:choose>
+						<c:when test="${mid ne null }">
+							<a href="pickProc.di?mid=${mid }&pid=${pid}"><button type="button" class="product_btn_style" id="like">찜</button></a>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="product_btn_style" id="like">찜</button>
+						</c:otherwise>
+					</c:choose> --%>
+					<button type="button" class="product_btn_style" id="like">찜하기</button>
+					<button class="product_btn_style">채팅으로 거래하기</button>
+				</div>
 			</section> 	
 		</div>
 

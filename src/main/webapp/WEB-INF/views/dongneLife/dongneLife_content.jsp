@@ -20,10 +20,30 @@
 			  if($(this).hasClass('btn_like')){
 				  //좋아요 취소
 				  $(this).removeClass('btn_like');
+				  
+				//ajax를 활용한 서버 연동
+				  $.ajax({
+					  url:"dongnelife_unlike.do?mid=whtjdrnr010&bid=${vo.bid }", //mid는 로그인한사람id
+					  success:function(result){
+						  alert("좋아요 취소되었습니다");
+						  location.reload();
+						  }
+					});
+				
 			  }
 			  else{
 				  //좋아요 눌렀을 때
 				  $(this).addClass('btn_like');
+
+				//ajax를 활용한 서버 연동
+					$.ajax({
+						url:"dongnelife_like.do?mid=whtjdrnr010&bid=${vo.bid }", //mid는 로그인한사람id
+						success:function(result){
+							alert("좋아요 반영되었습니다");
+							location.reload();
+							$(this).addClass('btn_like');
+						}
+					});
 			  }
 			});
 	});

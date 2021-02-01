@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,29 +77,33 @@
 	<div class="mypage_purchased">
 		<section class="section1_purchased">
 			<div>
+			
+			 <c:forEach var="vo" items="${list }">
 				<table class="mypage_table">
 				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td><span class="product">${vo.pname }</span></td>
+					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
+					<td><span class="product">${vo.ptitle }</span></td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
 						매너점수를 주세요~~~<br>
 						<select  name="mannerGrade" onchange="showConfirm()">
 							<option value="none">선택</option>
-							<option value="3">😮</option>
-							<option value="5">😆</option>
-							<option value="4">🙂</option>
-							<option value="2">😥</option>
-							<option value="1">😡</option>
+							<option value="2">😮</option>
+							<option value="1">😆</option>
+							<option value="0">🙂</option>
+							<option value="-1">😥</option>
+							<option value="-2">😡</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td><span class="locate">역삼동  ${vo.sysdate }</span></td>
+					<td><span class="locate">${vo.maddr}</span></td>
 				</tr>
 				<tr>
-					<td><span class="price">${vo.price }</span></td>
-				</tr> 
+					<td><span class="price">${vo.pprice }</span></td>
+				</tr>
 			</table>
+			</c:forEach> 
+			
 			<table class="mypage_table">
 				<tr>
 					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
@@ -116,7 +121,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>지역</td>
+					<td>지역 <div>${vo.mid}</div></td>
 				</tr>
 				<tr>
 					<td>가격</td>

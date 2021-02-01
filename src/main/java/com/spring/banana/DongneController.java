@@ -3,19 +3,21 @@ package com.spring.banana;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.dongneVO;
 import com.spring.service.BananaService;
+import com.spring.service.DongneServiceImpl;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class DongneController  {
@@ -23,6 +25,9 @@ public class DongneController  {
 	
 	@Autowired
 	private BananaService bananaService;
+	
+	@Autowired
+	private DongneServiceImpl dongneServiceImpl;
 	
 	/**
 	 * 동네생활 - 글정보 삭제화면
@@ -101,7 +106,17 @@ public class DongneController  {
 		return (ModelAndView)bananaService.getList();
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/dongnelife_like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_like(String mid, String bid) {
+		return dongneServiceImpl.product_like(mid, bid);
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="/dongnelife_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_unlike(String mid, String bid) {
+		return dongneServiceImpl.product_unlike(mid, bid);
+	}
 	
 	
 }

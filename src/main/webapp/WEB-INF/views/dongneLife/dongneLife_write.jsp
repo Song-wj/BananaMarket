@@ -168,7 +168,7 @@
 		<section class="section1_dongneLife_write">
 			<div class="write_nav">
 				<ul>
-					<li><input type="hidden" name="mid" value="aa"></li>				
+					<li><input type="hidden" name="mid" value="whtjdrnr010"></li>				
 					<li><a href="dongneLife.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li><label>동네생활 글쓰기</label></li>
 					<li><button type="submit" id="board_write_btn">완료</button></li>

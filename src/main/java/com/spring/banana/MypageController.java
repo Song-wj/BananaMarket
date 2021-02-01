@@ -4,16 +4,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.productVO;
+import com.spring.service.BuylistService;
+import com.spring.service.LikeServiceImpl;
 import com.spring.service.ProductService;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class MypageController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private BuylistService buylistservice;
+	
+	@Autowired
+	private LikeServiceImpl likeserviceimpl;
+	
+	@Autowired
+	private ProductServiceImpl ProductServiceImpl;
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -135,8 +148,20 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_like.do", method=RequestMethod.GET)
-	public String mypage_like() {
-		return "mypage/mypage_like";
+	public ModelAndView mypage_like(String mid) {
+		return (ModelAndView)likeserviceimpl.getList(mid);
+	}
+	
+	/**
+	 * 관심목록 - 중고거래 취소
+	 * @param mid
+	 * @param pid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/mypage_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_unlike(String mid, String pid) {
+		return ProductServiceImpl.product_unlike(mid, pid);
 	}
 	
 	/**
@@ -170,10 +195,11 @@ public class MypageController {
 	 * 마이페이지 - 구매내역
 	 * @return
 	 */
-	@RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	public String mypage_purchased() {
-		return "mypage/mypage_purchased";
-	}
+	/*
+	 * @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+	 * public ModelAndView mypage_purchased() { return
+	 * (ModelAndView)buylistservice.getList(); }
+	 */
 	
 	/**
 	 * 마이페이지 - 프로필 수정

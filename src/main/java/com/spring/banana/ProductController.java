@@ -6,16 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.productVO;
 import com.spring.service.ProductService;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductServiceImpl ProductServiceImpl;
 	
 	
 	@RequestMapping(value="/productContent.do", method=RequestMethod.GET)
@@ -62,4 +67,18 @@ public class ProductController {
 	public String promoteDonge() {
 		return "/popularProduct/promoteDongne";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/product_like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_like(String mid, String pid) {
+		return ProductServiceImpl.product_like(mid, pid);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/product_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_unlike(String mid, String pid) {
+		return ProductServiceImpl.product_unlike(mid, pid);
+	}
+	
+	
 }
