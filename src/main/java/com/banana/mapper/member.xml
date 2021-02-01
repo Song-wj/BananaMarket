@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="login" parameterType="com.banana.vo.BananaMemberVO" resultType="com.banana.vo.SessionVO">
-		select count(*) result, nickname from banana_member where mid=#{mid} and pw=#{pw} group by nickname
+		select count(*) result, nickname,mid from banana_member where mid=#{mid} and pw=#{pw} group by nickname,mid
 	</select>
 	
 	<select id="logincheck" parameterType="map" resultType="int">
