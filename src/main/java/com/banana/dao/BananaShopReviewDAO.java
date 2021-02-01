@@ -7,6 +7,31 @@ import com.banana.vo.BananaShopReviewVO;
 public class BananaShopReviewDAO extends DBConn {
 	
 	/**
+	 * srid로 sid 구하기
+	 * @param vo
+	 * @return
+	 */
+	public String getSid(BananaShopReviewVO vo) {
+		String sid = "";
+		
+		try {
+			String sql ="select sid from banana_shop_review where srid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, vo.getSrid());
+				
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				sid = (rs.getString(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return sid;
+	}
+	
+	/**
 	 * Delete - 업체리뷰 삭제
 	 * @param srid
 	 * @return

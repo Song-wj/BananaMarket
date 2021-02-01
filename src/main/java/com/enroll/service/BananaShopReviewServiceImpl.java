@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.BananaShopReviewDAO;
 import com.banana.vo.BananaShopReviewVO;
+import com.banana.vo.DongneCommentVO;
 
 @Service("shopReviewService")
 public class BananaShopReviewServiceImpl implements EnrollService {
@@ -48,7 +49,7 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 		boolean dao_result = shopReviewDAO.insertShopReview(srvo);
 		
 		if(dao_result) {
-			mv.setViewName("redirect:/neighborhood.do");
+			mv.setViewName("redirect:/neighborStoreReview_list.do?sid="+srvo.getSid());
 		}else
 			mv.setViewName("errorPage");
 		
@@ -75,11 +76,11 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 		boolean result = false;
 
 		BananaShopReviewVO srvo = (BananaShopReviewVO)vo;
-		
+		String sid = shopReviewDAO.getSid(srvo);
 		result = shopReviewDAO.shopReviewUpdate(srvo);
 
 		if(result) {
-			mv.setViewName("redirect:/neighborhood.do");
+			mv.setViewName("redirect:/neighborStoreReview_list.do?sid="+sid);
 		}else
 			mv.setViewName("errorPage");
 		
@@ -100,11 +101,15 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 
 	@Override
 	public Object delete(Object srid) {
+		BananaShopReviewVO srvo = new BananaShopReviewVO();
+		srvo.setSrid((String)srid);
+		
+		String sid = shopReviewDAO.getSid(srvo);
 		boolean result = shopReviewDAO.shopReviewDelete((String)srid);
 		
 		String str="";
 		if(result) {
-			str="redirect:/neighborhood.do";
+			str="redirect:/neighborStoreReview_list.do?sid="+sid;
 		}
 		return str;
 	}
