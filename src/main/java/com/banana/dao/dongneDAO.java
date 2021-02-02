@@ -1,7 +1,9 @@
 package com.banana.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +37,11 @@ public class dongneDAO extends DBConn{
 		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
 	}
 	
-	public dongneVO getSubjectList(String bstitle) {
-		return sqlSession.selectOne(namespace+".getDongneSubjectlist", bstitle);
+	public ArrayList<dongneVO> getSubjectList(String bstitle) {
+		Map <String,String> param = new HashMap<String,String>();
+		param.put("bstitle", bstitle);
+		List<dongneVO> list =sqlSession.selectList(namespace+".getDongneSubjectlist", param);
+		return (ArrayList<dongneVO>)list;
 	}
 	
 	public ArrayList<dongneSubjectVO> getDongneSubject() {

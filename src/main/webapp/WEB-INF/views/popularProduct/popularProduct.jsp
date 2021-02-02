@@ -14,7 +14,7 @@
 		width:55%;
 		margin:auto;
 		margin-top:150px;
-		margin-bottom:150px;
+		margin-bottom:230px;
 	}
 	h1.ph3{
 		text-align:center;

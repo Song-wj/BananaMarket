@@ -21,16 +21,19 @@
 	}
 	
 	div.content form.pupdateForm ul li:first-child>label{
-		display: inline-block; 
+	    position: absolute; 	
+	    left:700px;
+	    display: inline-block; 
 		padding: .5em .75em; 
 		color: #999; 
+		font-size: inherit; 
 		line-height: normal; 
 		background-color: #fdfdfd; 
 		cursor: pointer; 
-		border: 1px solid lightgray; 
-		/*border-bottom-color: #e2e2e2; */
+		border: 1px solid #ebebeb; 
+		border-bottom-color: #e2e2e2; 
 		border-radius: .25em;
-		margin-left:-10px;
+		margin-right:10px;
 	}
 	div.content form.pupdateForm ul li:first-child img {
 		width:30px;
@@ -39,13 +42,24 @@
 	}
 
 	div.content form.pupdateForm ul li:first-child>input[type="file"]{
-		position: absolute; 
-		 /* width: 1px; 
-		height: 1px; */ 
-		margin: -1px;  
-		overflow: hidden; 
-		clip:rect(0,0,0,0); 
-		margin:-150px;
+	    position: absolute; 	
+		padding: 0; 
+		width:1px;
+		height:1px;  
+	    margin-left: -150px;
+		margin-top: 24px;  
+	 	overflow: hidden;  
+	 	clip:rect(0 180px 150px 75px);  
+		
+	}
+	div.content form.pupdateForm ul li:first-child span#fake_id{
+		display:inline-block;
+		position: absolute;
+		left:838px; 	
+		top:252px;
+		font-size:13.7px;
+		width:100px;
+	
 	}
 	div.content form.pupdateForm ul li:first-child button{
 		color:RGB(82,67,21);
@@ -56,7 +70,9 @@
 		cursor:pointer;
 		background-color:RGB(254,229,0);
 		border:1px solid RGB(254,229,0);
-		margin:-10px 0 0 30px;
+		position:absolute;
+		left:1110px;
+		top:234px;
 	}
 	
 	div.content form.pupdateForm ul li:first-child div{
@@ -98,7 +114,7 @@
 $(document).ready(function(){
 	
 	
-	var sel_files = [];
+	/* var sel_files = [];
 	$(document).ready(function(){
 		$("#input_img").on("change", handleImgFileSelect);
 	});
@@ -121,7 +137,7 @@ $(document).ready(function(){
 			}
 			reader.readAsDataURL(f);
 		});
-	};
+	}; */
 	
 	
 	$('#pwrite_btn').click(function(){
@@ -162,7 +178,8 @@ $(document).ready(function(){
 		 if (confirm("사진을 초기화 하시겠습니까?")){
 		   alert("초기화 되었습니다!");		
 		   $("input[type='hidden']#cancel_img").val("cancel");
-	   	   $("#fake_id1").text("선택된 파일 없음");
+		   $("#update_img").val("");
+	   	   $("#fake_id").text("선택된 파일 없음");
 		  } 
 	};
 
@@ -176,8 +193,8 @@ $(document).ready(function(){
 			$("#update_img").val("");
 		}
 		
-		$("#fake_id1").css("display","none");
-		$("input[type='file']#update_img").css("width","400px").css("height","25px").css("font-size","13.7px"); 
+		$("#fake_id").css("display","none");
+		$("input[type='file']#update_img").css("width","300px").css("height","25px").css("font-size","13.8px"); 
 	}
 
 
@@ -195,7 +212,7 @@ $(document).ready(function(){
 					<input type="file" name="file1" id="update_img"  multiple  onchange='test()'>
 					<c:choose>
 						<c:when test="${count ne 0 }">
-							<span id="fake_id1">파일 ${count}개</span>
+							<span id="fake_id">파일 ${count}개</span>
 						</c:when>
 						<c:otherwise>
 							<span id="fake_id">선택한 파일 없음</span>

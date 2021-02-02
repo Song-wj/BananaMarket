@@ -106,7 +106,7 @@
 		
 	});
 </script>
-<script text="javascript/text">
+<script >
     $(document).ready(function(){
 
 		 $('.box').each(function(){
@@ -361,7 +361,9 @@
 			</div>
 		</section>
 		<section class="subjectContent-post">
-			<a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
+			<c:forEach var="vo" items="${list }">
+			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
+				
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
 					<ul>
@@ -389,7 +391,8 @@
 					<a href="#"><img src="images/messenger.png"><button type="button" id="comment-btn">댓글 16</button></a>
 					<div class="display-like"></div>
 				</div>
-			</div>
+				</c:forEach>
+			
 		</section>
 	</div>
 	

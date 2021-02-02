@@ -11,17 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.BananaMemberDAO;
 import com.banana.dao.dongneDAO;
-<<<<<<< HEAD
+
 
 import com.banana.vo.DongneCommentVO;
-
 import com.banana.vo.BananaMemberVO;
-
-
-=======
-import com.banana.vo.BananaMemberVO;
-import com.banana.vo.DongneCommentVO;
->>>>>>> d7b1c812cf3f93ce77ed49e79e4a5a5a24947317
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
@@ -88,8 +81,11 @@ public class DongneServiceImpl implements BananaService{
 	public ModelAndView getSubjectListContent(String bsid,String bstitle) {
 		ModelAndView mv = new ModelAndView();
 		dongneSubjectVO svo = dongneDAO.getSubjectContent(bsid);
-		dongneVO dvo = dongneDAO.getSubjectList(bstitle);
-		mv.addObject("dvo", dvo);
+		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle);
+		
+			
+		
+		mv.addObject("list", list);
 		mv.addObject("vo", svo);
 		mv.setViewName("mypage/mypage_subjectContent");
 		return mv;

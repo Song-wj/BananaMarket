@@ -165,6 +165,7 @@ $(document).ready(function(){
 			  {
 			   alert("삭제되었습니다!");		
 			   $("input[type='hidden']#cancel_img").val("cancel");
+			   $("#update_img").val("")
 		    	$("#fake_id").html("선택된 파일 없음");
 			  } 
 			 };
