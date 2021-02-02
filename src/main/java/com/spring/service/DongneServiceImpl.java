@@ -4,9 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,12 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.banana.dao.BananaMemberDAO;
 import com.banana.dao.dongneDAO;
 import com.banana.vo.BananaMemberVO;
-import com.banana.vo.ReviewVO;
-import com.banana.vo.SessionVO;
+import com.banana.vo.DongneCommentVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 
 
@@ -356,13 +350,52 @@ public class DongneServiceImpl implements BananaService{
 	public ModelAndView getMyPost(String mid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<dongneVO> list = dongneDAO.getMyPost(mid);
-		ArrayList<dongneVO> clist = dongneDAO.getMyComment(mid);
+		ArrayList<DongneCommentVO> clist = dongneDAO.getMyComment(mid);
 		
+		 countDate(list,clist); 
+		 
+		 
 		mv.addObject("list", list);
 		mv.addObject("clist", clist);
 		mv.setViewName("mypage/mypage_mypost");
 		return mv;
 		
 	}
+	
+	public void countDate(ArrayList<dongneVO> list ,ArrayList<DongneCommentVO> clist) {
+		
+		String str="";
+		int date=0;
+		for(dongneVO vo : list) {		
+			date = Integer.parseInt(vo.getBdate());
+			str = count(date);
+			vo.setBdate(str);
+		}
+		for(DongneCommentVO vo : clist) {
+			
+			date = Integer.parseInt(vo.getBrdate());
+			str = count(date);
+			vo.setBrdate(str);
+		}
+		
+		
+		
+	}
+		
+	public String count(int date) {
+		String str ="";
+		if(60>date) {
+			str = date +"분";
+		}else if(1440 > date && date>60) {
+			str = date/60 +"시간";
+		}else if (1440<date) {
+			str= date/60/60 + "일";
+		}else if (date == 0) {
+			str="방금";
+		}
+		
+		return str;
+		}
+	
 	
 }
