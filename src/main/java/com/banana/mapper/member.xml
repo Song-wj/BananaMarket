@@ -20,7 +20,15 @@
 
 	<insert id="join" parameterType="com.banana.vo.BananaMemberVO">
 		insert into banana_member values(#{mid},#{nickname},#{pw},#{ph},#{maddr_num},#{maddr},
-			#{mfile},#{msfile},36,sysdate)
+		<choose>
+			<when test="mfile != null">
+				#{mfile},#{msfile}
+			</when>
+			<otherwise>
+				null, null 
+			</otherwise>
+		</choose>		
+		   ,36,sysdate)
 	</insert>
 	
 	<select id="idcheck" parameterType="java.lang.String" resultType="int">

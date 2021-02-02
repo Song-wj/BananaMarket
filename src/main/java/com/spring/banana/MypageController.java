@@ -77,8 +77,11 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mannerGrade.do", method=RequestMethod.GET)
-	public String mypage_mannerGrade() {
-		return "mypage/mypage_mannerGrade";
+	public ModelAndView mypage_mannerGrade(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid =svo.getMid();
+		return (ModelAndView)MypageReviewService.getContent(mid);
+		/* return "mypage/mypage_mannerGrade"; */
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
@@ -118,8 +121,10 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mypost.do", method=RequestMethod.GET)
-	public String mypage_mypost() {
-		return "mypage/mypage_mypost";
+	public ModelAndView mypage_mypost(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMyPost(svo.getMid());
+		
 	}
 	
 	/**

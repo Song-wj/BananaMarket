@@ -353,7 +353,7 @@
 						</button>
 						<div class="dropdown-container">
 							<div><a href="javascript:void(0)" id="mypost">동네생활 글</a></div>
-							<div><a href="javascript:void(0)" id="mycomment">동네생활 댓글</a></div>
+							<!-- <div><a href="javascript:void(0)" id="mycomment">동네생활 댓글</a></div> -->
 							<div><a href="javascript:void(0)" id="subjectList">동네생활 주제 목록</a></div>
 						</div>
 					</li>

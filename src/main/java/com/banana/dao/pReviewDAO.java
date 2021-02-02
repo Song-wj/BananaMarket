@@ -66,4 +66,13 @@ public class pReviewDAO {
 	public int deleteSellMyReview(String rid) {
 		return sqlSession.delete(namespace+".deletesellmyreview" , rid);
 	}
+	
+	
+	//매너점수 불러오기
+	public ArrayList<ReviewVO> getGradeList(String mid){
+		List<ReviewVO> list =sqlSession.selectList(namespace + ".gradelist" , mid);
+		return (ArrayList<ReviewVO>)list;
+	}
+	
+	
 }

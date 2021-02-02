@@ -29,4 +29,57 @@
 	<delete id="deleteSubject" parameterType="java.lang.String">
 		delete from banana_board_subject where bsid=#{bsid}
 	</delete>
+	
+	<insert id="insertboard" parameterType="com.banana.vo.dongneVO">
+		insert into banana_board values('b_'||SQE_BANANA_BOARD.NEXTVAL, #{mid},#{btitle},
+		<choose>
+			<when test="bfile != null">
+			#{bfile},#{bsfile},
+			</when>
+			<otherwise>
+			null,null,
+			</otherwise>
+		</choose>
+		#{btopic} , sysdate )
+	</insert>
+	
+	<select id="boardlist" resultType="com.banana.vo.dongneVO">
+		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
+	    from banana_member m , banana_board b
+		where m.mid = b.mid order by bdate 
+	</select>
+	
+	<select id="boardcontent" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
+		select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate 
+	    from banana_member m , banana_board b
+		where m.mid = b.mid and bid=#{bid}
+	
+	</select>
+	
+	<update id="boardupdate" parameterType="com.banana.vo.dongneVO">
+		update banana_board set btitle=#{btitle} , btopic=#{btopic}
+		<if test="bfile != null">
+		 ,bfile=#{bfile} , bsfile=#{bsfile}
+		</if>
+		 where bid=#{bid}	
+	</update>
+	
+	<delete id="boarddelete" parameterType="java.lang.String" >
+		delete from banana_board where bid=#{bid}
+	</delete>
+
+
+	<select id="getmypost" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
+		select bid, nickname, btitle , btopic ,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
+	    from banana_member m , banana_board b
+		where m.mid = b.mid and m.mid=#{mid} 
+		order by bdate 
+	</select>
+	
+	<select id="getmycomment" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
+		select nickname , brid , bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate 
+		from banana_board_review r, banana_member m
+		where r.mid= m.mid and m.mid=#{mid}
+		order by brdate
+	</select>
 </mapper>
