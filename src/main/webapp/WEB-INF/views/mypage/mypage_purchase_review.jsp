@@ -116,7 +116,6 @@
 
 <script>
 	$(document).ready(function(){
-		
 		$("#purchase_review_btn").click(function(){
 			if($("#mannerGrade").val() == "none"){
 				alert("매너점수를 선택해주세요");
@@ -129,9 +128,7 @@
 	         }
 	      });
 	      
-	      
-	      
-	     
+
 	   
 		
 	})
@@ -139,16 +136,15 @@
 		function test(){
 			
 			
-			var fileInput = document.getElementById("review_img");
+			var fileInput = document.getElementById("input_img");
             
             var files = fileInput.files;
             var file;
              
             if(files.length>5){
             	alert("이미지는 5장까지 업로드 가능합니다!");
-            	$("#review_img").val("");
+            	$("#input_img").val("");
             }
-          
           
 	      
 		}
@@ -160,20 +156,19 @@
 	<div class="dongnelife_write">
 		<form name="purchase_reivew_form" action="purchase_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
-			<input type="hidden" name="pid" value="p_1">	
-			<input type="hidden" name="mid" value="qqq123">
+			<input type="hidden" name="pid" value="P_2">	
 			<div class="write_nav">
-				<ul>				
+				<ul>
 					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li><label>구매상품 리뷰</label></li>
-					<li><button type="submit" id="purchase_review_btn">완료</button></li>
+					<li><label>동네생활 글쓰기</label></li>
+					<li><button type="button" id="purchase_review_btn">완료</button></li>
 				</ul>
 			</div>    
 		</section>
 		<section class="section2_dongneLife_write">
 			<div class="write_topic" id="write_topic">
-			 	<label>매너점수를 주세요</label><br>
-						<select  name="score" onchange="showConfirm()" id="mannerGrade">
+				<label>매너점수를 주세요</label><br>
+						<select  name="score"  id="mannerGrade">
 							<option value="none">선택</option>
 							<option value="5">😆 (최고에요)</option>
 							<option value="4">🙂 (좋아요)</option>
@@ -185,13 +180,13 @@
 		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
-				<textarea placeholder="구매상품에 대한 리뷰를 남겨주세요." name="review" id="preview"></textarea>
+				<textarea placeholder="서초4동 우리 동네 관련된 질문이나 이야기를 해보세요." name="review" id="preview"></textarea>
 			</div>
 		</section>
 		<section class="section4_dongneLife_write">
 			<div>
 				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
-				<input type="file" name="file" id="reivew_img"  multiple  onchange='test()'><br><br>
+				<input type="file" name="file1" id="input_img"  multiple  onchange='test()'><br><br>
 				
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>

@@ -3,6 +3,7 @@ package com.spring.banana;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
+import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
 import com.spring.service.BuylistService;
 import com.spring.service.LikeServiceImpl;
@@ -38,10 +41,16 @@ public class MypageController {
 	private ProductServiceImpl ProductServiceImpl;
 	private DongneServiceImpl dongneService;
 	
-	
 	@Autowired
 	private MypageReviewServiceImpl MypageReviewService ;
 	
+	@RequestMapping(value="/mypage_update_proc.do", method=RequestMethod.POST)
+	public String mypage_update_proc(BananaMemberVO vo, HttpServletRequest request) {
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "\\resources\\upload\\";
+		vo.setSavepath(path1 + path2);
+		return dongneService.mypageUpdateProc(vo);
+	}
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -78,8 +87,11 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mannerGrade.do", method=RequestMethod.GET)
-	public String mypage_mannerGrade() {
-		return "mypage/mypage_mannerGrade";
+	public ModelAndView mypage_mannerGrade(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid =svo.getMid();
+		return (ModelAndView)MypageReviewService.getContent(mid);
+		/* return "mypage/mypage_mannerGrade"; */
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
@@ -119,8 +131,10 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mypost.do", method=RequestMethod.GET)
-	public String mypage_mypost() {
-		return "mypage/mypage_mypost";
+	public ModelAndView mypage_mypost(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMyPost(svo.getMid());
+		
 	}
 	
 	/**
@@ -228,7 +242,17 @@ public class MypageController {
 		return "mypage/mypage_contract_review";
 	}
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
-	public String contract_reivew_write_proc(ReviewVO vo) {
+	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		 vo.setMid(svo.getMid());
+		
+		List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		 
 		vo.setParam("판매자리뷰");
 		return (String)MypageReviewService.insert(vo); 
 	}
@@ -253,8 +277,18 @@ public class MypageController {
 		return "mypage/mypage_purchase_review";
 	}
 	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
-	public String purchase_reivew_write_proc(ReviewVO vo) {
-		vo.setParam("구매자리뷰");
+	public String purchase_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request , HttpSession session) {
+		
+		 SessionVO svo = (SessionVO)session.getAttribute("svo");
+		 vo.setMid(svo.getMid());
+
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		 vo.setParam("구매자리뷰");
 		return (String)MypageReviewService.insert(vo); 
 	}
 	
@@ -263,8 +297,9 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_update.do", method=RequestMethod.GET)
-	public String mypage_update() {
-		return "mypage/mypage_update";
+	public ModelAndView mypage_update(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMemberInfoUpdate(svo.getMid());
 	}
 	
 	/**
@@ -272,8 +307,9 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
-	public String mypage() {
-		return "mypage/mypage";
+	public ModelAndView mypage(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMemberInfo(svo.getMid());
 	}
 	
 	/**
@@ -289,14 +325,17 @@ public class MypageController {
 	
 	// 내리뷰
 	@RequestMapping(value="/mypage_myReview.do", method=RequestMethod.GET)
-	public ModelAndView mypage_myRreview() {
-		String mid ="qqq123";
+	public ModelAndView mypage_myRreview( HttpSession session) {
+		
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid = svo.getMid();
+		
 		return (ModelAndView)MypageReviewService.getMyReviewList(mid);
 		
 	}
 	// 리뷰 수정
-	@RequestMapping(value="MyReview_update.do", method=RequestMethod.GET)
-	public ModelAndView MyReview_update_proc(String rid) {
+	@RequestMapping(value="myReview_update.do", method=RequestMethod.GET)
+	public ModelAndView myReview_update_proc(String rid ) {
 		
 		return (ModelAndView)MypageReviewService.getUpdateContent(rid);	
 	}
@@ -304,13 +343,22 @@ public class MypageController {
 	
 		
 	@RequestMapping(value="update_myReview_proc.do", method=RequestMethod.POST)
-	public ModelAndView update_myReview_proc(ReviewVO vo) {
+	public ModelAndView update_myReview_proc(ReviewVO vo ,MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {	
+		
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
 		return (ModelAndView)MypageReviewService.update(vo);
 		
 	}
 	// 리뷰 삭제
-		@RequestMapping(value="MyReview_delete_proc.do", method=RequestMethod.GET)
-		public ModelAndView MyReview_delete_proc(String rid) {
+		@RequestMapping(value="myReview_delete_proc.do", method=RequestMethod.GET)
+		public ModelAndView myReview_delete_proc(String rid) {
 			
 			return (ModelAndView)MypageReviewService.delete(rid); 
 		

@@ -6,9 +6,29 @@
 
 <mapper namespace="mapper.member">
 
+	<!-- <select id="getmember" parameterType="java.lang.String" resultType="com.banana.vo.BananaMemberVO">
+		select mid, nickname, ph, maddr, msfile, score, mdate from banana_member where mid=#{mid} 
+	</select> -->
+	
+	<update id="memberUpdate" parameterType="com.banana.vo.BananaMemberVO">
+		update banana_member set nickname=#{nickname}, pw=#{pw}, ph=#{ph}, maddr_num=#{maddr_num}, maddr=#{maddr}
+			<if test="mfile != null">
+			,mfile=#{mfile}, msfile=#{msfile}
+			</if> 
+			where mid=#{mid} 
+	</update>
+
 	<insert id="join" parameterType="com.banana.vo.BananaMemberVO">
 		insert into banana_member values(#{mid},#{nickname},#{pw},#{ph},#{maddr_num},#{maddr},
-			#{mfile},#{msfile},36,sysdate)
+		<choose>
+			<when test="mfile != null">
+				#{mfile},#{msfile}
+			</when>
+			<otherwise>
+				null, null 
+			</otherwise>
+		</choose>		
+		   ,36,sysdate)
 	</insert>
 	
 	<select id="idcheck" parameterType="java.lang.String" resultType="int">
@@ -20,7 +40,7 @@
 	</select>
 	
 	<select id="login" parameterType="com.banana.vo.BananaMemberVO" resultType="com.banana.vo.SessionVO">
-		select count(*) result, nickname from banana_member where mid=#{mid} and pw=#{pw} group by nickname
+		select count(*) result, nickname,mid from banana_member where mid=#{mid} and pw=#{pw} group by nickname,mid
 	</select>
 	
 	<select id="logincheck" parameterType="map" resultType="int">

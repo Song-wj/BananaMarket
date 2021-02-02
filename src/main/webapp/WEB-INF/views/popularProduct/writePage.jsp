@@ -193,8 +193,13 @@ $(document).ready(function(){
 			</select></li>
 			<li><input type="text" name="pprice" placeholder="₩가격 (선택사항)" id="pprice"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
 			<li><textarea cols=10 rows=10 name="pcontent" placeholder="게시글 내용을 작성해주세요. 가품 및 판매금지품목은 게시가 제한될 수 있어요." id="pcontent" style="resize:none;"></textarea></li>
+<<<<<<< HEAD
 			<li><input type="hidden" name="mid" value="whtjdrnr010"></li>
 			<li><input type="hidden" name="pchk" value="x"></li>s
+=======
+			<li><input type="hidden" name="mid" value="test123"></li>
+			<li><input type="hidden" name="pchk" value="x"></li>
+>>>>>>> branch 'master' of https://github.com/Dex-Park/BananaMarket.git
 			<li><button type="button" id="pwrite_btn">완료</button></li>	
 		</ul>
 		</form>

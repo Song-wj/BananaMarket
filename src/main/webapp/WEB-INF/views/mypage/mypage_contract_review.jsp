@@ -161,7 +161,6 @@
 		<form name="contract_reivew_form" action="contract_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
 			<input type="hidden" name="pid" value="p_1">	
-			<input type="hidden" name="mid" value="qqq123">
 			<div class="write_nav">
 				<ul>				
 					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
@@ -191,7 +190,7 @@
 		<section class="section4_dongneLife_write">
 			<div>
 				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
-				<input type="file" name="file" id="reivew_img"  multiple  onchange='test()'><br><br>
+				<input type="file" name="file1" id="reivew_img"  multiple  onchange='test()'><br><br>
 				
 				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
 			</div>

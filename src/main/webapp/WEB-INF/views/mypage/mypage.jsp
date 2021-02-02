@@ -17,7 +17,7 @@
 		
 		$('#mannerbar').jqbar({ 
 			label: '', 
-			value: 36.5, 
+			value: ${ vo.score }, 
 			barColor: '#3A1D1D' 
 		});
 		
@@ -292,13 +292,14 @@
 	<div class="mypage_mainDiv">
 		<section class="section1_mypage">
 			<div class="mypageImg">
-				<img src="images/mypage_bananaimg.jpg" class="mypageImg">
+				<img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }" class="mypageImg">
 			</div>
 			<div class="mypageSide">
 				<ul class="mypageSide">
-					<li>닉네임</li>
-					<li>아이디</li>
+					<li>${ vo.nickname }</li>
+					<li>${ vo.mid }</li>
 					<li>
+<%-- 						<a href="mypage_update.do?mid=${ vo.mid }"><button type="button" id="mypage_updateBtn">프로필 수정</button></a> --%>
 						<a href="mypage_update.do"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
 						<a href="http://localhost:9000/banana/enrollstore.do" id="#"><button type="button" id="mypage_updateBtn">동네 업체 등록</button></a>
 					</li>
@@ -353,7 +354,7 @@
 						</button>
 						<div class="dropdown-container">
 							<div><a href="javascript:void(0)" id="mypost">동네생활 글</a></div>
-							<div><a href="javascript:void(0)" id="mycomment">동네생활 댓글</a></div>
+							<!-- <div><a href="javascript:void(0)" id="mycomment">동네생활 댓글</a></div> -->
 							<div><a href="javascript:void(0)" id="subjectList">동네생활 주제 목록</a></div>
 						</div>
 					</li>
