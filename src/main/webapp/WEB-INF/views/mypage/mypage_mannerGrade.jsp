@@ -51,10 +51,12 @@ $(document).ready(function(){
 		border-bottom:1px solid gray;
 	}
 	div.mypage_manner table.mypage_table td:first-child{
-		width:200px;
+		width:700px;
+		padding :50px 10px;
+		/* text-indent:50px; */
 	}
-	div.mypage_manner table.mypage_table td:nth-child(2),
-	div.mypage_manner table.mypage_table td:nth-child(3){
+
+	div.mypage_manner table.mypage_table td:nth-child(2){
 		text-align:center;
 	}
 	div.mypage_manner table.mypage_table td:first-child img {
@@ -89,22 +91,21 @@ $(document).ready(function(){
 		<section class="section2_manner" id="section2_manner">
 			<table class="mypage_table">
 				<tr>
-					<th>닉네임</th>
+					
 					<th>내용</th>
 					<th>점수</th>
 				</tr>	
 			<c:choose >
 			<c:when test="${empty good_list }">
 					<tr>
-						<td  colspan="3" style="padding: 100px 0; color: #ccc;text-align:center;">받은 매너칭찬이 없습니다.</td>
+						<td  colspan="2" style="padding: 100px 0; color: #ccc;text-align:center;">받은 매너칭찬이 없습니다.</td>
 					</tr> 
 			</c:when>
 			<c:otherwise>
                 <c:forEach var="vo" items="${good_list }">
                 
-                	<tr>					
-						<td><img src="images/mypage_bananaimg.jpg" class="mimg"><span class="mnickname">홀길돌</span></td>
-						<td><span class="mcoment">${vo.review }</span></td>
+                	<tr>										
+						<td style="text-indent:50px;" ><span class="mcoment">${vo.review }</span></td>
 						<td><span class="mgrade">${vo.score }</span></td>
 					</tr>
                 
@@ -121,23 +122,21 @@ $(document).ready(function(){
 		</section>
 		<section class="section3_manner" id="section3_manner">
 			<table class="mypage_table">
-				 <tr>
-					<th>닉네임</th>
+				 <tr>	
 					<th>내용</th>
 					<th>점수</th>
 				 </tr>	
 				 	<c:choose >
 						<c:when test="${empty bad_list }">
 								<tr>
-									<td  colspan="3" style="padding: 100px 0; color: #ccc;text-align:center;">받은 매너칭찬이 없습니다.</td>
+									<td  colspan="2" style="padding: 100px 0; color: #ccc;text-align:center;">받은 비매너칭찬이 없습니다.</td>
 								</tr> 
 						</c:when>
 						<c:otherwise>
 						   <c:forEach var="vo" items="${bad_list }">
 		                
 		                	<tr>					
-								<td><img src="images/mypage_bananaimg.jpg" class="mimg"><span class="mnickname">홀길돌</span></td>
-								<td><span class="mcoment">${vo.review }</span></td>
+								<td style="text-indent:50px;"><span class="mcoment">${vo.review }</span></td>
 								<td><span class="mgrade">${vo.score }</span></td>
 							</tr>
 		                
