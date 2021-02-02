@@ -127,6 +127,23 @@ public class DongneCommentServiceImpl implements EnrollService {
 		ArrayList<DongneCommentVO> list = dongneCommentDAO.getDongneCommentList(bid); 
 		int comment_count = dongneCommentDAO.getCommentCount(bid);
 		
+		String str ="";	
+		for(DongneCommentVO vo : list) {
+			
+		int	date = Integer.parseInt(vo.getBrdate());
+			
+			if(60>date) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/60 + "일";
+			}else if (date == 0) {
+				str="방금";
+			}
+			vo.setBrdate(str);
+		
+		}
 		//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
 		JsonArray jarray = new JsonArray();
 		JsonObject jdata = new JsonObject();

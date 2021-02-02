@@ -243,7 +243,7 @@ public class MypageController {
 	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
 	public String purchase_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request , HttpSession session) {
 		
-		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		 SessionVO svo = (SessionVO)session.getAttribute("svo");
 		 vo.setMid(svo.getMid());
 
 		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");

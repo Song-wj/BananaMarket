@@ -162,7 +162,7 @@ public class DongneCommentDAO extends DBConn{
 	public ArrayList<DongneCommentVO> getDongneCommentList(String bid){
 		ArrayList<DongneCommentVO> list = new ArrayList<DongneCommentVO>();
 		try {
-			String sql = "select mid, nickname, maddr, msfile, brid, bid, bcomment, brdate, rownum rno\r\n" + 
+			String sql = "select mid, nickname, maddr, msfile, brid, bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate, rownum rno\r\n" + 
 					"from (select mem.mid, mem.nickname, mem.maddr, mem.msfile, rev.brid, rev.bid, rev.bcomment, rev.brdate\r\n" + 
 					"from banana_member mem, banana_board_review rev, banana_board board\r\n" + 
 					"where mem.mid = rev.mid and rev.bid = board.bid\r\n" + 
