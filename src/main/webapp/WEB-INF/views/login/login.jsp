@@ -18,8 +18,9 @@
 				$("#pass").focus();
 				return false;
 			} else {
-				login_chk($("#id").val(), $("#pass").val());
-				loginForm.submit();
+				if(!login_chk($("#id").val(), $("#pass").val())){
+					return false;
+				} 
 			}
 		});
 	});
@@ -31,6 +32,8 @@
 			success:function(cnt) {
 				if(cnt == 0) {
 					alert("아이디 혹은 비밀번호를 다시 확인해주세요.");
+				} else {
+					loginForm.submit();
 				}
 			}
 		});

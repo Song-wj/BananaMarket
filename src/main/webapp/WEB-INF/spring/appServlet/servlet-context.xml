@@ -36,7 +36,15 @@
    			<beans:ref bean="authInterceptor"/>
    		</interceptor>
    		<interceptor>
-   			<mapping path="/dongneLife*"/>
+   			<mapping path="/dongneLife_write.do"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/dongneLife_update.do"/>
+   			<beans:ref bean="authInterceptor"/>
+   		</interceptor>
+   		<interceptor>
+   			<mapping path="/dongneLife_delete.do"/>
    			<beans:ref bean="authInterceptor"/>
    		</interceptor>
    		<interceptor>

@@ -43,14 +43,12 @@ public class MemberServiceImpl implements MemberService{
 		ModelAndView mv = new ModelAndView();
 		SessionVO svo = memberDAO.getLogin(vo);
 		//String result = "";
+		mv.addObject("svo", svo);
 		
 		if(svo.getResult() == 1) {
 			session.setAttribute("svo", svo);
-			mv.addObject("svo", svo);
 			mv.setViewName("index");
-			//result = "index";
 		} else {
-			//result = "errorPage";
 			mv.setViewName("/login/login");
 		}
 		
