@@ -1,14 +1,21 @@
 package com.spring.banana;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.BananaShopVO;
+import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
 
 @Controller
@@ -50,13 +57,15 @@ public class EnrollstoreController {
 	 * @return
 	 */
 	@RequestMapping(value ="/updateStore_update_proc.do", method = RequestMethod.POST)
-	public ModelAndView updateStore_update_proc(BananaShopVO vo, HttpServletRequest request) {	
+	public ModelAndView updateStore_update_proc(BananaShopVO vo, MultipartHttpServletRequest mtfRequest, HttpServletRequest request) {	
+		List<MultipartFile> fileList = mtfRequest.getFiles("file_list");
 		//서버의 저장경로
 		String path1 = request.getSession().getServletContext().getRealPath("/");
 		String path2 = "\\resources\\upload\\";
-						
+		
 		//vo에 저장경로 추가
 		vo.setSavepath1(path1+path2);
+		vo.setFlie_list(fileList);
 		
 		return (ModelAndView)shopService.update(vo);
 	}
@@ -75,13 +84,18 @@ public class EnrollstoreController {
 	 * @return
 	 */
 	@RequestMapping(value="/enrollstore_write_proc.do",method=RequestMethod.POST)
-	public ModelAndView enrollstore_write_proc(BananaShopVO vo, HttpServletRequest request) {
+	public ModelAndView enrollstore_write_proc(BananaShopVO vo, MultipartHttpServletRequest mtfRequest, HttpServletRequest request, HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		vo.setMid(svo.getMid());
+		
+		List<MultipartFile> fileList = mtfRequest.getFiles("file_list");
 		//서버의 저장경로
 		String path1 = request.getSession().getServletContext().getRealPath("/");
 		String path2 = "\\resources\\upload\\";
 				
 		//vo에 저장경로 추가
 		vo.setSavepath1(path1+path2);
+		vo.setFlie_list(fileList);
 		
 		return (ModelAndView)shopService.insert(vo);
 	}

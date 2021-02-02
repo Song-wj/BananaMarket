@@ -210,7 +210,7 @@
 			<c:forEach var="vo" items="${list }">
 			<div class="store_recommand">
 				<div>				
-					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>
 				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
 				<label class="store_info">${vo.sintro }</label>
@@ -228,7 +228,7 @@
 			<c:forEach var="vo" items="${list }">
 			<div class="store_recommand">
 				<div>				
-					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>
 				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
 				<label class="store_info">${vo.sintro }</label>
