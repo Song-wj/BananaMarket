@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.service.MemberServiceImpl;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
 import com.spring.service.DongneServiceImpl;
@@ -27,9 +28,10 @@ public class MypageController {
 	@Autowired
 	private DongneServiceImpl dongneService;
 	
+	@Autowired
+	private MemberServiceImpl memberService;
 	
 	@Autowired
-
 	private MypageReviewServiceImpl MypageReviewService ;
 	
 	
@@ -159,6 +161,16 @@ public class MypageController {
 	}
 	
 	/**
+	 * 마이페이지 - 판매내역 - 판매완료
+	 */
+	@RequestMapping(value="/mypage_contract_review" , method=RequestMethod.GET)
+	public ModelAndView sellUpdate(String pid) {
+		
+	
+		return (ModelAndView)productService.sellUpdate(pid);
+	}
+	
+	/**
 	 * 마이페이지 - 판매내역 - 삭제
 	 * @return
 	 */
@@ -236,8 +248,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_update.do", method=RequestMethod.GET)
-	public String mypage_update() {
-		return "mypage/mypage_update";
+	public ModelAndView mypage_update(String mid) {
+		return (ModelAndView)memberService.getMemberContent(mid);
 	}
 	
 	/**
@@ -245,8 +257,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
-	public String mypage() {
-		return "mypage/mypage";
+	public ModelAndView mypage(String mid) {
+		return (ModelAndView)memberService.getMemberContent(mid);
 	}
 	
 	/**

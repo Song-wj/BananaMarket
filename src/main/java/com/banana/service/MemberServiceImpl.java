@@ -20,8 +20,6 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	BananaMemberDAO memberDAO;
 	
-	
-	
 	@Override
 	public Object getMemberList() {
 		ModelAndView mv = new ModelAndView();
@@ -30,7 +28,17 @@ public class MemberServiceImpl implements MemberService{
 		mv.setViewName("admin/memberManage");
 		return mv;
 	}
-
+	
+	@Override
+	public ModelAndView getMemberContent(String mid) {
+		ModelAndView mv = new ModelAndView();
+		BananaMemberVO vo = memberDAO.MemberContent((String)mid);
+		
+		mv.addObject("vo", vo);
+		mv.setViewName("/mypage/mypage");
+		return mv;
+	}
+	
 	@Override
 	public String getResultLoginChk(String id, String pass) {
 		int result = memberDAO.getLoginChk(id, pass);

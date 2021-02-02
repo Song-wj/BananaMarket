@@ -157,8 +157,6 @@ public class ProductServiceImpl implements ProductService{
 				result = productDAO.getUpdateNofile((productVO)vo);
 				
 			}
-			
-			
 				if(result) {			
 					mv.setViewName("/mypage/mypage");
 				}
@@ -166,12 +164,25 @@ public class ProductServiceImpl implements ProductService{
 			return mv;	
 		}
 	 
+	 public Object sellUpdate(Object pid) {
+		 ModelAndView mv = new ModelAndView();
+		 boolean result = productDAO.getSellUpdate((String)pid);
+		 
+		 if(result){
+				mv.setViewName("redirect:/mypage.do");
+			}else{
+				mv.setViewName("errorPage");
+			}
+		 
+		 return mv;
+	 }
 	 
 	 public Object delete(Object pid) {
 		 boolean result = productDAO.getProductDelete((String)pid);
 			String str="";
 			if(result) {
-				str="/popularProduct/deletePage";
+				//str="/popularProduct/deletePage";
+				str="/mypage/mypage";
 			}
 			return str;
 		}

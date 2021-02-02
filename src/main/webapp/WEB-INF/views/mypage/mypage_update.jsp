@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>      
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,13 +147,13 @@
 </style>
 </head>
 <body>
-	
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="join">
 		<section class="section_join">
 			<div>
-				<form name="joinForm" action="join_proc.do" method="post" class="join">
+				 <c:forEach var="vo" items="${list}">
+				<form name="updateForm" action="member_update_proc.do" method="post" class="join">
 				<h1>프로필 수정</h1>
 				<ul>
 					<li>
@@ -166,13 +167,13 @@
 						<label>닉네임</label>
 					</li>
 					<li>
-						<input type="text" name="nickname" class="f1" id="nickname">
+						<input type="text" name="nickname" class="f1" id="nickname" value="${vo.nickname}">
 					</li>
 					<li>
 						<label>아이디</label>
 					</li>
 					<li>
-						<input type="text" name="id" class="f1" id="id">
+						<input type="text" name="id" class="f1" id="id" value="${vo.mid}">
 					</li>
 					<li>
 						<div>영문 소문자, 숫자로 6-16자리</div>
@@ -181,7 +182,7 @@
 						<label>비밀번호</label>
 					</li>
 					<li>
-						<input type="password" name="pass" class="f1" id="pass">
+						<input type="password" name="pass" class="f1" id="pass" value="${vo.pw}">
 					</li>
 					<li>
 						<div>영문 대/소문자 구분주의, 숫자 조합으로 6-16자리</div>
@@ -190,7 +191,7 @@
 						<label>비밀번호 확인</label>
 					</li>
 					<li>
-						<input type="password" name="cpass" class="f1" id="cpass">
+						<input type="password" name="cpass" class="f1" id="cpass" value="${vo.pw}">
 					</li>
 					<li>
 						<div>비밀번호 일치여부</div>
@@ -211,10 +212,10 @@
 						<label>주소</label>
 					</li>
 					<li>
-						<input type="text" name="addr_num" placeholder="우편번호" class="addr1" id="addr1">
+						<input type="text" name="addr_num" placeholder="우편번호" class="addr1" id="addr1" >
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
-						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2">
+						<input type="text" name="addr2" placeholder="도로명주소" class="addr2" id="addr2" >
 						<input type="text" name="addr3" placeholder="상세주소" class="addr2" id="addr3">
 					</li>
 					<li>
@@ -223,6 +224,7 @@
 					</li>
 				</ul>
 				</form>
+				</c:forEach>
 			</div>
 		</section>
 	</div>
