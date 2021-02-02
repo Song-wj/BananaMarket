@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.dao.BananaMemberDAO;
 import com.banana.dao.dongneDAO;
+import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
@@ -23,6 +25,19 @@ public class DongneServiceImpl implements BananaService{
 
 	@Autowired
 	private dongneDAO dongneDAO;
+	
+	@Autowired
+	private BananaMemberDAO bananaMemberDAO;
+	
+	public ModelAndView getMemberInfo(String mid) {
+		ModelAndView mv = new ModelAndView();
+		
+		BananaMemberVO vo = bananaMemberDAO.getMember(mid);
+		mv.addObject("vo",vo);
+		mv.setViewName("mypage/mypage");
+		
+		return mv;
+	}
 	
 	public String deleteSubjectProc(String bsid) {
 		boolean result = dongneDAO.deleteSubjectProc(bsid);

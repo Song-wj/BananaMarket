@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
@@ -31,7 +32,6 @@ public class MypageController {
 	
 	
 	@Autowired
-
 	private MypageReviewServiceImpl MypageReviewService ;
 	
 	
@@ -267,8 +267,8 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
-	public String mypage() {
-		return "mypage/mypage";
+	public ModelAndView mypage(String mid) {
+		return dongneService.getMemberInfo(mid);
 	}
 	
 	/**

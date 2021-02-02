@@ -18,6 +18,11 @@ public class BananaMemberDAO extends DBConn{
 	
 	private static String namespace = "mapper.member";
 	
+	public BananaMemberVO getMember(String mid) {
+		System.out.println(mid);
+		return sqlSession.selectOne(namespace+".getmember", mid);
+	}
+	
 	public ArrayList<BananaMemberVO> getMemberList() {
 		List<BananaMemberVO> list = sqlSession.selectList(namespace+".memberlist");
 		return (ArrayList<BananaMemberVO>)list;

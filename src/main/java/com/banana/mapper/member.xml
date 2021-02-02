@@ -6,6 +6,10 @@
 
 <mapper namespace="mapper.member">
 
+	<select id="getmember" parameterType="java.lang.String" resultType="com.banana.vo.BananaMemberVO">
+		select mid, nickname, ph, regexp_substr(maddr,'[^,]+', 1, 1) maddr, msfile, score, mdate from banana_member where mid=#{mid} 
+	</select>
+
 	<insert id="join" parameterType="com.banana.vo.BananaMemberVO">
 		insert into banana_member values(#{mid},#{nickname},#{pw},#{ph},#{maddr_num},#{maddr},
 			#{mfile},#{msfile},36,sysdate)
