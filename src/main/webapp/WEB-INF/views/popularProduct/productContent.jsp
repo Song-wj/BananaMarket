@@ -25,7 +25,7 @@
 				  
 				//ajax를 활용한 서버 연동
 				  $.ajax({
-					  url:"product_unlike.do?mid=whtjdrnr010&pid=${vo.pid }", //mid는 로그인한사람id
+					  url:"product_unlike.do?mid=${mid}&pid=${vo.pid }", //mid는 로그인한사람id
 					  success:function(result){
 						  alert("좋아요 취소되었습니다");
 						  location.reload();
@@ -39,7 +39,7 @@
 
 				//ajax를 활용한 서버 연동
 					$.ajax({
-						url:"product_like.do?mid=whtjdrnr010&pid=${vo.pid }", //mid는 로그인한사람id
+						url:"product_like.do?mid=${mid}&pid=${vo.pid }", //mid는 로그인한사람id
 						success:function(result){
 							alert("좋아요 반영되었습니다");
 							location.reload();
@@ -500,8 +500,6 @@ $(document).ready(function(){
 					<div id="article-profile-left">
 						<div id="nickname">${vo.nickname }</div>
 						<div id="region-name">${vo.maddr }</div>
-						<input type="hidden" name="mid" id="mid" value="whtjdrnr010">
-						<input type="hidden" name="pid" id="pid" value="p_27">
 					</div>
 					<div id="article-profile-right">
 						<dl id="temperature-wrap">
@@ -519,8 +517,6 @@ $(document).ready(function(){
 		<div class="description">
 			<section id="article-description">
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}
-				<input type="hidden" name="mid" id="mid" value="whtjdrnr010">
-				<input type="hidden" name="pid" id="pid" value="${vo.pid }">
 				<button type="button" class="btn_unlike" id="btnLike">
   							<span class="img_emoti">좋아요</span></button>
      				

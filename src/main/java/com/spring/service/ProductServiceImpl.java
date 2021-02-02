@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.productDAO;
 import com.banana.vo.LikeVO;
+import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -93,10 +96,10 @@ public class ProductServiceImpl implements ProductService{
 			return mv;
 	  }
 	 
-	 public Object getContent(Object pid) {
+	 public Object getContent(Object pid, String mid) {
 		ModelAndView mv = new ModelAndView();
-
-		int result = productDAO.likeResult("whtjdrnr010", (String)pid);
+		
+		int result = productDAO.likeResult(mid, (String)pid);
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
 			if(vo.getPsfile() != null) {

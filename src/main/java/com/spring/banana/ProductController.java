@@ -3,6 +3,7 @@ package com.spring.banana;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
 import com.spring.service.ProductService;
 import com.spring.service.ProductServiceImpl;
@@ -28,8 +30,9 @@ public class ProductController {
 	
 	
 	@RequestMapping(value="/productContent.do", method=RequestMethod.GET)
-	public ModelAndView productContent(String pid) {
-		return (ModelAndView)productService.getContent(pid);
+	public ModelAndView productContent(String pid, HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)productService.getContent(pid,svo.getMid());
 	}
 	
 	@RequestMapping(value="/popularProduct.do", method=RequestMethod.GET)
@@ -62,14 +65,16 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value="/product_like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView product_like(String mid, String pid) {
-		return ProductServiceImpl.product_like(mid, pid);
+	public ModelAndView product_like(HttpSession session, String pid) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return ProductServiceImpl.product_like(svo.getMid(), pid);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/product_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView product_unlike(String mid, String pid) {
-		return ProductServiceImpl.product_unlike(mid, pid);
+	public ModelAndView product_unlike(HttpSession session, String pid) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return ProductServiceImpl.product_unlike(svo.getMid(),pid);
 	}
 	
 	
