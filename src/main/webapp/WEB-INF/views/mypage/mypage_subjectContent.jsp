@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -364,17 +365,14 @@
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
 					<ul>
-						<li class="userName">박민석</li>
-						<li class="userAddr">흑석동</li>
-						<li class="regit-date">어제</li>
+						<li class="userName">${vo.nickname }</li>
+						<li class="userAddr">${vo.maddr }</li>
+						<li class="regit-date">${vo.bdate }</li>
 					</ul>
 				</div>
 				<div class="box">
 					<div class="post-body">
-						<!-- <p>흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요.</p> -->
-						흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요.
-						흑석동에 지노헤어 미용실 현금 결제시 만원! 오늘 이용해봤는데 유정쌤이 엄청 잘자르더라구요!! 다들 한번 가보세요. 
-						흑석동에 지노헤어 미용실 현금 결제시 만원!
+						<pre><c:out value="${vo.btopic}" /></pre>
 					</div>
 				</div>
 				</a>

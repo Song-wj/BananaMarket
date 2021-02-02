@@ -112,12 +112,12 @@
 					<ul class="header-menu-list">
 						<li id="name-area" class="header-menu-item"><a class="menu-link" href="#">${ svo.nickname }님</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/logout.do">로그아웃</a></li>
-<<<<<<< HEAD
+
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do">나의 바나나</a></li>
-=======
-						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/mypage.do?mid=${ svo.mid }">나의 바나나</a></li>
+
+					
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/popularProduct.do">바나나 매물</a></li>
->>>>>>> c8fd1d99cc258bf61e9a4a4c37f5645dfd977eeb
+
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood.do">내 근처</a></li>
 					</ul>

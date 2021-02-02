@@ -35,6 +35,10 @@ public class dongneDAO extends DBConn{
 		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
 	}
 	
+	public dongneVO getSubjectList(String bstitle) {
+		return sqlSession.selectOne(namespace+".getDongneSubjectlist", bstitle);
+	}
+	
 	public ArrayList<dongneSubjectVO> getDongneSubject() {
 		List<dongneSubjectVO> list = sqlSession.selectList(namespace+".getDongneSubject");
 		return (ArrayList<dongneSubjectVO>)list;

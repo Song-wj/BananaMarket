@@ -14,6 +14,11 @@
 		select bsid, bstitle, bstopic, bssfile from banana_board_subject
 	</select>
 	
+	<select id="getDongneSubjectlist" parameterType="java.lang.String" resultType="com.banana.vo.dongneSubjectVO">
+		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
+	    from banana_member m , banana_board b
+	    where bstitle=#{bstitle} and m.mid=b.mid
+	</select>
 	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
 		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
 	</select>
