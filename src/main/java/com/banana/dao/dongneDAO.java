@@ -6,6 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.banana.vo.DongneCommentVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
@@ -80,8 +81,8 @@ public class dongneDAO extends DBConn{
 		return (ArrayList<dongneVO>)list;
 	}
 	
-	public ArrayList<dongneVO> getMyComment(String mid){
-		List<dongneVO> list = sqlSession.selectList(namespace+".getmycomment" , mid);
-		return (ArrayList<dongneVO>)list;
+	public ArrayList<DongneCommentVO> getMyComment(String mid){
+		List<DongneCommentVO> list = sqlSession.selectList(namespace+".getmycomment" , mid);
+		return (ArrayList<DongneCommentVO>)list;
 	}
 }
