@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.dongneDAO;
+import com.banana.vo.ReviewVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 import com.google.gson.Gson;
@@ -134,13 +135,10 @@ public class DongneServiceImpl implements BananaService{
 		if(dvo.getList().get(0).getSize() != 0)  {
 			 	
 		       for (MultipartFile mf : dvo.getList()) {    	   
-		           
-		           
+		           		           
 		           file_list.add(mf.getOriginalFilename());
 		           sfile_list.add(uuid+ "_"+ mf.getOriginalFilename());
-		           
-		        
-		          
+ 
 		       }
 		      
 		       dvo.setBfile(String.join(",", file_list));
@@ -148,8 +146,8 @@ public class DongneServiceImpl implements BananaService{
 		}
 		
 		
-		boolean dao_result = dongneDAO.insertBoard(dvo);
-		if(dao_result) {
+		int  dao_result = dongneDAO.insertBoard(dvo);
+		if(dao_result != 0) {
 			try {
 				 for (MultipartFile mf : dvo.getList()) { 
 					File file = new File(dvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
@@ -169,11 +167,31 @@ public class DongneServiceImpl implements BananaService{
 	public Object  getList() {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<dongneVO> list =dongneDAO.getBoardList();
+		
+		String str ="";
+		for(dongneVO vo : list) {
+			int date = Integer.parseInt(vo.getBdate());
+			if(60>date) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/60 + "일";
+			}else if(date ==0) {
+				str="방금";
+			}
+				
+			vo.setBdate(str);
+		}
+		
+		
 		mv.addObject("list",list);
 		mv.setViewName("/dongneLife/dongneLife");
 		
 		return mv;
 	}
+	
+	
 	
 	public Object getContent(Object bid) {
 		ModelAndView mv = new ModelAndView();
@@ -183,6 +201,20 @@ public class DongneServiceImpl implements BananaService{
 	
 			mv.addObject("sfile_list", sfile_list);
 		}
+		
+		String str ="";	
+		int date = Integer.parseInt(vo.getBdate());
+			if(60>date) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/60 + "일";
+			}else if(date ==0) {
+				str="방금";
+			}
+				
+			vo.setBdate(str);
 		
 		
 		mv.addObject("vo", vo);
@@ -211,7 +243,7 @@ public class DongneServiceImpl implements BananaService{
 		
 		
 		ModelAndView mv = new ModelAndView();
-		boolean result = false;
+		int dao_result =0;
 		ArrayList<String> file_list = new ArrayList<String>();
 		ArrayList<String> sfile_list = new ArrayList<String>();
 		dongneVO dvo = (dongneVO)vo;
@@ -230,9 +262,9 @@ public class DongneServiceImpl implements BananaService{
 		       dvo.setBfile(String.join(",", file_list));
 		       dvo.setBsfile(String.join(",", sfile_list));
 		       
-		       result = dongneDAO.boardU((dongneVO)vo);
+		      dao_result = dongneDAO.boardUpdate((dongneVO)vo);
 		       
-		       if(result) {
+		       if(dao_result !=0) {
 		       try {
 					 for (MultipartFile mf : dvo.getList()) { 									    		   
 							 File file = new File(dvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
@@ -243,28 +275,41 @@ public class DongneServiceImpl implements BananaService{
 				}
 		       }		       
 		}else if(dvo.getCancel_img().equals("cancel")) {
-			 dvo.setBfile(null);
-		     dvo.setBsfile(null);
-		     result = dongneDAO.boardU((dongneVO)vo);
+			 dvo.setBfile("");
+		     dvo.setBsfile("");
+		     dao_result = dongneDAO.boardUpdate((dongneVO)vo);
 		}else {
-			result = dongneDAO.boardUpdateNofile((dongneVO)vo);
+			dao_result = dongneDAO.boardUpdate((dongneVO)vo);
 		
 		}
 			
 		
 		
-		if(result) {			
+		if(dao_result !=0) {			
 			mv.setViewName("redirect:/dongneLife.do");
 		}
 		
 		return mv;
 	}
 	public Object delete(Object bid) {
-		boolean result = dongneDAO.boardDelete((String)bid);
+		int result = dongneDAO.boardDelete((String)bid);
 		String str="";
-		if(result) {
+		if(result!=0) {
 			str="redirect:/dongneLife.do";
 		}
 		return str;
 	}
+	
+	public ModelAndView getMyPost(String mid) {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneVO> list = dongneDAO.getMyPost(mid);
+		ArrayList<dongneVO> clist = dongneDAO.getMyComment(mid);
+		
+		mv.addObject("list", list);
+		mv.addObject("clist", clist);
+		mv.setViewName("mypage/mypage_mypost");
+		return mv;
+		
+	}
+	
 }

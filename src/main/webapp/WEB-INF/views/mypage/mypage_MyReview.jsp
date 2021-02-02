@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 <script>
 	$(document).ready(function(){
 		
@@ -14,6 +17,32 @@
 		
 	});
 		
+	function review_delete(rid){
+		if (confirm("정말 삭제하시겠습니가?"))
+		  {
+			 window.location.href="myReview_delete_proc.do?rid="+rid;
+		  } 
+	}
+	
+	
+	
+	function showReview(rid ,rsfile ,showImg){
+		
+		$("."+rid).css("display","block");
+		$("#"+showImg).text("");
+		var output="";
+		 if(rsfile != "") {
+			var sfile_list =rsfile.split(','); 
+			for(var i in sfile_list){
+				output = "<a href='http://localhost:9000/banana/resources/upload/"+sfile_list[i]+"' data-lightbox='example-set'><img src='http://localhost:9000/banana/resources/upload/"+sfile_list[i] +"'>"
+				$("#"+showImg).append( output);
+				$("#mw .fg").css("height" , "600px");
+			} 
+		 } 
+	}
+	function closeReview(rid){
+		$("."+rid).css("display","none");
+	}
 </script>
 <style>
 	.mypage_review {
@@ -71,7 +100,8 @@
 		margin-top:10px;
 		float:left;
 	}
-	td.review>img{
+	td.review>img,
+	#mw .fg div:nth-child(2) div:nth-child(1) img{
 		width:35px;
 		height:35px;
 		margin-left:10px;
@@ -79,7 +109,15 @@
      	border:2px solid #fff;
       	box-shadow: 0 0 16px rgb(221,221,221);
 	}
-	td.review>label{
+	#mw .fg div:nth-child(2) div:nth-child(3) img{
+	 	width:100px;
+		height:100px;
+		margin-left:10px;
+		border:2px solid #fff;
+		margin-top:10px;
+	}
+	td.review>label,
+	#mw .fg label{
 		position: relative;
         top: -11px;
         color: rgb(98,71,24);
@@ -97,7 +135,6 @@
         height: 3.6em; 
 		overflow:hidden;
       	text-overflow:ellipsis;
-		border:1px solid red;
 		text-align:left;
 		font-size: 20px;	
 	}
@@ -125,6 +162,61 @@
 		vertical-align:text-top;
 	}
 
+	#mw {
+		 position:fixed;
+		_position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		display:none;
+		z-index:1;
+	}
+	#mw .bg {
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background:#000;
+		opacity:.5;
+		filter:alpha(opacity=50);
+		z-index:2;
+		}
+	#mw .fg {
+		position:absolute;
+		top:30%;
+		left:50%;
+		width:450px;
+		height:450px;
+		margin:-100px 0 0 -200px;
+		padding:20px;
+		border:3px solid #ccc;
+		background:#fff;
+		z-index:3;
+		}
+	#mw .fg button{
+		float:right;
+		background-color:white;
+		border:1px solid white;
+		outline:none;
+	}
+	
+	#mw .fg div:nth-child(2){
+		margin-top:30px;
+		text-align:left;
+		clear:both;
+	
+	}
+	#mw .fg div:nth-child(2) label.date{
+		color:lightgray;
+		margin-left:10px;
+		font-size:13px;
+	}
+	#mw .fg pre{
+		height:300px;
+		border:0.5px solid black;
+	}
 	
 </style>
 </head>
@@ -141,7 +233,13 @@
 			<div>
 			<table class="review_all_table"> 
 			<c:choose >
-			<c:when test="${list ne null }">
+			<c:when test="${empty list }">
+					<tr>
+						<td style="padding: 230px 0; color: #ccc;">내 후기가 없습니다.</td>
+					</tr> 
+			</c:when>
+			<c:otherwise>
+				
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td class="review">
@@ -150,8 +248,8 @@
 							<label>${vo.maddr }</label>
 						</td>
 					</tr>
-					<tr>
-						<td class="review" colspan="3">
+					<tr onclick="showReview('${vo.rid}','${vo.rsfile }' ,'showImg')">
+						<td class="review" colspan="3" >
 							<pre><c:out value="${vo.review}" /></pre>
 						</td>
 					</tr>
@@ -159,16 +257,32 @@
 						<td class="review" colspan="3">	
 							<label class="date">${vo.rdate }</label>
 					
-							<button type="button" class="review_update_btn">수정</button>
-							<button type="button" class="review_delete_btn">삭제</button>
+							<a href="myReview_update.do?rid=${vo.rid }"><button type="button" class="review_update_btn">수정</button></a>
+							<button type="button" class="review_delete_btn" onclick="review_delete('${vo.rid}')">삭제</button>
 						</td>
 					</tr>	
+					<div class="${vo.rid }" id="mw"> 
+		    		<div class="bg"><!--이란에는 내용을 넣지 마십시오.--></div>
+		    		<div class="fg">
+			    		<div>
+			    			<button onclick="closeReview('${vo.rid}')" type="button">x</button>
+			    		</div>
+			    		<div>
+			    			<div>
+				    		   <img src="images/banana.jpg">
+								<label>${vo.mid }</label>
+								 <label class="date">${vo.rdate }</label>
+			    			</div>
+			    			<div>
+			       			   <pre><c:out value="${vo.review}" /></pre>	    			
+			    			</div>
+			    		    <div id="showImg">
+			    		    	
+			    		    </div>
+			    		</div>
+		   			 </div>
+					</div>
 			</c:forEach>
-			</c:when>
-			<c:otherwise>
-					<tr>
-						<td style="padding: 230px 0; color: #ccc;">내 후기가 없습니다.</td>
-					</tr> 
 			</c:otherwise>
 			</c:choose>
 			</table> 

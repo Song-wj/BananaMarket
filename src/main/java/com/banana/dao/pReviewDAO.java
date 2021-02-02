@@ -46,4 +46,33 @@ public class pReviewDAO {
 		List<ReviewVO> list =sqlSession.selectList(namespace+".getmyreviewlist" , mid);
 		return (ArrayList<ReviewVO>)list ; 
 	}
+	// 리뷰 수정 페이지
+	public ReviewVO getMyReview(String rid) {
+		return sqlSession.selectOne(namespace+".getmyreview" , rid);
+		
+	}
+	// 리뷰 수정
+	public int updateBuyMyReview(ReviewVO vo) {
+		return sqlSession.update(namespace+".updatebuymyreview" , vo);
+	}
+	public int updateSellMyReview(ReviewVO vo) {
+		return sqlSession.update(namespace+".updatesellmyreview" , vo);
+	}
+	
+	// 리뷰 삭제
+	public int deleteBuyMyReview(String rid) {
+		return sqlSession.delete(namespace+".deletebuymyreview" , rid);
+	}
+	public int deleteSellMyReview(String rid) {
+		return sqlSession.delete(namespace+".deletesellmyreview" , rid);
+	}
+	
+	
+	//매너점수 불러오기
+	public ArrayList<ReviewVO> getGradeList(String mid){
+		List<ReviewVO> list =sqlSession.selectList(namespace + ".gradelist" , mid);
+		return (ArrayList<ReviewVO>)list;
+	}
+	
+	
 }

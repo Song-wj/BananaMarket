@@ -86,7 +86,8 @@
 	.dl_content2 ul li:first-child label:nth-child(2){
 		color: rgb(98,71,24);
 		font-size:14px;
-		margin-left:460px;
+		float:right;
+		margin-right:20px;
 	}
 	.dl_content2 ul li:nth-child(2) img{
 		width:35px;
@@ -162,7 +163,7 @@
 				<ul>	
 					<li>
 						<label>${vo.btitle }</label>
-						<label>시간(몇분전)</label>
+						<label>${vo.bdate }</label>
 					</li>
 					<li>
 						<img src="images/banana.jpg">

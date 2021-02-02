@@ -3,6 +3,7 @@ package com.spring.banana;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.service.MemberServiceImpl;
 import com.banana.vo.ReviewVO;
+import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
 import com.spring.service.DongneServiceImpl;
 import com.spring.service.MypageReviewServiceImpl;
@@ -71,8 +73,11 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mannerGrade.do", method=RequestMethod.GET)
-	public String mypage_mannerGrade() {
-		return "mypage/mypage_mannerGrade";
+	public ModelAndView mypage_mannerGrade(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid =svo.getMid();
+		return (ModelAndView)MypageReviewService.getContent(mid);
+		/* return "mypage/mypage_mannerGrade"; */
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
@@ -112,8 +117,10 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mypost.do", method=RequestMethod.GET)
-	public String mypage_mypost() {
-		return "mypage/mypage_mypost";
+	public ModelAndView mypage_mypost(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMyPost(svo.getMid());
+		
 	}
 	
 	/**
@@ -219,7 +226,17 @@ public class MypageController {
 		return "mypage/mypage_contract_review";
 	}
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
-	public String contract_reivew_write_proc(ReviewVO vo) {
+	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		 vo.setMid(svo.getMid());
+		
+		List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		 
 		vo.setParam("ÆÇ¸ÅÀÚ¸®ºä");
 		return (String)MypageReviewService.insert(vo); 
 	}
@@ -237,8 +254,18 @@ public class MypageController {
 		return "mypage/mypage_purchase_review";
 	}
 	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
-	public String purchase_reivew_write_proc(ReviewVO vo) {
-		vo.setParam("±¸¸ÅÀÚ¸®ºä");
+	public String purchase_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request , HttpSession session) {
+		
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		 vo.setMid(svo.getMid());
+
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		 vo.setParam("±¸¸ÅÀÚ¸®ºä");
 		return (String)MypageReviewService.insert(vo); 
 	}
 	
@@ -274,11 +301,45 @@ public class MypageController {
 	
 	// ³»¸®ºä
 	@RequestMapping(value="/mypage_myReview.do", method=RequestMethod.GET)
-	public ModelAndView mypage_myRreview() {
-		String mid ="aa";
+	public ModelAndView mypage_myRreview( HttpSession session) {
+		
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid = svo.getMid();
+		
 		return (ModelAndView)MypageReviewService.getMyReviewList(mid);
 		
 	}
+	// ¸®ºä ¼öÁ¤
+	@RequestMapping(value="myReview_update.do", method=RequestMethod.GET)
+	public ModelAndView myReview_update_proc(String rid ) {
+		
+		return (ModelAndView)MypageReviewService.getUpdateContent(rid);	
+	}
+	
+	
+		
+	@RequestMapping(value="update_myReview_proc.do", method=RequestMethod.POST)
+	public ModelAndView update_myReview_proc(ReviewVO vo ,MultipartHttpServletRequest mtfRequest ,HttpServletRequest request) {	
+		
+		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");
+		
+		 String path1 = request.getSession().getServletContext().getRealPath("/");
+		 String path2 = "\\resources\\upload\\";
+		
+		
+		 vo.setSavepath(path1+path2);
+		 vo.setList(fileList);
+		return (ModelAndView)MypageReviewService.update(vo);
+		
+	}
+	// ¸®ºä »èÁ¦
+		@RequestMapping(value="myReview_delete_proc.do", method=RequestMethod.GET)
+		public ModelAndView myReview_delete_proc(String rid) {
+			
+			return (ModelAndView)MypageReviewService.delete(rid); 
+		
+			
+		}
 	/*
 	 * @ResponseBody
 	 * 

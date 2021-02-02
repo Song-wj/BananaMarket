@@ -1,11 +1,50 @@
 package com.banana.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class ReviewVO {
-	 String rid, mid, pid, review, rfile, rsfile, rdate ;
+	 String rid, mid, pid, review, rfile, rsfile, rdate ,savepath , cancel_img;
 	 String score;
 	 String param;
 	 String maddr;
 	 
+	 String file;
+	 String sfile;
+	 List<MultipartFile> list ;
+		
+	 
+	 public String getCancel_img() {
+		 return cancel_img;
+	 }
+	 public void setCancel_img(String cancel_img) {
+		 this.cancel_img = cancel_img;
+	 }
+	 public String getSavepath() {
+		 return savepath;
+	 }
+	 public void setSavepath(String savepath) {
+		 this.savepath = savepath;
+	 }
+	 public String getFile() {
+		return file;
+	}
+	public void setFile(String file) {
+		this.file = file;
+	}
+	public String getSfile() {
+		return sfile;
+	}
+	public void setSfile(String sfile) {
+		this.sfile = sfile;
+	}
+	public List<MultipartFile> getList() {
+		return list;
+	}
+	public void setList(List<MultipartFile> list) {
+		this.list = list;
+	}
 	
 	 public String getScore() {
 		return score;
