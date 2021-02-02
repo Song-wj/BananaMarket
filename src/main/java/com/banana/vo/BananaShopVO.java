@@ -1,5 +1,8 @@
 package com.banana.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class BananaShopVO {
@@ -8,8 +11,18 @@ public class BananaShopVO {
 	String smain_img, smain_simg, 
 		   scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3;
 	CommonsMultipartFile file1;
+	List<MultipartFile> flie_list ;
+	
 	String savepath1;
 	StringBuilder dong = new StringBuilder();
+	
+	public List<MultipartFile> getFlie_list() {
+		return flie_list;
+	}
+
+	public void setFlie_list(List<MultipartFile> flie_list) {
+		this.flie_list = flie_list;
+	}
 
 	public StringBuilder getDong() {
 		return dong;
