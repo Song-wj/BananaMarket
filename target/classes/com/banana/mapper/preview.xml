@@ -114,7 +114,7 @@
 		  union
 		  select pid, mid, score, review, sdate
 		  from banana_sell_review) r
-		where p.pid=r.pid and p.pid='P_1' 
+		where p.pid=r.pid and p.mid=#{mid} 
 	</select>
 	
 	
