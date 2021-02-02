@@ -179,7 +179,7 @@
 		<section class="section2_contract" id="section2_contract">
 		<div>
 			<c:forEach var="vo"  items="${list}">
-			   <c:if test="${vo.pchk eq 'x'}">
+			   <c:if test="${vo.pchk eq 'x' && vo.mid eq svo.mid}">
 				  <div class="contract_content">
 						<table class="mypage_table">
 							<tr onclick="location.href='productContent.do?pid=${vo.pid}'">
@@ -209,7 +209,7 @@
 		<section class="section3_contract" id="section3_contract">
 		  <div>
 		  	<c:forEach var="vo"  items="${list}">
-		  		<c:if test="${vo.pchk eq 'o'}">
+		  		<c:if test="${vo.pchk eq 'o' && vo.mid ne 'test12'}">
 					<table class="mypage_table">
 						<tr>
 							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>

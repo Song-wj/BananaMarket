@@ -158,7 +158,9 @@ public class ProductServiceImpl implements ProductService{
 				
 			}
 				if(result) {			
-					mv.setViewName("/mypage/mypage");
+					mv.setViewName("redirect:mypage.do");
+				}else {
+					mv.setViewName("errorPage");
 				}
 			
 			return mv;	
