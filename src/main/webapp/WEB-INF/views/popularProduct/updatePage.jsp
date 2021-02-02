@@ -40,22 +40,23 @@
 
 	div.content form.pupdateForm ul li:first-child>input[type="file"]{
 		position: absolute; 
-		/* width: 1px; 
-		height: 1px; 
-		margin: -1px;  */
+		 /* width: 1px; 
+		height: 1px; */ 
+		margin: -1px;  
 		overflow: hidden; 
 		clip:rect(0,0,0,0); 
 		margin:-150px;
 	}
 	div.content form.pupdateForm ul li:first-child button{
-		color:#999;
+		color:RGB(82,67,21);
 		background-color:#fdfdfd;
-		border:1px solid lightgray;
-		padding:20px 15px;
+		padding:10px 15px;
 		font-size:15px;
 		border-radius:5px; 
 		cursor:pointer;
-		
+		background-color:RGB(254,229,0);
+		border:1px solid RGB(254,229,0);
+		margin:-10px 0 0 30px;
 	}
 	
 	div.content form.pupdateForm ul li:first-child div{
@@ -158,10 +159,10 @@ $(document).ready(function(){
 });
 
 	function showConfirm() {
-		 if (confirm("사진을 삭제하시겠습니까?")){
-		   alert("삭제되었습니다!");		
+		 if (confirm("사진을 초기화 하시겠습니까?")){
+		   alert("초기화 되었습니다!");		
 		   $("input[type='hidden']#cancel_img").val("cancel");
-	   	   $("#fake_id").html("선택된 파일 없음");
+	   	   $("#fake_id1").text("선택된 파일 없음");
 		  } 
 	};
 
@@ -175,7 +176,7 @@ $(document).ready(function(){
 			$("#update_img").val("");
 		}
 		
-		$("#fake_id").css("display","none");
+		$("#fake_id1").css("display","none");
 		$("input[type='file']#update_img").css("width","400px").css("height","25px").css("font-size","13.7px"); 
 	}
 
@@ -192,17 +193,15 @@ $(document).ready(function(){
 			<ul>
 				<li><label for="update_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png">이미지 변경</label>
 					<input type="file" name="file1" id="update_img"  multiple  onchange='test()'>
-					<button type="button" id="cancel_img">초기화</button><input type="hidden" name="cancel_img" id="cancel_img"><br><br> 
 					<c:choose>
 						<c:when test="${count ne 0 }">
-							<span id="fake_id">파일 ${count}개</span>
+							<span id="fake_id1">파일 ${count}개</span>
 						</c:when>
 						<c:otherwise>
 							<span id="fake_id">선택한 파일 없음</span>
 						</c:otherwise>
 					</c:choose>
-				<!--  <li><label for="input_img">이미지 추가</label>
-			    <input type="file" id="input_img"  multiple> -->
+					<button type="button" id="cancel_img">초기화</button><input type="hidden" name="cancel_img" id="cancel_img"><br><br> 
 					<div id="img_list"></div></li>
 				<li><input type="text" name="ptitle" id="ptitle" value="${vo.ptitle}"></li>
 				<li><select name="pcategory" id="pcategory">

@@ -11,4 +11,6 @@ public interface MemberService {
 	String getResultLoginChk(String id, String pass);
 	Object getResultLogin(BananaMemberVO vo, HttpSession seesion);
 	Object getMemberList();
+	Object getMemberContent(String id);
+	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.SessionVO;
@@ -191,6 +192,16 @@ public class MypageController {
 	@RequestMapping(value="/mypage_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public ModelAndView product_unlike(String mid, String pid) {
 		return ProductServiceImpl.product_unlike(mid, pid);
+	}
+	
+	/**
+	 * 마이페이지 - 판매내역 - 판매완료
+	 */
+	@RequestMapping(value="/mypage_contract_review" , method=RequestMethod.GET)
+	public ModelAndView sellUpdate(String pid) {
+		
+	
+		return (ModelAndView)productService.sellUpdate(pid);
 	}
 	
 	/**

@@ -12,4 +12,5 @@ public interface ProductService {
 	Object delete(Object id);
 	
 	Object getSellList();
+	Object sellUpdate(Object id);
 }

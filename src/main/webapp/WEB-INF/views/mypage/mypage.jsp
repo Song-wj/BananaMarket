@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -303,7 +304,7 @@
 						<a href="mypage_update.do"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
 						<a href="http://localhost:9000/banana/enrollstore.do" id="#"><button type="button" id="mypage_updateBtn">동네 업체 등록</button></a>
 					</li>
-				</ul>
+				</ul>			
 			</div>
 		</section>
 		<section class="section2_mypage">
@@ -378,6 +379,7 @@
 				
 			</div>
 		</section>
+		
 	</div>
 	<script>
 	/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
