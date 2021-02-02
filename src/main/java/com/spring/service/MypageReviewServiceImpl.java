@@ -78,20 +78,20 @@ public class MypageReviewServiceImpl implements BananaService {
 		return mv;
 	};
 	
-	//³¯Â¥ °è»ê
+	//ë‚ ì§œ ê³„ì‚°
 	public void countDate(ArrayList<ReviewVO> list) {
 		
 		String str ="";
 		for(ReviewVO vo : list) {
 			int date = Integer.parseInt(vo.getRdate());
 			if(60>date) {
-				str = date +"ºÐ";
+				str = date +"ë¶„";
 			}else if(1440 > date && date>60) {
-				str = date/60 +"½Ã°£";
+				str = date/60 +"ì‹œê°„";
 			}else if (1440<date) {
-				str= date/60/60 + "ÀÏ";
+				str= date/60/60 + "ì¼";
 			}else if (date == 0) {
-				str="¹æ±Ý";
+				str="ë°©ê¸ˆ";
 			}
 			vo.setRdate(str);
 		}
@@ -205,7 +205,7 @@ public class MypageReviewServiceImpl implements BananaService {
 		
 		}			
 		
-		String msg= "¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+		String msg= "ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 		
 		if(val !=0) {
 			mv.addObject("msg", msg);
@@ -220,7 +220,7 @@ public class MypageReviewServiceImpl implements BananaService {
 	@Override
 	public Object delete(Object id) {
 		ModelAndView mv = new ModelAndView();
-		String msg= "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+		String msg= "ì‚­ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 		String rid = (String)id;
 		int val=0;
 		if(rid.contains("BR")){
@@ -238,7 +238,7 @@ public class MypageReviewServiceImpl implements BananaService {
 	
 	public ModelAndView deleteMyReview(String rid) {
 		ModelAndView mv = new ModelAndView();
-		String msg= "»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.";
+		String msg= "ì‚­ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.";
 		int val=0;
 		if(rid.contains("BR")){
 			val= reviewDAO.deleteBuyMyReview(rid);	
@@ -255,9 +255,41 @@ public class MypageReviewServiceImpl implements BananaService {
 	
 	
 	@Override
-	public Object getContent(Object id) {
-		return "";
+	public Object getContent(Object mid) {
+		ModelAndView mv = new ModelAndView();
+		
+		ArrayList<ReviewVO> list = reviewDAO.getGradeList((String)mid);
+		ArrayList<ReviewVO> good_list = new ArrayList<ReviewVO>();
+		ArrayList<ReviewVO> bad_list = new ArrayList<ReviewVO>();
+		
+		
+		
+		for(ReviewVO vo : list) {
+			if(Integer.parseInt(vo.getScore())>=3) {
+				if(Integer.parseInt(vo.getScore())==5) {
+					vo.setScore("ðŸ˜†");
+				}else if(Integer.parseInt(vo.getScore())==4) {
+					vo.setScore("ðŸ™‚");
+				}else if(Integer.parseInt(vo.getScore())==3) {
+					vo.setScore("ðŸ˜®");
+				}
+				good_list.add(vo);
+			}else {
+				if(Integer.parseInt(vo.getScore())==2) {
+					vo.setScore("ðŸ˜¥");
+				}else if(Integer.parseInt(vo.getScore())==1) {
+					vo.setScore("ðŸ˜¡");
+				}
+				bad_list.add(vo);
+			 }
+		}
+		
+		mv.addObject("good_list", good_list);
+		mv.addObject("bad_list", bad_list);
+		mv.setViewName("mypage/mypage_mannerGrade");
+		return mv;
 	};
+	
 	
 	
 }

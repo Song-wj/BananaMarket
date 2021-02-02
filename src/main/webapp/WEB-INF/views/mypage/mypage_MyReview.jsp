@@ -239,6 +239,7 @@
 					</tr> 
 			</c:when>
 			<c:otherwise>
+				
 				<c:forEach var="vo" items="${list }">
 					<tr>
 						<td class="review">

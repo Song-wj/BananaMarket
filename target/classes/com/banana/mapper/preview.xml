@@ -105,4 +105,17 @@
 		delete from banana_sell_review where rid= #{rid}
 			
 	</delete>
+	
+	<select id="gradelist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO">
+		select r.score , review  ,rdate
+		from banana_product p ,
+		  (select pid, mid, score, review, rdate
+		  from banana_buy_review
+		  union
+		  select pid, mid, score, review, sdate
+		  from banana_sell_review) r
+		where p.pid=r.pid and p.pid='P_1' 
+	</select>
+	
+	
 </mapper>
