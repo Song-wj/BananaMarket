@@ -299,4 +299,17 @@ public class DongneServiceImpl implements BananaService{
 		}
 		return str;
 	}
+	
+	public ModelAndView getMyPost(String mid) {
+		ModelAndView mv = new ModelAndView();
+		ArrayList<dongneVO> list = dongneDAO.getMyPost(mid);
+		ArrayList<dongneVO> clist = dongneDAO.getMyComment(mid);
+		
+		mv.addObject("list", list);
+		mv.addObject("clist", clist);
+		mv.setViewName("mypage/mypage_mypost");
+		return mv;
+		
+	}
+	
 }

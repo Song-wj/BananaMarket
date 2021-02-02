@@ -68,15 +68,20 @@ public class dongneDAO extends DBConn{
 		return sqlSession.update(namespace+".boardupdate" ,vo);	
 	}
 	
-	
-	
-	
-	
-	
-	
 	// board delete
 	public int boardDelete(String bid) {
 		return sqlSession.delete(namespace+".boarddelete" ,bid);
 		
+	}
+	
+	// 내 게시물 리스트
+	public ArrayList<dongneVO> getMyPost(String mid){
+		List<dongneVO> list = sqlSession.selectList(namespace+".getmypost" , mid);
+		return (ArrayList<dongneVO>)list;
+	}
+	
+	public ArrayList<dongneVO> getMyComment(String mid){
+		List<dongneVO> list = sqlSession.selectList(namespace+".getmycomment" , mid);
+		return (ArrayList<dongneVO>)list;
 	}
 }

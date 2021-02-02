@@ -63,5 +63,19 @@
 	<delete id="boarddelete" parameterType="java.lang.String" >
 		delete from banana_board where bid=#{bid}
 	</delete>
+
+
+	<select id="getmypost" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
+		select bid, nickname, btitle , btopic ,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
+	    from banana_member m , banana_board b
+		where m.mid = b.mid and m.mid=#{mid} 
+		order by bdate 
+	</select>
 	
+	<select id="getmycomment" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
+		select nickname , brid , bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate 
+		from banana_board_review r, banana_member m
+		where r.mid= m.mid and m.mid=#{mid}
+		order by brdate
+	</select>
 </mapper>

@@ -31,7 +31,6 @@ public class MypageController {
 	
 	
 	@Autowired
-
 	private MypageReviewServiceImpl MypageReviewService ;
 	
 	
@@ -115,8 +114,10 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_mypost.do", method=RequestMethod.GET)
-	public String mypage_mypost() {
-		return "mypage/mypage_mypost";
+	public ModelAndView mypage_mypost(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMyPost(svo.getMid());
+		
 	}
 	
 	/**
