@@ -206,7 +206,7 @@ $(document).ready(function(){
 		}else if($("#storekind1").val() =="select"){
 			alert("업종을 선택해주세요");
 			$("#storekind1").focus();
-		}else if($("#storekind2").val() =="select"){
+		}else if($("#storekind2").val() ==""){
 			alert("상세업종 입력해주세요");
 			$("#storekind2").focus();
 		}else if($("#addr1").val() ==""){
@@ -264,7 +264,6 @@ $(document).ready(function(){
 			<div>
 				<form name="EnrollForm" action="enrollstore_write_proc.do" method="post" 
 				class="join" enctype="multipart/form-data">
-				<input type="hidden" name="mid" value="test123"> <!-- mid 임의로 설정  -->
 				<h1>동네업체 등록</h1>
 				<ul>
 					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>

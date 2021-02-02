@@ -307,6 +307,8 @@
 </style>
 <script>
 	$(document).ready(function(){
+		var session_mid = $("#session_mid").val();
+		
 		/** 데이터 로딩 시 댓글 전체 리스트 출력 **/
 		comment_list($("#bid").val());
 		
@@ -315,16 +317,11 @@
 			$.ajax({
 				url:"comment_list_ajax_proc.do?bid="+bid,
 				success:function(result){	
-					//alert(result);
-					//JSON 형식으로 parsing
-					var jdata = JSON.parse(result);	//string객체 ->json객체
-
-					//2-1. DHTML을 이용하여 테이블 생성 및 출력
-					//결과물 출력
+					var jdata = JSON.parse(result);	
 					
 					var output="";
 					
-					for(var i in jdata.jlist){	//json객체로 받아야 reference가능
+					for(var i in jdata.jlist){	
 						output +="<div class='content_comment' id='content_comment'>"
 						output += "<div class='commentMemberImg'>";
 						output += "<img src='images/mypage_bananaimg.jpg' class='commentMemberImg'>";
@@ -336,17 +333,15 @@
 						output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
 						output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
 						output += "<li id='bcomment_area" + jdata.jlist[i].rno +"'>"+ "</li>";
-						output += "<li>";
-						/* output += "<form name='comment_update' action='dongneLifeComment_update.do' method=POST id='comment_update' enctype='multipart/form-data'>";
-						output += "<input type='hidden' name='brid' value='"+ jdata.jlist[i].brid +"'>";
-						output += "<input type='hidden' name='rno' value='"+ jdata.jlist[i].rno +"'>";
-						output += "<a id=''><button type='button'>수정</button></a>"; */
-						/*output += "<a href='dongneLifeComment_update.do?brid=" + jdata.jlist[i].brid + "&rno=" + jdata.jlist[i].rno +"'><button type='button' id='update'>수정</button></a>";*/
-						output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
-						/* output += "<a id='commentUpdate' href='comment_update.do?brid=" + jdata.jlist[i].brid + "&bcomment=" + jdata.jlist[i].bcomment + "&rno=" + jdata.jlist[i].rno +"'><button type='button'>수정</button></a>" */
-						output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button'>삭제</button></a>";
 						
-						output += "</li>";
+						//세션아이디와 비교
+						if(session_mid == jdata.jlist[i].mid) {
+							output += "<li>";
+							output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
+							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button'>삭제</button></a>";
+							output += "</li>";
+						}
+						
 						output += "</ul>";
 						output += "</div>";
 						output += "</div>";
@@ -360,7 +355,6 @@
 				}//success
 			});//ajax
 		}//comment_list
-		
 		
 		//수정 버튼 눌렸을 때
 		$("#commentUpdate").click(function(){
@@ -415,6 +409,7 @@
 	<div class="dongnelife_content">
 		<section class="section1_dongneLife_content">
 		<input type="hidden" id="bid" value="${vo.bid }">
+		<input type="hidden" id="session_mid" value="${svo.mid }">
 			<div class="content_nav">
 				<ul>
 					<li><a href="dongneLife.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
@@ -455,7 +450,6 @@
 			
 					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
 				
-			
 			</c:forEach>
 			</div>	
 			</div>
@@ -474,15 +468,23 @@
 		
 		</section>
 		<section class="section6_dongneLife_content">
-		<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }&mid=qqq123" method=POST id="board_review_write_form"  enctype="multipart/form-data">
-			<div class="content_comment_write">
-				<ul>
-					<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
-					<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
-				</ul>
-			</div>
-		</form>
+		<c:choose>
+			<c:when test="${svo.mid ne null }">
+			<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }" method=POST id="board_review_write_form"  enctype="multipart/form-data">
+				<div class="content_comment_write">
+					<ul>
+						<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
+						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+					</ul>
+				</div>
+			</form>
+			</c:when>
+			<c:otherwise>
+				<div><label>로그인 후 이용해주세요</label></div>
+			</c:otherwise>
+		</c:choose>
 		</section>
+		
 		<section class="section7_dongneLife_content">
 			
 		</section>

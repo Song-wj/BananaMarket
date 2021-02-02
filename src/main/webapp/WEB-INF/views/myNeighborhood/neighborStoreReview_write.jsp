@@ -127,7 +127,7 @@
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
-		<form name="review_write_form" action="neighborStoreReview_write_proc.do?sid=${sid }&mid=${mid }" method=POST id="board_write_form"  enctype="multipart/form-data">
+		<form name="review_write_form" action="neighborStoreReview_write_proc.do?sid=${sid }" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
 			<div class="write_nav">
 				<ul>

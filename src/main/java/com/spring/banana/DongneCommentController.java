@@ -1,5 +1,7 @@
 package com.spring.banana;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.DongneCommentVO;
+import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
 
 @Controller
@@ -55,9 +58,10 @@ public class DongneCommentController {
 	 * 동네생활 - 댓글 작성 처리
 	 */
 	@RequestMapping(value="/dongneLife_review_write_proc.do", method=RequestMethod.POST)
-	public ModelAndView dongneLife_review_write_proc(DongneCommentVO vo, String bid, String mid) {
+	public ModelAndView dongneLife_review_write_proc(DongneCommentVO vo, String bid, HttpSession session) {
 		vo.setBid(bid);
-		vo.setMid(mid);
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		vo.setMid(svo.getMid());
 		return (ModelAndView)dongneCommentService.insert(vo);
 	}
 	

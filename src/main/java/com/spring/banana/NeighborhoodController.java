@@ -1,5 +1,7 @@
 package com.spring.banana;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.BananaShopReviewVO;
+import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
 
 @Controller
@@ -81,9 +84,10 @@ public class NeighborhoodController {
 	 * @return
 	 */
 	@RequestMapping(value="/neighborStoreReview_write_proc.do",method=RequestMethod.POST)
-	public ModelAndView neighborStoreReview_write_proc(BananaShopReviewVO vo, String sid, String mid) {
+	public ModelAndView neighborStoreReview_write_proc(BananaShopReviewVO vo, String sid, HttpSession session) {
 		vo.setSid(sid);
-		vo.setMid(mid);
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		vo.setMid(svo.getMid());
 		
 		return (ModelAndView)shopReviewService.insert(vo);
 	}

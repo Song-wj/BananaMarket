@@ -229,7 +229,7 @@ $(document).ready(function(){
 		}else if($("#storekind1").val() =="select"){
 			alert("업종을 선택해주세요");
 			$("#storekind1").focus();
-		}else if($("#storekind2").val() =="select"){
+		}else if($("#storekind2").val() ==""){
 			alert("상세업종 입력해주세요");
 			$("#storekind2").focus();
 		}else if($("#addr1").val() ==""){
