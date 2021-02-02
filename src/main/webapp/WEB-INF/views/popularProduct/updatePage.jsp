@@ -20,6 +20,11 @@
 		margin-top:30px;
 	}
 	
+	div.content form.pupdateForm ul li:first-child img {
+		width:30px;
+		height:30px;
+		margin:5px 10px 0 0;
+	}
 	div.content form.pupdateForm ul li:first-child>label{
 	    position: absolute; 	
 	    left:700px;
@@ -34,13 +39,14 @@
 		border-bottom-color: #e2e2e2; 
 		border-radius: .25em;
 		margin-right:10px;
+		
 	}
-	div.content form.pupdateForm ul li:first-child img {
-		width:30px;
-		height:30px;
-		margin:5px 10px 0 0;
+	div.content form.pupdateForm ul li:first-child>label>span{
+		display: inline-block;
+		vertical-align:10px;
+		color: #999;
+		font-size: inherit;
 	}
-
 	div.content form.pupdateForm ul li:first-child>input[type="file"]{
 	    position: absolute; 	
 		padding: 0; 
@@ -208,7 +214,7 @@ $(document).ready(function(){
 			<input type="hidden" value="${vo.pid }" name="pid">
 			<input type="hidden" value="${vo.mid }" name="mid">
 			<ul>
-				<li><label for="update_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png">이미지 변경</label>
+				<li><label for="update_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"><span>이미지 변경</span></label>
 					<input type="file" name="file1" id="update_img"  multiple  onchange='test()'>
 					<c:choose>
 						<c:when test="${count ne 0 }">
