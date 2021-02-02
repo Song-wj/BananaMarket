@@ -11,6 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.banana.dao.BananaShopDAO;
 import com.banana.dao.BananaShopReviewDAO;
 import com.banana.vo.BananaShopVO;
+import com.banana.vo.LikeVO;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 @Service("shopService")
 public class EnrollstoreServiceImpl implements EnrollService {
@@ -66,6 +70,8 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	@Override
 	public Object getContent(Object sid) {
 		ModelAndView mv = new ModelAndView();
+		int result = shopDAO.likeResult("whtjdrnr010", (String)sid);
+		mv.addObject("result",result);
 		BananaShopVO svo = shopDAO.getShopContent((String)sid);
 		svo.getSintro().replace("\r\n", "<br>");
 		int review_count = shopReviewDAO.getShopReviewCount((String)sid);
@@ -155,5 +161,71 @@ public class EnrollstoreServiceImpl implements EnrollService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/** 좋아요 **/
+	 public ModelAndView product_like(String mid, String sid) {
+		 ModelAndView mv = new ModelAndView();
+		 boolean result = shopDAO.getPickContent(mid,sid); 
+			
+			if(result) {
+				//좋아요 버튼 잘 반영
+				ArrayList<BananaShopVO> list = shopDAO.getLikelist(mid); 
+				//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
+				JsonArray jarray = new JsonArray();
+				JsonObject jdata = new JsonObject();
+				Gson gson = new Gson();
+				
+				for(BananaShopVO vo : list){
+					JsonObject jobj = new JsonObject();
+					jobj.addProperty("sname", vo.getSname()); 
+					jobj.addProperty("skinds", vo.getSkinds()); 
+					jobj.addProperty("saddr", vo.getSaddr());
+					jobj.addProperty("sph", vo.getSph());
+					jobj.addProperty("smain_img", vo.getSmain_img());
+					jobj.addProperty("smain_simg", vo.getSmain_simg());
+					jobj.addProperty("mid", vo.getMid());
+					jobj.addProperty("sid", vo.getSid());
+					
+					jarray.add(jobj);
+				}
+				jdata.add("jlist", jarray);		//java객체
+				
+				mv.setViewName(gson.toJson(jdata));
+				
+			}
+			return mv;
+	 }
+	 
+	 /** 좋아요 취소 **/
+	 public ModelAndView product_unlike(String mid, String sid) {
+		 ModelAndView mv = new ModelAndView();
+		 boolean result = shopDAO.getDeleteContent(mid,sid); 
+			
+			if(result) {
+				//좋아요 버튼 잘 반영
+				ArrayList<BananaShopVO> list = shopDAO.getLikelist(mid); 
+				//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
+				JsonArray jarray = new JsonArray();
+				JsonObject jdata = new JsonObject();
+				Gson gson = new Gson();
+				
+				for(BananaShopVO vo : list){
+					JsonObject jobj = new JsonObject();
+					jobj.addProperty("sname", vo.getSname()); 
+					jobj.addProperty("skinds", vo.getSkinds()); 
+					jobj.addProperty("saddr", vo.getSaddr());
+					jobj.addProperty("sph", vo.getSph());
+					jobj.addProperty("smain_img", vo.getSmain_img());
+					jobj.addProperty("smain_simg", vo.getSmain_simg());
+					jobj.addProperty("mid", vo.getMid());
+					jobj.addProperty("sid", vo.getSid());
+					jarray.add(jobj);
+				}
+				jdata.add("jlist", jarray);		//java객체
+				
+				mv.setViewName(gson.toJson(jdata));
+				
+			}
+			return mv;
+	 }
 }

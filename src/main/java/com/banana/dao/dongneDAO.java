@@ -212,7 +212,7 @@ public class dongneDAO extends DBConn{
 		boolean result = false;
 		
 		try {
-			String sql = "insert into BANANA_INTEREST values(?,'',?)";
+			String sql = "insert into BANANA_INTEREST values(?,'',?,'')";
 			getPreparedStatement(sql);
 			pstmt.setString(1,mid);
 			pstmt.setString(2,bid);
@@ -295,7 +295,7 @@ public class dongneDAO extends DBConn{
 		int result = 0;
 		
 		try {
-			String sql ="select count(*) from BANANA_INTEREST where mid=? and pid=?";
+			String sql ="select count(*) from BANANA_INTEREST where mid=? and bid=?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.setString(2, bid);

@@ -197,7 +197,7 @@ public class productDAO extends DBConn{
 		boolean result = false;
 		
 		try {
-			String sql = "insert into BANANA_INTEREST values(?,?,'')";
+			String sql = "insert into BANANA_INTEREST values(?,?,'','')";
 			getPreparedStatement(sql);
 			pstmt.setString(1,mid);
 			pstmt.setString(2,pid);
@@ -245,7 +245,7 @@ public class productDAO extends DBConn{
 		ArrayList<LikeVO> list = new ArrayList<LikeVO>();
 		
 		try {
-			String sql = "select p.ptitle, m.maddr, p.pprice, p.pfile, p.psfile "
+			String sql = "select p.ptitle, m.maddr, p.pprice, p.pfile, p.psfile, p.pid"
 					+ " from banana_product p, banana_interest i, banana_member m "
 					+ " where i.mid=m.mid and i.pid=p.pid and i.mid=?";
 			
@@ -261,6 +261,7 @@ public class productDAO extends DBConn{
 				vo.setPprice(rs.getString(3));
 				vo.setPfile(rs.getString(4));
 				vo.setPsfile(rs.getString(5));
+				vo.setPid(rs.getString(6));
 				
 				list.add(vo);
 			}
@@ -292,7 +293,7 @@ public class productDAO extends DBConn{
 		
 		return result;
 	}
-
+	
 
 	
 	public boolean getUpdateNofile(productVO vo) {

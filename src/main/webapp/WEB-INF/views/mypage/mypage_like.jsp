@@ -38,24 +38,33 @@
 					  success:function(result){
 						  }
 					});
-				 location.reload();
+					 location.reload();
 			 }
-			  /* if($(this).hasClass('btn_like')){
-				  //좋아요 취소
-				  $(this).removeClass('btn_like');
-				  
-				//ajax를 활용한 서버 연동
-				  $.ajax({
-					  url:"mypage_unlike.do?mid=whtjdrnr010&pid=p_27", //mid는 로그인한사람id
-					  success:function(result){
-						  alert("좋아요 취소되었습니다");
-						  location.reload();
-						  }
-					});
-				
-			  } */
 		});
 		
+		$("#btnLike2").click(function(){
+			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
+			 if(confirmflag){
+				 $.ajax({
+					  url:"dongnelife_unlike.do?mid=whtjdrnr010&bid=b_21", //mid는 로그인한사람id
+					  success:function(result){
+						  }
+					});
+				 location.reload();
+			 }
+		});
+		
+		$("#btnLike3").click(function(){
+			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
+			 if(confirmflag){
+				 $.ajax({
+					  url:"shop_unlike.do?mid=whtjdrnr010&sid=shop_25", //mid는 로그인한사람id
+					  success:function(result){
+						  }
+					});
+				 location.reload();
+			 }
+		});
 	});
 </script>
 <style>
@@ -89,6 +98,7 @@
 	}
 	div.mypage_like table.mypage_table td.tdimg {
 		width:10px;
+		padding-right:15px;
 	}
 	div.mypage_like table.mypage_table img {
 		width:120px;
@@ -105,7 +115,7 @@
 	div.mypage_like table.mypage_table span.price {
 		font-weight:900;
 	}
-	.btn_like {
+	.btn_like,.btn_like2 {
 		float:right;
 	  	position: relative;
 	 	margin:2px 10px;
@@ -123,12 +133,12 @@
 	  	transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
 	  	cursor: pointer;
 	}
-	.btn_like:hover {
+	.btn_like:hover,.btn_like2:hover {
 	  border: 1px solid rgba(228,89,89,0.3);
 	  background-color: rgba(228,89,89,0.02);
 	  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
 	}
-	.btn_like .img_emoti {
+	.btn_like .img_emoti ,.btn_like2 .img_emoti{
 	    background-position: -30px -120px;
 	}
 	.img_emoti {
@@ -145,10 +155,18 @@
 	    background-position: 0px -120px;
 	    text-indent: 0;
 	}
+	.btn_like2{
+		margin-top:-5px;
+		maring-left:-15px;
+	}
+	div.skinds{
+		font-size:14px;
+	}
 	.dl_content2 {
 		background-color: rgb(251,247,242); 
 		box-shadow: 0 0 16px rgb(221,221,221);
 		margin-bottom:30px;
+		z-index:-1;
 	}
 	.dl_content2 ul{
 		list-style-type:none;
@@ -214,50 +232,37 @@
 			<c:forEach var="vo" items="${list1 }">
 				<table class="mypage_table">
 				<tr>
-					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
-					<td><span class="product">${vo.ptitle }</span></td>
+					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
+					<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
 					<td rowspan="3">
 					<button type="button" class="btn_like" id="btnLike">
   							<span class="img_emoti">좋아요취소</span></button>
   					</td>
 				</tr>
 				<tr>
-					<td><span class="locate">${vo.maddr }</span></td>
+					<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
 				</tr>
 				<tr>
-					<td><span class="price">${vo.pprice }</span></td>
+					<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
 				</tr>
 			</table>
 			</c:forEach> 
 		</section>
 		<section class="section3_like" id="section3_like">
-			<%-- <c:forEach var="vo" items="${list2 }">
-				<table class="mypage_table2">
-				<tr>
-					<td><span class="btitle">${vo.btitle }</span></td>
-				</tr>
-				<tr>
-					<td><span><img src="images/banana.jpg" class="mpic"></span>
-					<td><span class="nickname">${vo.nickname }</span></td>
-					<td><span class="maddr">${vo.maddr }</span></td>
-				</tr>
-				<tr>
-					<td colspan="5"><span class="btopic"><pre><c:out value="${vo.btopic}" /></pre></span></td>
-				</tr>
-			</table>
-			</c:forEach> --%>
 			<c:forEach var="vo" items="${list2 }">
-			<div class="dl_content2" onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">
+			<div class="dl_content2">
 				<ul>	
 					<li>
-						<label>${vo.btitle }</label>
+						<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.btitle }</label>
+						<button type="button" class="btn_like2" id="btnLike2">
+  							<span class="img_emoti">좋아요취소</span></button>
 					</li>
 					<li>
 						<img src="images/banana.jpg">
-						<label>${vo.nickname }</label>
-						<label>${vo.maddr }</label>
+						<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.nickname }</label>
+						<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.maddr }</label>
 					</li>	
-					<li><pre><c:out value="${vo.btopic}" /></pre></li>
+					<li><pre onclick="location.href='dongneLife_content.do?bid=${vo.bid}'"><c:out value="${vo.btopic}" /></pre></li>
 				</ul>
 			</div>
 			</c:forEach>
@@ -267,14 +272,18 @@
 			<c:forEach var="vo" items="${list3 }">
 				<table class="mypage_table">
 				<tr>
-					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
-					<td><span class="product">${vo.ptitle }</span></td>
+					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'"></td>
+					<td><span class="product" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.sname } <div class="skinds" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.skinds }</div></span></td>
+					<td rowspan="3">
+					<button type="button" class="btn_like" id="btnLike3">
+  							<span class="img_emoti">좋아요취소</span></button>
+  					</td>
 				</tr>
 				<tr>
-					<td><span class="locate">${vo.maddr }</span></td>
+					<td><span class="locate" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.saddr }</span></td>
 				</tr>
 				<tr>
-					<td><span class="price">${vo.pprice }</span></td>
+					<td><span class="price">${vo.sph }</span></td>
 				</tr>
 			</table>
 			</c:forEach>

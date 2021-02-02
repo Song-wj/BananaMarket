@@ -51,6 +51,7 @@
 	
 	div.mypage_purchased table.mypage_table td.tdimg {
 		width:10px;
+		padding-right:10px;
 	}
 	div.mypage_purchased table.mypage_table img {
 		width:120px;
@@ -90,8 +91,7 @@
 					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
 					<td><span class="product">${vo.ptitle }</span></td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
-<<<<<<< HEAD
-						매너점수를 주세요~~~<br>
+						<!-- 매너점수를 주세요~~~<br>
 						<select  name="mannerGrade" onchange="showConfirm()">
 							<option value="none">선택</option>
 							<option value="2">😮</option>
@@ -99,11 +99,8 @@
 							<option value="0">🙂</option>
 							<option value="-1">😥</option>
 							<option value="-2">😡</option>
-						</select>
-=======
-						
+						</select> -->
 						<a href="mypage_purchase_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
->>>>>>> branch 'master' of https://github.com/Dex-Park/BananaMarket.git
 					</td>
 				</tr>
 				<tr>
@@ -113,36 +110,9 @@
 					<td><span class="price">${vo.pprice }</span></td>
 				</tr>
 			</table>
+			<div></div>
 			</c:forEach> 
 			
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-					<td rowspan="3" rowspan="3" class="manner_grade">
-					
-						
-					</td>
-				</tr>
-				<tr>
-					<td>지역 <div>${vo.mid}</div></td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
 			</div>
 		</section>
 		

@@ -1,10 +1,16 @@
 package com.banana.vo;
 
 public class BuylistVO {
-	String ptitle, maddr, pprice, pfile, psfile;
+	String ptitle, maddr, pprice, pfile, psfile,pid;
 	int score, mannerGrade;
 	
 	
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
 	public int getMannerGrade() {
 		return mannerGrade;
 	}

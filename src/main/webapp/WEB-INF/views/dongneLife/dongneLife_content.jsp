@@ -16,6 +16,10 @@
 <script>
 	$(document).ready(function(){
 		
+		if(${result}){
+			$("#btnLike").addClass('btn_like');
+		}
+		
 		$("#btnLike").click(function(){
 			  if($(this).hasClass('btn_like')){
 				  //좋아요 취소

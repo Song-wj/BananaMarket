@@ -13,10 +13,10 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
-		
-		/* if(){
+
+		if(${result}){
 			$("#btnLike").addClass('btn_like');
-		} */
+		}
 		
 		$("#btnLike").click(function(){
 			  if($(this).hasClass('btn_like')){
@@ -402,7 +402,6 @@
 	div.product_btn{
 		text-align:center;
 	}
-	
 	.btn_unlike {
 		float:right;
 	  	position: relative;
@@ -443,6 +442,7 @@
 	    background-position: 0px -120px;
 	    text-indent: 0;
 	}
+	
 </style>
 </head>
 <script>
@@ -521,10 +521,9 @@ $(document).ready(function(){
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}
 				<input type="hidden" name="mid" id="mid" value="whtjdrnr010">
 				<input type="hidden" name="pid" id="pid" value="${vo.pid }">
-					<!--  <a href="likeproc.do?mid=test123&pid=${vo.pid}">-->
-						<button type="button" class="btn_unlike" id="btnLike">
+				<button type="button" class="btn_unlike" id="btnLike">
   							<span class="img_emoti">좋아요</span></button>
-     				<!--  </a>-->
+     				
      			</h1>
 				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} (몇분전으로 수정)</time></p>
 				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice}</p>

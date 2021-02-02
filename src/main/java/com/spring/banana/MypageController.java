@@ -236,16 +236,17 @@ public class MypageController {
 	 * 마이페이지 - 구매내역
 	 * @return
 	 */
-	/*
-	 * @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	 * public ModelAndView mypage_purchased() { return
-	 * (ModelAndView)buylistservice.getList(); }
-	 */
+	
+	 @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+	 public ModelAndView mypage_purchased(String mid) { 
+		return(ModelAndView)buylistservice.getList(mid); 
+	 }
+	
 
-	@RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	public String mypage_purchased() {
-		return "mypage/mypage_purchased";
-	}
+		/*
+		 * @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+		 * public String mypage_purchased() { return "mypage/mypage_purchased"; }
+		 */
 	// 구매내역 리뷰 쓰기
 	@RequestMapping(value="/mypage_purchase_review.do", method=RequestMethod.GET)
 	public String mypage_purchase_review() {

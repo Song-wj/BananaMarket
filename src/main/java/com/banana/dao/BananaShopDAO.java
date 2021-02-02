@@ -1,8 +1,10 @@
 package com.banana.dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.banana.vo.BananaShopVO;
+import com.banana.vo.LikeVO;
 
 public class BananaShopDAO extends DBConn {
 	
@@ -184,6 +186,112 @@ public class BananaShopDAO extends DBConn {
 			
 			int count = pstmt.executeUpdate();
 			if(count != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 좋아요
+	 */
+	public boolean getPickContent(String mid,String sid) {
+		boolean result = false;
+		
+		try {
+			String sql = "insert into BANANA_INTEREST values(?,'','',?)";
+			getPreparedStatement(sql);
+			pstmt.setString(1,mid);
+			pstmt.setString(2,sid);
+			
+			int val = pstmt.executeUpdate();
+			
+			if(val != 0) {
+				result = true;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 좋아요 취소 
+	 */
+	public boolean getDeleteContent(String mid, String sid) {
+		boolean result = false;
+		
+		try {
+			String sql = "delete from BANANA_INTEREST where mid=? and sid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, sid);
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 좋아요 목록
+	 */
+	public ArrayList<BananaShopVO> getLikelist(String mid){
+		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
+		
+		try {
+			String sql = "select s.sname, s.skinds, s.saddr, s.sph, s.smain_img, s.smain_simg, m.mid, s.sid"
+					+ " from banana_shop s, banana_interest i, banana_member m "
+					+ " where i.mid=m.mid and i.sid=s.sid and i.mid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaShopVO vo = new BananaShopVO();
+				
+				vo.setSname(rs.getString(1));
+				vo.setSkinds(rs.getString(2));
+				vo.setSaddr(rs.getString(3));
+				vo.setSph(rs.getString(4));
+				vo.setSmain_img(rs.getString(5));
+				vo.setSmain_simg(rs.getString(6));
+				vo.setMid(rs.getString(7));
+				vo.setSid(rs.getString(8));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 좋아요 중복 체크
+	 */
+	public int likeResult(String mid, String sid) {
+		int result = 0;
+		
+		try {
+			String sql ="select count(*) from BANANA_INTEREST where mid=? and sid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, sid);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

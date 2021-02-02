@@ -76,11 +76,9 @@ public class ProductServiceImpl implements ProductService{
 		} 
 	
 	
-	
 	 public Object getList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
-		  
 			mv.addObject("list", list);
 			mv.setViewName("/popularProduct/popularProduct");
 			return mv;
@@ -97,6 +95,9 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object getContent(Object pid) {
 		ModelAndView mv = new ModelAndView();
+
+		int result = productDAO.likeResult("whtjdrnr010", (String)pid);
+		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
 			if(vo.getPsfile() != null) {
 				String[] pfile_list =vo.getPsfile().split(",");
@@ -240,7 +241,6 @@ public class ProductServiceImpl implements ProductService{
 					jarray.add(jobj);
 				}
 				jdata.add("jlist", jarray);		//java°´Ã¼
-				System.out.println(jarray);
 				
 				mv.setViewName(gson.toJson(jdata));
 				
@@ -248,14 +248,9 @@ public class ProductServiceImpl implements ProductService{
 			return mv;
 	 }
 	 
-		/*
-		 * public ModelAndView likeResult(String mid, String pid) { ModelAndView mv =
-		 * new ModelAndView(); int result = productDAO.likeResult(mid, pid);
-		 * 
-		 * mv.addObject("result",result); mv.setViewName("productContent.do?pid="+pid);
-		 * 
-		 * return mv; }
-		 */
+		
+		
+		 
 	 
 		 
 }
