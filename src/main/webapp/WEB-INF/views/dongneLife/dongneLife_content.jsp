@@ -474,7 +474,7 @@
 		
 		</section>
 		<section class="section6_dongneLife_content">
-		<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }&mid=test12345" method=POST id="board_review_write_form"  enctype="multipart/form-data">
+		<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }&mid=test123" method=POST id="board_review_write_form"  enctype="multipart/form-data">
 			<div class="content_comment_write">
 				<ul>
 					<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
