@@ -228,4 +228,29 @@ public class productDAO extends DBConn{
 		return result;
 	}
 	
+	
+	/**
+	 *  중고 물품 (판매 중 => 판매 완료) 상태 변경 
+	 */
+	public boolean getSellUpdate(String pid) {
+		boolean result = false;
+		
+		try {
+			String sql="update banana_product set pchk=?  where pid=?";
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, "o");
+			pstmt.setString(2, pid);
+			
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+
 }

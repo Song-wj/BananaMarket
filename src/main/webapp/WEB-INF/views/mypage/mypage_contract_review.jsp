@@ -10,7 +10,7 @@
 	div.dongnelife_write {
 		width: 70%;
 		margin:auto;
-		height: 1000px;
+		height: 1200px;
 		padding-top:150px;
 		border:1px solid green;
 	}
@@ -51,17 +51,26 @@
 		height:30px;
 		margin-bottom:-5px;
 	}
-	section.section2_dongneLife_write div.write_topic {
-		padding-top:40px;
-	
+	section.section2_dongneLife_write div.write_topic, 
+	section.section2_dongneLife_write div.write_buyer {
+		padding:30px 0;
+		display:inline-block;
+		float:left;
+		padding-right:80px;
 	}
-	section.section2_dongneLife_write div.write_topic select{
+	section.section2_dongneLife_write div.write_buyer{
+		
+	}
+	
+	section.section2_dongneLife_write div.write_topic select,
+	section.section2_dongneLife_write div.write_buyer select{
 		border:5px solid #FEE500;
 		height:40px;
 		width:160px;
 		font-size:14px;
 	}
-	section.section2_dongneLife_write div.write_topic label {
+	section.section2_dongneLife_write div.write_topic label,
+	section.section2_dongneLife_write div.write_buyer label {
 		font-size:19px;
 		font-weight:700;
 	}
@@ -160,7 +169,8 @@
 	<div class="dongnelife_write">
 		<form name="contract_reivew_form" action="contract_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
-			<input type="hidden" name="pid" value="p_1">	
+			<!-- <input type="hidden" name="pid" value="p_1"> -->	
+			<input type="hidden" name="mid" value="test12">
 			<div class="write_nav">
 				<ul>				
 					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
@@ -170,6 +180,14 @@
 			</div>    
 		</section>
 		<section class="section2_dongneLife_write">
+			<div class="write_buyer" id="write_buyer">
+			 	<label>구매자를 선택해주세요</label><br>
+						<select  name="buy_mid" onchange="showConfirm()" id="buy_mid">
+							<option value="none">선택</option>
+							<option value="chat1"> 채팅1($(buy_mid)) </option>
+							<option value="chat2"> 채팅2($(buy_mid)) </option>
+						</select> 			
+			</div>
 			<div class="write_topic" id="write_topic">
 			 	<label>매너점수를 주세요</label><br>
 						<select  name="score" onchange="showConfirm()" id="mannerGrade">
@@ -180,7 +198,7 @@
 							<option value="2">😥 (별로에요)</option>
 							<option value="1">😡 (나빠요)</option>
 						</select> 			
-		</div>
+			</div>
 		</section>
 		<section class="section3_dongneLife_write">
 			<div class="write_content">
@@ -192,7 +210,7 @@
 				<label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png"></label>
 				<input type="file" name="file1" id="reivew_img"  multiple  onchange='test()'><br><br>
 				
-				<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a>
+				<!--<a href="#"><img src="http://localhost:9000/banana/images/dongneLife_locate.png">0/5</a> -->
 			</div>
 		</section>
 		</form>
