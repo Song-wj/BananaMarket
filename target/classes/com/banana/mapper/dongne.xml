@@ -19,7 +19,11 @@
 	</select>
 	
 	<update id="updateSubject" parameterType="com.banana.vo.dongneSubjectVO">
-		update banana_board_subject set bstitle=#{bstitle}, bstopic=#{bstopic}, bsfile=#{bsfile}, bssfile=#{bssfile} where bsid=#{bsid}
+		update banana_board_subject set bstitle=#{bstitle}, bstopic=#{bstopic}
+		<if test="bsfile != null">
+		, bsfile=#{bsfile}, bssfile=#{bssfile} 
+		</if>
+		where bsid=#{bsid}
 	</update>
 	
 	<delete id="deleteSubject" parameterType="java.lang.String">

@@ -13,7 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.banana.service.MemberServiceImpl;
+
+import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
@@ -31,11 +32,15 @@ public class MypageController {
 	private DongneServiceImpl dongneService;
 	
 	@Autowired
-	private MemberServiceImpl memberService;
-	
-	@Autowired
 	private MypageReviewServiceImpl MypageReviewService ;
 	
+	@RequestMapping(value="/mypage_update_proc.do", method=RequestMethod.POST)
+	public String mypage_update_proc(BananaMemberVO vo, HttpServletRequest request) {
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		String path2 = "\\resources\\upload";
+		vo.setSavepath(path1 + path2);
+		return dongneService.mypageUpdateProc(vo);
+	}
 	
 	
 	/**
@@ -276,7 +281,7 @@ public class MypageController {
 	 */
 	@RequestMapping(value="/mypage_update.do", method=RequestMethod.GET)
 	public ModelAndView mypage_update(String mid) {
-		return (ModelAndView)memberService.getMemberContent(mid);
+		return dongneService.getMemberInfoUpdate(mid);
 	}
 	
 	/**
@@ -285,7 +290,7 @@ public class MypageController {
 	 */
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
 	public ModelAndView mypage(String mid) {
-		return (ModelAndView)memberService.getMemberContent(mid);
+		return dongneService.getMemberInfo(mid);
 	}
 	
 	/**

@@ -18,7 +18,7 @@
 		
 		$('#mannerbar').jqbar({ 
 			label: '', 
-			value: 36.5, 
+			value: ${ vo.score }, 
 			barColor: '#3A1D1D' 
 		});
 		
@@ -293,14 +293,14 @@
 	<div class="mypage_mainDiv">
 		<section class="section1_mypage">
 			<div class="mypageImg">
-				<img src="images/mypage_bananaimg.jpg" class="mypageImg">
+				<img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }" class="mypageImg">
 			</div>
 			<div class="mypageSide">
 				<ul class="mypageSide">
-					<li>${vo.nickname}</li>
-					<li>${vo.mid }</li>
+					<li>${ vo.nickname }</li>
+					<li>${ vo.mid }</li>
 					<li>
-						<a href="mypage_update.do?mid=${vo.mid}"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
+						<a href="mypage_update.do?mid=${ vo.mid }"><button type="button" id="mypage_updateBtn">프로필 수정</button></a>
 						<a href="http://localhost:9000/banana/enrollstore.do" id="#"><button type="button" id="mypage_updateBtn">동네 업체 등록</button></a>
 					</li>
 				</ul>			

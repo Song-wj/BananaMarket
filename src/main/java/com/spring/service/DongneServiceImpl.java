@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.dao.BananaMemberDAO;
 import com.banana.dao.dongneDAO;
+import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
@@ -23,6 +25,54 @@ public class DongneServiceImpl implements BananaService{
 
 	@Autowired
 	private dongneDAO dongneDAO;
+	
+	@Autowired
+	private BananaMemberDAO bananaMemberDAO;
+	
+	public String mypageUpdateProc(Object vo) {
+		String result = "";
+		
+		BananaMemberVO bvo = (BananaMemberVO) vo;
+		if(bvo.getFile1().getSize() != 0) {
+			UUID uuid = UUID.randomUUID();
+			bvo.setMfile(bvo.getFile1().getOriginalFilename());
+			bvo.setMsfile(uuid+"_"+bvo.getFile1().getOriginalFilename());
+		}
+		
+		boolean update_result = bananaMemberDAO.memberUpdate(bvo);
+		if(update_result) {
+			File file = new File(bvo.getSavepath()+bvo.getMsfile());
+			try {
+				bvo.getFile1().transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			result = "redirect:/mypage_update.do?mid="+bvo.getMid();
+		} else {
+			result = "errorPage";
+		}
+		return result;
+	}
+	
+	public ModelAndView getMemberInfoUpdate(String mid) {
+		ModelAndView mv = new ModelAndView();
+		
+		BananaMemberVO vo = bananaMemberDAO.getMember(mid);
+		mv.addObject("vo",vo);
+		mv.setViewName("mypage/mypage_update");
+		
+		return mv;
+	}
+	
+	public ModelAndView getMemberInfo(String mid) {
+		ModelAndView mv = new ModelAndView();
+		
+		BananaMemberVO vo = bananaMemberDAO.getMember(mid);
+		mv.addObject("vo",vo);
+		mv.setViewName("mypage/mypage");
+		
+		return mv;
+	}
 	
 	public String deleteSubjectProc(String bsid) {
 		boolean result = dongneDAO.deleteSubjectProc(bsid);
