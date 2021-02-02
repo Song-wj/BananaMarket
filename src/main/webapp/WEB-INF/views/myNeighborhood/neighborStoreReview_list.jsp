@@ -170,9 +170,6 @@
 						<label>${vo.maddr }</label>
 					</li>	
 					<li><pre><c:out value="${vo.srcontent}" /></pre></li>
-					<li>
-						<a href="neighborStoreReview_content.do?srid=${vo.srid}"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
-					</li>
 				</ul>
 			</div>
 			

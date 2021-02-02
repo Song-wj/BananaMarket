@@ -206,6 +206,7 @@ $(document).ready(function(){
 			reader.onload = function(e2){
 				var img_html ="<img src=\"" + e2.target.result + "\"  style='width:100px;height:100px;margin-right:20px;'/>";
 				$("#img_carousel_list").append(img_html);
+				$("#pastimg_carousel_list").hide();
 				sel_files2.add(f2);
 			}
 			reader.readAsDataURL(f2);
@@ -222,16 +223,13 @@ $(document).ready(function(){
 	
 	
 	$('#btnEnroll').click(function(){
-		/* if($("#input_img").val() ==""){
-			alert("업체이미지를 등록해주세요");
-			$("#input_img").focus(); */
 		if($("#storename").val() ==""){
 			alert("상호명을 입력해주세요");
 			$("#storename").focus();
 		}else if($("#storekind1").val() =="select"){
 			alert("업종을 선택해주세요");
 			$("#storekind1").focus();
-		}else if($("#storekind2").val() =="select"){
+		}else if($("#storekind2").val() ==""){
 			alert("상세업종 입력해주세요");
 			$("#storekind2").focus();
 		}else if($("#addr1").val() ==""){
@@ -255,9 +253,6 @@ $(document).ready(function(){
 		}else if($("#storeintro").val() ==""){
 			alert("업체 소개를 입력해주세요");
 			$("#storeintro").focus();
-		/* }else if($("#input_carousel_img").val() ==""){
-			alert("광고사진을 등록해주세요");
-			$("#input_carousel_img").focus(); */
 		}else
 			UpdateStoreForm.submit();
 		
@@ -376,9 +371,14 @@ $(document).ready(function(){
 						<textarea name="sintro" rows="5" class="f1" id="storeintro">${vo.sintro }</textarea>
 					</li>
 					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가</label>
-						<input type="file" id="input_carousel_img" name="" multiple>
+						<input type="file" id="input_carousel_img" name="file_list" multiple>
 						</div>
 						<div class="img_list" id="img_carousel_list"></div>
+						<div id="pastimg_carousel_list">
+							<label>${vo.scaro_img1 }<br></label>
+							<label>${vo.scaro_img2 }<br></label>
+							<label>${vo.scaro_img3 }<br></label>
+						</div>
 		    		</li>	
 					<li>
 						<button type="button" class="join_btn_style" id="btnEnroll">수정완료</button>

@@ -201,13 +201,7 @@
 				<div class="shop-img">
 					<img src="http://localhost:9000/banana/images/market.svg">
 				</div>
-				<p class="info-content">${vo.sintro }
-					<!-- 안녕하세요^^<br>
-					옥정동 뷰림헤어입니다.<br>
-					요즘 코로나 때문에 마음대로 다니시길 어려우시져?<br>
-					저희샵은 공간을 최대한 분리되어있어서 좀더 쾌적하고 편안하게 시술받을 수 있는 장점이 있어요<br>
-					신규고객님들은 30%할인 적용도 있으시니 방문해주셔서 예쁘게 머리하시고 기분전환하세요! -->
-				</p>
+				<p class="info-content">${vo.sintro }</p>
 			</li>
 			<li>
 				<div class="location-img">
@@ -221,9 +215,11 @@
 				</div>
 				<p class="info-phone"><a href="#">${vo.sph} <!-- 0318623555 --></a></p>
 			</li>
+			<c:if test="${svo.mid eq vo.mid}">
 			<li>
 				<a href="updateStore.do?sid=${vo.sid }"><button type="button">업체 관리</button></a>
 			</li>
+			</c:if>
 		</ul>
 	</div>
 </section>
@@ -235,21 +231,29 @@
 			  <!-- Indicators -->
 			  <ul class="carousel-indicators">
 			    <li data-target="#demo" data-slide-to="0" class="active"></li>
+			    <c:if test="${vo.scaro_simg2 ne null}">
 			    <li data-target="#demo" data-slide-to="1"></li>
+			    </c:if>
+			    <c:if test="${vo.scaro_simg3 ne null}">
 			    <li data-target="#demo" data-slide-to="2"></li>
+			    </c:if>
 			  </ul>
 			  
 			  <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:1024px; margin-left:8.5%;">
 			    <div class="carousel-item active">
-			      <img src="http://localhost:9000/banana/images/store_photo1.jpeg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}" >
 			    </div>
+			    <c:if test="${vo.scaro_simg2 ne null}">
 			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/images/store_photo2.jpeg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg2}" >
 			    </div>
+			    </c:if>
+			    <c:if test="${vo.scaro_simg3 ne null}">
 			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/images/store_photo3.jpeg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg3}" >
 			    </div>
+			    </c:if>
 			  </div>
 			  
 			  <!-- Left and right controls -->
