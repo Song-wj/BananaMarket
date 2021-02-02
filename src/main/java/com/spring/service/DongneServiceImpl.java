@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +16,7 @@ import com.banana.dao.BananaMemberDAO;
 import com.banana.dao.dongneDAO;
 import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
+import com.banana.vo.SessionVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 import com.google.gson.Gson;
@@ -47,7 +51,8 @@ public class DongneServiceImpl implements BananaService{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			result = "redirect:/mypage_update.do?mid="+bvo.getMid();
+//			result = "redirect:/mypage_update.do?mid="+bvo.getMid();
+			result = "redirect:/mypage_update.do";
 		} else {
 			result = "errorPage";
 		}
@@ -56,7 +61,6 @@ public class DongneServiceImpl implements BananaService{
 	
 	public ModelAndView getMemberInfoUpdate(String mid) {
 		ModelAndView mv = new ModelAndView();
-		
 		BananaMemberVO vo = bananaMemberDAO.getMember(mid);
 		mv.addObject("vo",vo);
 		mv.setViewName("mypage/mypage_update");
@@ -66,7 +70,6 @@ public class DongneServiceImpl implements BananaService{
 	
 	public ModelAndView getMemberInfo(String mid) {
 		ModelAndView mv = new ModelAndView();
-		
 		BananaMemberVO vo = bananaMemberDAO.getMember(mid);
 		mv.addObject("vo",vo);
 		mv.setViewName("mypage/mypage");

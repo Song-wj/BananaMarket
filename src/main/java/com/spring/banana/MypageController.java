@@ -36,7 +36,7 @@ public class MypageController {
 	@RequestMapping(value="/mypage_update_proc.do", method=RequestMethod.POST)
 	public String mypage_update_proc(BananaMemberVO vo, HttpServletRequest request) {
 		String path1 = request.getSession().getServletContext().getRealPath("/");
-		String path2 = "\\resources\\upload";
+		String path2 = "\\resources\\upload\\";
 		vo.setSavepath(path1 + path2);
 		return dongneService.mypageUpdateProc(vo);
 	}
@@ -269,8 +269,9 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_update.do", method=RequestMethod.GET)
-	public ModelAndView mypage_update(String mid) {
-		return dongneService.getMemberInfoUpdate(mid);
+	public ModelAndView mypage_update(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMemberInfoUpdate(svo.getMid());
 	}
 	
 	/**
@@ -278,8 +279,9 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
-	public ModelAndView mypage(String mid) {
-		return dongneService.getMemberInfo(mid);
+	public ModelAndView mypage(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getMemberInfo(svo.getMid());
 	}
 	
 	/**
