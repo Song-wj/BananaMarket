@@ -146,8 +146,8 @@ public class DongneServiceImpl implements BananaService{
 		}
 		
 		
-		boolean dao_result = dongneDAO.insertBoard(dvo);
-		if(dao_result) {
+		int  dao_result = dongneDAO.insertBoard(dvo);
+		if(dao_result != 0) {
 			try {
 				 for (MultipartFile mf : dvo.getList()) { 
 					File file = new File(dvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
@@ -243,7 +243,7 @@ public class DongneServiceImpl implements BananaService{
 		
 		
 		ModelAndView mv = new ModelAndView();
-		boolean result = false;
+		int dao_result =0;
 		ArrayList<String> file_list = new ArrayList<String>();
 		ArrayList<String> sfile_list = new ArrayList<String>();
 		dongneVO dvo = (dongneVO)vo;
@@ -262,9 +262,9 @@ public class DongneServiceImpl implements BananaService{
 		       dvo.setBfile(String.join(",", file_list));
 		       dvo.setBsfile(String.join(",", sfile_list));
 		       
-		       result = dongneDAO.boardUpdate((dongneVO)vo);
+		      dao_result = dongneDAO.boardUpdate((dongneVO)vo);
 		       
-		       if(result) {
+		       if(dao_result !=0) {
 		       try {
 					 for (MultipartFile mf : dvo.getList()) { 									    		   
 							 File file = new File(dvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
@@ -275,26 +275,26 @@ public class DongneServiceImpl implements BananaService{
 				}
 		       }		       
 		}else if(dvo.getCancel_img().equals("cancel")) {
-			 dvo.setBfile(null);
-		     dvo.setBsfile(null);
-		     result = dongneDAO.boardUpdate((dongneVO)vo);
+			 dvo.setBfile("");
+		     dvo.setBsfile("");
+		     dao_result = dongneDAO.boardUpdate((dongneVO)vo);
 		}else {
-			result = dongneDAO.boardUpdateNofile((dongneVO)vo);
+			dao_result = dongneDAO.boardUpdate((dongneVO)vo);
 		
 		}
 			
 		
 		
-		if(result) {			
+		if(dao_result !=0) {			
 			mv.setViewName("redirect:/dongneLife.do");
 		}
 		
 		return mv;
 	}
 	public Object delete(Object bid) {
-		boolean result = dongneDAO.boardDelete((String)bid);
+		int result = dongneDAO.boardDelete((String)bid);
 		String str="";
-		if(result) {
+		if(result!=0) {
 			str="redirect:/dongneLife.do";
 		}
 		return str;
