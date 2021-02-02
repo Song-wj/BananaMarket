@@ -6,9 +6,17 @@
 
 <mapper namespace="mapper.member">
 
-	<select id="getmember" parameterType="java.lang.String" resultType="com.banana.vo.BananaMemberVO">
-		select mid, nickname, ph, regexp_substr(maddr,'[^,]+', 1, 1) maddr, msfile, score, mdate from banana_member where mid=#{mid} 
-	</select>
+	<!-- <select id="getmember" parameterType="java.lang.String" resultType="com.banana.vo.BananaMemberVO">
+		select mid, nickname, ph, maddr, msfile, score, mdate from banana_member where mid=#{mid} 
+	</select> -->
+	
+	<update id="memberUpdate" parameterType="com.banana.vo.BananaMemberVO">
+		update banana_member set nickname=#{nickname}, pw=#{pw}, ph=#{ph}, maddr_num=#{maddr_num}, maddr=#{maddr}
+			<if test="mfile != null">
+			,mfile=#{mfile}, msfile=#{msfile}
+			</if> 
+			where mid=#{mid} 
+	</update>
 
 	<insert id="join" parameterType="com.banana.vo.BananaMemberVO">
 		insert into banana_member values(#{mid},#{nickname},#{pw},#{ph},#{maddr_num},#{maddr},
