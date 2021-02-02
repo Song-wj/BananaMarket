@@ -189,7 +189,10 @@ $(document).ready(function(){
 			$("#btnEnroll").focus();
 		}
 		
-		/* alert(sel_files2); */
+		alert(sel_files2);
+		alert(sel_files2[0]);
+		alert(sel_files2[1]);
+		alert(sel_files2[2]);
 		
 	});
 	
@@ -227,9 +230,9 @@ $(document).ready(function(){
 		}else if($("#storeintro").val() ==""){
 			alert("업체 소개를 입력해주세요");
 			$("#storeintro").focus();
-		/* }else if($("#input_carousel_img").val() ==""){
+		}else if($("#input_carousel_img").val() ==""){
 			alert("광고사진을 등록해주세요");
-			$("#input_carousel_img").focus(); */
+			$("#input_carousel_img").focus();
 		}else
 			EnrollForm.submit();
 		
@@ -337,7 +340,7 @@ $(document).ready(function(){
 						<textarea name="sintro" rows="5" class="f1" id="storeintro"></textarea>
 					</li>
 					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가</label>
-						<input type="file" id="input_carousel_img" name="" multiple>
+						<input type="file" id="input_carousel_img" name="file_list" multiple>
 						</div>
 						<div class="img_list" id="img_carousel_list"></div>
 		    		</li>	
