@@ -394,9 +394,9 @@ public class DongneServiceImpl implements BananaService{
 	 }
 	 
 	 /** 좋아요 취소 **/
-	 public ModelAndView product_unlike(String mid, String bid) {
-		 ModelAndView mv = new ModelAndView();
+	 public String product_unlike(String mid, String bid) {
 		 boolean result = dongneDAO.getDeleteContent(mid,bid); 
+		 /*ModelAndView mv = new ModelAndView();
 			
 			if(result) {
 				//좋아요 버튼 잘 반영
@@ -425,7 +425,10 @@ public class DongneServiceImpl implements BananaService{
 				
 			}
 			return mv;
+			*/
+		 return String.valueOf(result);
 	 }
+	 
 	public ModelAndView getMyPost(String mid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<dongneVO> list = dongneDAO.getMyPost(mid);

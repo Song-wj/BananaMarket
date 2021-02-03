@@ -232,11 +232,11 @@ public class ProductServiceImpl implements ProductService{
 	 }
 	 
 	 /** 좋아요 취소 **/
-	 public ModelAndView product_unlike(String mid, String pid) {
-		 ModelAndView mv = new ModelAndView();
+	 public String product_unlike(String mid, String pid) {
+		 //ModelAndView mv = new ModelAndView();
 		 boolean result = productDAO.getDeleteContent(mid,pid); 
-			
-			if(result) {
+		 System.out.println(mid+","+pid);
+			/*if(result) {
 				//좋아요 버튼 잘 반영
 				ArrayList<LikeVO> list = productDAO.getLikelist(mid); 
 				//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
@@ -261,7 +261,8 @@ public class ProductServiceImpl implements ProductService{
 				mv.setViewName(gson.toJson(jdata));
 				
 			}
-			return mv;
+			return mv;*/
+			return String.valueOf(result);
 	 }
 	 
 		
