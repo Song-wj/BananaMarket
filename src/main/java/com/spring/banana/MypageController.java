@@ -193,7 +193,7 @@ public class MypageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/mypage_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView product_unlike(HttpSession session, String pid) {
+	public String product_unlike(HttpSession session, String pid) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return ProductServiceImpl.product_unlike(svo.getMid(), pid);
 	}
@@ -205,7 +205,6 @@ public class MypageController {
 	@RequestMapping(value="/mypage_contract_review" , method=RequestMethod.GET)
 	public ModelAndView sellUpdate(String pid) {
 		
-	
 		return (ModelAndView)productService.sellUpdate(pid);
 	}
 	

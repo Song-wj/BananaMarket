@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService{
 	
 	public Object insert(Object vo) {
 		String result="";
+		int dao_result = 0;
 		productVO pvo = (productVO)vo;
 		
 		ArrayList<String> file_list = new ArrayList<String>();
@@ -43,8 +44,8 @@ public class ProductServiceImpl implements ProductService{
 		       pvo.setPfile(String.join(",", file_list));
 		       pvo.setPsfile(String.join(",", pfile_list));
 		}
-		boolean dao_result = productDAO.getInsert(pvo);
-		if(dao_result) {
+		dao_result = productDAO.getInsert(pvo);
+		if(dao_result != 0) {
 			try {
 				 for (MultipartFile mf : pvo.getList()) { 
 					File file = new File(pvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
@@ -107,6 +108,20 @@ public class ProductServiceImpl implements ProductService{
 		
 				mv.addObject("pfile_list", pfile_list);
 			}
+			/*
+			String str ="";	
+			int date = Integer.parseInt(vo.getPdate());
+				if(60>date) {
+					str = date +"분";
+				}else if(1440 > date && date>60) {
+					str = date/60 +"시간";
+				}else if (1440<date) {
+					str= date/60/60 + "일";
+				}else if(date ==0) {
+					str="방금";
+				}
+				vo.setPdate(str);
+			*/
 				mv.addObject("vo", vo);
 				mv.setViewName("/popularProduct/productContent");
 			
@@ -132,7 +147,7 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object update(Object vo) {
 		 	ModelAndView mv = new ModelAndView();
-			boolean result = false;
+			int  result = 0;
 			ArrayList<String> file_list = new ArrayList<String>();
 			ArrayList<String> pfile_list = new ArrayList<String>();
 			productVO pvo = (productVO)vo;
@@ -148,7 +163,7 @@ public class ProductServiceImpl implements ProductService{
 			       
 			       result = productDAO.getProductUpdate((productVO)vo);
 			       
-			       if(result) {
+			       if(result != 0 ) {
 				       try {
 							 for (MultipartFile mf : pvo.getList()) { 									    		   
 									 File file = new File(pvo.getSavepath()+ uuid+ "_"+ mf.getOriginalFilename());
@@ -161,11 +176,10 @@ public class ProductServiceImpl implements ProductService{
 				pvo.setPsfile(null);
 		        result = productDAO.getProductUpdate((productVO)vo);
 			}
-			else {
+			/*else {
 				result = productDAO.getUpdateNofile((productVO)vo);
-				
-			}
-				if(result) {			
+			}*/
+				if(result != 0) {			
 					mv.setViewName("redirect:mypage.do");
 				}else {
 					mv.setViewName("errorPage");
@@ -176,9 +190,10 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object sellUpdate(Object pid) {
 		 ModelAndView mv = new ModelAndView();
-		 boolean result = productDAO.getSellUpdate((String)pid);
+		 int result = 0;
+		 result = productDAO.getSellUpdate((String)pid);
 		 
-		 if(result){
+		 if(result != 0 ){
 				mv.setViewName("redirect:/mypage.do");
 			}else{
 				mv.setViewName("errorPage");
@@ -188,9 +203,10 @@ public class ProductServiceImpl implements ProductService{
 	 }
 	 
 	 public Object delete(Object pid) {
-		 boolean result = productDAO.getProductDelete((String)pid);
+		 int result = 0;
+		 result = productDAO.getProductDelete((String)pid);
 			String str="";
-			if(result) {
+			if(result != 0) {
 				//str="/popularProduct/deletePage";
 				str="/mypage/mypage";
 			}
@@ -232,11 +248,11 @@ public class ProductServiceImpl implements ProductService{
 	 }
 	 
 	 /** 좋아요 취소 **/
-	 public ModelAndView product_unlike(String mid, String pid) {
-		 ModelAndView mv = new ModelAndView();
+	 public String product_unlike(String mid, String pid) {
+		 //ModelAndView mv = new ModelAndView();
 		 boolean result = productDAO.getDeleteContent(mid,pid); 
-			
-			if(result) {
+		 System.out.println(mid+","+pid);
+			/*if(result) {
 				//좋아요 버튼 잘 반영
 				ArrayList<LikeVO> list = productDAO.getLikelist(mid); 
 				//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
@@ -261,7 +277,8 @@ public class ProductServiceImpl implements ProductService{
 				mv.setViewName(gson.toJson(jdata));
 				
 			}
-			return mv;
+			return mv;*/
+			return String.valueOf(result);
 	 }
 	 
 		

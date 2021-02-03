@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.product">
+
+	<insert id="InsertProduct" parameterType="com.banana.vo.productVO">
+		insert into banana_product values ('p_'||sqe_banana_product.nextval,#{mid},
+				#{ptitle},#{pcategory},#{pprice},#{pcontent},0,0,sysdate,#{pchk},#{pfile},#{psfile},#{buy_mid})
+	</insert>
+	
+	<select id="ProductList" resultType="com.banana.vo.productVO">
+		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate,
+		 	   pchk, pfile, psfile, buy_mid 
+		from banana_product   order by pdate desc
+	</select>
+	
+	<select id="ProductContent" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
+		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE
+			from banana_product p, banana_member m 	
+			where p.mid = m.mid and p.pid = #{pid}
+	</select>
+	
+	<update id="ProductUpdate" parameterType="com.banana.vo.productVO">
+		update banana_product set ptitle=#{ptitle}, pcategory=#{pcategory}, pprice=#{pprice}, pcontent=#{pcontent}, pfile=#{pfile} , psfile=#{psfile} where pid=#{pid}
+	</update>
+	
+	<delete id="ProductDelete" parameterType="java.lang.String">
+		delete from banana_product where pid=#{pid}
+	</delete>
+	
+	
+	
+	
+	<select id="ProductSellList" resultType="com.banana.vo.productVO">
+		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid
+			from banana_product where pchk=#{x}
+	</select>
+	
+	<update id="ProductSellUpdate">
+		update banana_product set pchk=#{o}  where pid=#{pid}
+	</update>
+	
+</mapper>
