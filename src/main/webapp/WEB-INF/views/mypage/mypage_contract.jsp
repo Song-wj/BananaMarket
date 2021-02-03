@@ -68,12 +68,14 @@
 					url : 'mypage_contract_review.do?pid='+pid,
 					success: function(result){
 						if(result) {
+							
 							console.log("sell success");
 						} else {
 							console.log("sell fail");
 						}
 					}
 				 });
+				
 				location.href='mypage_contract_review.do?pid='+pid
 				alert("리뷰 작성 페이지로 넘어갑니다.");		
 			} else {
@@ -220,7 +222,7 @@
 		<section class="section3_contract" id="section3_contract">
 		  <div>
 		  	<c:forEach var="vo"  items="${list}">
-		  		<c:if test="${vo.pchk eq 'o' && vo.mid ne 'test12'}">
+		  		<c:if test="${vo.pchk eq 'o' && vo.mid eq svo.mid}">
 					<table class="mypage_table">
 						<tr>
 							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>

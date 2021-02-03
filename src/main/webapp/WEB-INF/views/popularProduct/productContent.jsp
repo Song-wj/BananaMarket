@@ -178,11 +178,23 @@
 	
 	#article-description {
 		border-top: 1px solid #e9ecef;
-	    padding: 32px 0;
+	    padding: 12px 0 32px 0;
 	    width: 677px;
 	    margin: 0 auto;
 	    border-bottom: 1px solid #e9ecef;
 	    text-align: left;
+	}
+	
+	#article-description button {
+		border:1px solid RGB(254,229,0);
+		background-color:RGB(254,229,0);
+		color:RGB(82,67,21);
+		font-weight:bold;
+		padding:10px 15px;
+		font-size:17px;
+		border-radius:5px; 
+		cursor:pointer;
+		margin: 0 0 0 560px;
 	}
 	
 	#article-description #article-title {
@@ -363,14 +375,14 @@ $(document).ready(function(){
 
 <div id="content">
 		<div id="demo" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
+			 <!-- Indicators -->
 			  <ul class="carousel-indicators">
 			    <li data-target="#demo" data-slide-to="0" class="active"></li>
 			    <li data-target="#demo" data-slide-to="1"></li>
 			    <li data-target="#demo" data-slide-to="2"></li>
 			  </ul>
 			  
-			  <!-- The slideshow -->
+			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
 			      <c:forEach var="list" items="${pfile_list }" >
@@ -384,8 +396,7 @@ $(document).ready(function(){
 				    </div>
 				   </c:forEach> 
 			  </div>
-			  
-			  <!-- Left and right controls -->
+			 <!-- Left and right controls -->
 			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 			    <span class="carousel-control-prev-icon"></span>
 			  </a>
@@ -418,9 +429,10 @@ $(document).ready(function(){
 		</div>
 		<div class="description">
 			<section id="article-description">
+				<a href="#"><button type="button"> 채팅 하기</button></a>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
-				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} (몇분전으로 수정)</time></p>
-				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice}</p>
+				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} </time></p>
+				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
 				<div id="article-detail">
 					<p>${vo.pcontent}</p>
 				</div>
@@ -447,7 +459,7 @@ $(document).ready(function(){
 				</div>
 			</a>
 		</article>
-		<article class="card">
+		<!--  <article class="card">
 			<a class="card-link" href="#">
 				<div class="card-photo">
 					<img src="">
@@ -511,7 +523,7 @@ $(document).ready(function(){
 					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
 				</div>
 			</a>
-		</article>
+		</article> -->
 	</section>
 </section>
 
