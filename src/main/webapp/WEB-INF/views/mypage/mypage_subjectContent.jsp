@@ -361,7 +361,20 @@
 			</div>
 		</section>
 		<section class="subjectContent-post">
+<<<<<<< HEAD
+		<c:choose >
+			<c:when test="${empty list}">
+			<table class="review_all_table"> 
+					<tr>
+						<td style="padding: 230px 0; color: #ccc;">관련 게시글이 없습니다.</td>
+					</tr> 
+			</table>
+			</c:when>
+			<c:otherwise>
+			
+
 			<c:forEach var="vo" items="${ list }">
+
 			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
 				
 				<div class="post-header">
@@ -392,7 +405,8 @@
 					<div class="display-like"></div>
 				</div>
 				</c:forEach>
-			
+			</c:otherwise>
+			</c:choose>
 		</section>
 	</div>
 	
