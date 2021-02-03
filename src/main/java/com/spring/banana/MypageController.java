@@ -96,8 +96,9 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
-	public ModelAndView mypage_subjectContent(String bsid) {
-		return dongneService.getSubjectListContent(bsid);
+	public ModelAndView mypage_subjectContent(String bsid , String bstitle) {
+		
+		return dongneService.getSubjectListContent(bsid,bstitle);
 	}
 	
 	/**

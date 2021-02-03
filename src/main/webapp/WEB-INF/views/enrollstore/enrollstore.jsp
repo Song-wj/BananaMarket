@@ -189,7 +189,10 @@ $(document).ready(function(){
 			$("#btnEnroll").focus();
 		}
 		
-		/* alert(sel_files2); */
+		alert(sel_files2);
+		alert(sel_files2[0]);
+		alert(sel_files2[1]);
+		alert(sel_files2[2]);
 		
 	});
 	
@@ -203,7 +206,7 @@ $(document).ready(function(){
 		}else if($("#storekind1").val() =="select"){
 			alert("업종을 선택해주세요");
 			$("#storekind1").focus();
-		}else if($("#storekind2").val() =="select"){
+		}else if($("#storekind2").val() ==""){
 			alert("상세업종 입력해주세요");
 			$("#storekind2").focus();
 		}else if($("#addr1").val() ==""){
@@ -227,9 +230,9 @@ $(document).ready(function(){
 		}else if($("#storeintro").val() ==""){
 			alert("업체 소개를 입력해주세요");
 			$("#storeintro").focus();
-		/* }else if($("#input_carousel_img").val() ==""){
+		}else if($("#input_carousel_img").val() ==""){
 			alert("광고사진을 등록해주세요");
-			$("#input_carousel_img").focus(); */
+			$("#input_carousel_img").focus();
 		}else
 			EnrollForm.submit();
 		
@@ -261,7 +264,6 @@ $(document).ready(function(){
 			<div>
 				<form name="EnrollForm" action="enrollstore_write_proc.do" method="post" 
 				class="join" enctype="multipart/form-data">
-				<input type="hidden" name="mid" value="whtjdrnr010"> <!-- mid 임의로 설정  -->
 				<h1>동네업체 등록</h1>
 				<ul>
 					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>
@@ -337,7 +339,7 @@ $(document).ready(function(){
 						<textarea name="sintro" rows="5" class="f1" id="storeintro"></textarea>
 					</li>
 					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가</label>
-						<input type="file" id="input_carousel_img" name="" multiple>
+						<input type="file" id="input_carousel_img" name="file_list" multiple>
 						</div>
 						<div class="img_list" id="img_carousel_list"></div>
 		    		</li>	

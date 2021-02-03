@@ -55,7 +55,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		if(svo.getResult() == 1) {
 			session.setAttribute("svo", svo);
-			mv.setViewName("index");
+			mv.setViewName("redirect:/index.do");
 		} else {
 			mv.setViewName("/login/login");
 		}

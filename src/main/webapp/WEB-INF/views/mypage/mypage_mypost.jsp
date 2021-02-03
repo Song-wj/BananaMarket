@@ -153,16 +153,18 @@
 		</section>
 		<section class="mypost_table_area">
 			<div>
-			<table class="mypost_table">
 				
 			<c:choose >
 			<c:when test="${empty list }">
+			<table class="mypost_table">
 					<tr>
 						<td style="padding: 230px 0; color: #ccc; text-align:center;">내 게시글이 없습니다.</td>
 					</tr> 
+			</table>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="vo" items="${list }">
+				<table class="mypost_table">
 					<tr>
 						<td class="post">
 							<label>${vo.btitle }</label>
@@ -182,24 +184,25 @@
 						</td>
 					</tr>	
 				
+			</table>
 			</c:forEach>
 			</c:otherwise>
 			</c:choose>
-			</table>
 			</div>
 		</section>
 		<section class="mycomment_table_area">
 			<div>
-			<table class="mycomment_table">
 				<c:choose >
 			<c:when test="${empty clist }">
+				<table class="mycomment_table">
 					<tr>
-						<td style="padding: 230px 0; color: #ccc;">댓글이 없습니다.</td>
+						<td style="padding: 230px 0; color: #ccc; text-align:center;">댓글이 없습니다.</td>
 					</tr> 
+				</table>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="vo" items="${clist }">
-					
+				  <table class="mycomment_table">	
 					<tr>
 						<td class="post" colspan="3" >
 							<img src="images/banana.jpg">
@@ -213,11 +216,11 @@
 						
 						</td>
 					</tr>	
+				</table>
 				
 			</c:forEach>
 			</c:otherwise>
 			</c:choose>
-			</table>
 			</div>
 		</section>
 	</div>

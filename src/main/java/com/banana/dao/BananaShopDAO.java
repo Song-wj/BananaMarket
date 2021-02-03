@@ -28,7 +28,7 @@ public class BananaShopDAO extends DBConn {
 	}
 	
 	/**
-	 * Update - 업체 수정 : 파일 없을 때
+	 * Update - 업체 수정 : 메인 이미지 수정사항 없을 때 + 광고이미지 수정사항 없을 때
 	 * @param vo
 	 * @return
 	 */
@@ -59,7 +59,59 @@ public class BananaShopDAO extends DBConn {
 	}
 	
 	/**
-	 * Update - 업체 수정
+	 * Update - 업체 수정 
+	 * 메인 이미지 수정사항 있을 때 + 광고이미지 수정사항 있을 때
+	 * 메인 이미지 수정사항 없을 때 + 광고이미지 수정사항 있을 때
+	 * @param vo
+	 * @return
+	 */
+	public boolean shopUpdateCaro(BananaShopVO vo) {
+		boolean result = false;
+		try {
+			String sql ="update banana_shop set scaro_img1=?, scaro_simg1=?, scaro_img2=?, scaro_simg2=?, scaro_img3=?, scaro_simg3=? where sid=?";
+			getPreparedStatement(sql);
+			
+			if(vo.getScaro_img2() == null && vo.getScaro_img3() == null){
+				//이미지 한개 (Scaro_img1)
+				pstmt.setString(1, vo.getScaro_img1());
+				pstmt.setString(2, vo.getScaro_simg1());
+				pstmt.setString(3, "");
+				pstmt.setString(4, "");
+				pstmt.setString(5, "");
+				pstmt.setString(6, "");
+				pstmt.setString(7, vo.getSid());
+			}else if(vo.getScaro_img2().length() != 0 && vo.getScaro_img3() == null) {
+				//이미지 두개 (Scaro_img1, Scaro_img2)
+				pstmt.setString(1, vo.getScaro_img1());
+				pstmt.setString(2, vo.getScaro_simg1());
+				pstmt.setString(3, vo.getScaro_img2());
+				pstmt.setString(4, vo.getScaro_simg2());
+				pstmt.setString(5, "");
+				pstmt.setString(6, "");
+				pstmt.setString(7, vo.getSid());
+			}else if(vo.getScaro_img2().length() != 0 && vo.getScaro_img3().length() != 0) {
+				//셋 다 있음 (Scaro_img1, Scaro_img2, Scaro_img3)
+				pstmt.setString(1, vo.getScaro_img1());
+				pstmt.setString(2, vo.getScaro_simg1());
+				pstmt.setString(3, vo.getScaro_img2());
+				pstmt.setString(4, vo.getScaro_simg2());
+				pstmt.setString(5, vo.getScaro_img3());
+				pstmt.setString(6, vo.getScaro_simg3());
+				pstmt.setString(7, vo.getSid());
+			}
+			
+			int count = pstmt.executeUpdate();
+			if(count != 0) result = true;
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return result;
+	}
+	
+	/**
+	 * Update - 업체 수정 : 메인 이미지 수정사항 있을 때 + 광고이미지 수정사항 없을 때
 	 * @param vo
 	 * @return
 	 */
@@ -99,8 +151,9 @@ public class BananaShopDAO extends DBConn {
 	public BananaShopVO getShopContent(String sid) {
 		BananaShopVO vo = new BananaShopVO();
 		try {
-			String sql ="select  sid , mid, sname, skinds, skinds2, sintro, saddr_num, saddr, sph, sdate, smain_img, smain_simg\r\n"
-						+ "from banana_shop where sid=?";
+			String sql ="select  sid , mid, sname, skinds, skinds2, sintro, saddr_num, saddr, sph, sdate, smain_img, smain_simg,\r\n" + 
+					"        scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3\r\n" + 
+					"from banana_shop where sid=?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, sid);
 				
@@ -118,6 +171,13 @@ public class BananaShopDAO extends DBConn {
 				vo.setSdate(rs.getString(10));
 				vo.setSmain_img(rs.getString(11));
 				vo.setSmain_simg(rs.getString(12));
+				vo.setScaro_img1(rs.getString(13));
+				vo.setScaro_simg1(rs.getString(14));
+				vo.setScaro_img2(rs.getString(15));
+				vo.setScaro_simg2(rs.getString(16));
+				vo.setScaro_img3(rs.getString(17));
+				vo.setScaro_simg3(rs.getString(18));
+				
 				
 			}
 		} catch (Exception e) {
@@ -134,7 +194,7 @@ public class BananaShopDAO extends DBConn {
 	public ArrayList<BananaShopVO> getShopList(){
 		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
 		try {
-			String sql = "select sid, mid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, smain_simg\r\n"
+			String sql = "select sid, mid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, smain_simg, scaro_img1, scaro_simg1\r\n"
 						+ "from banana_shop order by sdate desc";
 			getStatement();
 			rs= stmt.executeQuery(sql);
@@ -151,6 +211,8 @@ public class BananaShopDAO extends DBConn {
 				vo.setSdate(rs.getString(9));
 				vo.setSmain_img(rs.getString(10));
 				vo.setSmain_simg(rs.getString(11));
+				vo.setScaro_img1(rs.getString(12));
+				vo.setScaro_simg1(rs.getString(13));
 					
 				list.add(vo);
 					
@@ -170,8 +232,20 @@ public class BananaShopDAO extends DBConn {
 	public boolean insertShop(BananaShopVO vo) {
 		boolean result = false;
 		try {
+			String set_img = "";
+			
+			if(vo.getScaro_img2() == null && vo.getScaro_img3() == null){
+				//이미지 한개 (Scaro_img1)
+				set_img = ",?,?,null,null,null,null";
+			}else if(vo.getScaro_img2().length() != 0 && vo.getScaro_img3() == null) {
+				//이미지 두개 (Scaro_img1, Scaro_img2)
+				set_img = ",?,?,?,?,null,null";
+			}else if(vo.getScaro_img2().length() != 0 && vo.getScaro_img3().length() != 0) {
+				//셋 다 있음 (Scaro_img1, Scaro_img2, Scaro_img3)
+				set_img = ",?,?,?,?,?,?";
+			}
 			String sql ="insert into banana_shop "
-					+ " values('shop_'||SQE_BANANA_BOARD.NEXTVAL,?,?,?,?,?,?,?,?,sysdate,?,?)";
+					+ " values('shop_'||SQE_BANANA_BOARD.NEXTVAL,?,?,?,?,?,?,?,?,sysdate,?,?"+set_img+")";
 			getPreparedStatement(sql);
 			pstmt.setString(1, vo.getMid());
 			pstmt.setString(2, vo.getSname());
@@ -183,6 +257,27 @@ public class BananaShopDAO extends DBConn {
 			pstmt.setString(8, vo.getSph());
 			pstmt.setString(9, vo.getSmain_img());
 			pstmt.setString(10, vo.getSmain_simg());
+			
+			if(vo.getScaro_img2() == null && vo.getScaro_img3() == null){
+				//이미지 한개 (Scaro_img1)
+				pstmt.setString(11, vo.getScaro_img1());
+				pstmt.setString(12, vo.getScaro_simg1());
+			}else if(vo.getScaro_img2().length() != 0 && vo.getScaro_img3() == null) {
+				//이미지 두개 (Scaro_img1, Scaro_img2)
+				pstmt.setString(11, vo.getScaro_img1());
+				pstmt.setString(12, vo.getScaro_simg1());
+				pstmt.setString(13, vo.getScaro_img2());
+				pstmt.setString(14, vo.getScaro_simg2());
+			}else if(vo.getScaro_img2().length() != 0 && vo.getScaro_img3().length() != 0) {
+				//셋 다 있음 (Scaro_img1, Scaro_img2, Scaro_img3)
+				pstmt.setString(11, vo.getScaro_img1());
+				pstmt.setString(12, vo.getScaro_simg1());
+				pstmt.setString(13, vo.getScaro_img2());
+				pstmt.setString(14, vo.getScaro_simg2());
+				pstmt.setString(15, vo.getScaro_img3());
+				pstmt.setString(16, vo.getScaro_simg3());
+				
+			}
 			
 			int count = pstmt.executeUpdate();
 			if(count != 0) result = true;

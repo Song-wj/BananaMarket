@@ -295,7 +295,6 @@
 				<div class="likebutton">
 				<button type="button" class="btn_unlike" id="btnLike">
   							<span class="img_emoti">좋아요</span></button>
-  				</div>
 			</li>
 			<li>
 				<div class="location-img">
@@ -309,9 +308,11 @@
 				</div>
 				<p class="info-phone"><a href="#">${vo.sph}<!-- 0318623555 --></a></p>
 			</li>
+			<c:if test="${svo.mid eq vo.mid}">
 			<li>
 				<a href="updateStore.do?sid=${vo.sid }"><button type="button">업체 관리</button></a>
 			</li>
+			</c:if>
 		</ul>
 	</div>
 </section>
@@ -323,21 +324,29 @@
 			  <!-- Indicators -->
 			  <ul class="carousel-indicators">
 			    <li data-target="#demo" data-slide-to="0" class="active"></li>
+			    <c:if test="${vo.scaro_simg2 ne null}">
 			    <li data-target="#demo" data-slide-to="1"></li>
+			    </c:if>
+			    <c:if test="${vo.scaro_simg3 ne null}">
 			    <li data-target="#demo" data-slide-to="2"></li>
+			    </c:if>
 			  </ul>
 			  
 			  <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:1024px; margin-left:8.5%;">
 			    <div class="carousel-item active">
-			      <img src="http://localhost:9000/banana/images/store_photo1.jpeg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}" >
 			    </div>
+			    <c:if test="${vo.scaro_simg2 ne null}">
 			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/images/store_photo2.jpeg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg2}" >
 			    </div>
+			    </c:if>
+			    <c:if test="${vo.scaro_simg3 ne null}">
 			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/images/store_photo3.jpeg" >
+			      <img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg3}" >
 			    </div>
+			    </c:if>
 			  </div>
 			  
 			  <!-- Left and right controls -->

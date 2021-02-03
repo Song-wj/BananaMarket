@@ -10,7 +10,7 @@ public class dongneVO {
 
 	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate ,savepath ,cancel_img;
 	
-
+	
 	String file;
 	String sfile;
 	
