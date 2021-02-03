@@ -255,7 +255,7 @@ public class MypageReviewServiceImpl implements BananaService {
 	
 	
 	@Override
-	public Object getContent(Object mid) {
+	public Object getContent(Object mid, String a) {
 		ModelAndView mv = new ModelAndView();
 		
 		ArrayList<ReviewVO> list = reviewDAO.getGradeList((String)mid);

@@ -181,7 +181,7 @@
 			</div> <!-- product -->
 		<div class="pbanner">
 			<div><a href="promoteDongne.do"><label class="pstore">동네홍보</label><button type="button" id="pstore"><img src="images/pstore.png"></button></a></div>
-			<div><a href="writePage.do"><label class="pwrite">중고거래</label><button type="button" id="pwrite"><img src="images/pwrite.png"></button></a></div>
+			<div><a href="writePage.do?mid=${vo.mid }"><label class="pwrite">중고거래</label><button type="button" id="pwrite"><img src="images/pwrite.png"></button></a></div>
 			<div><button type="button" id="plus"><img src="images/picon.png"></button></div>
 		</div> <!-- banner -->
 	</div> <!-- content -->
