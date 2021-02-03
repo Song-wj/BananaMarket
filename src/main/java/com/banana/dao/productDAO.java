@@ -12,6 +12,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.banana.vo.BuylistVO;
+import com.banana.vo.LikeVO;
 import com.banana.vo.productVO;
 
 public class productDAO extends DBConn{
@@ -215,6 +217,112 @@ public class productDAO extends DBConn{
 		*/
 	}
 	
+
+	/**
+	 * 좋아요
+	 */
+	public boolean getPickContent(String mid,String pid) {
+		boolean result = false;
+		
+		try {
+			String sql = "insert into BANANA_INTEREST values(?,?,'','')";
+			getPreparedStatement(sql);
+			pstmt.setString(1,mid);
+			pstmt.setString(2,pid);
+			
+			int val = pstmt.executeUpdate();
+			
+			if(val != 0) {
+				result = true;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 좋아요 취소 
+	 */
+	public boolean getDeleteContent(String mid, String pid) {
+		boolean result = false;
+		
+		try {
+			String sql = "delete from BANANA_INTEREST where mid=? and pid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, pid);
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 좋아요 목록
+	 */
+	public ArrayList<LikeVO> getLikelist(String mid){
+		ArrayList<LikeVO> list = new ArrayList<LikeVO>();
+		
+		try {
+			String sql = "select p.ptitle, m.maddr, p.pprice, p.pfile, p.psfile, p.pid"
+					+ " from banana_product p, banana_interest i, banana_member m "
+					+ " where i.mid=m.mid and i.pid=p.pid and i.mid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				LikeVO vo = new LikeVO();
+				
+				vo.setPtitle(rs.getString(1));
+				vo.setMaddr(rs.getString(2));
+				vo.setPprice(rs.getString(3));
+				vo.setPfile(rs.getString(4));
+				vo.setPsfile(rs.getString(5));
+				vo.setPid(rs.getString(6));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 좋아요 중복 체크
+	 */
+	public int likeResult(String mid, String pid) {
+		int result = 0;
+		
+		try {
+			String sql ="select count(*) from BANANA_INTEREST where mid=? and pid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, pid);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) result = rs.getInt(1);			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+
 	
 	public boolean getUpdateNofile(productVO vo) {
 		boolean result = false;

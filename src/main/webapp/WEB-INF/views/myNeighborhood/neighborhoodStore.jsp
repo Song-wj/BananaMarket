@@ -12,6 +12,46 @@
 <!-- <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script> -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cb442acb5509f83b057470646a5299b&libraries=services"></script>
 <title>Insert title here</title>
+<script>
+	$(document).ready(function(){
+		
+		if(${result}){
+			$("#btnLike").addClass('btn_like');
+		}
+		
+		$("#btnLike").click(function(){
+			  if($(this).hasClass('btn_like')){
+				  //좋아요 취소
+				  $(this).removeClass('btn_like');
+				  
+				//ajax를 활용한 서버 연동
+				  $.ajax({
+					  url:"shop_unlike.do?mid=${svo.mid}&sid=${vo.sid }", //mid는 로그인한사람id
+					  success:function(result){
+						  alert("좋아요 취소되었습니다");
+						  location.reload();
+						  }
+					});
+				
+			  }
+			  else{
+				  //좋아요 눌렀을 때
+				  $(this).addClass('btn_like');
+
+				//ajax를 활용한 서버 연동
+					$.ajax({
+						url:"shop_like.do?mid=${svo.mid}&sid=${vo.sid }", //mid는 로그인한사람id
+						success:function(result){
+							alert("좋아요 반영되었습니다");
+							location.reload();
+							$(this).addClass('btn_like');
+						}
+					});
+			  }
+			});
+	});
+	
+</script>
 <style>
 	.store-info-top {
 		text-align: center;
@@ -125,6 +165,9 @@
 	    line-height: 150%;
 	    letter-spacing: -.02em;
 	}
+	.store-info-body .store-intro .intro-list li p.info-content{
+	    width:85%;
+	}
 	
 	.store-info-body .store-intro .intro-list li p a {
 		color: #2694AB
@@ -163,6 +206,46 @@
   	.store-info-map .map-detail {
   		margin-left: 105px;
   	}
+  	.btn_unlike {
+		float:right;
+	  	position: relative;
+	 	margin:2px 10px;
+	 	margin-right:15px;
+	  	width: 50px;
+	  	height: 50px;
+	  	border: 1px solid #e8e8e8;
+	  	border-radius: 44px;
+	  	font-family: notokr-bold,sans-serif;
+	  	font-size: 14px;
+	  	line-height: 16px;
+	  	background-color: #fff;
+	  	color: #DD5D54;
+	  	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
+	  	transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
+	  	cursor: pointer;
+	}
+	.btn_unlike:hover {
+	  border: 1px solid rgba(228,89,89,0.3);
+	  background-color: rgba(228,89,89,0.02);
+	  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
+	}
+	.btn_like .img_emoti {
+	    background-position: -30px -120px;
+	}
+	.img_emoti {
+	    display: inline-block;
+	    overflow: hidden;
+	    font-size: 0;
+	    line-height: 0;
+	    background: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/img_emoti.png?v=20180410) no-repeat;
+	    text-indent: -9999px;
+	    vertical-align: top;
+	    width: 20px;
+	    height: 17px;
+	    margin-top: 1px;
+	    background-position: 0px -120px;
+	    text-indent: 0;
+	}
   	ul.storeReview>li {
   		display:inline-block;
   		margin-top:20px;
@@ -189,9 +272,9 @@
 	</div>
 	<div class="desc-container">
 		<div>
-			<a href="#">${vo.dong}</a> &middot; <a href="#">${vo.skinds} <!-- 뷰티/미용 --></a>
+			<a href="#">${vo.dong}</a> &middot; <a href="#">${vo.skinds}<!--   뷰티/미용  --></a>
 		</div>
-		<h1>${vo.sname}<!-- 뷰림헤어살롱 옥정점 --></h1>
+		<h1>${vo.sname}<!--  뷰림헤어살롱 옥정점  --></h1>
 	</div>
 </section>
 <section class="store-info-body">
@@ -200,20 +283,30 @@
 			<li>
 				<div class="shop-img">
 					<img src="http://localhost:9000/banana/images/market.svg">
+					
 				</div>
-				<p class="info-content">${vo.sintro }</p>
+				<p class="info-content">${vo.sintro }
+					<!-- 안녕하세요^^<br>
+					옥정동 뷰림헤어입니다.<br>
+					요즘 코로나 때문에 마음대로 다니시길 어려우시져?<br>
+					저희샵은 공간을 최대한 분리되어있어서 좀더 쾌적하고 편안하게 시술받을 수 있는 장점이 있어요<br>
+					신규고객님들은 30%할인 적용도 있으시니 방문해주셔서 예쁘게 머리하시고 기분전환하세요! -->
+				</p>
+				<div class="likebutton">
+				<button type="button" class="btn_unlike" id="btnLike">
+  							<span class="img_emoti">좋아요</span></button>
 			</li>
 			<li>
 				<div class="location-img">
 					<img src="http://localhost:9000/banana/images/location.svg">
 				</div>
-				<p class="info-location">${vo.saddr} ${vo.saddr_num} <!-- 경기도 양주시 회천남로 76 --></p>
+				<p class="info-location">${vo.saddr} ${vo.saddr_num}<!--  경기도 양주시 회천남로 76 --></p>
 			</li>
 			<li>
 				<div class="phone-img">
 					<img src="http://localhost:9000/banana/images/phone.svg">
 				</div>
-				<p class="info-phone"><a href="#">${vo.sph} <!-- 0318623555 --></a></p>
+				<p class="info-phone"><a href="#">${vo.sph}<!-- 0318623555 --></a></p>
 			</li>
 			<c:if test="${svo.mid eq vo.mid}">
 			<li>

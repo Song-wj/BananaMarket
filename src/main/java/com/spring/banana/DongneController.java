@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.banana.vo.SessionVO;
 import com.banana.vo.dongneVO;
 import com.spring.service.BananaService;
+import com.spring.service.DongneServiceImpl;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class DongneController  {
@@ -26,6 +29,9 @@ public class DongneController  {
 	@Autowired
 	@Qualifier("dongneService")
 	private BananaService dongneService;
+	
+	@Autowired
+	private DongneServiceImpl dongneServiceImpl;
 	
 	/**
 	 * 동네생활 - 글정보 삭제화면
@@ -66,9 +72,9 @@ public class DongneController  {
 	 * @return
 	 */
 	@RequestMapping(value ="/dongneLife_content.do", method = RequestMethod.GET)
-	public ModelAndView dongneLife_content(String bid) {
-	
-		return (ModelAndView)dongneService.getContent(bid);
+	public ModelAndView dongneLife_content(String bid, HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)dongneService.getContent(bid,svo.getMid());
 	}
 	
 	/**
@@ -104,7 +110,17 @@ public class DongneController  {
 		return (ModelAndView)dongneService.getList();
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/dongnelife_like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_like(String mid, String bid) {
+		return dongneServiceImpl.product_like(mid, bid);
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="/dongnelife_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_unlike(String mid, String bid) {
+		return dongneServiceImpl.product_unlike(mid, bid);
+	}
 	
 	
 }

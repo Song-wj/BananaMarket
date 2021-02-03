@@ -6,17 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.BananaShopReviewVO;
 import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
+import com.enroll.service.EnrollstoreServiceImpl;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class NeighborhoodController {
 	
 	@Autowired
 	private EnrollService shopService;
+	
+	@Autowired
+	private EnrollstoreServiceImpl EnrollstoreServiceImpl;
 	
 	@Autowired
 	private EnrollService shopReviewService;
@@ -66,8 +72,8 @@ public class NeighborhoodController {
 	 * 내 근처 - 업체 후기 내용 화면
 	 */
 	@RequestMapping(value="/neighborStoreReview_content.do", method=RequestMethod.GET)
-	public ModelAndView neighborStoreReview_content(String srid) {
-		return (ModelAndView)shopReviewService.getContent(srid);
+	public ModelAndView neighborStoreReview_content(String srid, String mid) {
+		return (ModelAndView)shopReviewService.getContent(srid,null);
 	}
 	
 	/**
@@ -111,8 +117,9 @@ public class NeighborhoodController {
 	 * @return
 	 */
 	@RequestMapping(value="/neighborhoodStore.do" , method=RequestMethod.GET)
-	public ModelAndView neighborhoodStore(String sid) {
-		return (ModelAndView)shopService.getContent(sid);
+	public ModelAndView neighborhoodStore(String sid,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)shopService.getContent(sid,svo.getMid());
 	}
 	
 	@RequestMapping(value="/neighborhood.do" , method=RequestMethod.GET)
@@ -123,5 +130,17 @@ public class NeighborhoodController {
 	@RequestMapping(value="/footer.do", method=RequestMethod.GET)
 	public String index() {
 		return "footer";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/shop_like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_like(String mid, String sid) {
+		return EnrollstoreServiceImpl.product_like(mid, sid);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/shop_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_unlike(String mid, String sid) {
+		return EnrollstoreServiceImpl.product_unlike(mid, sid);
 	}
 }

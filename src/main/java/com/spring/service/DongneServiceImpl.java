@@ -17,12 +17,11 @@ import com.banana.dao.dongneDAO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.BananaMemberVO;
 
-
-import com.banana.vo.BananaMemberVO;
-import com.banana.vo.DongneCommentVO;
-
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 
 
@@ -84,12 +83,10 @@ public class DongneServiceImpl implements BananaService{
 		return String.valueOf(result);
 	}
 	
-	public ModelAndView getSubjectListContent(String bsid,String bstitle) {
+	public ModelAndView getSubjectListContent(String bsid, String bstitle) {
 		ModelAndView mv = new ModelAndView();
 		dongneSubjectVO svo = dongneDAO.getSubjectContent(bsid);
 		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle);
-		
-			
 		
 		mv.addObject("list", list);
 		mv.addObject("vo", svo);
@@ -253,8 +250,10 @@ public class DongneServiceImpl implements BananaService{
 	
 	
 	
-	public Object getContent(Object bid) {
+	public Object getContent(Object bid, String mid) {
 		ModelAndView mv = new ModelAndView();
+		int result = dongneDAO.likeResult(mid, (String)bid);
+		mv.addObject("result",result);
 		dongneVO vo = dongneDAO.getBoardContent((String)bid);
 		if(vo.getBsfile() != null) {
 			String[] sfile_list =vo.getBsfile().split(",");
@@ -284,6 +283,7 @@ public class DongneServiceImpl implements BananaService{
 	
 	public Object getUpdateContent(Object bid) {
 		ModelAndView mv = new ModelAndView();
+		
 		dongneVO vo = dongneDAO.getBoardContent((String)bid);
 		int count =0;
 		if(vo.getBfile() != null) {
@@ -360,6 +360,72 @@ public class DongneServiceImpl implements BananaService{
 		return str;
 	}
 	
+	/** 좋아요 **/
+	 public ModelAndView product_like(String mid, String bid) {
+		 ModelAndView mv = new ModelAndView();
+		 boolean result = dongneDAO.getPickContent(mid,bid); 
+			
+			if(result) {
+				//좋아요 버튼 잘 반영
+				ArrayList<dongneVO> list = dongneDAO.getLikelist(mid); 
+				//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
+				JsonArray jarray = new JsonArray();
+				JsonObject jdata = new JsonObject();
+				Gson gson = new Gson();
+				for(dongneVO vo : list){
+					JsonObject jobj = new JsonObject();
+					jobj.addProperty("btitle", vo.getBtitle()); 
+					jobj.addProperty("nickname", vo.getBtitle()); 
+					jobj.addProperty("maddr", vo.getMaddr());
+					jobj.addProperty("btopic", vo.getBtopic());
+					jobj.addProperty("bfile", vo.getBfile());
+					jobj.addProperty("bsfile", vo.getBsfile());
+					jobj.addProperty("mid", vo.getMid());
+					jobj.addProperty("bid", vo.getBid());
+					
+					jarray.add(jobj);
+				}
+				jdata.add("jlist", jarray);		//java객체
+				
+				mv.setViewName(gson.toJson(jdata));
+				
+			}
+			return mv;
+	 }
+	 
+	 /** 좋아요 취소 **/
+	 public ModelAndView product_unlike(String mid, String bid) {
+		 ModelAndView mv = new ModelAndView();
+		 boolean result = dongneDAO.getDeleteContent(mid,bid); 
+			
+			if(result) {
+				//좋아요 버튼 잘 반영
+				ArrayList<dongneVO> list = dongneDAO.getLikelist(mid); 
+				//list객체의 데이터를 JSON 객체로 변환작업 필요 ---> JSON 라이브러리 존재(gson)
+				JsonArray jarray = new JsonArray();
+				JsonObject jdata = new JsonObject();
+				Gson gson = new Gson();
+				
+				for(dongneVO vo : list){
+					JsonObject jobj = new JsonObject();
+					jobj.addProperty("btitle", vo.getBtitle()); 
+					jobj.addProperty("nickname", vo.getBtitle()); 
+					jobj.addProperty("maddr", vo.getMaddr());
+					jobj.addProperty("btopic", vo.getBtopic());
+					jobj.addProperty("bfile", vo.getBfile());
+					jobj.addProperty("bsfile", vo.getBsfile());
+					jobj.addProperty("mid", vo.getMid());
+					jobj.addProperty("bid", vo.getBid());
+					
+					jarray.add(jobj);
+				}
+				jdata.add("jlist", jarray);		//java객체
+				
+				mv.setViewName(gson.toJson(jdata));
+				
+			}
+			return mv;
+	 }
 	public ModelAndView getMyPost(String mid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<dongneVO> list = dongneDAO.getMyPost(mid);

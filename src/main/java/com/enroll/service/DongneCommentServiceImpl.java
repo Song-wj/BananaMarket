@@ -42,7 +42,7 @@ public class DongneCommentServiceImpl implements EnrollService {
 	}
 
 	@Override
-	public Object getContent(Object id) {
+	public Object getContent(Object id, String mid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
