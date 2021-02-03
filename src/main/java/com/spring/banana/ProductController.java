@@ -72,7 +72,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value="/product_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView product_unlike(HttpSession session, String pid) {
+	public String product_unlike(HttpSession session, String pid) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return ProductServiceImpl.product_unlike(svo.getMid(),pid);
 	}

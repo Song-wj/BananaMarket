@@ -118,8 +118,9 @@ public class DongneController  {
 	
 	@ResponseBody
 	@RequestMapping(value="/dongnelife_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView product_unlike(String mid, String bid) {
-		return dongneServiceImpl.product_unlike(mid, bid);
+	public String product_unlike(HttpSession session, String bid) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneServiceImpl.product_unlike(svo.getMid(), bid);
 	}
 	
 	

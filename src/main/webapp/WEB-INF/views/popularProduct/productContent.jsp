@@ -225,18 +225,6 @@
 	    text-align: left;
 	}
 	
-	#article-description button {
-		border:1px solid RGB(254,229,0);
-		background-color:RGB(254,229,0);
-		color:RGB(82,67,21);
-		font-weight:bold;
-		padding:10px 15px;
-		font-size:17px;
-		border-radius:5px; 
-		cursor:pointer;
-		margin: 0 0 0 560px;
-	}
-	
 	#article-description #article-title {
 	    font-size: 22px;
 	    font-weight: 600;
@@ -402,9 +390,10 @@
 	background-color: RGB(254, 229, 0);
 	font-weight: bold;
 	border: 1px solid RGB(254, 229, 0);
-	padding: 15px 17px;
+	padding: 12px 15px;
 	font-size: 17px;
 	border-radius: 5px;
+	margin-left:500px;
 	}
 
 	button.product_btn_style:hover {
@@ -527,19 +516,6 @@ $(document).ready(function(){
 		</div>
 		<div class="description">
 			<section id="article-description">
-				<a href="#"><button type="button"> 채팅 하기</button></a>
-				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}
-					<button type="button" class="btn_unlike" id="btnLike">
-  					<span class="img_emoti">좋아요</span></button>     				
-     			</h1>
-				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} </time></p>
-				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
-				<div id="article-detail">
-					<p>${vo.pcontent}</p>
-				</div>
-				<p id="article-counts">
-					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
-				</p>
 				<div class="product_btn">
 					<%-- <c:choose>
 						<c:when test="${mid ne null }">
@@ -550,8 +526,20 @@ $(document).ready(function(){
 						</c:otherwise>
 					</c:choose> --%>
 					<!-- <button type="button" class="product_btn_style" id="like">찜하기</button>  -->
-					<button class="product_btn_style">채팅으로 거래하기</button>
+					<button type="button" class="btn_unlike" id="btnLike">
+  						<span class="img_emoti">좋아요</span>
+  					</button> 
+					<a href="#"><button type="button" class="product_btn_style">채팅 하기</button></a>
 				</div>
+				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
+				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} </time></p>
+				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
+				<div id="article-detail">
+					<p>${vo.pcontent}</p>
+				</div>
+				<p id="article-counts">
+					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
+				</p>
 			</section> 	
 		</div>
 
