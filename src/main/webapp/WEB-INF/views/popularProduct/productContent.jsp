@@ -218,7 +218,7 @@
 	
 	#article-description {
 		border-top: 1px solid #e9ecef;
-	    padding: 32px 0;
+	    padding: 12px 0 32px 0;
 	    width: 677px;
 	    margin: 0 auto;
 	    border-bottom: 1px solid #e9ecef;
@@ -390,9 +390,10 @@
 	background-color: RGB(254, 229, 0);
 	font-weight: bold;
 	border: 1px solid RGB(254, 229, 0);
-	padding: 15px 17px;
+	padding: 12px 15px;
 	font-size: 17px;
 	border-radius: 5px;
+	margin-left:500px;
 	}
 
 	button.product_btn_style:hover {
@@ -461,14 +462,14 @@ $(document).ready(function(){
 
 <div id="content">
 		<div id="demo" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
+			 <!-- Indicators -->
 			  <ul class="carousel-indicators">
 			    <li data-target="#demo" data-slide-to="0" class="active"></li>
 			    <li data-target="#demo" data-slide-to="1"></li>
 			    <li data-target="#demo" data-slide-to="2"></li>
 			  </ul>
 			  
-			  <!-- The slideshow -->
+			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
 			      <c:forEach var="list" items="${pfile_list }" >
@@ -482,8 +483,7 @@ $(document).ready(function(){
 				    </div>
 				   </c:forEach> 
 			  </div>
-			  
-			  <!-- Left and right controls -->
+			 <!-- Left and right controls -->
 			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 			    <span class="carousel-control-prev-icon"></span>
 			  </a>
@@ -516,19 +516,6 @@ $(document).ready(function(){
 		</div>
 		<div class="description">
 			<section id="article-description">
-				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}
-				<button type="button" class="btn_unlike" id="btnLike">
-  							<span class="img_emoti">좋아요</span></button>
-     				
-     			</h1>
-				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} (몇분전으로 수정)</time></p>
-				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice}</p>
-				<div id="article-detail">
-					<p>${vo.pcontent}</p>
-				</div>
-				<p id="article-counts">
-					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
-				</p>
 				<div class="product_btn">
 					<%-- <c:choose>
 						<c:when test="${mid ne null }">
@@ -539,8 +526,20 @@ $(document).ready(function(){
 						</c:otherwise>
 					</c:choose> --%>
 					<!-- <button type="button" class="product_btn_style" id="like">찜하기</button>  -->
-					<button class="product_btn_style">채팅으로 거래하기</button>
+					<button type="button" class="btn_unlike" id="btnLike">
+  						<span class="img_emoti">좋아요</span>
+  					</button> 
+					<a href="#"><button type="button" class="product_btn_style">채팅 하기</button></a>
 				</div>
+				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
+				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} </time></p>
+				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
+				<div id="article-detail">
+					<p>${vo.pcontent}</p>
+				</div>
+				<p id="article-counts">
+					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
+				</p>
 			</section> 	
 		</div>
 
@@ -561,7 +560,7 @@ $(document).ready(function(){
 				</div>
 			</a>
 		</article>
-		<article class="card">
+		<!--  <article class="card">
 			<a class="card-link" href="#">
 				<div class="card-photo">
 					<img src="">
@@ -625,7 +624,7 @@ $(document).ready(function(){
 					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
 				</div>
 			</a>
-		</article>
+		</article> -->
 	</section>
 </section>
 
