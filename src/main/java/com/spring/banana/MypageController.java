@@ -40,6 +40,8 @@ public class MypageController {
 	
 	@Autowired
 	private ProductServiceImpl ProductServiceImpl;
+	
+	@Autowired
 	private DongneServiceImpl dongneService;
 	
 	@Autowired
@@ -91,7 +93,7 @@ public class MypageController {
 	public ModelAndView mypage_mannerGrade(HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		String mid =svo.getMid();
-		return (ModelAndView)MypageReviewService.getContent(mid);
+		return (ModelAndView)MypageReviewService.getContent(mid,null);
 		/* return "mypage/mypage_mannerGrade"; */
 	}
 	
@@ -179,10 +181,10 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_like.do", method=RequestMethod.GET)
-	public ModelAndView mypage_like(String mid) {
-		return (ModelAndView)likeserviceimpl.getList(mid);
+	public ModelAndView mypage_like(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)likeserviceimpl.getList(svo.getMid());
 	}
-	
 	/**
 	 * 관심목록 - 중고거래 취소
 	 * @param mid
@@ -191,9 +193,11 @@ public class MypageController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/mypage_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-	public ModelAndView product_unlike(String mid, String pid) {
-		return ProductServiceImpl.product_unlike(mid, pid);
+	public ModelAndView product_unlike(HttpSession session, String pid) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return ProductServiceImpl.product_unlike(svo.getMid(), pid);
 	}
+	
 	
 	/**
 	 * 마이페이지 - 판매내역 - 판매완료
@@ -323,6 +327,10 @@ public class MypageController {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return dongneService.getMemberInfo(svo.getMid());
 	}
+	/*@RequestMapping(value="/mypage.do",method=RequestMethod.GET)
+	public String mypage() {
+		return "mypage/mypage";
+	}*/
 	
 	/**
 	 * 마이페이지 - 내 댓글

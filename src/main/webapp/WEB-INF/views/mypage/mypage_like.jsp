@@ -34,7 +34,7 @@
 			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
-					  url:"mypage_unlike.do?mid=whtjdrnr010&pid=p_27", //mid는 로그인한사람id
+					  url:"product_unlike.do?mid=${svo.mid}&pid=${vo.pid}", //mid는 로그인한사람id
 					  success:function(result){
 						  }
 					});
@@ -46,7 +46,7 @@
 			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
-					  url:"dongnelife_unlike.do?mid=whtjdrnr010&bid=b_21", //mid는 로그인한사람id
+					  url:"dongnelife_unlike.do?mid=${svo.mid}&bid=${vo.bid}", //mid는 로그인한사람id
 					  success:function(result){
 						  }
 					});
@@ -58,7 +58,7 @@
 			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
-					  url:"shop_unlike.do?mid=whtjdrnr010&sid=shop_25", //mid는 로그인한사람id
+					  url:"shop_unlike.do?mid=${svo.mid}&sid=${vo.sid}", //mid는 로그인한사람id
 					  success:function(result){
 						  }
 					});
@@ -227,8 +227,6 @@
 			</div>
 		</section>
 		<section class="section2_like" id="section2_like">
-		<input type="hidden" name="mid" id="mid" value="whtjdrnr010">
-		<input type="hidden" name="pid" id="pid" value="p_27">
 			<c:forEach var="vo" items="${list1 }">
 				<table class="mypage_table">
 				<tr>

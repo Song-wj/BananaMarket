@@ -107,9 +107,9 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	}
 
 	@Override
-	public Object getContent(Object sid) {
+	public Object getContent(Object sid, String mid) {
 		ModelAndView mv = new ModelAndView();
-		int result = shopDAO.likeResult("whtjdrnr010", (String)sid);
+		int result = shopDAO.likeResult(mid, (String)sid);
 		mv.addObject("result",result);
 		BananaShopVO svo = shopDAO.getShopContent((String)sid);
 		svo.getSaddr().replace("/", " ");

@@ -26,7 +26,7 @@
 				  
 				//ajax를 활용한 서버 연동
 				  $.ajax({
-					  url:"shop_unlike.do?mid=whtjdrnr010&sid=${vo.sid }", //mid는 로그인한사람id
+					  url:"shop_unlike.do?mid=${svo.mid}&sid=${vo.sid }", //mid는 로그인한사람id
 					  success:function(result){
 						  alert("좋아요 취소되었습니다");
 						  location.reload();
@@ -40,7 +40,7 @@
 
 				//ajax를 활용한 서버 연동
 					$.ajax({
-						url:"shop_like.do?mid=whtjdrnr010&sid=${vo.sid }", //mid는 로그인한사람id
+						url:"shop_like.do?mid=${svo.mid}&sid=${vo.sid }", //mid는 로그인한사람id
 						success:function(result){
 							alert("좋아요 반영되었습니다");
 							location.reload();

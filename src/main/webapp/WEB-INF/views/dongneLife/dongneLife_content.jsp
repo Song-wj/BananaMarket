@@ -27,7 +27,7 @@
 				  
 				//ajax를 활용한 서버 연동
 				  $.ajax({
-					  url:"dongnelife_unlike.do?mid=whtjdrnr010&bid=${vo.bid }", //mid는 로그인한사람id
+					  url:"dongnelife_unlike.do?mid=${svo.mid}&bid=${vo.bid }", //mid는 로그인한사람id
 					  success:function(result){
 						  alert("좋아요 취소되었습니다");
 						  location.reload();
@@ -41,7 +41,7 @@
 
 				//ajax를 활용한 서버 연동
 					$.ajax({
-						url:"dongnelife_like.do?mid=whtjdrnr010&bid=${vo.bid }", //mid는 로그인한사람id
+						url:"dongnelife_like.do?mid=${svo.mid}&bid=${vo.bid }", //mid는 로그인한사람id
 						success:function(result){
 							alert("좋아요 반영되었습니다");
 							location.reload();

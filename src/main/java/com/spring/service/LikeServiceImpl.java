@@ -27,10 +27,9 @@ public class LikeServiceImpl implements LikeService{
 	
 	public Object getList(String mid) {
 		ModelAndView mv = new ModelAndView();
-		  ArrayList<LikeVO> list1 = productDAO.getLikelist("whtjdrnr010");
-		  ArrayList<dongneVO> list2 = dongneDAO.getLikelist("whtjdrnr010");
-		  ArrayList<BananaShopVO> list3 = bananashopDAO.getLikelist("whtjdrnr010");
-		  System.out.println(list2);
+		  ArrayList<LikeVO> list1 = productDAO.getLikelist(mid);
+		  ArrayList<dongneVO> list2 = dongneDAO.getLikelist(mid);
+		  ArrayList<BananaShopVO> list3 = bananashopDAO.getLikelist(mid);
 			mv.addObject("list1", list1);
 			mv.addObject("list2", list2);
 			mv.addObject("list3", list3);

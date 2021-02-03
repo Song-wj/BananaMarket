@@ -72,8 +72,8 @@ public class NeighborhoodController {
 	 * 내 근처 - 업체 후기 내용 화면
 	 */
 	@RequestMapping(value="/neighborStoreReview_content.do", method=RequestMethod.GET)
-	public ModelAndView neighborStoreReview_content(String srid) {
-		return (ModelAndView)shopReviewService.getContent(srid);
+	public ModelAndView neighborStoreReview_content(String srid, String mid) {
+		return (ModelAndView)shopReviewService.getContent(srid,null);
 	}
 	
 	/**
@@ -117,8 +117,9 @@ public class NeighborhoodController {
 	 * @return
 	 */
 	@RequestMapping(value="/neighborhoodStore.do" , method=RequestMethod.GET)
-	public ModelAndView neighborhoodStore(String sid) {
-		return (ModelAndView)shopService.getContent(sid);
+	public ModelAndView neighborhoodStore(String sid,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)shopService.getContent(sid,svo.getMid());
 	}
 	
 	@RequestMapping(value="/neighborhood.do" , method=RequestMethod.GET)

@@ -72,9 +72,9 @@ public class DongneController  {
 	 * @return
 	 */
 	@RequestMapping(value ="/dongneLife_content.do", method = RequestMethod.GET)
-	public ModelAndView dongneLife_content(String bid) {
-	
-		return (ModelAndView)dongneService.getContent(bid);
+	public ModelAndView dongneLife_content(String bid, HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)dongneService.getContent(bid,svo.getMid());
 	}
 	
 	/**

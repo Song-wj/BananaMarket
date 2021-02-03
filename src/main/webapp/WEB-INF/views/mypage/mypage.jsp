@@ -69,7 +69,6 @@
 		$("#myreview").click(function() {
 			$("#contentSection").load("mypage_myReview.do");
 		});
-
 		$("#mypage_mannerGrade").click(function() {
 			$("#contentSection").load("mypage_mannerGrade.do");
 		});

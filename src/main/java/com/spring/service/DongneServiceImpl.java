@@ -17,10 +17,6 @@ import com.banana.dao.dongneDAO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.BananaMemberVO;
 
-
-import com.banana.vo.BananaMemberVO;
-import com.banana.vo.DongneCommentVO;
-
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 import com.google.gson.Gson;
@@ -256,9 +252,9 @@ public class DongneServiceImpl implements BananaService{
 	
 	
 	
-	public Object getContent(Object bid) {
+	public Object getContent(Object bid, String mid) {
 		ModelAndView mv = new ModelAndView();
-		int result = dongneDAO.likeResult("whtjdrnr010", (String)bid);
+		int result = dongneDAO.likeResult(mid, (String)bid);
 		mv.addObject("result",result);
 		dongneVO vo = dongneDAO.getBoardContent((String)bid);
 		if(vo.getBsfile() != null) {

@@ -25,7 +25,7 @@
 				  
 				//ajax를 활용한 서버 연동
 				  $.ajax({
-					  url:"product_unlike.do?mid=${mid}&pid=${vo.pid }", //mid는 로그인한사람id
+					  url:"product_unlike.do?mid=${svo.mid}&pid=${vo.pid }", //mid는 로그인한사람id
 					  success:function(result){
 						  alert("좋아요 취소되었습니다");
 						  location.reload();
@@ -39,7 +39,7 @@
 
 				//ajax를 활용한 서버 연동
 					$.ajax({
-						url:"product_like.do?mid=${mid}&pid=${vo.pid }", //mid는 로그인한사람id
+						url:"product_like.do?mid=${svo.mid}&pid=${vo.pid }", //mid는 로그인한사람id
 						success:function(result){
 							alert("좋아요 반영되었습니다");
 							location.reload();
@@ -538,7 +538,7 @@ $(document).ready(function(){
 							<button type="button" class="product_btn_style" id="like">찜</button>
 						</c:otherwise>
 					</c:choose> --%>
-					<button type="button" class="product_btn_style" id="like">찜하기</button>
+					<!-- <button type="button" class="product_btn_style" id="like">찜하기</button>  -->
 					<button class="product_btn_style">채팅으로 거래하기</button>
 				</div>
 			</section> 	
