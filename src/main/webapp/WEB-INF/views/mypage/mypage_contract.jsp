@@ -178,6 +178,15 @@
 		</section>
 		<section class="section2_contract" id="section2_contract">
 		<div>
+			<c:choose>
+			<c:when test="${empty list }">
+				<table class="mypage_table">
+				   <tr>
+						<td style="padding: 150px 0; color: #ccc; text-align:center;">판매 내역이 없습니다.</td>
+					</tr> 
+				</table>
+			</c:when>
+			<c:otherwise>
 			<c:forEach var="vo"  items="${list}">
 			   <c:if test="${vo.pchk eq 'x' && vo.mid eq svo.mid}">
 				  <div class="contract_content">
@@ -204,6 +213,8 @@
 				  </div> 
 			   </c:if>
 			</c:forEach>
+			  </c:otherwise>
+			   </c:choose>
 		</div> 
 		</section>
 		<section class="section3_contract" id="section3_contract">
