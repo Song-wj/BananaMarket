@@ -361,20 +361,20 @@
 			</div>
 		</section>
 		<section class="subjectContent-post">
-			<c:forEach var="vo" items="${list }">
+			<c:forEach var="vo" items="${ list }">
 			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
 				
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
 					<ul>
-						<li class="userName">${vo.nickname }</li>
-						<li class="userAddr">${vo.maddr }</li>
-						<li class="regit-date">${vo.bdate }</li>
+						<li class="userName">${ vo.nickname }</li>
+						<li class="userAddr">${ vo.maddr }</li>
+						<li class="regit-date">${ vo.bdate }</li>
 					</ul>
 				</div>
 				<div class="box">
 					<div class="post-body">
-						<pre><c:out value="${vo.btopic}" /></pre>
+						<pre><c:out value="${ vo.btopic}" /></pre>
 					</div>
 				</div>
 				</a>

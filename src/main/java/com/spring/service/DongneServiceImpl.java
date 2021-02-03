@@ -84,12 +84,10 @@ public class DongneServiceImpl implements BananaService{
 		return String.valueOf(result);
 	}
 	
-	public ModelAndView getSubjectListContent(String bsid,String bstitle) {
+	public ModelAndView getSubjectListContent(String bsid, String bstitle) {
 		ModelAndView mv = new ModelAndView();
 		dongneSubjectVO svo = dongneDAO.getSubjectContent(bsid);
 		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle);
-		
-			
 		
 		mv.addObject("list", list);
 		mv.addObject("vo", svo);

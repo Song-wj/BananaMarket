@@ -181,9 +181,9 @@
 				<select id="basic" name ="btitle" style="display:none;">
 	               <option value="none" >=== 선택 ===</option>
 	               <option value="none" style="color:blue;" disabled>동네 기본주제</option>
-	               <option value="동네사건사고">동네사건사고</option>
+	               <option value="동네 사건사고">동네사건사고</option>
 	               <option value="분실/실종센터">분실/실종센터</option>
-	               <option value="우리동네질문">우리동네질문</option>
+	               <option value="우리동네 질문">우리동네질문</option>
 	               <option value="none" style="color:blue;" disabled>관심주제</option>
 	               <option value="일상">일상</option>
 	               <option value="동네소식">동네소식</option>
