@@ -205,7 +205,6 @@ public class MypageController {
 	@RequestMapping(value="/mypage_contract_review" , method=RequestMethod.GET)
 	public ModelAndView sellUpdate(String pid) {
 		
-	
 		return (ModelAndView)productService.sellUpdate(pid);
 	}
 	

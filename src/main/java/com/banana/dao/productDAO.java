@@ -4,6 +4,13 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.BuylistVO;
 import com.banana.vo.LikeVO;
@@ -11,10 +18,17 @@ import com.banana.vo.productVO;
 
 public class productDAO extends DBConn{
 	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	private static String namespace = "mapper.product";
+	
 	/**
 	 * Insert : 중고 물품 등록
 	 */
-	public boolean getInsert(productVO vo) {
+	public int getInsert(productVO vo) {
+		return sqlSession.insert(namespace+".InsertProduct", vo);
+		/*
 		boolean result = false;
 		
 		try {
@@ -42,6 +56,7 @@ public class productDAO extends DBConn{
 		}		
 		
 		return result;
+		*/
 	}
 	
 	
@@ -49,6 +64,9 @@ public class productDAO extends DBConn{
 	 *  중고 제품 리스트
 	 */
 	public ArrayList<productVO> getProductList(){
+		List <productVO> list = sqlSession.selectList(namespace+".ProductList");
+		return (ArrayList<productVO>) list;
+		/*
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		try {
 			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile, buy_mid "
@@ -81,12 +99,16 @@ public class productDAO extends DBConn{
 		}
 		
 		return list;
+		*/
 	}
 	
 	/**
 	 *  판매내역 - 판매중 제품 리스트 
 	 */
 	public ArrayList<productVO> getProductSellList(){
+		List <productVO> list = sqlSession.selectList(namespace+".ProductSellList");
+		return (ArrayList<productVO>) list;
+		/*
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		try {
 			String sql = "select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd'), pchk, pfile, psfile, buy_mid "
@@ -119,6 +141,7 @@ public class productDAO extends DBConn{
 		}
 		
 		return list;
+		*/
 	}
 	
 	
@@ -126,7 +149,8 @@ public class productDAO extends DBConn{
 	 *  중고제품 상세 보기
 	 */
 	public productVO getProductContent(String pid) {
-		productVO vo = new productVO();
+		return sqlSession.selectOne(namespace+".ProductContent", pid);
+		/*productVO vo = new productVO();
 		try {
 			String sql ="select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, "
 					+ "      p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE "
@@ -159,12 +183,15 @@ public class productDAO extends DBConn{
 		}
 		
 		return vo;
+		*/
 	}
 	
 	/**
 	 *  중고제품 수정
 	 */
-	public boolean getProductUpdate(productVO vo) {
+	public int getProductUpdate(productVO vo) {
+		return sqlSession.update(namespace+".ProductUpdate", vo);
+		/*
 		boolean result = false;
 		
 		try {
@@ -187,6 +214,7 @@ public class productDAO extends DBConn{
 		}
 		
 		return result;
+		*/
 	}
 	
 
@@ -322,7 +350,9 @@ public class productDAO extends DBConn{
 	/**
 	 *  중고 물품 삭제
 	 */
-	public boolean getProductDelete(String pid) {
+	public int getProductDelete(String pid) {
+		return sqlSession.delete(namespace+".ProductDelete", pid);
+		/*
 		boolean result = false;
 		try {
 			String sql="delete from banana_product where pid=?";
@@ -334,13 +364,16 @@ public class productDAO extends DBConn{
 			e.printStackTrace();
 		}
 		return result;
+		*/
 	}
 	
 	
 	/**
 	 *  중고 물품 (판매 중 => 판매 완료) 상태 변경 
 	 */
-	public boolean getSellUpdate(String pid) {
+	public int getSellUpdate(String pid) {
+		return sqlSession.update(namespace+".ProductSellUpdate", pid);
+		/*
 		boolean result = false;
 		
 		try {
@@ -358,6 +391,7 @@ public class productDAO extends DBConn{
 		}
 		
 		return result;
+		*/
 	}
 	
 

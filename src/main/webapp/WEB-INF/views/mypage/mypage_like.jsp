@@ -220,7 +220,7 @@
 		<section class="section1_like">
 			<div>
 				<ul class="like_nav">
-					<li><a href="#" id="like_secondhand">중고거래${jlist.pid }d</a></li>
+					<li><a href="#" id="like_secondhand">중고거래</a></li>
 					<li><a href="#" id="like_dongnaelife">동네생활</a></li>
 					<li><a href="#" id="like_neighborhoodstore">동네업체</a></li>
 				</ul>
