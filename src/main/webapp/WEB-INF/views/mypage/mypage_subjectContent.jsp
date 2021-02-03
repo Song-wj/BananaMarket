@@ -372,10 +372,9 @@
 			</c:when>
 			<c:otherwise>
 			
-			<c:forEach var="vo" items="${list }">
-=======
+
 			<c:forEach var="vo" items="${ list }">
->>>>>>> b2d8edcd0b334623b4e0df76de2d5ec80ac9f5c4
+
 			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
 				
 				<div class="post-header">

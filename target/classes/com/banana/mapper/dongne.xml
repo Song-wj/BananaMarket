@@ -17,13 +17,9 @@
 	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
 		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
 	</select>
-<<<<<<< HEAD
+
 	<select id="getDongneSubjectlist" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
 		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
-=======
-	<select id="getDongneSubjectlist" parameterType="map" resultType="com.banana.vo.dongneVO">
-		select bid, nickname, btitle, bfile, bsfile, btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
->>>>>>> b2d8edcd0b334623b4e0df76de2d5ec80ac9f5c4
 	    from banana_member m , banana_board b
 	    where m.mid=b.mid and btitle= #{btitle}
 	</select>
