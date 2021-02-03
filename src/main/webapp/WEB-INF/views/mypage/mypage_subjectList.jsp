@@ -115,7 +115,11 @@
 				<c:forEach var="vo" items="${ list }">
 					<c:if test="${ vo.bstopic eq '동네 기본주제' }">
 						<article class="subject-card-top">
+<<<<<<< HEAD
 							<a class="subject-card-link" href="http://localhost:9000/banana/mypage_subjectContent.do?bsid=${ vo.bsid }&bstitle=${vo.bstitle }">
+=======
+							<a class="subject-card-link" href="http://localhost:9000/banana/mypage_subjectContent.do?bsid=${ vo.bsid }&bstitle=${ vo.bstitle }">
+>>>>>>> b2d8edcd0b334623b4e0df76de2d5ec80ac9f5c4
 								<div class="subject-card-photo">
 									<img src="http://localhost:9000/banana/resources/upload/${ vo.bssfile }">
 								</div>
@@ -132,7 +136,11 @@
 				<c:forEach var="vo" items="${ list }">
 					<c:if test="${ vo.bstopic eq '관심주제' }">
 						<article class="subject-card-top">
+<<<<<<< HEAD
 							<a class="subject-card-link" href="http://localhost:9000/banana/mypage_subjectContent.do?bsid=${ vo.bsid }&bstitle=${vo.bstitle }">
+=======
+							<a class="subject-card-link" href="http://localhost:9000/banana/mypage_subjectContent.do?bsid=${ vo.bsid }&bstitle=${ vo.bstitle }">
+>>>>>>> b2d8edcd0b334623b4e0df76de2d5ec80ac9f5c4
 								<div class="subject-card-photo">
 									<img src="http://localhost:9000/banana/resources/upload/${ vo.bssfile }">
 								</div>

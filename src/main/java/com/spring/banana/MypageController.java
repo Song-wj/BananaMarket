@@ -293,6 +293,7 @@ public class MypageController {
 	@RequestMapping(value="/mypage.do", method=RequestMethod.GET)
 	public ModelAndView mypage(HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		System.out.println(svo.getMid());
 		return dongneService.getMemberInfo(svo.getMid());
 	}
 	
