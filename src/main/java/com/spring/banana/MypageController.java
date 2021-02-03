@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,15 +19,27 @@ import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
+import com.spring.service.BuylistService;
+import com.spring.service.LikeServiceImpl;
 import com.spring.service.DongneServiceImpl;
 import com.spring.service.MypageReviewServiceImpl;
 import com.spring.service.ProductService;
+import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class MypageController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private BuylistService buylistservice;
+	
+	@Autowired
+	private LikeServiceImpl likeserviceimpl;
+	
+	@Autowired
+	private ProductServiceImpl ProductServiceImpl;
 	
 	@Autowired
 	private DongneServiceImpl dongneService;
@@ -41,7 +54,6 @@ public class MypageController {
 		vo.setSavepath(path1 + path2);
 		return dongneService.mypageUpdateProc(vo);
 	}
-	
 	
 	/**
 	 * 마이페이지 - 동네생활 글 삭제화면
@@ -81,7 +93,7 @@ public class MypageController {
 	public ModelAndView mypage_mannerGrade(HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		String mid =svo.getMid();
-		return (ModelAndView)MypageReviewService.getContent(mid);
+		return (ModelAndView)MypageReviewService.getContent(mid,null);
 		/* return "mypage/mypage_mannerGrade"; */
 	}
 	
@@ -169,9 +181,23 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_like.do", method=RequestMethod.GET)
-	public String mypage_like() {
-		return "mypage/mypage_like";
+	public ModelAndView mypage_like(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)likeserviceimpl.getList(svo.getMid());
 	}
+	/**
+	 * 관심목록 - 중고거래 취소
+	 * @param mid
+	 * @param pid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/mypage_unlike.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView product_unlike(HttpSession session, String pid) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return ProductServiceImpl.product_unlike(svo.getMid(), pid);
+	}
+	
 	
 	/**
 	 * 마이페이지 - 판매내역 - 판매완료
@@ -250,10 +276,17 @@ public class MypageController {
 	 * 마이페이지 - 구매내역
 	 * @return
 	 */
-	@RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	public String mypage_purchased() {
-		return "mypage/mypage_purchased";
-	}
+	
+	 @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+	 public ModelAndView mypage_purchased(String mid) { 
+		return(ModelAndView)buylistservice.getList(mid); 
+	 }
+	
+
+		/*
+		 * @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
+		 * public String mypage_purchased() { return "mypage/mypage_purchased"; }
+		 */
 	// 구매내역 리뷰 쓰기
 	@RequestMapping(value="/mypage_purchase_review.do", method=RequestMethod.GET)
 	public String mypage_purchase_review() {
@@ -275,7 +308,6 @@ public class MypageController {
 		return (String)MypageReviewService.insert(vo); 
 	}
 	
-	
 	/**
 	 * 마이페이지 - 프로필 수정
 	 * @return
@@ -296,6 +328,10 @@ public class MypageController {
 		System.out.println(svo.getMid());
 		return dongneService.getMemberInfo(svo.getMid());
 	}
+	/*@RequestMapping(value="/mypage.do",method=RequestMethod.GET)
+	public String mypage() {
+		return "mypage/mypage";
+	}*/
 	
 	/**
 	 * 마이페이지 - 내 댓글

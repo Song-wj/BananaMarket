@@ -57,7 +57,7 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 	}
 
 	@Override
-	public Object getContent(Object srid) {
+	public Object getContent(Object srid, String mid) {
 		ModelAndView mv = new ModelAndView();
 		BananaShopReviewVO srvo = shopReviewDAO.getShopReviewContent((String)srid);
 		srvo.getSrcontent().replace("\r\n", "<br>");
