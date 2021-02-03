@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,6 +51,7 @@
 	
 	div.mypage_purchased table.mypage_table td.tdimg {
 		width:10px;
+		padding-right:10px;
 	}
 	div.mypage_purchased table.mypage_table img {
 		width:120px;
@@ -82,50 +84,35 @@
 	<div class="mypage_purchased">
 		<section class="section1_purchased">
 			<div>
+			
+			 <c:forEach var="vo" items="${list }">
 				<table class="mypage_table">
 				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td><span class="product">미스치프 크롭 후드티 팝니다~</span></td>
+					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
+					<td><span class="product">${vo.ptitle }</span></td>
 					<td rowspan="3" rowspan="3" class="manner_grade">
-						
+						<!-- 매너점수를 주세요~~~<br>
+						<select  name="mannerGrade" onchange="showConfirm()">
+							<option value="none">선택</option>
+							<option value="2">😮</option>
+							<option value="1">😆</option>
+							<option value="0">🙂</option>
+							<option value="-1">😥</option>
+							<option value="-2">😡</option>
+						</select> -->
 						<a href="mypage_purchase_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
 					</td>
 				</tr>
 				<tr>
-					<td><span class="locate">역삼동  어제</span></td>
+					<td><span class="locate">${vo.maddr}</span></td>
 				</tr>
 				<tr>
-					<td><span class="price">20,000원</span></td>
-				</tr> 
+					<td><span class="price">${vo.pprice }</span></td>
+				</tr>
 			</table>
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-					<td rowspan="3" rowspan="3" class="manner_grade">
-					
-						
-					</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
-			<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="images/mypage_bananaimg.jpg"></td>
-					<td>상품명</td>
-				</tr>
-				<tr>
-					<td>지역</td>
-				</tr>
-				<tr>
-					<td>가격</td>
-				</tr> 
-			</table>
+			<div></div>
+			</c:forEach> 
+			
 			</div>
 		</section>
 		
