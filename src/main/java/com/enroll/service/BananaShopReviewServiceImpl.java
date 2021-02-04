@@ -13,6 +13,20 @@ import com.banana.vo.DongneCommentVO;
 @Service("shopReviewService")
 public class BananaShopReviewServiceImpl implements EnrollService {
 	
+	
+	
+	@Override
+	public String getAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reviewAlarmWrite(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Autowired
 	private BananaShopReviewDAO shopReviewDAO;
 

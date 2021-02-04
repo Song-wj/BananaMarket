@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
+		alarm_count('${ svo.mid }');
+		
 		$("#al-msg").click(function(){
 			$(".modal").toggle();
 		});
@@ -17,6 +19,15 @@
 			$(".modal").hide();
 		});
 	});
+	
+	function alarm_count(mid) {
+		$.ajax({
+			url: "alarm_count.do?mid="+mid,
+			success: function(cnt) {
+				$("#al-cnt").append(cnt);
+			}		
+		});
+	}
 </script>
 <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -196,7 +207,7 @@
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood.do">내 근처</a></li>
 						<li class="header-menu-item">
 							<div id="al-msg">
-								<div id="al-cnt">0</div>
+								<div id="al-cnt"></div>
 								<img src="http://localhost:9000/banana/images/알림.png">
 							</div>
 							<div class="modal" style="display:none">

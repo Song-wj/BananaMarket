@@ -2,13 +2,12 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.banana.vo.BananaReviewAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
@@ -19,6 +18,17 @@ public class dongneDAO extends DBConn{
 	private SqlSessionTemplate sqlSession;
 	
 	private static String namespace = "mapper.dongne";
+	
+	public int getAlarmCount(String mid) {
+		return sqlSession.selectOne(namespace+".getAlarmCount", mid);
+	}
+	
+	public boolean reviewAlarmWrite(BananaReviewAlarmVO vo) {
+		boolean result = false;
+		int val = sqlSession.insert(namespace+".reviewAlarmWrite", vo);
+		if(val != 0) result = true;
+		return result;
+	}
 	
 	public boolean deleteSubjectProc(String bsid) {
 		boolean result = false;

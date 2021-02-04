@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.DongneCommentDAO;
+import com.banana.dao.dongneDAO;
+import com.banana.vo.BananaReviewAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -15,10 +17,26 @@ import com.google.gson.JsonObject;
 @Service("dongneCommentService")
 public class DongneCommentServiceImpl implements EnrollService {
 	
+	/////
 	@Autowired
 	private DongneCommentDAO dongneCommentDAO;
 	
+	@Autowired
+	private dongneDAO dongneDAO;
+	/////
 
+	public String getAlarmCount(String mid) {
+		int count = dongneDAO.getAlarmCount(mid);
+		return String.valueOf(count);
+	}
+	
+	public String reviewAlarmWrite(Object vo) {
+		boolean result = false;
+		BananaReviewAlarmVO rvo = (BananaReviewAlarmVO)vo;
+		dongneDAO.reviewAlarmWrite(rvo); 
+		return String.valueOf(result);
+	}
+	
 	@Override
 	public Object getList() {
 		return null;

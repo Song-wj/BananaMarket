@@ -5,6 +5,17 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.dongne">
+
+	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
+		select count(distinct ra.brid) count
+		from banana_member m, banana_board b, banana_board_review br, banana_review_alarm ra
+		where b.bid = br.bid and br.bid = ra.bid and ra.mid!=#{mid} and b.mid=#{mid}
+	</select>	
+	
+	<insert id="reviewAlarmWrite" parameterType="com.banana.vo.BananaReviewAlarmVO">
+		insert into banana_review_alarm values(#{mid},#{bid},#{brid})
+	</insert>
+
 	<insert id="writesubject" parameterType="com.banana.vo.dongneSubjectVO">
 		insert into banana_board_subject values('bs_'||SQE_BANANA_BOARD_SUBJECT.NEXTVAL,
 					#{bstitle},#{bstopic},#{bsfile},#{bssfile})
@@ -59,7 +70,6 @@
 		select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate 
 	    from banana_member m , banana_board b
 		where m.mid = b.mid and bid=#{bid}
-	
 	</select>
 	
 	<update id="boardupdate" parameterType="com.banana.vo.dongneVO">

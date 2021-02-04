@@ -27,6 +27,18 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	private BananaShopReviewDAO shopReviewDAO;
 
 	@Override
+	public String getAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reviewAlarmWrite(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public Object getList() {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<BananaShopVO> list = shopDAO.getShopList();
