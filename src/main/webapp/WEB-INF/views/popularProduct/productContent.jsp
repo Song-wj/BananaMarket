@@ -484,12 +484,8 @@ $(document).ready(function(){
 				    </div>
 				   </c:forEach> 
 			  </div>
-<<<<<<< HEAD
-			  </div>
-			  <!-- Left and right controls -->
-=======
+
 			 <!-- Left and right controls -->
->>>>>>> 0cf336606b501d8947fdca9c16df5c119ae6e013
 			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 			    <span class="carousel-control-prev-icon"></span>
 			  </a>
