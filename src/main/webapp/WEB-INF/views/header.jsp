@@ -5,7 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <title>Insert title here</title>
+<script>
+	$(document).ready(function(){
+		$("#al-msg").click(function(){
+			$(".modal").toggle();
+		});
+		
+		$(".modal_overlay").click(function(){
+			$(".modal").hide();
+		});
+	});
+</script>
 <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 	* {
@@ -66,7 +78,7 @@
 	#fixed-bar .header-menu-list {
 		position: absolute;
 		top: 40px;
-		left: 75rem;
+		left: 70rem;
 		list-style-type: none;
 	}
 	
@@ -88,6 +100,72 @@
 		background-color: #FEE500;
 	}
 	
+	#al-msg {
+		position:absolute;
+		top: -2px;
+		display: inline-block;
+		margin-top: -2px;
+	}
+	
+	#al-msg:active {
+		opacity: 0.6;
+	}
+	
+	#al-msg img {
+		width: 30px;
+		height: 30px;
+	}
+	
+	#al-cnt {
+		display: inline-block;
+		position: absolute;
+		top: -9px;
+		color: #212529;
+		font-weight: bold;
+		background-color: #FEE500;
+		padding:0 5px;
+		margin-left: 14px;
+		border-radius: 10px;
+	}
+	
+	.modal {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal_overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .modal_content {
+            position: absolute;
+            padding: 20px 20px;
+            background-color: white;
+            text-align: left;
+            top: 100px;
+            right: 5px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+            border-radius: 10px;
+            width: 25%;
+            font-size: 20px;
+        }
+        
+        .modal_content ul{
+        	list-style-type: none;
+        }
+        .modal_content ul li{
+			margin-bottom: 5px;
+        }
+        
 </style>
 </head>
 <body>
@@ -116,6 +194,22 @@
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/popularProduct.do">바나나 매물</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/dongneLife.do">동네생활</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/neighborhood.do">내 근처</a></li>
+						<li class="header-menu-item">
+							<div id="al-msg">
+								<div id="al-cnt">0</div>
+								<img src="http://localhost:9000/banana/images/알림.png">
+							</div>
+							<div class="modal" style="display:none">
+								<div class="modal_overlay"></div>
+								<div class="modal_content">
+									<ul>
+										<li>댓글1</li>
+										<li>댓글2</li>
+										<li>댓글3</li>
+									</ul>
+								</div>
+							</div>
+						</li>
 					</ul>
 				</c:when>
 				<c:otherwise>
