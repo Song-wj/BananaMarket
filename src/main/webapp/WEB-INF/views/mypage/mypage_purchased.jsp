@@ -100,7 +100,7 @@
 							<option value="-1">😥</option>
 							<option value="-2">😡</option>
 						</select> -->
-						<a href="mypage_purchase_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
+						<a href="mypage_purchase_review.do?pid=${vo.pid }"><button type ="button" id="write_btn">후기 작성</button></a>
 					</td>
 				</tr>
 				<tr>
