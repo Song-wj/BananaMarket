@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.vo.BananaReviewAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
@@ -18,6 +19,21 @@ public class DongneCommentController {
 	
 	@Autowired
 	private EnrollService dongneCommentService;
+	
+	
+	/**
+	 * 리뷰 alarm
+	 */
+	@ResponseBody
+	@RequestMapping(value="/review_alarm_write.do", method=RequestMethod.GET)
+	public String review_alarm_write(BananaReviewAlarmVO vo, HttpSession session, String bid, String brid) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		vo.setMid(svo.getMid());
+		vo.setBid(bid);
+		vo.setBrid(brid);
+		System.out.println(svo.getMid()+","+bid+","+brid);
+		return dongneCommentService.reviewAlarmWrite(vo);
+	}
 	
 	/**
 	 * 동네생활 - 댓글 삭제 처리

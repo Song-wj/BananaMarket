@@ -332,10 +332,8 @@
 <script>
 	$(document).ready(function(){
 		var session_mid = $("#session_mid").val();
-		
 		/** 데이터 로딩 시 댓글 전체 리스트 출력 **/
 		comment_list($("#bid").val());
-		
 		/** Ajax를 활용한 댓글 전체 리스트 출력 **/
 		function comment_list(bid){
 			$.ajax({
@@ -353,6 +351,7 @@
 						output += "<div class='commentMemberSide'>";
 						output += "<ul class='commentMemberSide'>";
 						
+						output += "<li><input id='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
 						output += "<li>" + jdata.jlist[i].nickname + "</li>";
 						output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
 						output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
@@ -376,6 +375,7 @@
 					//댓글 갯수
 					$("#comment_count").text(jdata.comment_count);
 					
+					//console.log($("#brid").val());
 				}//success
 			});//ajax
 		}//comment_list
@@ -393,9 +393,24 @@
 				return false;
 			}else {
 				board_review_write_form.submit();
+				r_alarm_write();
 			}
 		});
 	});
+	
+	function r_alarm_write() {
+		//$(location).attr("href","review_alarm_write.do?bid=${vo.bid}&brid="+$('#brid').val());
+		$.ajax({
+			url: "review_alarm_write.do?bid=${vo.bid}&brid="+$('#brid').val(),
+			success: function(result) {
+				if(result) {
+					console.log("sucess");
+				} else {
+					console.log("fali");
+				}
+			}
+		});
+	}
 </script>
 <script>
 

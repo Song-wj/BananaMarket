@@ -1,5 +1,7 @@
 package com.enroll.service;
 
+import org.springframework.web.servlet.ModelAndView;
+
 public interface EnrollService {
 
 	Object getList();
@@ -11,4 +13,7 @@ public interface EnrollService {
 	Object delete(Object id);
 	Object getSelectList(String sid);
 	String getCommentListAjaxProc(String bid);
+	String reviewAlarmWrite(Object vo);
+	String getAlarmCount(String mid);
+	String getAlarmContent(String mid);
 }
