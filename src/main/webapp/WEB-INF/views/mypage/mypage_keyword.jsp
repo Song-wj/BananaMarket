@@ -88,6 +88,33 @@ function ajax_keywordplus(keyword){
 	.mypage_keyword button:hover{
 		opacity:0.7;
 	}
+	div.mypage_keyword table.mypage_table {
+		width:100%; 
+		padding:5px 0;
+		border-bottom:1px solid gray;
+	}
+	div.mypage_keyword table.mypage_table td {
+		width:800px;
+	}
+	div.mypage_keyword table.mypage_table td.tdimg {
+		width:10px;
+		padding-right:15px;
+	}
+	div.mypage_keyword table.mypage_table img {
+		width:120px;
+		height:120px;
+		border-radius:10px;
+	}
+	div.mypage_keyword table.mypage_table span.product {
+		font-size:19px;
+	}
+	div.mypage_keyword table.mypage_table span.locate {
+		font-size:15px;
+		color:gray;
+	}
+	div.mypage_keyword table.mypage_table span.price {
+		font-weight:900;
+	}
 </style>
 <body>
 	<div class="mypage_keyword">
@@ -103,10 +130,10 @@ function ajax_keywordplus(keyword){
 				<tr>
 					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
 					<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
-					<td rowspan="3">
+					<%-- <td rowspan="3">
 					<button type="button" class="btn_like" id="btnLike" onclick="delProductLike('${vo.pid}')">
   							<span class="img_emoti">좋아요취소</span></button>
-  					</td>
+  					</td> --%>
 				</tr>
 				<tr>
 					<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
