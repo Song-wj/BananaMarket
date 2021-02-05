@@ -39,16 +39,16 @@
 			
 				var jdata = JSON.parse(result);
 				var output = "";
+					output+= "<ul id='review-alarm'>";
 				for(var i in jdata.jlist) {
-					output+= "<ul>";
 					output+= "<li>";
 					output+= "<p>";
-					output+= jdata.jlist[i].mid + "님이" + jdata.jlist[i].btopic+"에 댓글을 남겼습니다.<br>";
-					output+= jdata.jlist[i].mid + ": " + jdata.jlist[i].bcomment;
+					output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].btopic+"</span> 글에 댓글을 남겼습니다.<br>";
+					output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>";
 					output+= "</p>";
 					output+= "</li>";
-					output+= "</ul>";
 				}
+					output+= "</ul>";
 				
 				$(".modal_content").append(output);
 			}
@@ -200,7 +200,19 @@
         	list-style-type: none;
         }
         .modal_content ul li{
-			margin-bottom: 5px;
+			margin-bottom: 8px;
+			border-bottom: 1px solid #ccc;
+        }
+        .modal_content ul li:hover{
+        	background-color: #FEE500;
+        }
+        .modal_content ul li:first-child{
+        	border-top: 1px solid #ccc;
+        }
+        
+        .modal_content ul .ra-id,
+        .modal_content ul .ra-title {
+        	font-weight: bold;
         }
         
 </style>
