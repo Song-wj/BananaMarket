@@ -361,7 +361,7 @@
 			</div>
 		</section>
 		<section class="subjectContent-post">
-<<<<<<< HEAD
+
 		<c:choose >
 			<c:when test="${empty list}">
 			<table class="review_all_table"> 

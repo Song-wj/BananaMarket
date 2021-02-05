@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f7ce94d4dd9c22ccad809655bc3ab74f&libraries=services"></script>
 <title>Insert title here</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script src="http://localhost:9000/banana//js/jqbar.js"></script>
