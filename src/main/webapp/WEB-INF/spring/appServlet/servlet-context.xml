@@ -69,6 +69,7 @@
 	<beans:bean class="com.enroll.service.DongneCommentServiceImpl" id="dongneCommentService"></beans:bean>
 	<beans:bean class="com.spring.service.BuylistServiceImpl" id="buylistService"></beans:bean>
     <beans:bean class="com.spring.service.LikeServiceImpl" id="likeService"></beans:bean>
+    <beans:bean class="com.spring.service.KeywordServiceImpl" id="keywordService"></beans:bean>
 	
 	<!-- DAO -->
 	<beans:bean class ="com.banana.dao.dongneDAO" id="dongneDAO"></beans:bean>
