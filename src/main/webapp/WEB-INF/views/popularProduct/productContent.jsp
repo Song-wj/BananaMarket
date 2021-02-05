@@ -468,7 +468,7 @@ $(document).ready(function(){
 			    <li data-target="#demo" data-slide-to="1"></li>
 			    <li data-target="#demo" data-slide-to="2"></li>
 			  </ul>
-			  
+			 
 			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
@@ -484,7 +484,7 @@ $(document).ready(function(){
 				    </div>
 				   </c:forEach> 
 			  </div>
-
+			</div>
 			 <!-- Left and right controls -->
 			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 			    <span class="carousel-control-prev-icon"></span>
