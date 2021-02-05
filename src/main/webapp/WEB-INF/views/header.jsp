@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
+		get_alarm_review_msg('${ svo.mid }');
+		
 		alarm_count('${ svo.mid }');
 		
 		$("#al-msg").click(function(){
@@ -27,6 +29,26 @@
 			success: function(cnt) {
 				$("#al-cnt").append(cnt);
 			}		
+		});
+	}
+	
+	function get_alarm_review_msg(mid) {
+		$.ajax({
+			url: "getReviewAlarmContent.do?mid="+mid,
+			success: function(result) {
+				var jdata = JSON.parse(result);
+				var output = "";
+				for(var i in jdata.jlist) {
+					output= "<li>";
+					output= "<p>";
+					output= jdata.jlist[i].mid + "님이" + jdata.jlist[i].btopic+"에 댓글을 남겼습니다.<br>";
+					output= jdata.jlist[i].mid + ": " + jdata.jlist[i].bcomment;
+					output= "</p>";
+					output= "</li>";
+				}
+				
+				$("#review-alarm").append(output);
+			}
 		});
 	}
 </script>
@@ -214,22 +236,13 @@
 							<div class="modal" style="display:none">
 								<div class="modal_overlay"></div>
 								<div class="modal_content">
-								<ul>
-								<c:forEach var="ravo" items="ralist">
-									<c:choose>
-										<c:when test="${ ralist ne null }">
-												<li>
-													<p>
-														${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
-														${ ravo.mid }: ${ ravo.bcomment }
-													</p> 
-												</li>
-										</c:when>
-										<c:otherwise>
-											<p>알림이 없습니다.</p>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
+								<ul id="review-alarm">
+									<%-- <li>
+										<p>
+											${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
+											${ ravo.mid }: ${ ravo.bcomment }
+										</p> 
+									</li> --%>
 								</ul>
 								</div>
 							</div>
