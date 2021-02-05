@@ -20,11 +20,31 @@ import com.google.gson.JsonObject;
 @Service("shopService")
 public class EnrollstoreServiceImpl implements EnrollService {
 	
+	
+	
+	@Override
+	public String getAlarmContent(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Autowired
 	private BananaShopDAO shopDAO;
 	
 	@Autowired
 	private BananaShopReviewDAO shopReviewDAO;
+
+	@Override
+	public String getAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String reviewAlarmWrite(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public Object getList() {

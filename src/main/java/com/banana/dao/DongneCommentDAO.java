@@ -6,6 +6,8 @@ import com.banana.vo.DongneCommentVO;
 
 public class DongneCommentDAO extends DBConn{
 	
+	
+	
 	/**
 	 * brid로 bid 구하기
 	 * @param vo

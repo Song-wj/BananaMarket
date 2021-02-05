@@ -5,6 +5,25 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.dongne">
+
+	<!-- <select id="getReviewContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaReviewAlarmVO">
+		select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment
+		from (select b.bid, b.btopic, br.mid, br.bcomment, br.brid
+      			from banana_board b, banana_board_review br
+      			where b.bid = br.bid and b.mid=#{mid}) bbr, banana_review_alarm ra
+		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
+	</select> -->
+
+	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
+		select count(distinct ra.brid)
+		from banana_board b, banana_board_review br, banana_review_alarm ra
+		where b.bid = br.bid and br.bid = ra.bid and ra.mid != #{mid} and b.mid= #{mid}
+	</select>	
+	
+	<insert id="reviewAlarmWrite" parameterType="com.banana.vo.BananaReviewAlarmVO">
+		insert into banana_review_alarm values(#{mid},#{bid},#{brid})
+	</insert>
+
 	<insert id="writesubject" parameterType="com.banana.vo.dongneSubjectVO">
 		insert into banana_board_subject values('bs_'||SQE_BANANA_BOARD_SUBJECT.NEXTVAL,
 					#{bstitle},#{bstopic},#{bsfile},#{bssfile})
@@ -59,7 +78,6 @@
 		select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate 
 	    from banana_member m , banana_board b
 		where m.mid = b.mid and bid=#{bid}
-	
 	</select>
 	
 	<update id="boardupdate" parameterType="com.banana.vo.dongneVO">
