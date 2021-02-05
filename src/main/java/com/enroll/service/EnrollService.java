@@ -15,4 +15,5 @@ public interface EnrollService {
 	String getCommentListAjaxProc(String bid);
 	String reviewAlarmWrite(Object vo);
 	String getAlarmCount(String mid);
+	String getAlarmContent(String mid);
 }

@@ -6,10 +6,18 @@
 
 <mapper namespace="mapper.dongne">
 
+	<!-- <select id="getReviewContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaReviewAlarmVO">
+		select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment
+		from (select b.bid, b.btopic, br.mid, br.bcomment, br.brid
+      			from banana_board b, banana_board_review br
+      			where b.bid = br.bid and b.mid=#{mid}) bbr, banana_review_alarm ra
+		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
+	</select> -->
+
 	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
-		select count(distinct ra.brid) count
-		from banana_member m, banana_board b, banana_board_review br, banana_review_alarm ra
-		where b.bid = br.bid and br.bid = ra.bid and ra.mid!=#{mid} and b.mid=#{mid}
+		select count(distinct ra.brid)
+		from banana_board b, banana_board_review br, banana_review_alarm ra
+		where b.bid = br.bid and br.bid = ra.bid and ra.mid != #{mid} and b.mid= #{mid}
 	</select>	
 	
 	<insert id="reviewAlarmWrite" parameterType="com.banana.vo.BananaReviewAlarmVO">

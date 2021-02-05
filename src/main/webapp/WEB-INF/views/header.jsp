@@ -213,11 +213,23 @@
 							<div class="modal" style="display:none">
 								<div class="modal_overlay"></div>
 								<div class="modal_content">
-									<ul>
-										<li>댓글1</li>
-										<li>댓글2</li>
-										<li>댓글3</li>
-									</ul>
+								<ul>
+								<c:forEach var="ravo" items="ralist">
+									<c:choose>
+										<c:when test="${ ralist ne null }">
+												<li>
+													<p>
+														${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
+														${ ravo.mid }: ${ ravo.bcomment }
+													</p> 
+												</li>
+										</c:when>
+										<c:otherwise>
+											<p>알림이 없습니다.</p>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								</ul>
 								</div>
 							</div>
 						</li>

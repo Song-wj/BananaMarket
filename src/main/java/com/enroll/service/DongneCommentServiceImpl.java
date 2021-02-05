@@ -25,6 +25,21 @@ public class DongneCommentServiceImpl implements EnrollService {
 	private dongneDAO dongneDAO;
 	/////
 
+	public String getAlarmContent(String mid) {
+		String str =""; //return юс╫ц
+		ArrayList<BananaReviewAlarmVO> ralist = dongneDAO.getReviewContent(mid);
+		
+		JsonArray jarray = new JsonArray();
+		JsonObject jdata = new JsonObject();
+		Gson gson = new Gson();
+		
+		for(BananaReviewAlarmVO vo : ralist) {
+			JsonObject jobj = new JsonObject();
+			
+		}
+		return str;
+	}
+	
 	public String getAlarmCount(String mid) {
 		int count = dongneDAO.getAlarmCount(mid);
 		return String.valueOf(count);

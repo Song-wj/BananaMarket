@@ -26,6 +26,12 @@ public class MainController {
 		return dongneCommentService.getAlarmCount(mid);
 	}
 	
+	@RequestMapping(value="/getReviewAlarmContent.do", method=RequestMethod.GET)
+	public String getReviewAlarmContent(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneCommentService.getAlarmContent(svo.getMid());
+	}
+	
 	@RequestMapping(value="/header.do", method=RequestMethod.GET)
 	public String header() {
 		return "header";
