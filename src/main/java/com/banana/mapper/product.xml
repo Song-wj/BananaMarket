@@ -8,11 +8,8 @@
 
 	<insert id="InsertProduct" parameterType="com.banana.vo.productVO">
 		insert into banana_product values ('p_'||sqe_banana_product.nextval,#{mid},
-<<<<<<< HEAD
-				#{ptitle},#{pcategory},#{pprice},#{pcontent},0,0,sysdate,#{pchk},#{pfile},#{psfile},"")
-=======
 				#{ptitle},#{pcategory},#{pprice},#{pcontent},0,0,sysdate,#{pchk},#{pfile},#{psfile},null)
->>>>>>> 289cc484c8e616fe1aa3f6864ef59cc53362d9b9
+
 	</insert>
 	
 	<select id="ProductList" resultType="com.banana.vo.productVO">
