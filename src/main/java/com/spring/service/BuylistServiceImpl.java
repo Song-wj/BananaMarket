@@ -24,7 +24,7 @@ public class BuylistServiceImpl implements BuylistService{
 	public Object getList(String mid) {
 		
 		 ModelAndView mv = new ModelAndView(); 
-		 ArrayList<productVO> list = buylistDAO.getBuylistList("doolee123");
+		 ArrayList<productVO> list = buylistDAO.getBuylistList("qqq111");
 		 mv.addObject("list", list); 
 		 mv.setViewName("/mypage/mypage_purchased");
 		 
