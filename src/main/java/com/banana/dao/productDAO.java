@@ -429,9 +429,11 @@ public class productDAO extends DBConn{
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		
 		try {
-			String sql = "select p.ptitle, m.maddr, p.pprice, p.pfile, p.psfile, p.pid"
-					+ " from banana_product p, banana_keyword k, banana_member m "
-					+ " where k.mid=m.mid and k.pid=p.pid and k.mid=?";
+			String sql = "select ptitle, maddr, pprice, pfile, psfile, pid "
+					+ " from(select m.maddr, p.* , k.keyword "
+					      + "from banana_product p, banana_member m, (select * from banana_keyword where mid = 'test123') k "
+					      + "where m.mid=p.mid) "
+					 + "where ptitle LIKE '%'||keyword||'%' or pcategory like '%'||keyword||'%' or pcontent like '%'||keyword||'%'";
 			
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
