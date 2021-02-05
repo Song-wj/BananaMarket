@@ -84,7 +84,15 @@
 	<div class="mypage_purchased">
 		<section class="section1_purchased">
 			<div>
-			
+			<c:choose>
+			<c:when test="${empty list }">
+				<table class="mypage_table">
+				   <tr>
+						<td style="padding: 150px 0; color: #ccc; text-align:center;">구매 내역이 없습니다.</td>
+					</tr> 
+				</table>
+			</c:when>
+			<c:otherwise>
 			 <c:forEach var="vo" items="${list }">
 				<table class="mypage_table">
 				<tr>
@@ -100,7 +108,7 @@
 							<option value="-1">😥</option>
 							<option value="-2">😡</option>
 						</select> -->
-						<a href="mypage_purchase_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
+						<a href="mypage_purchase_review.do?pid=${vo.pid }"><button type ="button" id="write_btn">후기 작성</button></a>
 					</td>
 				</tr>
 				<tr>
@@ -112,7 +120,8 @@
 			</table>
 			<div></div>
 			</c:forEach> 
-			
+			</c:otherwise>
+			</c:choose>
 			</div>
 		</section>
 		

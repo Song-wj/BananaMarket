@@ -277,8 +277,10 @@ public class MypageController {
 	 */
 	
 	 @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	 public ModelAndView mypage_purchased(String mid) { 
-		return(ModelAndView)buylistservice.getList(mid); 
+	 public ModelAndView mypage_purchased(HttpSession session) { 
+		 SessionVO svo = (SessionVO)session.getAttribute("svo");
+		
+		return(ModelAndView)buylistservice.getList( svo.getMid()); 
 	 }
 	
 
@@ -288,8 +290,11 @@ public class MypageController {
 		 */
 	// 구매내역 리뷰 쓰기
 	@RequestMapping(value="/mypage_purchase_review.do", method=RequestMethod.GET)
-	public String mypage_purchase_review() {
-		return "mypage/mypage_purchase_review";
+	public ModelAndView mypage_purchase_review(String pid) {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("pid", pid);
+		mv.setViewName("mypage/mypage_purchase_review");
+		return mv;
 	}
 	@RequestMapping(value="/purchase_reivew_write_proc.do", method=RequestMethod.POST)
 	public String purchase_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request , HttpSession session) {
