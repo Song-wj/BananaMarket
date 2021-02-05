@@ -36,18 +36,21 @@
 		$.ajax({
 			url: "getReviewAlarmContent.do?mid="+mid,
 			success: function(result) {
+			
 				var jdata = JSON.parse(result);
 				var output = "";
 				for(var i in jdata.jlist) {
+					output+= "<ul>";
 					output+= "<li>";
 					output+= "<p>";
 					output+= jdata.jlist[i].mid + "님이" + jdata.jlist[i].btopic+"에 댓글을 남겼습니다.<br>";
 					output+= jdata.jlist[i].mid + ": " + jdata.jlist[i].bcomment;
 					output+= "</p>";
 					output+= "</li>";
+					output+= "</ul>";
 				}
 				
-				$("#review-alarm").append(output);
+				$(".modal_content").append(output);
 			}
 		});
 	}
@@ -236,14 +239,14 @@
 							<div class="modal" style="display:none">
 								<div class="modal_overlay"></div>
 								<div class="modal_content">
-								<ul id="review-alarm">
+								<!-- <ul id="review-alarm"> -->
 									<%-- <li>
 										<p>
 											${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
 											${ ravo.mid }: ${ ravo.bcomment }
 										</p> 
 									</li> --%>
-								</ul>
+								<!-- </ul> -->
 								</div>
 							</div>
 						</li>
