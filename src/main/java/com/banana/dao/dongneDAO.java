@@ -30,20 +30,21 @@ public class dongneDAO extends DBConn{
 		ArrayList<BananaReviewAlarmVO> list = new ArrayList<BananaReviewAlarmVO>();
 		
 		try {
-			String sql ="select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment "
+			String sql ="select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment, ra.brid "
 					+ "from (select b.bid, b.btopic, br.mid, br.bcomment, br.brid "
 					+ "      from banana_board b, banana_board_review br "
-					+ "      where b.bid = br.bid and b.mid = 'doolee123') bbr, banana_review_alarm ra "
-					+ "where bbr.bid=ra.bid and bbr.brid = ? and ra.mid != ?";
+					+ "      where b.bid = br.bid and b.mid = ?) bbr, banana_review_alarm ra "
+					+ "where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != ?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.setString(2, mid);
-			rs=pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				BananaReviewAlarmVO vo = new BananaReviewAlarmVO();
 				vo.setBtopic(rs.getString(1));
 				vo.setMid(rs.getString(2));
 				vo.setBcomment(rs.getString(3));
+				vo.setBrid(rs.getString(4));
 				list.add(vo);
 			}
 		} catch (Exception e) {

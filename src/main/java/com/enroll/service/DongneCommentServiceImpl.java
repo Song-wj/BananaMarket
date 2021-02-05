@@ -26,7 +26,6 @@ public class DongneCommentServiceImpl implements EnrollService {
 	/////
 
 	public String getAlarmContent(String mid) {
-		String str =""; //return юс╫ц
 		ArrayList<BananaReviewAlarmVO> ralist = dongneDAO.getReviewContent(mid);
 		
 		JsonArray jarray = new JsonArray();
@@ -35,9 +34,15 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		for(BananaReviewAlarmVO vo : ralist) {
 			JsonObject jobj = new JsonObject();
-			
+			jobj.addProperty("btopic", vo.getBtopic());
+			jobj.addProperty("mid", vo.getMid());
+			jobj.addProperty("bcomment", vo.getBcomment().replace("\r\n", "<br>"));
+			jobj.addProperty("brid", vo.getBrid());
+			jarray.add(jobj);
 		}
-		return str;
+		jdata.add("jlist", jarray);
+		
+		return gson.toJson(jdata);
 	}
 	
 	public String getAlarmCount(String mid) {

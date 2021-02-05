@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
+		get_alarm_review_msg('${ svo.mid }');
+		
 		alarm_count('${ svo.mid }');
 		
 		$("#al-msg").click(function(){
@@ -27,6 +29,29 @@
 			success: function(cnt) {
 				$("#al-cnt").append(cnt);
 			}		
+		});
+	}
+	
+	function get_alarm_review_msg(mid) {
+		$.ajax({
+			url: "getReviewAlarmContent.do?mid="+mid,
+			success: function(result) {
+			
+				var jdata = JSON.parse(result);
+				var output = "";
+					output+= "<ul id='review-alarm'>";
+				for(var i in jdata.jlist) {
+					output+= "<li>";
+					output+= "<p>";
+					output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].btopic+"</span> 글에 댓글을 남겼습니다.<br>";
+					output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>";
+					output+= "</p>";
+					output+= "</li>";
+				}
+					output+= "</ul>";
+				
+				$(".modal_content").append(output);
+			}
 		});
 	}
 </script>
@@ -175,7 +200,19 @@
         	list-style-type: none;
         }
         .modal_content ul li{
-			margin-bottom: 5px;
+			margin-bottom: 8px;
+			border-bottom: 1px solid #ccc;
+        }
+        .modal_content ul li:hover{
+        	background-color: #FEE500;
+        }
+        .modal_content ul li:first-child{
+        	border-top: 1px solid #ccc;
+        }
+        
+        .modal_content ul .ra-id,
+        .modal_content ul .ra-title {
+        	font-weight: bold;
         }
         
 </style>
@@ -214,23 +251,14 @@
 							<div class="modal" style="display:none">
 								<div class="modal_overlay"></div>
 								<div class="modal_content">
-								<ul>
-								<c:forEach var="ravo" items="ralist">
-									<c:choose>
-										<c:when test="${ ralist ne null }">
-												<li>
-													<p>
-														${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
-														${ ravo.mid }: ${ ravo.bcomment }
-													</p> 
-												</li>
-										</c:when>
-										<c:otherwise>
-											<p>알림이 없습니다.</p>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								</ul>
+								<!-- <ul id="review-alarm"> -->
+									<%-- <li>
+										<p>
+											${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
+											${ ravo.mid }: ${ ravo.bcomment }
+										</p> 
+									</li> --%>
+								<!-- </ul> -->
 								</div>
 							</div>
 						</li>
