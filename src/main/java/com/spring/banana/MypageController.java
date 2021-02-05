@@ -301,8 +301,10 @@ public class MypageController {
 	 */
 	
 	 @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	 public ModelAndView mypage_purchased(String mid) { 
-		return(ModelAndView)buylistservice.getList(mid); 
+	 public ModelAndView mypage_purchased(HttpSession session) { 
+		 SessionVO svo = (SessionVO)session.getAttribute("svo");
+		
+		return(ModelAndView)buylistservice.getList( svo.getMid()); 
 	 }
 	
 
