@@ -208,7 +208,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
 	<div class="mypage_like">
 			<h1>"    "에 대한 검색 결과<span class="searchcount">&nbsp;(13561개)</span></h1>
 			<div class="seachresult"><h2>중고거래<span class="searchcount">&nbsp;(13561개)</span></h2></div><div class="line"></div>
