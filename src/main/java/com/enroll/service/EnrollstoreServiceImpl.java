@@ -359,9 +359,10 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	 }
 	 
 	 /** 좋아요 취소 **/
-	 public ModelAndView product_unlike(String mid, String sid) {
-		 ModelAndView mv = new ModelAndView();
+	 public String product_unlike(String mid, String sid) {
 		 boolean result = shopDAO.getDeleteContent(mid,sid); 
+		 
+		 /*ModelAndView mv = new ModelAndView();
 			
 			if(result) {
 				//좋아요 버튼 잘 반영
@@ -389,5 +390,7 @@ public class EnrollstoreServiceImpl implements EnrollService {
 				
 			}
 			return mv;
+			*/
+		 return String.valueOf(result);
 	 }
 }

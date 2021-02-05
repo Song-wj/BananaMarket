@@ -42,7 +42,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public String getResultLoginChk(String id, String pass) {
 		int result = memberDAO.getLoginChk(id, pass);
-		System.out.println(result);
+		//System.out.println(result);
 		return String.valueOf(result);
 	}
 

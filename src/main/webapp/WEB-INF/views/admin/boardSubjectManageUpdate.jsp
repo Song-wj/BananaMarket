@@ -218,10 +218,7 @@
 		$("#input_img").on("change", handleImgFileSelect);
 		
 		$("#subjectEnrollBtn").click(function() {
-			if($("#input_img").val() == "") {
-				alert("동네생활 주제에 표시할 이미지를 등록해주세요.");
-				return false;
-			}else if($("#bstitle").val() == "") {
+			if($("#bstitle").val() == "") {
 				alert("동네생활 주제를 입력해주세요.");
 				$("#bstitle").focus();
 				return false;

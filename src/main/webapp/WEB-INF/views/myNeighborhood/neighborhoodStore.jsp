@@ -295,6 +295,7 @@
 				<div class="likebutton">
 				<button type="button" class="btn_unlike" id="btnLike">
   							<span class="img_emoti">좋아요</span></button>
+  				</div>
 			</li>
 			<li>
 				<div class="location-img">

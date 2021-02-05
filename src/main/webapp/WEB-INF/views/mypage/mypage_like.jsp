@@ -9,8 +9,8 @@
 <script>
 	$(document).ready(function(){
 		
-		$("#section3_like").hide();
-		$("#section4_like").hide();
+		$("#section3_like").show();
+		$("#section4_like").show();
 		
 		$("#like_secondhand").click(function(){
 			$("#section3_like").hide();
@@ -30,19 +30,20 @@
 			$("#section4_like").toggle(1000);
 		});
 		
-		$("#btnLike").click(function(){
+		/* $("#btnLike").click(function(){
 			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
-					  url:"product_unlike.do?mid=${svo.mid}&pid=${vo.pid}", //mid는 로그인한사람id
+					  url:"product_unlike.do?pid=${vo.pid}", //mid는 로그인한사람id
 					  success:function(result){
-						  }
+						alert(result);
+					  }
 					});
 					 location.reload();
 			 }
-		});
+		}); */
 		
-		$("#btnLike2").click(function(){
+		/* $("#btnLike2").click(function(){
 			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
@@ -52,9 +53,9 @@
 					});
 				 location.reload();
 			 }
-		});
+		}); */
 		
-		$("#btnLike3").click(function(){
+		/* $("#btnLike3").click(function(){
 			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
@@ -64,8 +65,46 @@
 					});
 				 location.reload();
 			 }
-		});
+		}); */
 	});
+	
+	function delProductLike(pid) {
+		var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
+		 if(confirmflag){
+			 $.ajax({
+				  url:"product_unlike.do?pid="+pid, //mid는 로그인한사람id
+				  success:function(result){
+					alert('삭제가 완료되었습니다.');
+				  }
+				});
+				 location.reload();
+		 }
+	}
+	function delDongnelifeLike(bid) {
+		var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
+		 if(confirmflag){
+			 $.ajax({
+				  url:"dongnelife_unlike.do?bid=" + bid, //mid는 로그인한사람id
+				  success:function(result){
+					  }
+				});
+			 location.reload();
+		 }
+	}
+	function delShopLike(sid) {
+		var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
+		 if(confirmflag){
+			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
+			 if(confirmflag){
+				 $.ajax({
+					  url:"shop_unlike.do?sid="+sid, //mid는 로그인한사람id
+					  success:function(result){
+						  }
+					});
+				 location.reload();
+			 }
+		 }
+	}
 </script>
 <style>
 	div.mypage_like {
@@ -227,13 +266,13 @@
 			</div>
 		</section>
 		<section class="section2_like" id="section2_like">
-			<c:forEach var="vo" items="${list1 }">
+			<c:forEach var="vo" items="${ list1 }">
 				<table class="mypage_table">
 				<tr>
 					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
 					<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
 					<td rowspan="3">
-					<button type="button" class="btn_like" id="btnLike">
+					<button type="button" class="btn_like" id="btnLike" onclick="delProductLike('${vo.pid}')">
   							<span class="img_emoti">좋아요취소</span></button>
   					</td>
 				</tr>
@@ -252,7 +291,7 @@
 				<ul>	
 					<li>
 						<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.btitle }</label>
-						<button type="button" class="btn_like2" id="btnLike2">
+						<button type="button" class="btn_like2" id="btnLike2" onclick="delDongnelifeLike('${vo.bid}')">
   							<span class="img_emoti">좋아요취소</span></button>
 					</li>
 					<li>
@@ -273,7 +312,7 @@
 					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'"></td>
 					<td><span class="product" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.sname } <div class="skinds" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.skinds }</div></span></td>
 					<td rowspan="3">
-					<button type="button" class="btn_like" id="btnLike3">
+					<button type="button" class="btn_like" id="btnLike3" onclick="delShopLike('${vo.sid}')">
   							<span class="img_emoti">좋아요취소</span></button>
   					</td>
 				</tr>

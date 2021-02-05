@@ -45,6 +45,12 @@ public class AdminController {
 		return dongneService.updateSubject(bsid);
 	}
 	
+	
+	@RequestMapping(value = "/NewFile.do", method = RequestMethod.GET)
+	public String dong() {
+		return "NewFile";
+	}
+	
 	@RequestMapping(value = "/dongne_subject_write_proc.do", method = RequestMethod.POST)
 	public String dongne_subject_write_proc(dongneSubjectVO vo, HttpServletRequest request) {
 		String path1 = request.getSession().getServletContext().getRealPath("/");
