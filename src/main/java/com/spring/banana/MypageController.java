@@ -14,14 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.SessionVO;
+import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 import com.spring.service.BuylistService;
-import com.spring.service.LikeServiceImpl;
 import com.spring.service.DongneServiceImpl;
+import com.spring.service.KeywordServiceImpl;
+import com.spring.service.LikeServiceImpl;
 import com.spring.service.MypageReviewServiceImpl;
 import com.spring.service.ProductService;
 import com.spring.service.ProductServiceImpl;
@@ -46,6 +47,10 @@ public class MypageController {
 	
 	@Autowired
 	private MypageReviewServiceImpl MypageReviewService ;
+	
+	@Autowired
+	private KeywordServiceImpl KeywordServiceImpl ;
+	
 	
 	@RequestMapping(value="/mypage_update_proc.do", method=RequestMethod.POST)
 	public String mypage_update_proc(BananaMemberVO vo, HttpServletRequest request) {
@@ -155,9 +160,28 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_keyword.do", method=RequestMethod.GET)
-	public String mypage_keyword() {
-		return "mypage/mypage_keyword";
+	public ModelAndView mypage_keyword(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)KeywordServiceImpl.getList(svo.getMid());
 	}
+	/**
+	 * 마이페이지 - 키워드 등록
+	 */
+	 @RequestMapping(value="/keywordplus.do", method=RequestMethod.GET)
+	 public String keywordplus(HttpSession session, String keyword){
+		 SessionVO svo = (SessionVO)session.getAttribute("svo"); 
+		 return KeywordServiceImpl.product_unlike(svo.getMid(), keyword); 
+	 }
+	
+	/**
+	 * 마이페이지 - 키워드 삭제
+	 */
+	@RequestMapping(value="/mypage_keyword_minus.do", method=RequestMethod.GET)
+	public ModelAndView mypage_keyword_minus(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)likeserviceimpl.getList(svo.getMid());
+	}
+	
 	/**
 	 * 마이페이지 - 동네인증
 	 * @return

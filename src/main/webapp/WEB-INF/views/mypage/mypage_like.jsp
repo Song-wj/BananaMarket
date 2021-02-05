@@ -9,8 +9,8 @@
 <script>
 	$(document).ready(function(){
 		
-		$("#section3_like").show();
-		$("#section4_like").show();
+		$("#section3_like").hide();
+		$("#section4_like").hide();
 		
 		$("#like_secondhand").click(function(){
 			$("#section3_like").hide();

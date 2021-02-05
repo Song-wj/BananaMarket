@@ -271,9 +271,9 @@ public class ProductServiceImpl implements ProductService{
 					jobj.addProperty("pid", vo.getPid());
 					
 					jarray.add(jobj);
+					
 				}
 				jdata.add("jlist", jarray);		//java°´Ã¼
-				
 				mv.setViewName(gson.toJson(jdata));
 				
 			}
