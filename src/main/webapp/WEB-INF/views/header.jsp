@@ -39,12 +39,12 @@
 				var jdata = JSON.parse(result);
 				var output = "";
 				for(var i in jdata.jlist) {
-					output= "<li>";
-					output= "<p>";
-					output= jdata.jlist[i].mid + "님이" + jdata.jlist[i].btopic+"에 댓글을 남겼습니다.<br>";
-					output= jdata.jlist[i].mid + ": " + jdata.jlist[i].bcomment;
-					output= "</p>";
-					output= "</li>";
+					output+= "<li>";
+					output+= "<p>";
+					output+= jdata.jlist[i].mid + "님이" + jdata.jlist[i].btopic+"에 댓글을 남겼습니다.<br>";
+					output+= jdata.jlist[i].mid + ": " + jdata.jlist[i].bcomment;
+					output+= "</p>";
+					output+= "</li>";
 				}
 				
 				$("#review-alarm").append(output);
