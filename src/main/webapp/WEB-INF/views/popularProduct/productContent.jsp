@@ -468,11 +468,12 @@ $(document).ready(function(){
 			    <li data-target="#demo" data-slide-to="1"></li>
 			    <li data-target="#demo" data-slide-to="2"></li>
 			  </ul>
-			  
+			 
 			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
-			      <c:forEach var="list" items="${pfile_list }" >
+			      <c:forEach var="list" items="${pfile_list}" >
+			      	<div>
 						<img src="http://localhost:9000/banana/resources/upload/${list}">
 				    </div>
 				    <div class="carousel-item">
@@ -483,6 +484,7 @@ $(document).ready(function(){
 				    </div>
 				   </c:forEach> 
 			  </div>
+			</div>
 			 <!-- Left and right controls -->
 			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 			    <span class="carousel-control-prev-icon"></span>
