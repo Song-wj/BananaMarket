@@ -28,9 +28,9 @@ public class KeywordServiceImpl {
 			return String.valueOf(result);
 	 }
 	 
-	 public Object getList(String mid,String keyword) {
+	 public Object getList(String mid) {
 			ModelAndView mv = new ModelAndView();
-			  ArrayList<productVO> list1 = productDAO.getkeywordlist(mid,keyword);
+			  ArrayList<productVO> list1 = productDAO.getkeywordlist(mid);
 			  /*ArrayList<dongneVO> list2 = dongneDAO.getLikelist(mid);
 			  ArrayList<BananaShopVO> list3 = bananashopDAO.getLikelist(mid);*/
 				mv.addObject("list1", list1);

@@ -425,19 +425,18 @@ public class productDAO extends DBConn{
 	 * @param mid
 	 * @return
 	 */
-	public ArrayList<productVO> getkeywordlist(String mid, String keyword){
+	public ArrayList<productVO> getkeywordlist(String mid){
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		
 		try {
 			String sql = "select ptitle, maddr, pprice, pfile, psfile, pid "
 					+ " from(select m.maddr, p.* , k.keyword "
-					      + "from banana_product p, banana_member m, (select * from banana_keyword where mid = 'test123') k "
+					      + "from banana_product p, banana_member m, (select * from banana_keyword where mid = ?) k "
 					      + "where m.mid=p.mid) "
 					 + "where ptitle LIKE '%'||keyword||'%' or pcategory like '%'||keyword||'%' or pcontent like '%'||keyword||'%'";
 			
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
-			pstmt.setString(2, keyword);
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
