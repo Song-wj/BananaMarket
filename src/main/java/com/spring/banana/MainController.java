@@ -27,7 +27,8 @@ public class MainController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/getReviewAlarmContent.do", method=RequestMethod.GET)
+	@RequestMapping(value="/getReviewAlarmContent.do", method=RequestMethod.GET
+	, produces="text/plain;charset=UTF-8")
 	public String getReviewAlarmContent(String mid) {
 		return dongneCommentService.getAlarmContent(mid);
 	}
@@ -42,5 +43,9 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/search.do",method=RequestMethod.GET)
+	public String search() {
+		return "search";
+	}
 	
 }

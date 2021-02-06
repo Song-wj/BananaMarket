@@ -34,7 +34,7 @@ public class dongneDAO extends DBConn{
 					+ "from (select b.bid, b.btopic, br.mid, br.bcomment, br.brid "
 					+ "      from banana_board b, banana_board_review br "
 					+ "      where b.bid = br.bid and b.mid = ?) bbr, banana_review_alarm ra "
-					+ "where bbr.bid=ra.bid and ra.mid != ?";
+					+ "where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != ?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.setString(2, mid);

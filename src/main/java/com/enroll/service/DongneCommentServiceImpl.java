@@ -39,7 +39,6 @@ public class DongneCommentServiceImpl implements EnrollService {
 			jobj.addProperty("bcomment", vo.getBcomment().replace("\r\n", "<br>"));
 			jobj.addProperty("brid", vo.getBrid());
 			jarray.add(jobj);
-			System.out.println(vo.getBtopic()+","+vo.getMid()+","+vo.getBcomment()+","+vo.getBrid());
 		}
 		jdata.add("jlist", jarray);
 		
