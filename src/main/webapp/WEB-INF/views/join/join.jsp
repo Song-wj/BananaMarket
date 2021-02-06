@@ -28,7 +28,7 @@
 				return false;
 			} else if (!phoneCheck()) {
 				return false;
-			} else if ($("#addr1").val() == "") {
+			/* } else if ($("#addr1").val() == "") {
 				alert("우편번호를 입력해주세요.");
 				$("#addr1").focus();
 				return false;
@@ -39,7 +39,7 @@
 			} else if ($("#addr3").val() == "") {
 				alert("주소를 입력해주세요.");
 				$("#addr3").focus();
-				return false;
+				return false; */
 			} else {
 				if(passChkNum == 0) 
 					alert("환영합니다! "+$("#nickname").val()+"님, 회원가입을 축하합니다.");
@@ -210,7 +210,7 @@
 		}
 	}
 
-	var goPopup = function() {
+	/* var goPopup = function() {
 		var pop = window.open("jusoPopup.do", "pop",
 				"width=570,height=420, scrollbars=yes, resizable=yes");
 	}
@@ -223,7 +223,7 @@
 			return;
 		}
 		document.getElementById("addr3").value = addrDetail;
-	}
+	} */
 </script>
 <style>
 div.join {
@@ -316,13 +316,13 @@ section.section_join>div>form.join select.hp, section.section_join>div>form.join
 	width: 20%;
 }
 
-section.section_join>div>form.join input.addr1 {
+/* section.section_join>div>form.join input.addr1 {
 	width: 30%
 }
 
 section.section_join>div>form.join input.addr2 {
 	width: 48.8%
-}
+} */
 
 section.section_join>div>form.join button.join_btn_style {
 	position: relative;
@@ -395,14 +395,14 @@ section.section_join>div>form.join button.join_btn_style:first-child {
 						</select> <span>-&nbsp;</span><input type="text" name="ph2"
 							class="hp_number" id="hp2"> <span>-&nbsp;</span><input
 							type="text" name="ph3" class="hp_number" id="hp3"></li>
-						<li><label>주소</label></li>
+						<!-- <li><label>주소</label></li>
 						<li><input type="text" name="maddr_num" placeholder="우편번호"
 							class="addr1" id="addr1">
 							<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 						<li><input type="text" name="maddr1" placeholder="도로명주소"
 							class="addr2" id="addr2"> <input type="text"
 							name="maddr2" placeholder="상세주소" class="addr2" id="addr3">
-						</li>
+						</li> -->
 						<li>
 							<button type="button" class="join_btn_style" id="btnJoin">회원가입</button>
 						</li>

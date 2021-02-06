@@ -34,7 +34,7 @@ public class BananaMemberDAO extends DBConn{
 		
 		try {
 			String sql = "select mid, nickname, substr(ph,1,3), substr(ph,5,4), substr(ph,10,4), "
-					+ "maddr, msfile, score, mdate, pw, maddr_num from banana_member where mid=?";
+					+ " msfile, score, mdate, pw from banana_member where mid=?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();
@@ -44,16 +44,11 @@ public class BananaMemberDAO extends DBConn{
 				vo.setPh1(rs.getString(3));
 				vo.setPh2(rs.getString(4));
 				vo.setPh3(rs.getString(5));
-				int idx = rs.getString(6).indexOf(",");
-				String addr1 = rs.getString(6).substring(0,idx);
-				String addr2 = rs.getString(6).substring(idx+1);
-				vo.setMaddr1(addr1);
-				vo.setMaddr2(addr2);
-				vo.setMsfile(rs.getString(7));
-				vo.setScore(rs.getInt(8));
-				vo.setMdate(rs.getString(9));
-				vo.setPw(rs.getString(10));
-				vo.setMaddr_num(rs.getString(11));
+				vo.setMsfile(rs.getString(6));
+				vo.setScore(rs.getInt(7));
+				vo.setMdate(rs.getString(8));
+				vo.setPw(rs.getString(9));
+				
 			}
 			
 		} catch (Exception e) {
@@ -188,6 +183,11 @@ public class BananaMemberDAO extends DBConn{
 		return result;
 	}
 	
-	
+	public int insertAddr(String loc , String mid) {
+		Map<String ,String> param = new HashMap<String, String> ();
+		param.put("loc", loc);
+		param.put("mid", mid);
+		return sqlSession.update(namespace+".insertaddr" ,param);
+	}
 	
 }

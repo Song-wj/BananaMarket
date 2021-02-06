@@ -397,4 +397,16 @@ public class MypageController {
 	 * 
 	 * }
 	 */
+		
+		
+	//주소 저장
+		@ResponseBody
+		@RequestMapping(value="insert_addr.do", method=RequestMethod.GET)
+		public String insert_addr(String loc , HttpSession session) {
+			SessionVO svo = (SessionVO)session.getAttribute("svo");
+			return dongneService.insertAddr(loc , svo.getMid());
+			
+		
+			
+		}
 }
