@@ -367,8 +367,10 @@ public class MypageController {
 	 */
 	// ÀüÃ¼ ¸®ºä
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
-	public ModelAndView mypage_review() {
-		return (ModelAndView)MypageReviewService.getList();
+	public ModelAndView mypage_review(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid = svo.getMid();
+		return (ModelAndView)MypageReviewService.getList(mid);
 		
 	}
 	

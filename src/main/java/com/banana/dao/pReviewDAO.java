@@ -27,18 +27,18 @@ public class pReviewDAO {
 		}
 	}
 	// 리스트 불러오기
-	public ArrayList<ReviewVO> getReviewList(){
-		List<ReviewVO> list =sqlSession.selectList(namespace+".getlist");
+	public ArrayList<ReviewVO> getReviewList(String mid){
+		List<ReviewVO> list =sqlSession.selectList(namespace+".getlist" , mid);
 		return (ArrayList<ReviewVO>)list ; 
 	}
 	// 판매자 리뷰
-	public ArrayList<ReviewVO> getSellReviewList(){
-		List<ReviewVO> list =sqlSession.selectList(namespace+".getselllist");
+	public ArrayList<ReviewVO> getSellReviewList(String mid){
+		List<ReviewVO> list =sqlSession.selectList(namespace+".getselllist" ,mid);
 		return (ArrayList<ReviewVO>)list ; 
 	}
 	// 구매자 리뷰
-	public ArrayList<ReviewVO> getBuyReviewList(){
-		List<ReviewVO> list =sqlSession.selectList(namespace+".getbuylist");
+	public ArrayList<ReviewVO> getBuyReviewList(String mid){
+		List<ReviewVO> list =sqlSession.selectList(namespace+".getbuylist" , mid);
 		return (ArrayList<ReviewVO>)list ; 
 	}
 	// 내가 쓴 리뷰
