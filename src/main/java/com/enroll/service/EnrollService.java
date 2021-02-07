@@ -16,4 +16,5 @@ public interface EnrollService {
 	String reviewAlarmWrite(Object vo);
 	String getAlarmCount(String mid);
 	String getAlarmContent(String mid);
+	String deleteReviewAlarm(String brid);
 }

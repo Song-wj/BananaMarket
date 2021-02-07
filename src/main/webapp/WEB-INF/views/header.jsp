@@ -36,22 +36,39 @@
 		$.ajax({
 			url: "getReviewAlarmContent.do?mid="+mid,
 			success: function(result) {
-			
 				var jdata = JSON.parse(result);
 				var output = "";
 					output+= "<ul id='review-alarm'>";
 				for(var i in jdata.jlist) {
-					output+= "<li>";
+					//if(jdata.jlist.length > 0) {
+					output+= "<li onclick=" + "\"move_dongneLife_content('"+ jdata.jlist[i].bid +"','"+ jdata.jlist[i].brid +"')\">";
 					output+= "<p>";
 					output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].btopic+"</span> 글에 댓글을 남겼습니다.<br>";
-					output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>";
+					output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>" +"<span class='ra-date'>"+ jdata.jlist[i].ra_data +"</span>";
 					output+= "</p>";
 					output+= "</li>";
+					/* }
+					else {
+						output+="<li>알림이 없습니다.</li>";
+					} */
 				}
 					output+= "</ul>";
 				
-				$(".modal_content").append(output);
+				$(".review-al-content").append(output);
 			}
+		});
+	}
+	
+	function move_dongneLife_content(bid, brid) {
+		$.ajax({
+			url: "ra_delete.do?brid="+brid,
+			success: function(result) {
+				if(result) {
+					$(location).attr('href','http://localhost:9000/banana/dongneLife_content.do?bid='+bid);
+				} else {
+					alert("fail");
+				}
+			} 
 		});
 	}
 </script>
@@ -214,6 +231,11 @@
         .modal_content ul .ra-title {
         	font-weight: bold;
         }
+        .modal_content ul .ra-date {
+        	font-size: 16px;
+        	color: #666;
+        	margin-left: 10px;
+        }
         
 </style>
 </head>
@@ -251,14 +273,9 @@
 							<div class="modal" style="display:none">
 								<div class="modal_overlay"></div>
 								<div class="modal_content">
-								<!-- <ul id="review-alarm"> -->
-									<%-- <li>
-										<p>
-											${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
-											${ ravo.mid }: ${ ravo.bcomment }
-										</p> 
-									</li> --%>
-								<!-- </ul> -->
+									<div class="review-al-content">
+										<span>우리동네 알림</span>
+									</div>
 								</div>
 							</div>
 						</li>

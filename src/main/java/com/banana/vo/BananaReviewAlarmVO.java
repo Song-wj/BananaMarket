@@ -2,8 +2,16 @@ package com.banana.vo;
 
 public class BananaReviewAlarmVO {
 	String mid, bid, brid;
-	String btopic, bcomment;
+	String btopic, bcomment, ra_date;
 	
+
+	public String getRa_date() {
+		return ra_date;
+	}
+
+	public void setRa_date(String ra_date) {
+		this.ra_date = ra_date;
+	}
 
 	public String getBtopic() {
 		return btopic;
