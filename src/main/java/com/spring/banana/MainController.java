@@ -50,5 +50,9 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/search.do",method=RequestMethod.GET)
+	public String search() {
+		return "search";
+	}
 	
 }

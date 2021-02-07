@@ -393,6 +393,69 @@ public class productDAO extends DBConn{
 		return result;
 		*/
 	}
-	
-
+	/**
+	 * 키워드등록
+	 * @param mid
+	 * @param keyword
+	 * @return
+	 */
+	public boolean getKeyword(String mid,String keyword) {
+		boolean result = false;
+		
+		try {
+			String sql = "insert into BANANA_KEYWORD values(?,?)";
+			getPreparedStatement(sql);
+			pstmt.setString(1,mid);
+			pstmt.setString(2,keyword);
+			
+			int val = pstmt.executeUpdate();
+			
+			if(val != 0) {
+				result = true;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	/**
+	 * 키워드검색 목록
+	 * @param mid
+	 * @return
+	 */
+	public ArrayList<productVO> getkeywordlist(String mid){
+		ArrayList<productVO> list = new ArrayList<productVO>();
+		
+		try {
+			String sql = "select ptitle, maddr, pprice, pfile, psfile, pid "
+					+ " from(select m.maddr, p.* , k.keyword "
+					      + "from banana_product p, banana_member m, (select * from banana_keyword where mid = ?) k "
+					      + "where m.mid=p.mid) "
+					 + "where ptitle LIKE '%'||keyword||'%' or pcategory like '%'||keyword||'%' or pcontent like '%'||keyword||'%'";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				productVO vo = new productVO();
+				
+				vo.setPtitle(rs.getString(1));
+				vo.setMaddr(rs.getString(2));
+				vo.setPprice(rs.getString(3));
+				vo.setPfile(rs.getString(4));
+				vo.setPsfile(rs.getString(5));
+				vo.setPid(rs.getString(6));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

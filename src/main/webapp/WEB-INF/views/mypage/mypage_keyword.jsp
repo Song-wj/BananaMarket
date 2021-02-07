@@ -1,11 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>키워드 알림설정</title>
 </head>
+<script>
+$(document).ready(function(){
+	
+	$("#keywordplus").click(function(){
+		if($("#keyword").val() == ""){
+			alert("키워드를 입력해주세요");
+			$("#keyword").focus();
+		}else{
+			var keyword = $("#keyword").val();
+			ajax_keywordplus(keyword);
+			
+		}
+		
+	});
+});
+function ajax_keywordplus(keyword){
+	var confirmflag = confirm("키워드로 등록하시겠습니까?");
+	 if(confirmflag){
+		$.ajax({
+			url:"keywordplus.do?keyword="+keyword,
+			success:function(result){
+			}
+		});
+				$("#keyword").val("");
+				alert("키워드를 등록하였습니다");
+	}
+}
+	
+</script>
 <style>
 	div.mypage_keyword {
 		width:98%;
@@ -58,15 +88,61 @@
 	.mypage_keyword button:hover{
 		opacity:0.7;
 	}
+	div.mypage_keyword table.mypage_table {
+		width:100%; 
+		padding:5px 0;
+		border-bottom:1px solid gray;
+	}
+	div.mypage_keyword table.mypage_table td {
+		width:800px;
+	}
+	div.mypage_keyword table.mypage_table td.tdimg {
+		width:10px;
+		padding-right:15px;
+	}
+	div.mypage_keyword table.mypage_table img {
+		width:120px;
+		height:120px;
+		border-radius:10px;
+	}
+	div.mypage_keyword table.mypage_table span.product {
+		font-size:19px;
+	}
+	div.mypage_keyword table.mypage_table span.locate {
+		font-size:15px;
+		color:gray;
+	}
+	div.mypage_keyword table.mypage_table span.price {
+		font-weight:900;
+	}
 </style>
 <body>
 	<div class="mypage_keyword">
 		<section class="section1_keyword">
 			<div class="keyword_title"><h1>알림 받을 키워드<span>0/30</span></h1></div>
 			<label>혹시 키워드 알림이 오지 않나요?</label><br>
-			<input type="text" placeholder=" 키워드를 입력해주세요. (ex : 자전거)">
-			<button>등록</button>
+				<input type="text" id="keyword" placeholder=" 키워드를 입력해주세요. (ex : 자전거)">
+				<button type="button" id="keywordplus">등록</button>
+				<div id="output"></div>
 		</section>
+		<c:forEach var="vo" items="${ list1 }">
+				<table class="mypage_table">
+				<tr>
+					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
+					<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
+					<%-- <td rowspan="3">
+					<button type="button" class="btn_like" id="btnLike" onclick="delProductLike('${vo.pid}')">
+  							<span class="img_emoti">좋아요취소</span></button>
+  					</td> --%>
+				</tr>
+				<tr>
+					<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
+				</tr>
+				<tr>
+					<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
+				</tr>
+			</table>
+			</c:forEach> 
 	</div>	
 </body>
 </html>

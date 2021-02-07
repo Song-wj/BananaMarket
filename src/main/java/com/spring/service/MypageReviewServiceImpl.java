@@ -64,10 +64,15 @@ public class MypageReviewServiceImpl implements BananaService {
 	}
 	@Override
 	public Object getList() {
+	 return "";
+	}
+	
+	
+	public Object getList(String mid) {
 		ModelAndView mv = new ModelAndView();
-		ArrayList<ReviewVO> list = reviewDAO.getReviewList();
-		ArrayList<ReviewVO> blist = reviewDAO.getBuyReviewList();
-		ArrayList<ReviewVO> slist = reviewDAO.getSellReviewList();
+		ArrayList<ReviewVO> list = reviewDAO.getReviewList(mid);
+		ArrayList<ReviewVO> blist = reviewDAO.getBuyReviewList(mid);
+		ArrayList<ReviewVO> slist = reviewDAO.getSellReviewList(mid);
 		countDate(list);
 		countDate(blist);
 		countDate(slist);

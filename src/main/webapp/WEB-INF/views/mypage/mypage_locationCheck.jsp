@@ -9,25 +9,51 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 
-$(function() {        
-    // Geolocation API에 액세스할 수 있는지를 확인
-    if (navigator.geolocation) {
-        //위치 정보를 정기적으로 얻기
-        var id = navigator.geolocation.watchPosition(
-                function(pos) {
-                   kakao_map(pos.coords.latitude, pos.coords.longitude);    // 위도 
-                  // 경도 
-                });
-        
-        // 버튼 클릭으로 감시를 중지
-        $('#btnStop').click(function() {
-            navigator.geolocation.clearWatch(id);
-        });
-    } else {
-        alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
-    }
-    
+
+$(function() {
+	//kakao_map(37.49796,127.02759);
+
+	  // Geolocation API에 액세스할 수 있는지를 확인
+	
+		    if (navigator.geolocation) {
+		        //위치 정보를 정기적으로 얻기
+		        var id = navigator.geolocation.watchPosition(
+		                function(pos) {
+		                   kakao_map(pos.coords.latitude, pos.coords.longitude);    // 위도 
+		                  // 경도 
+		                });
+		        
+		        // 버튼 클릭으로 감시를 중지
+		        $('#btnStop').click(function() {
+		            navigator.geolocation.clearWatch(id);
+		        });
+		    } else {
+		        alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+		    }
+		    
+	 $("#loc_btn").click(function(){
+		var loc = $("#dong").text();
+		 if (confirm("'"+loc+"'을 주소로 등록하시겠습니까?"))
+		  {
+
+			$.ajax({
+					url:"insert_addr.do?loc="+loc,
+					success: function(result){
+						if(result == "1"){
+							alert("주소가 등록되었습니다.");
+						}
+						
+					}
+				})  
+		 		
+				
+		  } 
+		
+		})
+			
 });
+  
+   
 	function kakao_map(latitude,longitude){
 			
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -88,6 +114,7 @@ $(function() {
 
 			// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
 			function displayCenterInfo(result, status) {
+				
 			    if (status === kakao.maps.services.Status.OK) {
 			        var infoDiv = document.getElementById('centerAddr');
 
@@ -95,19 +122,32 @@ $(function() {
 			            // 행정동의 region_type 값은 'H' 이므로
 			            if (result[i].region_type === 'H') {
 			                /* infoDiv.innerHTML = result[i].address_name; */
-			             	chk(result[i].address_name.split(" "));
+			             	if(i == result.length-1){
+			                chk(result[i].address_name.split(" "));
+			            	}
 			                break;
 			            }
 			        }
 			    }    
+			       
 			}
 			
-			function chk(dong){
-				
-			 	$("#dong").html(dong[dong.length-1]); 
-			}
 		
+			
 	}
+
+	function chk(dong){
+		
+		var loc= dong[dong.length-1];
+	 	$("#dong").html(loc); 
+	 	
+	 	
+	}
+	
+	
+		
+	
+	
 	 	</script>
 
 
@@ -124,7 +164,7 @@ $(function() {
 	.mypage_locationCheck label:nth-child(2){
 		display:inline-block;
 		font-size:20px;
-		margin: 70px 0 0 300px;
+		margin: 70px 0 0 380px;
 	}
 	.mypage_locationCheck label:nth-child(3) {
 		display:inline-block;
@@ -202,9 +242,9 @@ $(function() {
     		</div> -->
     	</div>
     		
-			<label>현재 위치가 내 동네로 설정한 '<span id="dong"></span>'에 있습니다.</label>
+			<label>현재 위치는 '<span id="dong"></span>'에 있습니다.</label>
 			<label>왜 동네 인증을 해야하나요?</label><br>
-			<button type="button">동네 인증 완료하기</button> 
+			<button type="button" id="loc_btn">동네 인증 완료하기</button> 
 		</section>
 			
 	</div>	

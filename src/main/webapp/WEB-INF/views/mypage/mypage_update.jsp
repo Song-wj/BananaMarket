@@ -28,7 +28,7 @@
 				return false;
 			} else if (!phoneCheck()) {
 				return false;
-			} else if ($("#addr1").val() == "") {
+			/* } else if ($("#addr1").val() == "") {
 				alert("우편번호를 입력해주세요.");
 				$("#addr1").focus();
 				return false;
@@ -39,7 +39,7 @@
 			} else if ($("#addr3").val() == "") {
 				alert("주소를 입력해주세요.");
 				$("#addr3").focus();
-				return false;
+				return false; */
 			} else {
 				if(passChkNum == 0) {
 					alert("수정이 완료되었습니다.");
@@ -138,7 +138,7 @@
 			}
 		}
 	}
-
+/* 
  		var goPopup = function() {
  			var pop = window.open("jusoPopup.do", "pop",
  					"width=570,height=420, scrollbars=yes, resizable=yes");
@@ -152,7 +152,7 @@
  				return;
  			}
  			document.getElementById("addr3").value = addrDetail;
- 		}
+ 		} */
  		
 </script>
 <style>
@@ -241,12 +241,12 @@
 	section.section_join>div>form.join input.hp_number{
 		width:20%;
 	}
-	section.section_join>div>form.join input.addr1{
+	/* section.section_join>div>form.join input.addr1{
 		width:30%
 	}
 	section.section_join>div>form.join input.addr2{
 		width:48.8%
-	}
+	} */
 	section.section_join>div>form.join button.join_btn_style{
 		pisition:relative;
 		color:RGB(82,67,21);
@@ -332,13 +332,13 @@
 					<li>
 						<label>주소</label>
 					</li>
-					<li>
+					<%-- <li>
 						<input type="text" name="maddr_num" placeholder="우편번호" class="addr1" id="addr1" value="${ vo.maddr_num }">
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>
 						<input type="text" name="maddr1" placeholder="도로명주소" class="addr2" id="addr2" value="${ vo.maddr1 }">
 						<input type="text" name="maddr2" placeholder="상세주소" class="addr2" id="addr3" value="${ vo.maddr2 }">
-					</li>
+					</li> --%>
 					<li>
 						<button type="button" class="join_btn_style" id="btnUpdate">수정완료</button>
 						<a href="mypage.do?mid=${ vo.mid }"><button type="button" class="join_btn_style" id="btnMypage">마이페이지</button></a>
