@@ -179,6 +179,13 @@
         }
         
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header-search-button").click(function() {
+		location.href="http://localhost:9000/banana/searchResult.do";
+    });
+});
+</script>
 </head>
 <body>
 	<header id="fixed-bar" class="fixed-bar-box-shadow">
