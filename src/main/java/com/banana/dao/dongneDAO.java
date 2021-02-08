@@ -79,6 +79,12 @@ public class dongneDAO extends DBConn{
 		return result;
 	}
 	
+	public ArrayList<DongneCommentVO> getSubReview(String bid){
+	
+		List<DongneCommentVO> list =sqlSession.selectList(namespace+".getsubreview" ,bid);
+		return (ArrayList<DongneCommentVO>)list;
+	}
+	
 	public dongneSubjectVO getSubjectContent(String bsid) {
 		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
 	}

@@ -14,6 +14,16 @@
 		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
 	</select> -->
 
+	<select id="getsubreview" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
+		select mid, nickname, maddr, brid, bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate, rownum rno 
+		from (select mem.mid, mem.nickname, mem.maddr,rev.brid, rev.bid, rev.bcomment, rev.brdate
+			  from banana_member mem, banana_board_review rev, banana_board board
+			  where mem.mid = rev.mid and rev.bid = board.bid
+			  order by rev.brdate desc)
+		where bid=#{bid}
+	</select>
+	
+	
 	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
 		select count(distinct ra.brid)
 		from banana_board b, banana_board_review br, banana_review_alarm ra

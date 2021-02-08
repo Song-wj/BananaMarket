@@ -103,9 +103,16 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
-	public ModelAndView mypage_subjectContent(String bsid , String bstitle) {
+	public ModelAndView mypage_subjectContent(String bsid , String bstitle ,HttpSession session) {
 		
 		return dongneService.getSubjectListContent(bsid,bstitle);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/subjectContentReview.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String subjectContentReview(String bid) {
+		
+		return dongneService.getSubjectListReview(bid);
 	}
 	
 	/**
