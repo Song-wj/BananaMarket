@@ -4,15 +4,12 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.banana.vo.BuylistVO;
+import com.banana.vo.KeywordVO;
 import com.banana.vo.LikeVO;
 import com.banana.vo.productVO;
 
@@ -437,6 +434,85 @@ public class productDAO extends DBConn{
 			
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				productVO vo = new productVO();
+				
+				vo.setPtitle(rs.getString(1));
+				vo.setMaddr(rs.getString(2));
+				vo.setPprice(rs.getString(3));
+				vo.setPfile(rs.getString(4));
+				vo.setPsfile(rs.getString(5));
+				vo.setPid(rs.getString(6));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<KeywordVO> getkeyword(String mid){
+		ArrayList<KeywordVO> list = new ArrayList<KeywordVO>();
+		
+		try {
+			String sql = "select keyword from banana_keyword where mid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				KeywordVO vo = new KeywordVO();
+				
+				vo.setKeyword(rs.getString(1));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public boolean delkeyword(String mid, String keyword) {
+		boolean result = false;
+		
+		try {
+			String sql = "delete from BANANA_keyword where mid=? and keyword=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, keyword);
+			
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public ArrayList<productVO> getkeywordclick(String keyword){
+		ArrayList<productVO> list = new ArrayList<productVO>();
+		String str="%"+keyword+"%";
+		try {
+			String sql = "select ptitle, maddr, pprice, pfile, psfile, pid "
+					+ " from(select m.maddr, p.* from banana_product p, banana_member m where m.mid=p.mid) "
+					+ " where ptitle LIKE ? or pcategory like ? or pcontent like ?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, str);
+			pstmt.setString(2, str);
+			pstmt.setString(3, str);
 			
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
