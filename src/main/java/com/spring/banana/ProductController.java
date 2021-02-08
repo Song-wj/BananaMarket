@@ -63,6 +63,7 @@ public class ProductController {
 		return "/popularProduct/promoteDongne";
 	}
 	
+	
 	@ResponseBody
 	@RequestMapping(value="/product_like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	public ModelAndView product_like(HttpSession session, String pid) {

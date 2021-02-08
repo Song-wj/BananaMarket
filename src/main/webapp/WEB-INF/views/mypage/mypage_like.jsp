@@ -93,8 +93,6 @@
 	}
 	function delShopLike(sid) {
 		var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
-		 if(confirmflag){
-			 var confirmflag = confirm("관심목록에서 삭제하시겠습니까?");
 			 if(confirmflag){
 				 $.ajax({
 					  url:"shop_unlike.do?sid="+sid, //mid는 로그인한사람id
@@ -103,7 +101,6 @@
 					});
 				 location.reload();
 			 }
-		 }
 	}
 </script>
 <style>
