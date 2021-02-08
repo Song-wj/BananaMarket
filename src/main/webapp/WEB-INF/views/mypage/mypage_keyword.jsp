@@ -36,6 +36,7 @@ function ajax_keywordplus(keyword){
 		});
 		$("#keyword").val("");
 		alert("키워드를 등록하였습니다");
+				location.reload();
 	}
 }
 function delkeyword(keyword) {
@@ -181,29 +182,33 @@ var goPopup = function() {
 				</div>
 		</section>
 		<section class="section2_keyword" id="section2_keyword">
-			<table class="mypage_table">
+			
 				<c:choose >
 					<c:when test="${empty list1 }">
+					<table class="mypage_table">
 						<tr>
 							<td style="padding: 50px 0; text-align:center;"><h3>검색된 키워드가 없습니다</h3></td>
 						</tr> 
+					</table>
 					</c:when>
 				<c:otherwise>
 					<c:forEach var="vo" items="${ list1 }">
-					<tr>
-						<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
-						<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
-					</tr>
-					<tr>
-						<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
-					</tr>
-					<tr>
-						<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
-					</tr>
+					<table class="mypage_table">
+						<tr>
+							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
+							<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
+						</tr>
+						<tr>
+							<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
+						</tr>
+						<tr>
+							<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
+						</tr>
+					</table>
 					</c:forEach> 
 				</c:otherwise>
 				</c:choose>
-				</table>
+				
 		</section>
 	</div>	
 </body>

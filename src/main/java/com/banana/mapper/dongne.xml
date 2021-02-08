@@ -13,6 +13,10 @@
       			where b.bid = br.bid and b.mid=#{mid}) bbr, banana_review_alarm ra
 		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
 	</select> -->
+	
+	<delete id="deleteReviewAlarm" parameterType="java.lang.String">
+		delete from banana_review_alarm where brid=#{brid}
+	</delete>
 
 	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
 		select count(distinct ra.brid)
@@ -21,7 +25,7 @@
 	</select>	
 	
 	<insert id="reviewAlarmWrite" parameterType="com.banana.vo.BananaReviewAlarmVO">
-		insert into banana_review_alarm values(#{mid},#{bid},#{brid})
+		insert into banana_review_alarm values(#{mid},#{bid},#{brid},to_char(sysdate, 'YYYY-MM-DD AM HH12:MI'))
 	</insert>
 
 	<insert id="writesubject" parameterType="com.banana.vo.dongneSubjectVO">

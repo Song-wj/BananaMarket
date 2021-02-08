@@ -479,5 +479,8 @@ public class DongneServiceImpl implements BananaService{
 		return str;
 		}
 	
+	public String insertAddr(String addr , String mid) {	
+		return String.valueOf(bananaMemberDAO.insertAddr(addr, mid));
+	}
 	
 }

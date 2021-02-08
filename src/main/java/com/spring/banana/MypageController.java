@@ -386,8 +386,10 @@ public class MypageController {
 	 */
 	// 傈眉 府轰
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
-	public ModelAndView mypage_review() {
-		return (ModelAndView)MypageReviewService.getList();
+	public ModelAndView mypage_review(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid = svo.getMid();
+		return (ModelAndView)MypageReviewService.getList(mid);
 		
 	}
 	
@@ -440,4 +442,16 @@ public class MypageController {
 	 * 
 	 * }
 	 */
+		
+		
+	//林家 历厘
+		@ResponseBody
+		@RequestMapping(value="insert_addr.do", method=RequestMethod.GET)
+		public String insert_addr(String loc , HttpSession session) {
+			SessionVO svo = (SessionVO)session.getAttribute("svo");
+			return dongneService.insertAddr(loc , svo.getMid());
+			
+		
+			
+		}
 }
