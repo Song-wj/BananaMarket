@@ -13,6 +13,10 @@
       			where b.bid = br.bid and b.mid=#{mid}) bbr, banana_review_alarm ra
 		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
 	</select> -->
+	
+	<delete id="deleteReviewAlarm" parameterType="java.lang.String">
+		delete from banana_review_alarm where brid=#{brid}
+	</delete>
 
 	<select id="getsubreview" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
 		select mid, nickname, maddr, brid, bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate, rownum rno 
@@ -31,7 +35,7 @@
 	</select>	
 	
 	<insert id="reviewAlarmWrite" parameterType="com.banana.vo.BananaReviewAlarmVO">
-		insert into banana_review_alarm values(#{mid},#{bid},#{brid})
+		insert into banana_review_alarm values(#{mid},#{bid},#{brid},to_char(sysdate, 'YYYY-MM-DD AM HH12:MI'))
 	</insert>
 
 	<insert id="writesubject" parameterType="com.banana.vo.dongneSubjectVO">

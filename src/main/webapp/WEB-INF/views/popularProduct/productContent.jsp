@@ -534,7 +534,7 @@ $(document).ready(function(){
 					<a href="#"><button type="button" class="product_btn_style">채팅 하기</button></a>
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
-				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} </time></p>
+				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate}</time></p>
 				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
 				<div id="article-detail">
 					<p>${vo.pcontent}</p>

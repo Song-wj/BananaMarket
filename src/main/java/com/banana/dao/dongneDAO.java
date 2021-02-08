@@ -26,15 +26,23 @@ public class dongneDAO extends DBConn{
 	}
 	*/
 	
+	public boolean deleteReviewAlarmProc(String brid) {
+		boolean result = false;
+		int val = sqlSession.delete(namespace+".deleteReviewAlarm", brid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
 	public ArrayList<BananaReviewAlarmVO> getReviewContent(String mid) {
 		ArrayList<BananaReviewAlarmVO> list = new ArrayList<BananaReviewAlarmVO>();
 		
 		try {
-			String sql ="select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment, ra.brid "
+			String sql ="select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment, ra.brid, ra.ra_date, bbr.bid "
 					+ "from (select b.bid, b.btopic, br.mid, br.bcomment, br.brid "
 					+ "      from banana_board b, banana_board_review br "
 					+ "      where b.bid = br.bid and b.mid = ?) bbr, banana_review_alarm ra "
-					+ "where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != ?";
+					+ "where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != ?"
+					+ "order by ra.ra_date desc";
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.setString(2, mid);
@@ -45,6 +53,8 @@ public class dongneDAO extends DBConn{
 				vo.setMid(rs.getString(2));
 				vo.setBcomment(rs.getString(3));
 				vo.setBrid(rs.getString(4));
+				vo.setRa_date(rs.getString(5));
+				vo.setBid(rs.getString(6));
 				list.add(vo);
 			}
 		} catch (Exception e) {
