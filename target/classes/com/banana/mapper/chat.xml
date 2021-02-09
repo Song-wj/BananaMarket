@@ -10,16 +10,24 @@
 		insert into banana_chat values ('C_'||sqe_banana_chat.nextval,#{sell_mid},#{buy_mid},#{pid},#{chat_content},sysdate,#{chk_read})
 	</insert>
 	
-	<select id="ChatList" resultType="com.banana.vo.ChatVO">
+	<select id="ChatList" resultType="com.banana.vo.ChatContentVO">
 		select cid, sell_mid, buy_mid, pid, chat_content, to_char(cdate,'mm.dd  hh:mm') cdate, chk_read
 			from banana_chat  
+			
 			order by cdate desc
 	</select>
 	
-	<select id="ChatContent"  parameterType="java.lang.String"  resultType="com.banana.vo.ChatVO" >
-		select c.cid, c.sell_mid , c.buy_mid, p.pid, c.chat_content, c.cdate, c.chk_read, p.mid, p.ptitle, p.pprice
-			from banana_chat c, banana_product p
-				where p.pid = c.pid and p.mid =c.sell_mid and c.cid=#{cid}
+	<select id="ChatContent"  parameterType="java.lang.String"  resultType="com.banana.vo.ChatContentVO" >
+		select cp.cid, cp.buy_mid, cp.sell_mid, cp.pid, cp.chat_content, cp.cdate,
+    		  cp.chk_read, cp.mid, cp.ptitle, cp.pprice, cp.psfile, m.score, m.maddr, m.nickname
+		from (select c.cid, c.buy_mid, c.sell_mid, c.pid, c.chat_content, c.cdate, c.chk_read, p.mid, p.ptitle, p.pprice,p.psfile 
+				from (select cid, buy_mid, sell_mid, pid, chat_content, cdate, chk_read
+						from banana_chat
+						where cid=#{cid}) c , banana_product p
+				where c.pid = p.PID) cp , banana_member m
+		where cp.buy_mid = m.mid
 	</select>
+	
+	
 	
 </mapper>

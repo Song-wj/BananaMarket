@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.ChatVO;
 import com.banana.vo.SessionVO;
-import com.banana.vo.productVO;
 import com.spring.service.ChatServiceImpl;
 
 @Controller
@@ -35,11 +34,11 @@ public class ChatController {
 	 * @return
 	 */
 	@RequestMapping(value ="/chat_list_content.do", method = RequestMethod.GET)
-	public ModelAndView chat_list_content(String pid, String mid, HttpSession session) {
-		SessionVO svo = (SessionVO)session.getAttribute("svo");
+	public ModelAndView chat_list_content(String cid) {
 		
-		return (ModelAndView)chatService.getContent(pid, svo.getMid(), mid);
+		return (ModelAndView)chatService.getContent(cid);
 	}
+	
 	
 	/**
 	 * 채팅 - 홈 화면
@@ -47,6 +46,7 @@ public class ChatController {
 	 */
 	@RequestMapping(value ="/chat_list.do", method = RequestMethod.GET)
 	public ModelAndView chat_list() {
+		
 		return (ModelAndView)chatService.getList();
 		//"/chatBanner/chat_list";
 	}

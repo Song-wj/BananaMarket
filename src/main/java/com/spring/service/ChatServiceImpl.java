@@ -7,11 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.ChatDAO;
-import com.banana.vo.BananaNoticeVO;
-import com.banana.vo.BananaShopReviewVO;
+import com.banana.vo.ChatContentVO;
 import com.banana.vo.ChatVO;
-import com.banana.vo.dongneVO;
-import com.banana.vo.productVO;
 
 @Service("chatService")
 public class ChatServiceImpl {
@@ -28,29 +25,26 @@ public class ChatServiceImpl {
 		
 		if(result != 0) {
 			mv.setViewName("redirect:/chat_list_content.do?cid="+cvo.getCid());
-		}else {
-			
 		}
 		
 		return mv;
 	}
 
-	 public Object getList() {
+	public Object getList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<ChatVO> list = chatDAO.getChatList();
 			mv.addObject("list", list);
 			mv.setViewName("/chatBanner/chat_list");
 			return mv;
-	  }
+	}
 	
-	 public Object getContent(String pid, String cid, String mid) {
+	public Object getContent(String cid) {
+	
 			ModelAndView mv = new ModelAndView();
-			ChatVO vo = chatDAO.getContent((String)cid);
-			
+			ChatContentVO vo = chatDAO.getContent(cid);
 			mv.addObject("vo", vo);
-			mv.addObject("pid",pid);
-			mv.addObject("mid", mid);
 			mv.setViewName("/chatBanner/chat_list_content");
 			return mv;
-		}
+	}
+	
 }

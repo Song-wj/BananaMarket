@@ -82,87 +82,29 @@
 		</section>
 		<section class="section2_chatList">
 		   <c:forEach var="vo" items="${list }"> 
-		    <c:if test="${vo.buy_mid ne svo.mid }">
-			<div onclick="location.href='chat_list_content.do?cid=${vo.cid}'">
-			
-				<table class="table_chatList">
-					<tr>
-						<td rowspan="2"><img src="images/mypage_bananaimg.jpg"></td>
-						<td>
-							<ul>
-								<li><span> ${vo.buy_mid }</span></li>
-								<li><span> OO동</span></li>
-								<li><span> ${vo.cdate }</span></li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td><span>${vo.chat_content }</span></td>
-					</tr>
-				</table>
-			</div>
+			  <c:if test="${vo.buy_mid ne svo.mid }">
+			    
+				<div onclick="location.href='chat_list_content.do?cid=${vo.cid}'">
+					
+					<table class="table_chatList">
+						<tr>
+							<td rowspan="2"><img src="images/mypage_bananaimg.jpg"></td>
+							<td>
+								<ul>
+									<li><span> ${vo.buy_mid}</span></li>
+									<li><span> ${vo.cdate }</span></li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td><span>${vo.chat_content }</span></td>
+						</tr>
+					</table>
+				</div>
 			</c:if>
-	 </c:forEach>	
+	 	  </c:forEach>	
 		</section>
-	<!--  	<section class="section2_chatList">
-			<div>
-				<table class="table_chatList">
-					<tr>
-						<td rowspan="2"><img src="images/mypage_bananaimg.jpg"></td>
-						<td>
-							<ul>
-								<li><span>당근이</span></li>
-								<li><span>대부동</span></li>
-								<li><span>어제</span></li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td><span>(수줍)흐흫님, 지금이 바로~ 집 정리할..</span></td>
-					</tr>
-				</table>
-			</div>
-		</section>
-		<section class="section2_chatList">
-			<div>
-				<table class="table_chatList">
-					<tr>
-						<td rowspan="2"><img src="images/mypage_bananaimg.jpg"></td>
-						<td>
-							<ul>
-								<li><span>당근이</span></li>
-								<li><span>대부동</span></li>
-								<li><span>어제</span></li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td><span>(수줍)흐흫님, 지금이 바로~ 집 정리할..</span></td>
-					</tr>
-				</table>
-			</div>
-		</section>
-		<section class="section2_chatList">
-			<div>
-				<table class="table_chatList">
-					<tr>
-						<td rowspan="2"><img src="images/mypage_bananaimg.jpg"></td>
-						<td>
-							<ul>
-								<li><span>당근이</span></li>
-								<li><span>대부동</span></li>
-								<li><span>어제</span></li>
-							</ul>
-						</td>
-					</tr>
-					<tr>
-						<td><span>(수줍)흐흫님, 지금이 바로~ 집 정리할..</span></td>
-					</tr>
-				</table>
-			</div>
-		</section> -->
 	</div>
-	
 	
 	<jsp:include page="../chatBanner/chat.jsp"/>
 	

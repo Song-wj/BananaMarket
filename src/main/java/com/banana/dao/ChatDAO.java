@@ -6,7 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.banana.vo.BananaShopReviewVO;
+import com.banana.vo.ChatContentVO;
 import com.banana.vo.ChatVO;
 
 public class ChatDAO extends DBConn{
@@ -28,8 +28,10 @@ public class ChatDAO extends DBConn{
 		return (ArrayList<ChatVO>) list;
 	}
 	
+	
 	/** Ã¤ÆÃ content **/
-	public ChatVO getContent(String cid) {
+	public ChatContentVO getContent(String cid) {
+		
 		return sqlSession.selectOne(namespace+".ChatContent", cid);
 	}	
 }
