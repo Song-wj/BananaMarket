@@ -241,7 +241,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $("#header-search-button").click(function() {
-		location.href="http://localhost:9000/banana/searchResult.do";
+    	var search = $("#header-search-input").val();
+		location.href="http://localhost:9000/banana/search.do?search="+search;
     });
 });
 </script>

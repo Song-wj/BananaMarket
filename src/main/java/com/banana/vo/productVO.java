@@ -10,6 +10,7 @@ public class productVO {
 	String maddr, nickname, score;
 	String file, sfile, cancel_file;
 	List<MultipartFile> list ;
+	String rno;
 	//CommonsMultipartFile[] file_list;
 	
 	/*
@@ -21,9 +22,16 @@ public class productVO {
 	}
 	*/
 	
-	
 	public String getMaddr() {
 		return maddr;
+	}
+
+	public String getRno() {
+		return rno;
+	}
+
+	public void setRno(String rno) {
+		this.rno = rno;
 	}
 
 	public String getBuy_mid() {

@@ -12,10 +12,35 @@ public class BananaShopVO {
 		   scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3;
 	CommonsMultipartFile file1;
 	List<MultipartFile> flie_list ;
+	String rno, nickname, maddr;
 	
 	String savepath1;
 	StringBuilder dong = new StringBuilder();
 	
+	public String getRno() {
+		return rno;
+	}
+
+	public void setRno(String rno) {
+		this.rno = rno;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getMaddr() {
+		return maddr;
+	}
+
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
+
 	public List<MultipartFile> getFlie_list() {
 		return flie_list;
 	}
@@ -112,7 +137,7 @@ public class BananaShopVO {
 		String[] sadlist = saddr.split("/");
 		setAddr2(sadlist[0]);
 		setAddr3(sadlist[1]);
-		
+			
 		if(sadlist[1].contains("(")) {
 			for(int i=sadlist[1].indexOf("(")+1; i<=sadlist[1].indexOf("µ¿"); i++) {
 				dong.append(Character.toString(sadlist[1].charAt(i)));

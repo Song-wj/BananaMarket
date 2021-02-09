@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.banana.vo.BananaShopVO;
 import com.banana.vo.LikeVO;
+import com.banana.vo.productVO;
 
 public class BananaShopDAO extends DBConn {
 	
@@ -387,6 +388,99 @@ public class BananaShopDAO extends DBConn {
 			pstmt.setString(2, sid);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 검색 목록
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<BananaShopVO> getsearchlist(String search){
+		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select *\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.sintro, s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_simg, m.nickname, m.maddr\r\n" + 
+					"      from banana_shop s, banana_member m\r\n" + 
+					"      where s.mid = m.mid)\r\n" + 
+					"where (sname like ? or skinds like ? or sintro like ? or saddr like ? or sph like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			pstmt.setString(4, set_search);
+			pstmt.setString(5, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaShopVO vo = new BananaShopVO();
+				
+				vo.setRno(rs.getString(1));
+				vo.setSid(rs.getString(2));
+				vo.setMid(rs.getString(3));
+				vo.setSname(rs.getString(4));
+				vo.setSkinds(rs.getString(5));
+				vo.setSkinds2(rs.getString(6));
+				vo.setSintro(rs.getString(7));
+				vo.setSaddr_num(rs.getString(8));
+				vo.setSaddr(rs.getString(9));
+				vo.setSph(rs.getString(10));
+				vo.setSdate(rs.getString(11));
+				vo.setSmain_simg(rs.getString(12));
+				vo.setNickname(rs.getString(13));
+				vo.setMaddr(rs.getString(14));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 검색 카운트
+	 * @param search
+	 * @return
+	 */
+	public int getsearchCount(String search){
+		int result = 0;
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select count(*)\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.sintro, s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_simg, m.nickname, m.maddr\r\n" + 
+					"      from banana_shop s, banana_member m\r\n" + 
+					"      where s.mid = m.mid)\r\n" + 
+					"where (sname like ? or skinds like ? or sintro like ? or saddr like ? or sph like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			pstmt.setString(4, set_search);
+			pstmt.setString(5, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
