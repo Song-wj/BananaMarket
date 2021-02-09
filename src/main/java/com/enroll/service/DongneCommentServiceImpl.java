@@ -26,6 +26,11 @@ public class DongneCommentServiceImpl implements EnrollService {
 	@Autowired
 	private dongneDAO dongneDAO;
 	/////
+	
+	public String deleteReviewAlarm(String brid) {
+		boolean result = dongneDAO.deleteReviewAlarmProc(brid);
+		return String.valueOf(result);
+	}
 
 	public String getAlarmContent(String mid) {
 		ArrayList<BananaReviewAlarmVO> ralist = dongneDAO.getReviewContent(mid);
@@ -40,6 +45,8 @@ public class DongneCommentServiceImpl implements EnrollService {
 			jobj.addProperty("mid", vo.getMid());
 			jobj.addProperty("bcomment", vo.getBcomment().replace("\r\n", "<br>"));
 			jobj.addProperty("brid", vo.getBrid());
+			jobj.addProperty("ra_data", vo.getRa_date());
+			jobj.addProperty("bid", vo.getBid());
 			jarray.add(jobj);
 		}
 		jdata.add("jlist", jarray);

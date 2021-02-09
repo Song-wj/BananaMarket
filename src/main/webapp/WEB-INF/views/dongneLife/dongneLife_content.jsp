@@ -375,6 +375,7 @@
 					//댓글 갯수
 					$("#comment_count").text(jdata.comment_count);
 					
+					r_alarm_write();
 					//console.log($("#brid").val());
 				}//success
 			});//ajax
@@ -393,7 +394,7 @@
 				return false;
 			}else {
 				board_review_write_form.submit();
-				r_alarm_write();
+				//r_alarm_write();
 			}
 		});
 	});

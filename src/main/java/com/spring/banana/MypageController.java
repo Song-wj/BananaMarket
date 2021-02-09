@@ -167,18 +167,37 @@ public class MypageController {
 	 * 마이페이지 - 키워드 알림설정
 	 * @return
 	 */
-	@RequestMapping(value="/mypage_keyword.do", method=RequestMethod.GET)
-	public ModelAndView mypage_keyword(HttpSession session) {
+	@ResponseBody
+	@RequestMapping(value="/mypage_keyword.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView mypage_keyword(HttpSession session,String keyword) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
-		return (ModelAndView)KeywordServiceImpl.getList(svo.getMid());
+		return (ModelAndView)KeywordServiceImpl.getList(svo.getMid(),keyword);
 	}
+	@ResponseBody
+	@RequestMapping(value="/delkeyword.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public String delkeyword(HttpSession session,String keyword) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return KeywordServiceImpl.delkeyword(svo.getMid(), keyword);
+	}
+	@ResponseBody
+	@RequestMapping(value="/mypage_keywordclick.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView mypage_keywordclick(HttpSession session,String keyword) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)KeywordServiceImpl.keywordclick(svo.getMid(),keyword);
+	}
+	
+	@RequestMapping(value="/whyPopup.do",method= {RequestMethod.POST, RequestMethod.GET})
+	public String whyPopup() {
+		return "/mypage/whyPopup";
+	}
+	
 	/**
 	 * 마이페이지 - 키워드 등록
 	 */
 	 @RequestMapping(value="/keywordplus.do", method=RequestMethod.GET)
 	 public String keywordplus(HttpSession session, String keyword){
 		 SessionVO svo = (SessionVO)session.getAttribute("svo"); 
-		 return KeywordServiceImpl.product_unlike(svo.getMid(), keyword); 
+		 return KeywordServiceImpl.insertKeyword(svo.getMid(), keyword); 
 	 }
 	
 	/**

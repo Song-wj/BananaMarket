@@ -16,6 +16,12 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 	
 	
 	@Override
+	public String deleteReviewAlarm(String brid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String getAlarmContent(String mid) {
 		// TODO Auto-generated method stub
 		return null;

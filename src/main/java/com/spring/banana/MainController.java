@@ -20,6 +20,13 @@ public class MainController {
 	private EnrollService dongneCommentService;
 	
 	@ResponseBody
+	@RequestMapping(value="/ra_delete.do", method=RequestMethod.GET)
+	public String ra_delete(String brid) {
+		//SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneCommentService.deleteReviewAlarm(brid);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/alarm_count.do", method=RequestMethod.GET)
 	public String alarm_count(String mid) {
 		//SessionVO svo = (SessionVO)session.getAttribute("svo");
