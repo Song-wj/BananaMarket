@@ -4,7 +4,9 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -213,15 +215,19 @@ public class productDAO extends DBConn{
 		return result;
 		*/
 	}
-	
-
 	/**
 	 * ¡¡æ∆ø‰
 	 */
 	public boolean getPickContent(String mid,String pid) {
 		boolean result = false;
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("pid", pid);
+		int val = sqlSession.insert(namespace+".getPickContent",param);
+		if(val != 0) result = true;
+		return result;
 		
-		try {
+		/*try {
 			String sql = "insert into BANANA_INTEREST values(?,?,'','')";
 			getPreparedStatement(sql);
 			pstmt.setString(1,mid);
@@ -237,7 +243,7 @@ public class productDAO extends DBConn{
 			e.printStackTrace();
 		}
 		
-		return result;
+		return result;*/
 	}
 	
 	/**

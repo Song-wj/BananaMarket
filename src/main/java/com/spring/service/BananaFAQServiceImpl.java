@@ -50,7 +50,6 @@ public class BananaFAQServiceImpl implements BoardService{
 		mv.addObject("dbCount",dbCount);
 		mv.addObject("reqPage",reqPage);
 		mv.addObject("pageSize",pageSize);
-		
 		if(param.equals("user")) {
 			mv.setViewName("question/question_list");			
 		}else {

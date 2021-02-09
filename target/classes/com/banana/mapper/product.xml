@@ -32,7 +32,10 @@
 		delete from banana_product where pid=#{pid}
 	</delete>
 	
+	<insert id="getPickContent" parameterType="map">
+		insert into BANANA_INTEREST values(#{mid},#{pid},'','')
 	
+	</insert>
 	
 	
 	<select id="ProductSellList" resultType="com.banana.vo.productVO">

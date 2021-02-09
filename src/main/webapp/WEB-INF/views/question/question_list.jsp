@@ -9,6 +9,7 @@
 <link rel="stylesheet" href = "http://localhost:9000/banana/css/am-pagination.css">
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script src="http://localhost:9000/banana/js/am-pagination.js"></script>  
+
 <script>
 	$(document).ready(function(){
 		
@@ -19,13 +20,12 @@
 			page : '${reqPage}',
 			pageSize : '${pageSize}',
 					
-			
 			lastText : '&raquo;&raquo;',
 			firstText : '&laquo;&laquo',
 			prevTest : '&laquo;',
 			nextTest : '&raquo;',
 			
-			btnSize : 'sm' 			
+			btnSize : 'sm' 	
 		}); 
 		
 		//
