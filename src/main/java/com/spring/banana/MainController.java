@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
+import com.spring.service.SearchServiceImpl;
 import com.banana.vo.*;
 
 @Controller
@@ -19,6 +20,8 @@ public class MainController {
 	@Autowired
 	private EnrollService dongneCommentService;
 	
+	@Autowired
+	private SearchServiceImpl searchService;
 	
 	@ResponseBody
 	@RequestMapping(value="/shop_alarm_count.do", method=RequestMethod.GET)
@@ -73,8 +76,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/search.do",method=RequestMethod.GET)
-	public String search() {
-		return "search";
+	public ModelAndView search(String search) {
+		return (ModelAndView)searchService.getList(search);
 	}
 	
 }

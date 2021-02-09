@@ -531,10 +531,13 @@ $(document).ready(function(){
 					<button type="button" class="btn_unlike" id="btnLike">
   						<span class="img_emoti">좋아요</span>
   					</button> 
-					<a href="#"><button type="button" class="product_btn_style">채팅 하기</button></a>
+  					
+  					<c:if test="${svo.mid ne vo.mid }">
+						<a href="chat_list_content.do?pid=${vo.pid}&mid=${vo.mid}"><button type="button" class="product_btn_style">채팅 하기</button></a>
+					</c:if>
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
-				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate} </time></p>
+				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate}</time></p>
 				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
 				<div id="article-detail">
 					<p>${vo.pcontent}</p>

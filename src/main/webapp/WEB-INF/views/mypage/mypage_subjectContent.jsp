@@ -337,7 +337,171 @@
         /* border:1px solid #ddd;  */
         font: 400 1rem/1.5rem 'NotoSansKR';
     }
+   
+    div.post-footer ul>li {
+		display:inline-block;		
+	}
+	
+   div.post-footer textarea {
+		width:650px;
+		height:30px;
+		font-size:18px;
+		padding:5px 5px;
+		margin:0 10px;
+		resize:none;	
+	}
+	div.post-footer img {
+		width:23px;
+		height:23px;
+		margin-bottom:10px;
+	}
+	div.post-footer button#comment_writeBtn{
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:7px 17px;
+		font-size:17px;
+		border-radius:5px; 
+		width:70px;
+		height:30px;
+		float:left;
+		
+	}
+	 div.post-footer button.comment_writeBtn:hover{
+	 	cursor:pointer;
+		opacity:0.7;
+	}
+	
+	div#subreview div.content_comment {
+		margin-bottom:10px;
+		margin-top:40px;
+	}
+	div#subreview img.commentMemberImg {
+		magin-bottom:100px;
+		border-radius:50%;
+		border:6px solid #fff;
+		box-shadow: 0 0 10px #FEE500;
+		margin-left:60px;
+	}
+	div#subreview div.commentMemberImg {
+		float:left;
+		display:inline-block;
+		width:80px;
+		height:110px;
+		
+	} 
+	div#subreview div.commentMemberSide {
+		margin-top:-10px;
+		padding-bottom:30px;
+	}
+	div#subreview ul.commentMemberSide {
+		display:inline-block;
+		list-style:none;
+	}
+	div#subreview ul.commentMemberSide>li {
+		margin-left:15px;
+	}
+	div#subreview ul.commentMemberSide>li:first-child {
+		margin-top:10px;
+		font-size:16px;
+		font-weight:900;
+	}
+	div#subreview ul.commentMemberSide>li:nth-child(2) {
+		margin-top:3px; 
+		font-size:15px;
+		color:gray;
+	}
+	div#subreview ul.commentMemberSide>li:nth-child(3) {
+		height:15%;
+		margin-top:8px; 
+		font-size:17px;
+	}
+	div#subreview ul.commentMemberSide>li:nth-child(4) {
+		font-size:17px;
+		display:block;
+		margin-top:10px;
+		padding-left:20px;
+	}
+	 div.commentMemberSide button#update,
+	 div.commentMemberSide button#delete {
+	 	all:unset;
+	 	display:inline-block;
+	 	margin-top:30px;
+	 	margin-right:10px;
+   
+	}
 </style>
+<script>
+
+	
+	function comment_list(bid){ 
+		$.ajax({
+			url:"subjectContentReview.do?bid="+bid,
+			success:function(result){
+				
+				var jdata = JSON.parse(result);	
+				var output="";
+				
+				for(var i in jdata.jlist){	
+					output +="<div class='content_comment' id='content_comment'>"
+					output += "<div class='commentMemberImg'>";
+					output += "<img src='images/mypage_bananaimg.jpg' class='commentMemberImg'>";
+					output += "</div>";
+					output += "<div class='commentMemberSide'>";
+					output += "<ul class='commentMemberSide'>";
+					
+					output += "<li><input id='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
+					output += "<li>" + jdata.jlist[i].nickname + "</li>";
+					output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
+					output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
+					output += "<li id='bcomment_area" + jdata.jlist[i].rno +"'>"+ "</li>";
+					
+					if('${mid}' == jdata.jlist[i].mid) {
+						output += "<li>";
+						output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
+						output += "<a href='subcomment_delete_proc.do?brid=" + jdata.jlist[i].brid + "&bstitle=${ vo.bstitle }'><button type='button' id='delete'>삭제</button></a>";
+						output += "</li>";
+					}
+					
+					output += "</ul>";
+					output += "</div>";
+					output += "</div>";
+			    }
+				
+				$("#subreview").text("");
+				$("#subreview").append(output);
+			}
+		})
+		
+	}//comment_list
+	
+	function update_pro(brid,rno) {
+		$("#bcomment_content"+rno).remove();
+		$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=${ vo.bstitle }");
+		$("button#update").hide();
+	}
+	
+	
+	
+	
+$(document).ready(function(){
+	
+	$("#comment_writeBtn").click(function(){
+
+		if($("#bcomment").val() == ""){
+			alert("댓글을 입력해주세요");
+			$("#bcomment").focus();
+			return false;
+		}else {
+			board_review_write_form.submit();
+			
+		}
+	});
+})
+
+
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -373,21 +537,21 @@
 			<c:otherwise>
 			
 
-			<c:forEach var="vo" items="${ list }">
+			<c:forEach var="xvo" items="${ list }">
 
-			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
+			    <a href="#"><div class="post-list">
 				
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
 					<ul>
-						<li class="userName">${ vo.nickname }</li>
-						<li class="userAddr">${ vo.maddr }</li>
-						<li class="regit-date">${ vo.bdate }</li>
+						<li class="userName">${ xvo.nickname }</li>
+						<li class="userAddr">${ xvo.maddr }</li>
+						<li class="regit-date">${ xvo.bdate }</li>
 					</ul>
 				</div>
 				<div class="box">
 					<div class="post-body">
-						<pre><c:out value="${ vo.btopic}" /></pre>
+						<pre><c:out value="${ xvo.btopic}" /></pre>
 					</div>
 				</div>
 				</a>
@@ -401,7 +565,21 @@
 				</div>
 				<div class="post-footer">
 					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
-					<a href="#"><img src="images/messenger.png"><button type="button" id="comment-btn">댓글 16</button></a>
+					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${xvo.bid}')">댓글 ${count }</button>
+						<div id="subreview">
+						
+						</div>
+						 <div >				
+							<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${xvo.bid }&loc=subcontent&bstitle=${ vo.bstitle }" method=POST id="board_review_write_form"  >
+								<div class="content_comment_write">
+									<ul>
+										<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
+										<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+									</ul>
+								</div>
+							</form>
+								
+						</div> 
 					<div class="display-like"></div>
 				</div>
 				</c:forEach>

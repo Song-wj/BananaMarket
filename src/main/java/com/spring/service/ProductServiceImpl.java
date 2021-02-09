@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.productDAO;
 import com.banana.vo.LikeVO;
-import com.banana.vo.SessionVO;
 import com.banana.vo.productVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

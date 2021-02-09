@@ -107,6 +107,10 @@ public class dongneDAO extends DBConn{
 		return sqlSession.selectOne(namespace+".getShopAlarmCount", mid);
 	}
 	
+	public int getreviewCount(String bstitle) {
+		return sqlSession.selectOne(namespace+".getreviewcount" , bstitle);
+	}
+	
 	public int getAlarmCount(String mid) {
 		return sqlSession.selectOne(namespace+".getAlarmCount", mid);
 	}
@@ -130,6 +134,12 @@ public class dongneDAO extends DBConn{
 		int val = sqlSession.update(namespace+".updateSubject",vo);
 		if(val != 0) result = true;
 		return result;
+	}
+	
+	public ArrayList<DongneCommentVO> getSubReview(String bid){
+	
+		List<DongneCommentVO> list =sqlSession.selectList(namespace+".getsubreview" ,bid);
+		return (ArrayList<DongneCommentVO>)list;
 	}
 	
 	public dongneSubjectVO getSubjectContent(String bsid) {
@@ -288,6 +298,91 @@ public class dongneDAO extends DBConn{
 			pstmt.setString(2, bid);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 검색 목록
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<dongneVO> getsearchlist(String search){
+		ArrayList<dongneVO> list = new ArrayList<dongneVO>();
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select *\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, b.bid, b.mid, b.btitle, b.btopic, b.bdate, m.nickname, m.maddr\r\n" + 
+					"      from banana_board b, banana_member m\r\n" + 
+					"      where b.mid = m.mid)\r\n" + 
+					"where (btitle like ? or btopic like ? or nickname like ? or maddr like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			pstmt.setString(4, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dongneVO vo = new dongneVO();
+				
+				vo.setRno(rs.getString(1));
+				vo.setBid(rs.getString(2));
+				vo.setMid(rs.getString(3));
+				vo.setBtitle(rs.getString(4));
+				vo.setBtopic(rs.getString(5));
+				vo.setBdate(rs.getString(6));
+				vo.setNickname(rs.getString(7));
+				vo.setMaddr(rs.getString(8));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 검색 카운트
+	 * @param search
+	 * @return
+	 */
+	public int getsearchCount(String search){
+		int result = 0;
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select count(*)\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, b.bid, b.mid, b.btitle, b.btopic, b.bdate, m.nickname, m.maddr\r\n" + 
+					"      from banana_board b, banana_member m\r\n" + 
+					"      where b.mid = m.mid)\r\n" + 
+					"where (btitle like ? or btopic like ? or nickname like ? or maddr like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			pstmt.setString(4, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

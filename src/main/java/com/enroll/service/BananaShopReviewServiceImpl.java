@@ -159,7 +159,7 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 	}
 
 	@Override
-	public Object delete(Object srid) {
+	public Object delete(Object srid ) {
 		BananaShopReviewVO srvo = new BananaShopReviewVO();
 		srvo.setSrid((String)srid);
 		
