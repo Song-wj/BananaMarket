@@ -78,16 +78,44 @@ public class DongneServiceImpl implements BananaService{
 		return mv;
 	}
 	
+	public String getSubjectListReview(String bid) {
+		ArrayList<DongneCommentVO> list = dongneDAO.getSubReview(bid);
+		JsonArray jarray = new JsonArray();
+		JsonObject jobj = new JsonObject();
+		Gson gson = new Gson();
+		for(DongneCommentVO vo : list) {
+			JsonObject jdata = new JsonObject();
+			jdata.addProperty("brid", vo.getBrid());
+			jdata.addProperty("bid", vo.getBid());
+			jdata.addProperty("mid", vo.getMid());
+			jdata.addProperty("bcomment", vo.getBcomment());
+			jdata.addProperty("brdate", vo.getBrdate());
+			jdata.addProperty("nickname", vo.getNickname());
+			jdata.addProperty("maddr", vo.getMaddr());
+			jdata.addProperty("rno", vo.getRno());
+			
+			
+			jarray.add(jdata);
+		}
+		
+		jobj.add("jlist", jarray);
+		
+		return gson.toJson(jobj);
+	}
+	
 	public String deleteSubjectProc(String bsid) {
 		boolean result = dongneDAO.deleteSubjectProc(bsid);
 		return String.valueOf(result);
 	}
 	
-	public ModelAndView getSubjectListContent(String bsid, String bstitle) {
+	public ModelAndView getSubjectListContent( String bstitle ,String mid) {
 		ModelAndView mv = new ModelAndView();
-		dongneSubjectVO svo = dongneDAO.getSubjectContent(bsid);
+		int count = dongneDAO.getreviewCount(bstitle);
+		dongneSubjectVO svo = dongneDAO.getSubjectContent(bstitle);
 		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle);
 		
+		mv.addObject("count", count);
+		mv.addObject("mid", mid);
 		mv.addObject("list", list);
 		mv.addObject("vo", svo);
 		mv.setViewName("mypage/mypage_subjectContent");

@@ -3,7 +3,24 @@ package com.banana.vo;
 public class DongneCommentVO {
 	String brid, bid, mid, bcomment, brdate;
 	String nickname, maddr, msfile, rno;
+	String loc,title;
 	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getLoc() {
+		return loc;
+	}
+
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+
 	public String getRno() {
 		return rno;
 	}

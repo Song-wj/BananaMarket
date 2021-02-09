@@ -9,8 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.banana.dao.BananaShopDAO;
 import com.banana.dao.dongneDAO;
 import com.banana.dao.productDAO;
-import com.banana.vo.BananaShopVO;
-import com.banana.vo.dongneVO;
+import com.banana.vo.KeywordVO;
 import com.banana.vo.productVO;
 
 @Service("keywordService")
@@ -23,20 +22,48 @@ public class KeywordServiceImpl {
 	@Autowired
 	private BananaShopDAO bananashopDAO;
 	
-	 public String product_unlike(String mid, String keyword) {
+	 public String insertKeyword(String mid, String keyword) {
 		 boolean result = productDAO.getKeyword(mid,keyword);
 			return String.valueOf(result);
 	 }
 	 
-	 public Object getList(String mid) {
+	 public Object getList(String mid,String keyword) {
 			ModelAndView mv = new ModelAndView();
+			System.out.println(mid+","+keyword);
 			  ArrayList<productVO> list1 = productDAO.getkeywordlist(mid);
-			  /*ArrayList<dongneVO> list2 = dongneDAO.getLikelist(mid);
-			  ArrayList<BananaShopVO> list3 = bananashopDAO.getLikelist(mid);*/
+			  ArrayList<KeywordVO> list2 = productDAO.getkeyword(mid);
+			  ArrayList<productVO> list3 = productDAO.getkeywordclick(keyword);
+			  
+				mv.addObject("list3", list3);
+			  
+
 				mv.addObject("list1", list1);
-				/*mv.addObject("list2", list2);
-				mv.addObject("list3", list3);*/
+				mv.addObject("list2", list2);
 				mv.setViewName("/mypage/mypage_keyword");
 				return mv;
 		}
+	 
+	 public String delkeyword(String mid, String keyword) {
+		 //ModelAndView mv = new ModelAndView();
+		 boolean result = productDAO.delkeyword(mid, keyword);
+			return String.valueOf(result);
+	 }
+	 
+	 
+	 public Object keywordclick(String mid,String keyword) {
+		 ModelAndView mv = new ModelAndView();
+			System.out.println(mid+","+keyword);
+			  ArrayList<productVO> list1 = productDAO.getkeywordlist(mid);
+			  ArrayList<KeywordVO> list2 = productDAO.getkeyword(mid);
+			  ArrayList<productVO> list3 = productDAO.getkeywordclick(keyword);
+			  
+				mv.addObject("list3", list3);
+			  
+
+				mv.addObject("list1", list1);
+				mv.addObject("list2", list2);
+				mv.setViewName("/mypage/mypage_keyword");
+				return mv;
+	 }
+	 
 }

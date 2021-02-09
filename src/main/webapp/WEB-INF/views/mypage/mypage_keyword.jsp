@@ -10,6 +10,10 @@
 <script>
 $(document).ready(function(){
 	
+
+	
+
+	
 	$("#keywordplus").click(function(){
 		if($("#keyword").val() == ""){
 			alert("키워드를 입력해주세요");
@@ -30,11 +34,45 @@ function ajax_keywordplus(keyword){
 			success:function(result){
 			}
 		});
-				$("#keyword").val("");
-				alert("키워드를 등록하였습니다");
+		$("#keyword").val("");
+		alert("키워드를 등록하였습니다");
+				location.reload();
 	}
 }
+function delkeyword(keyword) {
+	var confirmflag = confirm(keyword+"키워드를 삭제하시겠습니까?");
+	 if(confirmflag){
+		 $.ajax({
+			  url:"delkeyword.do?keyword="+keyword, //mid는 로그인한사람id
+			  success:function(result){
+				alert('삭제가 완료되었습니다.');
+				location.reload();
+			  }
+			});
+	 }
+}
+/* function clickkeyword(keyword) {
+	var confirmflag = confirm(keyword+"보시겠습니까");
+	 if(confirmflag){
+		 $.ajax({
+			  url:"mypage_keywordclick.do?keyword="+keyword, //mid는 로그인한사람id
+			  success:function(result){
+			  }
+			});
+	 }
+} */
 	
+var goPopup = function() {
+	var _width = '400';
+    var _height = '330';
+
+	var _left = Math.ceil(( window.screen.width - _width )/2);
+    var _top = Math.ceil(( window.screen.width - _height )/2); 
+
+	var pop = window.open("whyPopup.do", "pop",
+			"width=400,height=330, scrollbars=yes, resizable=yes") 
+
+}
 </script>
 <style>
 	div.mypage_keyword {
@@ -74,7 +112,7 @@ function ajax_keywordplus(keyword){
 		text-indent:10px;
 		font-size:17px;
 	}
-	.mypage_keyword button {
+	.mypage_keyword button.keywordplus {
 		pisition:relative;
 		color:RGB(82,67,21);
 		background-color:RGB(254,229,0);
@@ -85,7 +123,7 @@ function ajax_keywordplus(keyword){
 		border-radius:5px;
 		width:90px;
 	}
-	.mypage_keyword button:hover{
+	.mypage_keyword button.keywordplus:hover{
 		opacity:0.7;
 	}
 	div.mypage_keyword table.mypage_table {
@@ -115,34 +153,63 @@ function ajax_keywordplus(keyword){
 	div.mypage_keyword table.mypage_table span.price {
 		font-weight:900;
 	}
+	button.btn_like{
+		pisition:relative;
+		color:RGB(82,67,21);
+		background-color:RGB(251,247,242);
+		border:1px solid RGB(251,247,242);
+		padding:3px 5px;
+		font-size:17px;
+		border-radius:5px;
+		text-decoration:underline
+	}
+	button.btn_like:hover{
+		font-weight:bold;
+	}
 </style>
 <body>
 	<div class="mypage_keyword">
-		<section class="section1_keyword">
-			<div class="keyword_title"><h1>알림 받을 키워드<span>0/30</span></h1></div>
-			<label>혹시 키워드 알림이 오지 않나요?</label><br>
+		<section class="section1_keyword" id="section1_keyword">
+			<div class="keyword_title"><h1>알림 받을 키워드</h1></div>
+			<label onclick="goPopup()">혹시 키워드 알림이 오지 않나요?</label><br>
 				<input type="text" id="keyword" placeholder=" 키워드를 입력해주세요. (ex : 자전거)">
-				<button type="button" id="keywordplus">등록</button>
-				<div id="output"></div>
+				<button type="button" id="keywordplus" class="keywordplus">등록</button>
+				<div id="output">등록된 키워드(클릭하여 삭제) : 
+				<c:forEach var="vo" items="${list2 }">
+					<button type="button" class="btn_like" id="keyword" onclick="delkeyword('${vo.keyword }')">
+	  							<span class="img_emoti">#${vo.keyword }</span></button>
+				</c:forEach>
+				</div>
 		</section>
-		<c:forEach var="vo" items="${ list1 }">
-				<table class="mypage_table">
-				<tr>
-					<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
-					<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
-					<%-- <td rowspan="3">
-					<button type="button" class="btn_like" id="btnLike" onclick="delProductLike('${vo.pid}')">
-  							<span class="img_emoti">좋아요취소</span></button>
-  					</td> --%>
-				</tr>
-				<tr>
-					<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
-				</tr>
-				<tr>
-					<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
-				</tr>
-			</table>
-			</c:forEach> 
+		<section class="section2_keyword" id="section2_keyword">
+			
+				<c:choose >
+					<c:when test="${empty list1 }">
+					<table class="mypage_table">
+						<tr>
+							<td style="padding: 50px 0; text-align:center;"><h3>검색된 키워드가 없습니다</h3></td>
+						</tr> 
+					</table>
+					</c:when>
+				<c:otherwise>
+					<c:forEach var="vo" items="${ list1 }">
+					<table class="mypage_table">
+						<tr>
+							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
+							<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
+						</tr>
+						<tr>
+							<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
+						</tr>
+						<tr>
+							<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
+						</tr>
+					</table>
+					</c:forEach> 
+				</c:otherwise>
+				</c:choose>
+				
+		</section>
 	</div>	
 </body>
 </html>

@@ -15,6 +15,17 @@ public class dongneVO {
 	String sfile;
 	
 	List<MultipartFile> list ;
+	
+	String rno;
+	
+	public String getRno() {
+		return rno;
+	}
+
+	public void setRno(String rno) {
+		this.rno = rno;
+	}
+
 	public String getCancel_img() {
 		return cancel_img;
 	}

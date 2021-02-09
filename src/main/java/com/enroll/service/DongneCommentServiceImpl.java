@@ -1,5 +1,7 @@
 package com.enroll.service;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,9 +129,16 @@ public class DongneCommentServiceImpl implements EnrollService {
 		boolean result = false;
 		DongneCommentVO dcvo = (DongneCommentVO)vo;
 		result = dongneCommentDAO.insertDongneComment(dcvo);
-		
+		 
 		if(result) {
-			mv.setViewName("redirect:/dongneLife_content.do?bid="+dcvo.getBid());
+			if(dcvo.getLoc().equals("subcontent")) {
+				System.out.println(dcvo.getTitle());
+				mv.setViewName("redirect:/mypage_subjectContent.do?bstitle="+dcvo.getTitle());
+
+			}else {
+				mv.setViewName("redirect:/dongneLife_content.do?bid="+dcvo.getBid());
+				
+			}
 		}else {
 			
 		}
@@ -137,24 +146,54 @@ public class DongneCommentServiceImpl implements EnrollService {
 		return mv;
 	}
 
+	public Object insert1(Object vo) throws UnsupportedEncodingException {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean result = false;
+		DongneCommentVO dcvo = (DongneCommentVO)vo;
+		result = dongneCommentDAO.insertDongneComment(dcvo);
+		 String encodedParam = URLEncoder.encode(dcvo.getTitle(), "UTF-8");
+		if(result) {
+			if(dcvo.getLoc().equals("subcontent")) {
+				mv.setViewName("redirect:/mypage_subjectContent.do?bstitle="+encodedParam);
+
+			}else {
+				mv.setViewName("redirect:/dongneLife_content.do?bid="+dcvo.getBid());
+				
+			}
+		}else {
+			
+		}
+		
+		return mv;
+	}
 	@Override
 	public Object getContent(Object id, String mid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public Object update(Object vo) {
+		return "";
+	}
+	
+	public Object update1(Object vo) throws UnsupportedEncodingException {
 		ModelAndView mv = new ModelAndView();
 
 		boolean result = false;
 		DongneCommentVO dcvo = (DongneCommentVO)vo;
-		
+		String encodedParam = URLEncoder.encode(dcvo.getTitle(), "UTF-8");
 		String bid = dongneCommentDAO.getBid(dcvo);
 		result = dongneCommentDAO.dongneCommentUpdate(dcvo);
 		
 		if(result) {
-			mv.setViewName("redirect:/dongneLife_content.do?bid="+bid);
+			if(!dcvo.getTitle().equals("null")) {
+				mv.setViewName("redirect:/mypage_subjectContent.do?bstitle="+encodedParam);
+
+			}else {
+				mv.setViewName("redirect:/dongneLife_content.do?bid="+bid);
+				
+			}
 		}else {
 			
 		}
@@ -175,8 +214,8 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		return mv;
 	}
-	
-	public Object getUpdateContent(Object brid, String rno) {
+	@Override
+	public Object getUpdateContent(Object brid, String rno ) {
 		ModelAndView mv = new ModelAndView();
 		DongneCommentVO vo = new DongneCommentVO();
 		String bid = dongneCommentDAO.getBid(vo);
@@ -189,9 +228,23 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		return mv;
 	}
-
+	
+	public Object getUpdateContent(Object brid, String rno ,String bstitle ) {
+		ModelAndView mv = new ModelAndView();
+		DongneCommentVO vo = new DongneCommentVO();
+		String bid = dongneCommentDAO.getBid(vo);
+		
+		vo = dongneCommentDAO.getDongneCommentContent((String)brid);
+		mv.addObject("bstitle", bstitle);
+		mv.addObject("rno", rno);
+		mv.addObject("vo", vo);
+		mv.setViewName("dongneLife/dongneLifeComment_content");
+		
+		return mv;
+	}
+	
 	@Override
-	public Object delete(Object brid) {
+	public Object delete(Object brid ) {
 		boolean result = false;
 		String str = "";
 		DongneCommentVO dcvo = new DongneCommentVO();
@@ -208,6 +261,24 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		return str;
 	}
+	public Object delete1(Object brid ,String bstitle ) throws UnsupportedEncodingException {
+		boolean result = false;
+		String str = "";
+		DongneCommentVO dcvo = new DongneCommentVO();
+		dcvo.setBrid((String)brid);
+		
+		String encodedParam = URLEncoder.encode(bstitle, "UTF-8");
+		result = dongneCommentDAO.dongneCommentDelete((String)brid);
+		
+		if(result) {
+			str = "redirect:/mypage_subjectContent.do?bstitle="+encodedParam;
+		}else {
+			
+		}
+		
+		return str;
+	}
+	
 
 	@Override
 	public Object getSelectList(String sid) {
