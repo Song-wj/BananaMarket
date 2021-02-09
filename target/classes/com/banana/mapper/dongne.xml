@@ -13,6 +13,10 @@
       			where b.bid = br.bid and b.mid=#{mid}) bbr, banana_review_alarm ra
 		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
 	</select> -->
+	<select id="getreviewcount" parameterType="java.lang.String" resultType="int">
+		select count(*) from banana_board b , banana_board_review r
+		where b.bid=r.bid and btitle=#{bstitle}
+	</select>
 	
 	<delete id="deleteReviewAlarm" parameterType="java.lang.String">
 		delete from banana_review_alarm where brid=#{brid}

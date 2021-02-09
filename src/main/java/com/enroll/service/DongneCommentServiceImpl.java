@@ -104,7 +104,6 @@ public class DongneCommentServiceImpl implements EnrollService {
 		 String encodedParam = URLEncoder.encode(dcvo.getTitle(), "UTF-8");
 		if(result) {
 			if(dcvo.getLoc().equals("subcontent")) {
-				System.out.println(dcvo.getTitle());
 				mv.setViewName("redirect:/mypage_subjectContent.do?bstitle="+encodedParam);
 
 			}else {
@@ -122,19 +121,28 @@ public class DongneCommentServiceImpl implements EnrollService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public Object update(Object vo) {
+		return "";
+	}
+	
+	public Object update1(Object vo) throws UnsupportedEncodingException {
 		ModelAndView mv = new ModelAndView();
 
 		boolean result = false;
 		DongneCommentVO dcvo = (DongneCommentVO)vo;
-		
+		String encodedParam = URLEncoder.encode(dcvo.getTitle(), "UTF-8");
 		String bid = dongneCommentDAO.getBid(dcvo);
 		result = dongneCommentDAO.dongneCommentUpdate(dcvo);
 		
 		if(result) {
-			mv.setViewName("redirect:/dongneLife_content.do?bid="+bid);
+			if(!dcvo.getTitle().equals("null")) {
+				mv.setViewName("redirect:/mypage_subjectContent.do?bstitle="+encodedParam);
+
+			}else {
+				mv.setViewName("redirect:/dongneLife_content.do?bid="+bid);
+				
+			}
 		}else {
 			
 		}
@@ -155,8 +163,8 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		return mv;
 	}
-	
-	public Object getUpdateContent(Object brid, String rno) {
+	@Override
+	public Object getUpdateContent(Object brid, String rno ) {
 		ModelAndView mv = new ModelAndView();
 		DongneCommentVO vo = new DongneCommentVO();
 		String bid = dongneCommentDAO.getBid(vo);
@@ -169,7 +177,21 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		return mv;
 	}
-
+	
+	public Object getUpdateContent(Object brid, String rno ,String bstitle ) {
+		ModelAndView mv = new ModelAndView();
+		DongneCommentVO vo = new DongneCommentVO();
+		String bid = dongneCommentDAO.getBid(vo);
+		
+		vo = dongneCommentDAO.getDongneCommentContent((String)brid);
+		mv.addObject("bstitle", bstitle);
+		mv.addObject("rno", rno);
+		mv.addObject("vo", vo);
+		mv.setViewName("dongneLife/dongneLifeComment_content");
+		
+		return mv;
+	}
+	
 	@Override
 	public Object delete(Object brid ) {
 		boolean result = false;

@@ -383,7 +383,7 @@
 		
 		//수정 버튼 눌렸을 때
 		$("#commentUpdate").click(function(){
-			alert("fdlke");
+			
 			$("#section5_dongneLife_content").load("dongneLifeComment_update.do");
 		});
 		
@@ -534,7 +534,7 @@
 <script>
 function update_pro(brid,rno) {
 	$("#bcomment_content"+rno).remove();
-	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno);
+	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=null");
 	$("button#update").hide();
 }
 </script>

@@ -476,11 +476,12 @@
 		
 	}//comment_list
 	
-	//수정 버튼 눌렸을 때
-	$("#commentUpdate").click(function(){
-		alert("fdlke");
-		$("#section5_dongneLife_content").load("dongneLifeComment_update.do");
-	}); 
+	function update_pro(brid,rno) {
+		$("#bcomment_content"+rno).remove();
+		$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=${ vo.bstitle }");
+		$("button#update").hide();
+	}
+	
 	
 	
 	
@@ -538,7 +539,7 @@ $(document).ready(function(){
 
 			<c:forEach var="xvo" items="${ list }">
 
-			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
+			    <a href="#"><div class="post-list">
 				
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
@@ -564,7 +565,7 @@ $(document).ready(function(){
 				</div>
 				<div class="post-footer">
 					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
-					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${xvo.bid}')">댓글 16</button>
+					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${xvo.bid}')">댓글 ${count }</button>
 						<div id="subreview">
 						
 						</div>

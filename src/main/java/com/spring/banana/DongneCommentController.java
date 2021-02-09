@@ -53,10 +53,12 @@ public class DongneCommentController {
 	
 	/**
 	 * 동네생활 - 댓글 수정 처리
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="/comment_update_proc.do", method=RequestMethod.POST)
-	public ModelAndView comment_update_proc(DongneCommentVO vo) {
-		return (ModelAndView)dongneCommentService.update(vo);
+	public ModelAndView comment_update_proc(DongneCommentVO vo ,String bstitle) throws UnsupportedEncodingException {
+		vo.setTitle(bstitle);
+		return (ModelAndView)dongneCommentService.update1(vo);
 	}
 	
 	/**
@@ -64,8 +66,8 @@ public class DongneCommentController {
 	 * @return
 	 */
 	@RequestMapping(value="/dongneLifeComment_update.do",method=RequestMethod.GET)
-	public ModelAndView dongneLifeComment_update(String brid, String rno) {
-		return (ModelAndView)dongneCommentService.getUpdateContent(brid, rno); 
+	public ModelAndView dongneLifeComment_update(String brid, String rno ,String bstitle){
+		return (ModelAndView)dongneCommentService.getUpdateContent(brid, rno ,bstitle); 
 	}
 	
 	/**
