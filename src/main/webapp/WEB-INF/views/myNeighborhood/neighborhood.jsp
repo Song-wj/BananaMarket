@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,21 +208,19 @@
 		<div class="recommand_store">
 			<a href="enrollstore.do"><button type="button">업체 등록</button></a>
 			<label>이웃들의 추천 가게</label>
-			<c:forEach var="vo" items="${list }">
+			<c:forEach var="vo" items="${list2 }">
 			<div class="store_recommand">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>
 				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
 				<label class="store_info">${vo.sintro }</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
+				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
 				<div class="store_review">
-					<span>oo님</span>
-					<label>호호호호</label>
+					<label>${fn:substring(vo.srcontent,0,8) }..</label>
 				</div>	
 			</div>	
 			</c:forEach>
-			<button type="button">더 보러가기</button>				
 		</div>  <!-- recommand_store -->
 		<div class="recommand_store">
 			<label>내 근처 가게 소식</label>
@@ -232,14 +231,13 @@
 				</div>
 				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
 				<label class="store_info">${vo.sintro }</label>
-				<span class="review_count">후기 5</span><span class="interest_count">관심 3</span>
+				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
 				<div class="store_review">
-					<span>oo님</span>
-					<label>호호호호</label>
+					<label>${fn:substring(vo.srcontent,0,8) }..</label>
 				</div>	
 			</div>	
 			</c:forEach>
-			<button type="button">가게 소식 전체 보기 > </button>
+			<!-- <button type="button">가게 소식 전체 보기 > </button> -->
 		</div><!-- store_news -->
 		
 	</div> <!-- content -->

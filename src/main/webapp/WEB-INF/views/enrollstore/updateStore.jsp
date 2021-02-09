@@ -129,6 +129,12 @@
 	span#fname{
 		margin-left:10px;
 	}
+	span.input_red {
+		padding-left:25px;
+		color:red;
+		font-size:14px;
+		font-weigth:800;
+	}
 </style>
 <script>
 
@@ -217,8 +223,6 @@ $(document).ready(function(){
 			$("#btnEnroll").focus();
 		}
 		
-		/* alert(sel_files2); */
-		
 	});
 	
 	
@@ -289,7 +293,7 @@ $(document).ready(function(){
 				<input type="hidden" name="sid" value="${vo.sid }">
 				<h1>동네업체 수정</h1>
 				<ul>
-					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>
+					<li><div id="inputMain"><label for="input_img">메인 이미지 추가<br><span class="input_red">최대 1장</span></label>
 						<c:choose>
 							<c:when test="${vo.smain_img ne null }">
 								<input type="file" id="input_img" name="file1" multiple><span id="fname">${vo.smain_img }</span>
@@ -370,7 +374,7 @@ $(document).ready(function(){
 					<li>
 						<textarea name="sintro" rows="5" class="f1" id="storeintro">${vo.sintro }</textarea>
 					</li>
-					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가</label>
+					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가<br><span class="input_red">최대 3장</span></label>
 						<input type="file" id="input_carousel_img" name="file_list" multiple>
 						</div>
 						<div class="img_list" id="img_carousel_list"></div>
