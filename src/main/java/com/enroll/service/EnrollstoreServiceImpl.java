@@ -56,8 +56,10 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	public Object getList() {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<BananaShopVO> list = shopDAO.getShopList();
+		ArrayList<BananaShopVO> list2 = shopDAO.getLikeShopList();
 		
 		mv.addObject("list",list);
+		mv.addObject("list2",list2);
 		mv.setViewName("/myNeighborhood/neighborhood");
 		
 		return mv;

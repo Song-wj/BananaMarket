@@ -13,10 +13,44 @@ public class BananaShopVO {
 	CommonsMultipartFile file1;
 	List<MultipartFile> flie_list ;
 	String rno, nickname, maddr;
+	int like_count, review_count;
+	String srid, srcontent;
 	
 	String savepath1;
 	StringBuilder dong = new StringBuilder();
 	
+	public int getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
+
+	public String getSrid() {
+		return srid;
+	}
+
+	public void setSrid(String srid) {
+		this.srid = srid;
+	}
+
+	public String getSrcontent() {
+		return srcontent;
+	}
+
+	public void setSrcontent(String srcontent) {
+		this.srcontent = srcontent;
+	}
+
+	public int getLike_count() {
+		return like_count;
+	}
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+
 	public String getRno() {
 		return rno;
 	}
