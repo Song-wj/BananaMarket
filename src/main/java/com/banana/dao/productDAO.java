@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.KeywordVO;
 import com.banana.vo.LikeVO;
+import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 
 public class productDAO extends DBConn{
@@ -417,6 +418,7 @@ public class productDAO extends DBConn{
 		
 		return result;
 	}
+	
 	/**
 	 * 키워드검색 목록
 	 * @param mid
@@ -533,5 +535,94 @@ public class productDAO extends DBConn{
 		}
 		
 		return list;
+	}
+		
+	/**
+	 * 검색 목록
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<productVO> getsearchlist(String search){
+		ArrayList<productVO> list = new ArrayList<productVO>();
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select *\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, p.pid, p.mid, p.ptitle, p.pcategory, p.pcontent, p.plike, p.pchat, p.pdate, p.pchk, p.psfile, m.nickname, m.maddr, p.pprice\r\n" + 
+					"      from banana_product p, banana_member m\r\n" + 
+					"      where p.mid = m.mid)\r\n" + 
+					"where (ptitle like ? or pprice like ? or maddr like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				productVO vo = new productVO();
+				
+				vo.setRno(rs.getString(1));
+				vo.setPid(rs.getString(2));
+				vo.setMid(rs.getString(3));
+				vo.setPtitle(rs.getString(4));
+				vo.setPcategory(rs.getString(5));
+				vo.setPcontent(rs.getString(6));
+				vo.setPlike(rs.getString(7));
+				vo.setPchat(rs.getString(8));
+				vo.setPdate(rs.getString(9));
+				vo.setPchk(rs.getString(10));
+				vo.setPsfile(rs.getString(11));
+				vo.setNickname(rs.getString(12));
+				vo.setMaddr(rs.getString(13));
+				vo.setPprice(rs.getString(14));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 검색 카운트
+	 * @param search
+	 * @return
+	 */
+	public int getsearchCount(String search){
+		int result = 0;
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select count(*)\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, p.pid, p.mid, p.ptitle, p.pcategory, p.pcontent, p.plike, p.pchat, p.pdate, p.pchk, p.psfile, m.nickname, m.maddr, p.pprice\r\n" + 
+					"      from banana_product p, banana_member m\r\n" + 
+					"      where p.mid = m.mid)\r\n" + 
+					"where (ptitle like ? or pprice like ? or maddr like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }

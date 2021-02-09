@@ -238,6 +238,14 @@
         }
         
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header-search-button").click(function() {
+    	var search = $("#header-search-input").val();
+		location.href="http://localhost:9000/banana/search.do?search="+search;
+    });
+});
+</script>
 </head>
 <body>
 	<header id="fixed-bar" class="fixed-bar-box-shadow">
