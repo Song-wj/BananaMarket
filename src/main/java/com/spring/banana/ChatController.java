@@ -1,28 +1,54 @@
 package com.spring.banana;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.banana.vo.ChatVO;
+import com.banana.vo.SessionVO;
+import com.spring.service.ChatServiceImpl;
 
 @Controller
 public class ChatController {
+	
+	@Autowired
+	private ChatServiceImpl chatService;
+	
+	/**
+	 *  채팅 처리
+	 */
+	@RequestMapping(value="/chat_write_proc.do", method=RequestMethod.POST)
+	public ModelAndView chat_write_proc(ChatVO cvo, String cid, HttpSession session) {
+		cvo.setCid(cid);
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		cvo.setBuy_mid(svo.getMid());
+		return (ModelAndView)chatService.insert(cvo);
+	}
 	
 	/**
 	 * 채팅 - 상세 내용
 	 * @return
 	 */
 	@RequestMapping(value ="/chat_list_content.do", method = RequestMethod.GET)
-	public String chat_list_content() {
-		return "/chatBanner/chat_list_content";
+	public ModelAndView chat_list_content(String cid) {
+		
+		return (ModelAndView)chatService.getContent(cid);
 	}
+	
 	
 	/**
 	 * 채팅 - 홈 화면
 	 * @return
 	 */
 	@RequestMapping(value ="/chat_list.do", method = RequestMethod.GET)
-	public String chat_list() {
-		return "/chatBanner/chat_list";
+	public ModelAndView chat_list() {
+		
+		return (ModelAndView)chatService.getList();
+		//"/chatBanner/chat_list";
 	}
 	
 	/**
