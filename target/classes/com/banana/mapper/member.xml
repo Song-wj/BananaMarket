@@ -10,6 +10,7 @@
 		select mid, nickname, ph, maddr, msfile, score, mdate from banana_member where mid=#{mid} 
 	</select> -->
 	
+	
 	<update id="memberUpdate" parameterType="com.banana.vo.BananaMemberVO">
 		update banana_member set nickname=#{nickname}, pw=#{pw}, ph=#{ph}
 			<if test="mfile != null">
