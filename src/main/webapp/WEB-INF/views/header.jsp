@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
+		get_alarm_review_msg('${ svo.mid }');
+		
 		alarm_count('${ svo.mid }');
 		
 		$("#al-msg").click(function(){
@@ -27,6 +29,46 @@
 			success: function(cnt) {
 				$("#al-cnt").append(cnt);
 			}		
+		});
+	}
+	
+	function get_alarm_review_msg(mid) {
+		$.ajax({
+			url: "getReviewAlarmContent.do?mid="+mid,
+			success: function(result) {
+				var jdata = JSON.parse(result);
+				var output = "";
+					output+= "<ul id='review-alarm'>";
+				for(var i in jdata.jlist) {
+					//if(jdata.jlist.length > 0) {
+					output+= "<li onclick=" + "\"move_dongneLife_content('"+ jdata.jlist[i].bid +"','"+ jdata.jlist[i].brid +"')\">";
+					output+= "<p>";
+					output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].btopic+"</span> 글에 댓글을 남겼습니다.<br>";
+					output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>" +"<span class='ra-date'>"+ jdata.jlist[i].ra_data +"</span>";
+					output+= "</p>";
+					output+= "</li>";
+					/* }
+					else {
+						output+="<li>알림이 없습니다.</li>";
+					} */
+				}
+					output+= "</ul>";
+				
+				$(".review-al-content").append(output);
+			}
+		});
+	}
+	
+	function move_dongneLife_content(bid, brid) {
+		$.ajax({
+			url: "ra_delete.do?brid="+brid,
+			success: function(result) {
+				if(result) {
+					$(location).attr('href','http://localhost:9000/banana/dongneLife_content.do?bid='+bid);
+				} else {
+					alert("fail");
+				}
+			} 
 		});
 	}
 </script>
@@ -175,7 +217,24 @@
         	list-style-type: none;
         }
         .modal_content ul li{
-			margin-bottom: 5px;
+			margin-bottom: 8px;
+			border-bottom: 1px solid #ccc;
+        }
+        .modal_content ul li:hover{
+        	background-color: #FEE500;
+        }
+        .modal_content ul li:first-child{
+        	border-top: 1px solid #ccc;
+        }
+        
+        .modal_content ul .ra-id,
+        .modal_content ul .ra-title {
+        	font-weight: bold;
+        }
+        .modal_content ul .ra-date {
+        	font-size: 16px;
+        	color: #666;
+        	margin-left: 10px;
         }
         
 </style>
@@ -214,23 +273,9 @@
 							<div class="modal" style="display:none">
 								<div class="modal_overlay"></div>
 								<div class="modal_content">
-								<ul>
-								<c:forEach var="ravo" items="ralist">
-									<c:choose>
-										<c:when test="${ ralist ne null }">
-												<li>
-													<p>
-														${ ravo.mid } 님이 ${ ravo.btopic }에 댓글을 남겼습니다.<br>
-														${ ravo.mid }: ${ ravo.bcomment }
-													</p> 
-												</li>
-										</c:when>
-										<c:otherwise>
-											<p>알림이 없습니다.</p>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								</ul>
+									<div class="review-al-content">
+										<span>우리동네 알림</span>
+									</div>
 								</div>
 							</div>
 						</li>

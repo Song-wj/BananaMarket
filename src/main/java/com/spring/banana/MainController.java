@@ -20,16 +20,24 @@ public class MainController {
 	private EnrollService dongneCommentService;
 	
 	@ResponseBody
+	@RequestMapping(value="/ra_delete.do", method=RequestMethod.GET)
+	public String ra_delete(String brid) {
+		//SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneCommentService.deleteReviewAlarm(brid);
+	}
+	
+	@ResponseBody
 	@RequestMapping(value="/alarm_count.do", method=RequestMethod.GET)
 	public String alarm_count(String mid) {
 		//SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return dongneCommentService.getAlarmCount(mid);
 	}
 	
-	@RequestMapping(value="/getReviewAlarmContent.do", method=RequestMethod.GET)
-	public String getReviewAlarmContent(HttpSession session) {
-		SessionVO svo = (SessionVO)session.getAttribute("svo");
-		return dongneCommentService.getAlarmContent(svo.getMid());
+	@ResponseBody
+	@RequestMapping(value="/getReviewAlarmContent.do", method=RequestMethod.GET
+	, produces="text/plain;charset=UTF-8")
+	public String getReviewAlarmContent(String mid) {
+		return dongneCommentService.getAlarmContent(mid);
 	}
 	
 	@RequestMapping(value="/header.do", method=RequestMethod.GET)
@@ -42,5 +50,9 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/search.do",method=RequestMethod.GET)
+	public String search() {
+		return "search";
+	}
 	
 }

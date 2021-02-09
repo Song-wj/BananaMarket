@@ -24,9 +24,13 @@ public class DongneCommentServiceImpl implements EnrollService {
 	@Autowired
 	private dongneDAO dongneDAO;
 	/////
+	
+	public String deleteReviewAlarm(String brid) {
+		boolean result = dongneDAO.deleteReviewAlarmProc(brid);
+		return String.valueOf(result);
+	}
 
 	public String getAlarmContent(String mid) {
-		String str =""; //return юс╫ц
 		ArrayList<BananaReviewAlarmVO> ralist = dongneDAO.getReviewContent(mid);
 		
 		JsonArray jarray = new JsonArray();
@@ -35,9 +39,17 @@ public class DongneCommentServiceImpl implements EnrollService {
 		
 		for(BananaReviewAlarmVO vo : ralist) {
 			JsonObject jobj = new JsonObject();
-			
+			jobj.addProperty("btopic", vo.getBtopic());
+			jobj.addProperty("mid", vo.getMid());
+			jobj.addProperty("bcomment", vo.getBcomment().replace("\r\n", "<br>"));
+			jobj.addProperty("brid", vo.getBrid());
+			jobj.addProperty("ra_data", vo.getRa_date());
+			jobj.addProperty("bid", vo.getBid());
+			jarray.add(jobj);
 		}
-		return str;
+		jdata.add("jlist", jarray);
+		
+		return gson.toJson(jdata);
 	}
 	
 	public String getAlarmCount(String mid) {

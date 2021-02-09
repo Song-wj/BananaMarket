@@ -30,35 +30,36 @@
   		</choose>
 	</insert>
 	
-	<select id="getlist" resultType="com.banana.vo.ReviewVO" >
-		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate, maddr
-		from banana_member m ,
-			(select rid,pid,mid,score,review, rfile, rsfile, rdate
-			  from banana_buy_review
-			  union
-			  select rid,pid,mid,score,review, rfile, rsfile, sdate
-			  from banana_sell_review )r
-			where m.mid= r.mid 
-			order by rdate 
+	<select id="getlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
+	
+   select  rid, mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+   from( select  rid, r.mid,r.score,review, rfile, rsfile, rdate
+		 from banana_buy_review r ,  banana_product p                            
+		 where r.pid = p.pid and p.mid =#{mid}	   
+   		 union
+   		 select rid,r.mid,r.score,review, rfile, rsfile,  sdate
+		 from  banana_product p  , banana_sell_review r
+		 where p.pid= p.pid and p.buy_mid =#{mid})
+    order by rdate 
 	</select> 
 	
 	
-	<select id="getbuylist" resultType="com.banana.vo.ReviewVO" >
-		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate, maddr
-		from banana_member m , banana_buy_review r
-		where m.mid= r.mid 
-		order by rdate 
+	<select id="getbuylist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
+		select  rid, r.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+		from banana_buy_review r ,  banana_product p                            
+		where r.pid = p.pid and p.mid =#{mid}
+		order by rdate
 	</select> 
 	
-	<select id="getselllist" resultType="com.banana.vo.ReviewVO" >
-		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-sdate)*24*60)) rdate, maddr
-		from banana_member m , banana_sell_review r
-		where m.mid= r.mid 
+	<select id="getselllist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
+		select rid,r.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-sdate)*24*60)) rdate
+		from  banana_product p  , banana_sell_review r
+		where p.pid= p.pid and p.buy_mid =#{mid}
 		order by sdate 
 	</select>
 	
 	<select id="getmyreviewlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
-		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate, maddr
+		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
 		from banana_member m , 
    			 (select rid,pid,mid,score,review, rfile, rsfile, rdate
       		  from banana_buy_review
@@ -70,7 +71,7 @@
 	</select> 
 	
 	<select id="getmyreview" parameterType="java.lang.String"  resultType="com.banana.vo.ReviewVO">
-		select rid,pid,m.mid,r.score,review, rfile, rsfile, maddr
+		select rid,pid,m.mid,r.score,review, rfile, rsfile
 		from banana_member m ,
 			(select rid,pid,mid,score,review, rfile, rsfile
 			  from banana_buy_review

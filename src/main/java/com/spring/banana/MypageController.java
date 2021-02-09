@@ -14,14 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.banana.vo.BananaMemberVO;
 import com.banana.vo.ReviewVO;
 import com.banana.vo.SessionVO;
+import com.banana.vo.dongneVO;
 import com.banana.vo.productVO;
 import com.spring.service.BuylistService;
-import com.spring.service.LikeServiceImpl;
 import com.spring.service.DongneServiceImpl;
+import com.spring.service.KeywordServiceImpl;
+import com.spring.service.LikeServiceImpl;
 import com.spring.service.MypageReviewServiceImpl;
 import com.spring.service.ProductService;
 import com.spring.service.ProductServiceImpl;
@@ -46,6 +47,10 @@ public class MypageController {
 	
 	@Autowired
 	private MypageReviewServiceImpl MypageReviewService ;
+	
+	@Autowired
+	private KeywordServiceImpl KeywordServiceImpl ;
+	
 	
 	@RequestMapping(value="/mypage_update_proc.do", method=RequestMethod.POST)
 	public String mypage_update_proc(BananaMemberVO vo, HttpServletRequest request) {
@@ -98,9 +103,16 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
-	public ModelAndView mypage_subjectContent(String bsid , String bstitle) {
+	public ModelAndView mypage_subjectContent(String bsid , String bstitle ,HttpSession session) {
 		
 		return dongneService.getSubjectListContent(bsid,bstitle);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/subjectContentReview.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String subjectContentReview(String bid) {
+		
+		return dongneService.getSubjectListReview(bid);
 	}
 	
 	/**
@@ -154,10 +166,48 @@ public class MypageController {
 	 * 마이페이지 - 키워드 알림설정
 	 * @return
 	 */
-	@RequestMapping(value="/mypage_keyword.do", method=RequestMethod.GET)
-	public String mypage_keyword() {
-		return "mypage/mypage_keyword";
+	@ResponseBody
+	@RequestMapping(value="/mypage_keyword.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView mypage_keyword(HttpSession session,String keyword) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)KeywordServiceImpl.getList(svo.getMid(),keyword);
 	}
+	@ResponseBody
+	@RequestMapping(value="/delkeyword.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public String delkeyword(HttpSession session,String keyword) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return KeywordServiceImpl.delkeyword(svo.getMid(), keyword);
+	}
+	@ResponseBody
+	@RequestMapping(value="/mypage_keywordclick.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	public ModelAndView mypage_keywordclick(HttpSession session,String keyword) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)KeywordServiceImpl.keywordclick(svo.getMid(),keyword);
+	}
+	
+	@RequestMapping(value="/whyPopup.do",method= {RequestMethod.POST, RequestMethod.GET})
+	public String whyPopup() {
+		return "/mypage/whyPopup";
+	}
+	
+	/**
+	 * 마이페이지 - 키워드 등록
+	 */
+	 @RequestMapping(value="/keywordplus.do", method=RequestMethod.GET)
+	 public String keywordplus(HttpSession session, String keyword){
+		 SessionVO svo = (SessionVO)session.getAttribute("svo"); 
+		 return KeywordServiceImpl.insertKeyword(svo.getMid(), keyword); 
+	 }
+	
+	/**
+	 * 마이페이지 - 키워드 삭제
+	 */
+	@RequestMapping(value="/mypage_keyword_minus.do", method=RequestMethod.GET)
+	public ModelAndView mypage_keyword_minus(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return (ModelAndView)likeserviceimpl.getList(svo.getMid());
+	}
+	
 	/**
 	 * 마이페이지 - 동네인증
 	 * @return
@@ -277,8 +327,10 @@ public class MypageController {
 	 */
 	
 	 @RequestMapping(value="/mypage_purchased.do", method=RequestMethod.GET)
-	 public ModelAndView mypage_purchased(String mid) { 
-		return(ModelAndView)buylistservice.getList(mid); 
+	 public ModelAndView mypage_purchased(HttpSession session) { 
+		 SessionVO svo = (SessionVO)session.getAttribute("svo");
+		
+		return(ModelAndView)buylistservice.getList( svo.getMid()); 
 	 }
 	
 
@@ -341,8 +393,10 @@ public class MypageController {
 	 */
 	// 전체 리뷰
 	@RequestMapping(value="/mypage_review.do", method=RequestMethod.GET)
-	public ModelAndView mypage_review() {
-		return (ModelAndView)MypageReviewService.getList();
+	public ModelAndView mypage_review(HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		String mid = svo.getMid();
+		return (ModelAndView)MypageReviewService.getList(mid);
 		
 	}
 	
@@ -395,4 +449,16 @@ public class MypageController {
 	 * 
 	 * }
 	 */
+		
+		
+	//주소 저장
+		@ResponseBody
+		@RequestMapping(value="insert_addr.do", method=RequestMethod.GET)
+		public String insert_addr(String loc , HttpSession session) {
+			SessionVO svo = (SessionVO)session.getAttribute("svo");
+			return dongneService.insertAddr(loc , svo.getMid());
+			
+		
+			
+		}
 }
