@@ -64,6 +64,10 @@ public class dongneDAO extends DBConn{
 		return list;
 	}
 	
+	public int getreviewCount(String bstitle) {
+		return sqlSession.selectOne(namespace+".getreviewcount" , bstitle);
+	}
+	
 	public int getAlarmCount(String mid) {
 		return sqlSession.selectOne(namespace+".getAlarmCount", mid);
 	}
