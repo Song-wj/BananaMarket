@@ -509,7 +509,7 @@
 		<section class="section6_dongneLife_content">
 		<c:choose>
 			<c:when test="${svo.mid ne null }">
-			<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }" method=POST id="board_review_write_form"  enctype="multipart/form-data">
+			<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }&loc=dongne&bstitle=aa" method=POST id="board_review_write_form"  enctype="multipart/form-data">
 				<div class="content_comment_write">
 					<ul>
 						<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>

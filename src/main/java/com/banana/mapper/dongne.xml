@@ -44,7 +44,7 @@
 	</select>
 	
 	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
-		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
+		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bstitle=#{bstitle}
 	</select>
 
 	<select id="getDongneSubjectlist" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
