@@ -83,6 +83,21 @@ public class DongneServiceImpl implements BananaService{
 		JsonArray jarray = new JsonArray();
 		JsonObject jobj = new JsonObject();
 		Gson gson = new Gson();
+		String str="";
+		for(DongneCommentVO vo : list) {
+			int date = Integer.parseInt(vo.getBrdate());
+			if(60>date && date>0) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/24 + "일";
+			}else  {
+				str="방금";
+			}
+				
+			vo.setBrdate(str);
+		}
 		for(DongneCommentVO vo : list) {
 			JsonObject jdata = new JsonObject();
 			jdata.addProperty("brid", vo.getBrid());
@@ -113,6 +128,21 @@ public class DongneServiceImpl implements BananaService{
 		int count = dongneDAO.getreviewCount(bstitle);
 		dongneSubjectVO svo = dongneDAO.getSubjectContent(bstitle);
 		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle);
+		String str ="";
+		for(dongneVO vo : list) {
+			int date = Integer.parseInt(vo.getBdate());
+			if(60>date && date>0) {
+				str = date +"분";
+			}else if(1440 > date && date>60) {
+				str = date/60 +"시간";
+			}else if (1440<date) {
+				str= date/60/24 + "일";
+			}else  {
+				str="방금";
+			}
+				
+			vo.setBdate(str);
+		}
 		
 		mv.addObject("count", count);
 		mv.addObject("mid", mid);
@@ -133,6 +163,7 @@ public class DongneServiceImpl implements BananaService{
 	public ModelAndView getSubjectList() {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<dongneSubjectVO> list = dongneDAO.getDongneSubject();
+		
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypage_subjectList");
 		return mv;
@@ -256,13 +287,13 @@ public class DongneServiceImpl implements BananaService{
 		String str ="";
 		for(dongneVO vo : list) {
 			int date = Integer.parseInt(vo.getBdate());
-			if(60>date) {
+			if(60>date && date>0) {
 				str = date +"분";
 			}else if(1440 > date && date>60) {
 				str = date/60 +"시간";
 			}else if (1440<date) {
-				str= date/60/60 + "일";
-			}else if(date ==0) {
+				str= date/60/24 + "일";
+			}else  {
 				str="방금";
 			}
 				
@@ -291,13 +322,13 @@ public class DongneServiceImpl implements BananaService{
 		
 		String str ="";	
 		int date = Integer.parseInt(vo.getBdate());
-			if(60>date) {
+			if(60>date && date>0) {
 				str = date +"분";
 			}else if(1440 > date && date>60) {
 				str = date/60 +"시간";
 			}else if (1440<date) {
-				str= date/60/60 + "일";
-			}else if(date ==0) {
+				str= date/60/24 + "일";
+			}else  {
 				str="방금";
 			}
 				
@@ -494,13 +525,13 @@ public class DongneServiceImpl implements BananaService{
 		
 	public String count(int date) {
 		String str ="";
-		if(60>date) {
+		if(60>date && date>0) {
 			str = date +"분";
 		}else if(1440 > date && date>60) {
 			str = date/60 +"시간";
 		}else if (1440<date) {
-			str= date/60/60 + "일";
-		}else if (date == 0) {
+			str= date/60/24 + "일";
+		}else {
 			str="방금";
 		}
 		

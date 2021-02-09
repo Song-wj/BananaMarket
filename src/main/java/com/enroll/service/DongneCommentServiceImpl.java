@@ -248,13 +248,13 @@ public class DongneCommentServiceImpl implements EnrollService {
 			
 		int	date = Integer.parseInt(vo.getBrdate());
 			
-			if(60>date) {
+			if(60>date && date>0) {
 				str = date +"분";
 			}else if(1440 > date && date>60) {
 				str = date/60 +"시간";
 			}else if (1440<date) {
-				str= date/60/60 + "일";
-			}else if (date == 0) {
+				str= date/60/24 + "일";
+			}else {
 				str="방금";
 			}
 			vo.setBrdate(str);
