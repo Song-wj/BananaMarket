@@ -41,7 +41,6 @@
 	
 	h1{
 		float:left;
-		border:1px solid red;
 		margin-bottom:40px;
 	}
 	div.mypage_like section.section1_like>div {

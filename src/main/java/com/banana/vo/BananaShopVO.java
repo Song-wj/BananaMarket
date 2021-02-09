@@ -171,10 +171,20 @@ public class BananaShopVO {
 		String[] sadlist = saddr.split("/");
 		setAddr2(sadlist[0]);
 		setAddr3(sadlist[1]);
-			
+		
 		if(sadlist[1].contains("(")) {
-			for(int i=sadlist[1].indexOf("(")+1; i<=sadlist[1].indexOf("µ¿"); i++) {
-				dong.append(Character.toString(sadlist[1].charAt(i)));
+			if(sadlist[1].contains(",")) {
+				for(int i=sadlist[1].indexOf("(")+1; i<sadlist[1].indexOf(",",sadlist[1].indexOf("(")+1); i++) {
+					dong.append(Character.toString(sadlist[1].charAt(i)));
+				}
+			}else {
+				if(sadlist[1].contains("µ¿")) {
+					for(int i=sadlist[1].indexOf("(")+1; i<=sadlist[1].indexOf("µ¿",sadlist[1].indexOf("(")+1); i++) {
+						dong.append(Character.toString(sadlist[1].charAt(i)));
+					}
+				}else {
+					dong.append("-");
+				}
 			}
 		}else {
 			dong.append("-");

@@ -126,6 +126,12 @@
 		margin-top:30px;
 		width:100%;
 	}
+	span.input_red {
+		padding-left:25px;
+		color:red;
+		font-size:14px;
+		font-weigth:800;
+	}
 </style>
 <script>
 
@@ -159,7 +165,6 @@ $(document).ready(function(){
 			$("#inputMain").hide();
 			$("#storename").focus();
 		}
-		/* alert("sel_files"+sel_files); */
 		
 	});
 	
@@ -188,11 +193,6 @@ $(document).ready(function(){
 			$("#inputCarousel").hide();
 			$("#btnEnroll").focus();
 		}
-		
-		alert(sel_files2);
-		alert(sel_files2[0]);
-		alert(sel_files2[1]);
-		alert(sel_files2[2]);
 		
 	});
 	
@@ -266,7 +266,7 @@ $(document).ready(function(){
 				class="join" enctype="multipart/form-data">
 				<h1>동네업체 등록</h1>
 				<ul>
-					<li><div id="inputMain"><label for="input_img">메인 이미지 추가</label>
+					<li><div id="inputMain"><label for="input_img">메인 이미지 추가<br><span class="input_red">최대 1장</span></label>
 						<input type="file" id="input_img" name="file1" multiple>
 						</div>
 						<div class="img_list" id="img_list"></div>
@@ -338,7 +338,7 @@ $(document).ready(function(){
 					<li>
 						<textarea name="sintro" rows="5" class="f1" id="storeintro"></textarea>
 					</li>
-					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가</label>
+					<li><div id="inputCarousel"><label for="input_carousel_img">광고 이미지 추가<br><span class="input_red">최대 3장</span></label>
 						<input type="file" id="input_carousel_img" name="file_list" multiple>
 						</div>
 						<div class="img_list" id="img_carousel_list"></div>
