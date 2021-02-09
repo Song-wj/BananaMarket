@@ -159,20 +159,19 @@
 			</div>	
 			<section class="sub_section">
 			<c:forEach var="vo" items="${list }">
-			<div class="dl_content2" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
-				<ul>	
-					<li>
-						<label>${vo.srdate }</label>
-					</li>
-					<li>
-						<img src="http://localhost:9000/banana/resources/upload/${vo.msfile }">
-						<label>${vo.nickname }</label>
-						<label>${vo.maddr }</label>
-					</li>	
-					<li><pre><c:out value="${vo.srcontent}" /></pre></li>
-				</ul>
-			</div>
-			
+				<div class="dl_content2" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
+					<ul>	
+						<li>
+							<label>${vo.srdate }</label>
+						</li>
+						<li>
+							<img src="http://localhost:9000/banana/resources/upload/${vo.msfile }">
+							<label>${vo.nickname }</label>
+							<label>${vo.maddr }</label>
+						</li>	
+						<li><pre><c:out value="${vo.srcontent}" /></pre></li>
+					</ul>
+				</div>
 			</c:forEach>
 			</section>
 			</section>

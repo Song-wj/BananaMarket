@@ -383,7 +383,7 @@
 		
 		//수정 버튼 눌렸을 때
 		$("#commentUpdate").click(function(){
-			alert("fdlke");
+			
 			$("#section5_dongneLife_content").load("dongneLifeComment_update.do");
 		});
 		
@@ -510,7 +510,7 @@
 		<section class="section6_dongneLife_content">
 		<c:choose>
 			<c:when test="${svo.mid ne null }">
-			<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }" method=POST id="board_review_write_form"  enctype="multipart/form-data">
+			<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }&loc=dongne&bstitle=aa" method=POST id="board_review_write_form"  enctype="multipart/form-data">
 				<div class="content_comment_write">
 					<ul>
 						<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
@@ -534,7 +534,7 @@
 <script>
 function update_pro(brid,rno) {
 	$("#bcomment_content"+rno).remove();
-	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno);
+	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=null");
 	$("button#update").hide();
 }
 </script>

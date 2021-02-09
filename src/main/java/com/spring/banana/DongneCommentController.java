@@ -1,5 +1,7 @@
 package com.spring.banana;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +12,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.BananaReviewAlarmVO;
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.SessionVO;
-import com.enroll.service.EnrollService;
+import com.enroll.service.DongneCommentServiceImpl;
 
 @Controller
 public class DongneCommentController {
 	
 	@Autowired
-	private EnrollService dongneCommentService;
-	
+	private  DongneCommentServiceImpl dongneCommentService;
 	
 	/**
 	 * 리뷰 alarm
@@ -39,16 +41,24 @@ public class DongneCommentController {
 	 * 동네생활 - 댓글 삭제 처리
 	 */
 	@RequestMapping(value="/comment_delete_proc.do", method=RequestMethod.GET)
-	public String comment_delete_proc(String brid) {
+	public String comment_delete_proc(String brid ) {
 		return (String)dongneCommentService.delete(brid);
 	}
 	
+	@RequestMapping(value="/subcomment_delete_proc.do", method=RequestMethod.GET)
+	public String subcomment_delete_proc(String brid , String bstitle ) throws UnsupportedEncodingException {
+		return (String)dongneCommentService.delete1(brid ,bstitle);
+	}
+	
+	
 	/**
 	 * 동네생활 - 댓글 수정 처리
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="/comment_update_proc.do", method=RequestMethod.POST)
-	public ModelAndView comment_update_proc(DongneCommentVO vo) {
-		return (ModelAndView)dongneCommentService.update(vo);
+	public ModelAndView comment_update_proc(DongneCommentVO vo ,String bstitle) throws UnsupportedEncodingException {
+		vo.setTitle(bstitle);
+		return (ModelAndView)dongneCommentService.update1(vo);
 	}
 	
 	/**
@@ -56,8 +66,8 @@ public class DongneCommentController {
 	 * @return
 	 */
 	@RequestMapping(value="/dongneLifeComment_update.do",method=RequestMethod.GET)
-	public ModelAndView dongneLifeComment_update(String brid, String rno) {
-		return (ModelAndView)dongneCommentService.getUpdateContent(brid, rno); 
+	public ModelAndView dongneLifeComment_update(String brid, String rno ,String bstitle){
+		return (ModelAndView)dongneCommentService.getUpdateContent(brid, rno ,bstitle); 
 	}
 	
 	/**
@@ -72,13 +82,16 @@ public class DongneCommentController {
 	
 	/**
 	 * 동네생활 - 댓글 작성 처리
+	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="/dongneLife_review_write_proc.do", method=RequestMethod.POST)
-	public ModelAndView dongneLife_review_write_proc(DongneCommentVO vo, String bid, HttpSession session) {
+	public ModelAndView dongneLife_review_write_proc(DongneCommentVO vo, String bid, HttpSession session ,String loc ,String bstitle) throws UnsupportedEncodingException {
 		vo.setBid(bid);
+		vo.setTitle(bstitle);
+		vo.setLoc(loc);
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		vo.setMid(svo.getMid());
-		return (ModelAndView)dongneCommentService.insert(vo);
+		return (ModelAndView)dongneCommentService.insert1(vo);
 	}
 	
 }

@@ -6,18 +6,25 @@
 
 <mapper namespace="mapper.dongne">
 
-	<!-- <select id="getReviewContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaReviewAlarmVO">
-		select DISTINCT bbr.btopic, bbr.mid, bbr.bcomment
-		from (select b.bid, b.btopic, br.mid, br.bcomment, br.brid
-      			from banana_board b, banana_board_review br
-      			where b.bid = br.bid and b.mid=#{mid}) bbr, banana_review_alarm ra
-		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
-	</select> -->
+	<select id="getreviewcount" parameterType="java.lang.String" resultType="int">
+		select count(*) from banana_board b , banana_board_review r
+		where b.bid=r.bid and btitle=#{bstitle}
+	</select>
+	
+	<delete id="deleteShopAlarm" parameterType="java.lang.String">
+		delete from banana_shop_alarm where srid=#{srid}
+	</delete>
 	
 	<delete id="deleteReviewAlarm" parameterType="java.lang.String">
 		delete from banana_review_alarm where brid=#{brid}
 	</delete>
 
+	<select id="getShopAlarmCount" parameterType="java.lang.String" resultType="int">
+		select count(distinct sa.srid)
+		from banana_shop s, banana_shop_review sr, banana_shop_alarm sa
+		where s.sid = sr.sid and sr.sid = sa.sid and sa.mid != #{mid} and s.mid= #{mid}
+	</select>
+		
 	<select id="getsubreview" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
 		select mid, nickname, maddr, brid, bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate, rownum rno 
 		from (select mem.mid, mem.nickname, mem.maddr,rev.brid, rev.bid, rev.bcomment, rev.brdate
@@ -26,7 +33,6 @@
 			  order by rev.brdate desc)
 		where bid=#{bid}
 	</select>
-	
 	
 	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
 		select count(distinct ra.brid)
@@ -48,7 +54,7 @@
 	</select>
 	
 	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
-		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
+		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bstitle=#{bstitle}
 	</select>
 
 	<select id="getDongneSubjectlist" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">

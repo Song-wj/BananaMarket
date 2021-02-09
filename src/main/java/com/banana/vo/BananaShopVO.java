@@ -12,10 +12,69 @@ public class BananaShopVO {
 		   scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3;
 	CommonsMultipartFile file1;
 	List<MultipartFile> flie_list ;
+	String rno, nickname, maddr;
+	int like_count, review_count;
+	String srid, srcontent;
 	
 	String savepath1;
 	StringBuilder dong = new StringBuilder();
 	
+	public int getReview_count() {
+		return review_count;
+	}
+
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
+
+	public String getSrid() {
+		return srid;
+	}
+
+	public void setSrid(String srid) {
+		this.srid = srid;
+	}
+
+	public String getSrcontent() {
+		return srcontent;
+	}
+
+	public void setSrcontent(String srcontent) {
+		this.srcontent = srcontent;
+	}
+
+	public int getLike_count() {
+		return like_count;
+	}
+
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+
+	public String getRno() {
+		return rno;
+	}
+
+	public void setRno(String rno) {
+		this.rno = rno;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getMaddr() {
+		return maddr;
+	}
+
+	public void setMaddr(String maddr) {
+		this.maddr = maddr;
+	}
+
 	public List<MultipartFile> getFlie_list() {
 		return flie_list;
 	}
@@ -114,8 +173,18 @@ public class BananaShopVO {
 		setAddr3(sadlist[1]);
 		
 		if(sadlist[1].contains("(")) {
-			for(int i=sadlist[1].indexOf("(")+1; i<=sadlist[1].indexOf("µ¿"); i++) {
-				dong.append(Character.toString(sadlist[1].charAt(i)));
+			if(sadlist[1].contains(",")) {
+				for(int i=sadlist[1].indexOf("(")+1; i<sadlist[1].indexOf(",",sadlist[1].indexOf("(")+1); i++) {
+					dong.append(Character.toString(sadlist[1].charAt(i)));
+				}
+			}else {
+				if(sadlist[1].contains("µ¿")) {
+					for(int i=sadlist[1].indexOf("(")+1; i<=sadlist[1].indexOf("µ¿",sadlist[1].indexOf("(")+1); i++) {
+						dong.append(Character.toString(sadlist[1].charAt(i)));
+					}
+				}else {
+					dong.append("-");
+				}
 			}
 		}else {
 			dong.append("-");

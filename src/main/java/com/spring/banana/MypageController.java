@@ -102,10 +102,11 @@ public class MypageController {
 		/* return "mypage/mypage_mannerGrade"; */
 	}
 	
-	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET)
-	public ModelAndView mypage_subjectContent(String bsid , String bstitle ,HttpSession session) {
-		
-		return dongneService.getSubjectListContent(bsid,bstitle);
+	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET , produces="text/plain;charset=UTF-8")
+	public ModelAndView mypage_subjectContent( String bstitle ,HttpSession session ) {
+		System.out.println(bstitle);
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.getSubjectListContent(bstitle ,svo.getMid());
 	}
 	
 	@ResponseBody
