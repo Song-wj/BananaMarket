@@ -46,8 +46,9 @@ public class ChatController {
 	 * @return
 	 */
 	@RequestMapping(value ="/chat_list.do", method = RequestMethod.GET)
-	public String chat_list() {
-		return "/chatBanner/chat_list";
+	public ModelAndView chat_list() {
+		return (ModelAndView)chatService.getList();
+		//"/chatBanner/chat_list";
 	}
 	
 	/**

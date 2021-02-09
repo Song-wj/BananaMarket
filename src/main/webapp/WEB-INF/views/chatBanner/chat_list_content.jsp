@@ -153,6 +153,7 @@
 		</section>
 		<section class="section2_chatContent">
 			<div>
+			
 				<table class="table_chatContent">
 					<tr>
 						<td rowspan="2"><img src="images/card-photo2.jpg"></td>
@@ -184,13 +185,14 @@
 		<section class="section4_chatContent">
 		  <c:choose>
 			<c:when test="${svo.mid ne null }">
-				<form name="chat_form" action="chat_write_proc.do?cid=${vo.cid }" method=POST id="chat_write_form"  enctype="multipart/form-data">
+				<form name="chat_form" action="chat_write_proc.do?cid=${vo.cid}" method=POST id="chat_write_form"  enctype="multipart/form-data">
 					<div>
 						<!-- <a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a> -->
 						<textarea name="chat_content" placeholder="메세지를 입력하세요."></textarea>
 						<div><a href="#"><button type="submit" class="chatBtn">전송</button></a></div>
 						<input type="hidden" name="sell_mid" value="${mid}">
 						<input type="hidden" name="pid" value="${pid}">  
+						<%-- <input type="text" name="cid" value="${vo.cid}">  --%> 
 						<input type="hidden" name="buy_mid" value="${svo.mid}">
 						<input type="hidden" name="chk_read" value="x">
 					</div>
