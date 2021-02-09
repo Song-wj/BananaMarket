@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.banana.dao.DongneCommentDAO;
 import com.banana.dao.dongneDAO;
 import com.banana.vo.BananaReviewAlarmVO;
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -25,11 +26,56 @@ public class DongneCommentServiceImpl implements EnrollService {
 	private dongneDAO dongneDAO;
 	/////
 	
+	public String deleteShopAlarm(String srid) {
+		boolean result = dongneDAO.deleteShopAlarmProc(srid);
+		return String.valueOf(result);
+	}
+	
 	public String deleteReviewAlarm(String brid) {
 		boolean result = dongneDAO.deleteReviewAlarmProc(brid);
 		return String.valueOf(result);
 	}
+	
+	@Override
+	public String insertStore(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public String shopAlarmWrite(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShopId(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getShopAlarmContent(String mid) {
+		ArrayList<BananaShopAlarmVO> salist = dongneDAO.getShopContent(mid);
+		
+		JsonArray jarray = new JsonArray();
+		JsonObject jdata = new JsonObject();
+		Gson gson = new Gson();
+		
+		for(BananaShopAlarmVO vo : salist) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("sname", vo.getSname());
+			jobj.addProperty("mid", vo.getMid());
+			jobj.addProperty("srcontent", vo.getSrcontent());
+			jobj.addProperty("srid", vo.getSrid());
+			jobj.addProperty("sa_date", vo.getSa_date());
+			jobj.addProperty("sid", vo.getSid());
+			jarray.add(jobj);
+		}
+		jdata.add("jlist", jarray);
+		
+		return gson.toJson(jdata);
+	}
+	
 	public String getAlarmContent(String mid) {
 		ArrayList<BananaReviewAlarmVO> ralist = dongneDAO.getReviewContent(mid);
 		
@@ -50,6 +96,11 @@ public class DongneCommentServiceImpl implements EnrollService {
 		jdata.add("jlist", jarray);
 		
 		return gson.toJson(jdata);
+	}
+	
+	public String getShopAlarmCount(String mid) {
+		int count = dongneDAO.getShopAlarmCount(mid);
+		return String.valueOf(count);
 	}
 	
 	public String getAlarmCount(String mid) {

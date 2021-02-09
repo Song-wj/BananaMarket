@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.BananaReviewAlarmVO;
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
@@ -26,11 +27,49 @@ public class dongneDAO extends DBConn{
 	}
 	*/
 	
+	public boolean deleteShopAlarmProc(String srid) {
+		boolean result = false;
+		int val = sqlSession.delete(namespace+".deleteShopAlarm", srid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
 	public boolean deleteReviewAlarmProc(String brid) {
 		boolean result = false;
 		int val = sqlSession.delete(namespace+".deleteReviewAlarm", brid);
 		if(val != 0) result = true;
 		return result;
+	}
+	
+	public ArrayList<BananaShopAlarmVO> getShopContent(String mid) {
+		ArrayList<BananaShopAlarmVO> list = new ArrayList<BananaShopAlarmVO>();
+		
+		try {
+			String sql ="select DISTINCT ssr.sname, ssr.mid, ssr.srcontent, sa.srid, sa.sa_date, ssr.sid "
+					+ "					from (select s.sid, s.sname, sr.mid, sr.srcontent, sr.srid "
+					+ "					      from banana_shop s, banana_shop_review sr "
+					+ "					      where s.sid = sr.sid and s.mid = ?) ssr, banana_shop_alarm sa "
+					+ "					where ssr.sid=sa.sid and ssr.srid = sa.srid and sa.mid != ?"
+					+ "					order by sa.sa_date desc";
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaShopAlarmVO vo = new BananaShopAlarmVO();
+				vo.setSname(rs.getString(1));
+				vo.setMid(rs.getString(2));
+				vo.setSrcontent(rs.getString(3));
+				vo.setSrid(rs.getString(4));
+				vo.setSa_date(rs.getString(5));
+				vo.setSid(rs.getString(6));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	public ArrayList<BananaReviewAlarmVO> getReviewContent(String mid) {
@@ -62,6 +101,10 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return list;
+	}
+	
+	public int getShopAlarmCount(String mid) {
+		return sqlSession.selectOne(namespace+".getShopAlarmCount", mid);
 	}
 	
 	public int getAlarmCount(String mid) {

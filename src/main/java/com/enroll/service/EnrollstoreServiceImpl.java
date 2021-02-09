@@ -11,17 +11,47 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.BananaShopDAO;
 import com.banana.dao.BananaShopReviewDAO;
+import com.banana.vo.BananaShopAlarmVO;
+import com.banana.vo.BananaShopReviewVO;
 import com.banana.vo.BananaShopVO;
-import com.banana.vo.LikeVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @Service("shopService")
 public class EnrollstoreServiceImpl implements EnrollService {
+	@Autowired
+	private BananaShopDAO shopDAO;
+	
+	@Autowired
+	private BananaShopReviewDAO shopReviewDAO;
 	
 	
 	
+	@Override
+	public String insertStore(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShopAlarmContent(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteShopAlarm(String srid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShopAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public String deleteReviewAlarm(String brid) {
 		// TODO Auto-generated method stub
@@ -34,12 +64,6 @@ public class EnrollstoreServiceImpl implements EnrollService {
 		return null;
 	}
 
-	@Autowired
-	private BananaShopDAO shopDAO;
-	
-	@Autowired
-	private BananaShopReviewDAO shopReviewDAO;
-
 	@Override
 	public String getAlarmCount(String mid) {
 		// TODO Auto-generated method stub
@@ -51,7 +75,7 @@ public class EnrollstoreServiceImpl implements EnrollService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public Object getList() {
 		ModelAndView mv = new ModelAndView();
@@ -419,4 +443,16 @@ public class EnrollstoreServiceImpl implements EnrollService {
 			*/
 		 return String.valueOf(result);
 	 }
+
+	@Override
+	public String getShopId(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String shopAlarmWrite(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

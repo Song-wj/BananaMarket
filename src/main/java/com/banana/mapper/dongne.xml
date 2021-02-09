@@ -14,10 +14,20 @@
 		where bbr.bid=ra.bid and bbr.brid = ra.brid and ra.mid != #{mid};
 	</select> -->
 	
+	<delete id="deleteShopAlarm" parameterType="java.lang.String">
+		delete from banana_shop_alarm where srid=#{srid}
+	</delete>
+	
 	<delete id="deleteReviewAlarm" parameterType="java.lang.String">
 		delete from banana_review_alarm where brid=#{brid}
 	</delete>
 
+	<select id="getShopAlarmCount" parameterType="java.lang.String" resultType="int">
+		select count(distinct sa.srid)
+		from banana_shop s, banana_shop_review sr, banana_shop_alarm sa
+		where s.sid = sr.sid and sr.sid = sa.sid and sa.mid != #{mid} and s.mid= #{mid}
+	</select>
+		
 	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
 		select count(distinct ra.brid)
 		from banana_board b, banana_board_review br, banana_review_alarm ra

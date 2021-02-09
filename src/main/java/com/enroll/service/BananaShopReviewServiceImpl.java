@@ -8,13 +8,46 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.BananaShopReviewDAO;
 import com.banana.vo.BananaShopReviewVO;
-import com.banana.vo.DongneCommentVO;
 
 @Service("shopReviewService")
 public class BananaShopReviewServiceImpl implements EnrollService {
 	
-	
-	
+	@Override
+	public Object insert(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShopAlarmContent(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteShopAlarm(String srid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShopAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String shopAlarmWrite(Object vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getShopId(String sid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public String deleteReviewAlarm(String brid) {
 		// TODO Auto-generated method stub
@@ -67,19 +100,19 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 	}
 
 	@Override
-	public Object insert(Object vo) {
-		ModelAndView mv = new ModelAndView();
+	public String insertStore(Object vo) {
+		//ModelAndView mv = new ModelAndView();
 
 		BananaShopReviewVO srvo = (BananaShopReviewVO)vo;
-		
 		boolean dao_result = shopReviewDAO.insertShopReview(srvo);
 		
-		if(dao_result) {
-			mv.setViewName("redirect:/neighborStoreReview_list.do?sid="+srvo.getSid());
-		}else
-			mv.setViewName("errorPage");
-		
-		return mv;
+//		if(dao_result) {
+//			//mv.setViewName("redirect:/neighborStoreReview_list.do?sid="+srvo.getSid());
+//			mv.setViewName("redirect:/neighborStoreReview_write.do?sid="+srvo.getSid()+"&mid="+srvo.getMid());
+//		}else
+//			mv.setViewName("errorPage");
+//		return mv;
+		return String.valueOf(dao_result);
 	}
 
 	@Override
