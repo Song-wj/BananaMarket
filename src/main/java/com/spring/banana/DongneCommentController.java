@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.vo.BananaReviewAlarmVO;
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.SessionVO;
 import com.enroll.service.DongneCommentServiceImpl;
@@ -21,7 +22,6 @@ public class DongneCommentController {
 	
 	@Autowired
 	private  DongneCommentServiceImpl dongneCommentService;
-	
 	
 	/**
 	 * ¸®ºä alarm

@@ -87,7 +87,7 @@ public class EnrollstoreController {
 	public ModelAndView enrollstore_write_proc(BananaShopVO vo, MultipartHttpServletRequest mtfRequest, HttpServletRequest request, HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		vo.setMid(svo.getMid());
-		
+		System.out.println(svo.getMid());
 		List<MultipartFile> fileList = mtfRequest.getFiles("file_list");
 		//서버의 저장경로
 		String path1 = request.getSession().getServletContext().getRealPath("/");

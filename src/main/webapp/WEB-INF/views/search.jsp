@@ -41,7 +41,6 @@
 	
 	h1{
 		float:left;
-		border:1px solid red;
 		margin-bottom:40px;
 	}
 	div.mypage_like section.section1_like>div {
@@ -209,73 +208,95 @@
 <body>
 <jsp:include page="header.jsp"/>
 	<div class="mypage_like">
-			<h1>"    "에 대한 검색 결과<span class="searchcount">&nbsp;(13561개)</span></h1>
-			<div class="seachresult"><h2>중고거래<span class="searchcount">&nbsp;(13561개)</span></h2></div><div class="line"></div>
+			<h1>"  ${search }  "에 대한 검색 결과<span class="searchcount">&nbsp;(${total_count }개)</span></h1>
+			<div class="seachresult"><h2>중고거래<span class="searchcount">&nbsp;(${product_count }개)</span></h2></div><div class="line"></div>
 			<section class="section2_like" id="section2_like">
-				<%-- <c:forEach var="vo" items="${ list1 }">
-					<table class="mypage_table">
-					<tr>
-						<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
-						<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
-						<td rowspan="3">
-						<button type="button" class="btn_like" id="btnLike" onclick="delProductLike('${vo.pid}')">
-	  							<span class="img_emoti">좋아요취소</span></button>
-	  					</td>
-					</tr>
-					<tr>
-						<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
-					</tr>
-					<tr>
-						<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
-					</tr>
-				</table>
-				</c:forEach>  --%>
-				<table class="mypage_table_no">
-				   <tr>
-						<td style="padding: 50px 0; text-align:center;"><h3>검색 결과가 없습니다</h3></td>
-					</tr> 
-				</table>
+			<c:choose>
+				<c:when test="${product_count ne 0}">
+					<c:forEach var="vo" items="${ list1 }">
+						<table class="mypage_table">
+						<tr>
+							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}" onclick="location.href='productContent.do?pid=${vo.pid}'"></td>
+							<td><span class="product" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.ptitle }</span></td>
+							<td rowspan="3">
+		  					</td>
+						</tr>
+						<tr>
+							<td><span class="locate" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.maddr }</span></td>
+						</tr>
+						<tr>
+							<td><span class="price" onclick="location.href='productContent.do?pid=${vo.pid}'">${vo.pprice }</span></td>
+						</tr>
+					</table>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<table class="mypage_table_no">
+					   <tr>
+							<td style="padding: 30px 0; text-align:center;"><h3>검색 결과가 없습니다</h3></td>
+						</tr> 
+					</table>
+				</c:otherwise>
+			</c:choose>
 			</section>
-		<div class="seachresult"><h2>동네업체<span class="searchcount">&nbsp;(13561개)</span></h2></div><div class="line"></div>
+		<div class="seachresult"><h2>동네업체<span class="searchcount">&nbsp;(${shop_count }개)</span></h2></div><div class="line"></div>
 			<section class="section4_like" id="section4_like">
-				<%-- <c:forEach var="vo" items="${list3 }">
-					<table class="mypage_table">
-					<tr>
-						<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'"></td>
-						<td><span class="product" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.sname } <div class="skinds" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.skinds }</div></span></td>
-						<td rowspan="3">
-						<button type="button" class="btn_like" id="btnLike3" onclick="delShopLike('${vo.sid}')">
-	  							<span class="img_emoti">좋아요취소</span></button>
-	  					</td>
-					</tr>
-					<tr>
-						<td><span class="locate" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.saddr }</span></td>
-					</tr>
-					<tr>
-						<td><span class="price">${vo.sph }</span></td>
-					</tr>
-				</table>
-				</c:forEach> --%>
+				<c:choose>
+				<c:when test="${shop_count ne 0}">
+					<c:forEach var="vo" items="${list3 }">
+						<table class="mypage_table">
+						<tr>
+							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'"></td>
+							<td><span class="product" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.sname } <div class="skinds" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.skinds }</div></span></td>
+							<td rowspan="3">
+		  					</td>
+						</tr>
+						<tr>
+							<td><span class="locate" onclick="location.href='neighborhoodStore.do?sid=${vo.sid}'">${vo.saddr }</span></td>
+						</tr>
+						<tr>
+							<td><span class="price">${vo.sph }</span></td>
+						</tr>
+						</table>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<table class="mypage_table_no">
+					   <tr>
+							<td style="padding: 30px 0; text-align:center;"><h3>검색 결과가 없습니다</h3></td>
+						</tr> 
+					</table>
+				</c:otherwise>
+				</c:choose>
 			</section>
-		<div class="seachresult"><h2>동네생활<span class="searchcount">&nbsp;(13561개)</span></h2></div><div class="line"></div>
+		<div class="seachresult"><h2>동네생활<span class="searchcount">&nbsp;(${dongne_count }개)</span></h2></div><div class="line"></div>
 			<section class="section3_like" id="section3_like">
-				<%-- <c:forEach var="vo" items="${list2 }">
-				<div class="dl_content2">
-					<ul>	
-						<li>
-							<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.btitle }</label>
-							<button type="button" class="btn_like2" id="btnLike2" onclick="delDongnelifeLike('${vo.bid}')">
-	  							<span class="img_emoti">좋아요취소</span></button>
-						</li>
-						<li>
-							<img src="images/banana.jpg">
-							<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.nickname }</label>
-							<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.maddr }</label>
-						</li>	
-						<li><pre onclick="location.href='dongneLife_content.do?bid=${vo.bid}'"><c:out value="${vo.btopic}" /></pre></li>
-					</ul>
-				</div>
-				</c:forEach> --%>
+				<c:choose>
+				<c:when test="${dongne_count ne 0}">
+					<c:forEach var="vo" items="${list2 }">
+					<div class="dl_content2">
+						<ul>	
+							<li>
+								<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.btitle }</label>
+							</li>
+							<li>
+								<img src="images/banana.jpg">
+								<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.nickname }</label>
+								<label onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">${vo.maddr }</label>
+							</li>	
+							<li><pre onclick="location.href='dongneLife_content.do?bid=${vo.bid}'"><c:out value="${vo.btopic}" /></pre></li>
+						</ul>
+					</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<table class="mypage_table_no">
+					   <tr>
+							<td style="padding: 30px 0; text-align:center;"><h3>검색 결과가 없습니다</h3></td>
+						</tr> 
+					</table>
+				</c:otherwise>
+				</c:choose>
 			</section>
 	</div>
 <jsp:include page="footer.jsp"/>

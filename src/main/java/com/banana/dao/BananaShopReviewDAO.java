@@ -2,9 +2,62 @@ package com.banana.dao;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.BananaShopReviewVO;
 
 public class BananaShopReviewDAO extends DBConn {
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	private static String namespace = "mapper.store";
+	
+	/*
+	public boolean shopAlarmWrite(BananaShopAlarmVO vo) {
+		boolean result = false;
+		int val = sqlSession.insert(namespace+".shopAlarmWrite", vo);
+		if(val != 0) result = true;
+		return result;
+	}
+	*/
+	
+	public boolean shopAlarmWrite(BananaShopAlarmVO vo) {
+		boolean result = false;
+		
+		try {
+			String sql = "insert into banana_shop_alarm values(?,?,?,to_char(sysdate, 'YYYY-MM-DD AM HH12:MI'))";
+			getPreparedStatement(sql);
+			pstmt.setString(1, vo.getMid());
+			pstmt.setString(2, vo.getSid());
+			pstmt.setString(3, vo.getSrid());
+			int val = pstmt.executeUpdate();
+			if(val != 0) result = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public String getShopId(String sid) {
+		String srid = "";
+		try {
+			String sql ="select srid from banana_shop_review where sid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, sid);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				srid = rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return srid;
+	}
 	
 	/**
 	 * srid로 sid 구하기

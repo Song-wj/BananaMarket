@@ -112,22 +112,59 @@
 
 <script>
 	$(document).ready(function(){
+		
 		$("#board_write_btn").click(function(){
 			if($("#srcontent").val() == ""){
 	            alert("후기를 작성해주세요");
 	            $("#srcontent").focus();  
 	         }else{
-	        	 review_write_form.submit();
+	        	 review_write('${sid}');
+	        	 //s_alarm_write(str);
 	         }
 	      });
 	});
+	
+	function review_write(sid) {
+		$.ajax({
+			url: "neighborStoreReview_write_proc.do?sid="+sid,
+			data: $("#board_write_form").serialize(),
+			success: function(result) {
+				if(result) {
+					getShopId('${sid}');
+				}
+			}
+		});
+	}
+	
+	function getShopId(id) {
+		$.ajax({
+			url: "getShopId.do?sid="+id,
+			success: function(data) {
+				alert('후기가 작성되었습니다');
+				s_alarm_write(data);
+			}
+		});
+	}
+	
+	function s_alarm_write(srid) {
+		$.ajax({
+			url: "shop_alarm_write.do?sid=${sid}&srid="+srid,
+			success: function(result) {
+				if(result) {
+					$(location).attr('href','neighborStoreReview_list.do?sid=${sid}');
+				} else {
+					alert(result);
+				}
+			}
+		});
+	}
 </script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
 	
 	<div class="dongnelife_write">
-		<form name="review_write_form" action="neighborStoreReview_write_proc.do?sid=${sid }" method=POST id="board_write_form"  enctype="multipart/form-data">
+		<form name="review_write_form" action="neighborStoreReview_write_proc.do?sid=${sid }" method=GET id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
 			<div class="write_nav">
 				<ul>
