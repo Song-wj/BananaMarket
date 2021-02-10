@@ -35,6 +35,7 @@ public class ProductController {
 		return (ModelAndView)productService.getContent(pid,svo.getMid());
 	}
 	
+	
 	@RequestMapping(value="/popularProduct.do", method=RequestMethod.GET)
 	public ModelAndView popularProduct() {
 		return (ModelAndView)productService.getList();
