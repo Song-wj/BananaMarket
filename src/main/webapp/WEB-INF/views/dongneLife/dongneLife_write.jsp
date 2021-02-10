@@ -119,7 +119,8 @@
 		$("#board_write_btn").click(function(){
 			if($("#basic").val() == "none"){
 				alert("게시글의 주제를 선택해주세요");
-				
+				$("#basic").focus();  
+				return false;
 			}else if($("#btopic").val() == ""){
 	            alert("게시글을 작성해주세요");
 	            $("#btopic").focus();  

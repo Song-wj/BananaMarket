@@ -423,6 +423,14 @@
 		margin-top:10px;
 		padding-left:20px;
 	}
+	 div.commentMemberSide button#update,
+	 div.commentMemberSide button#delete {
+	 	all:unset;
+	 	display:inline-block;
+	 	margin-top:30px;
+	 	margin-right:10px;
+   
+	}
 </style>
 <script>
 
@@ -449,6 +457,13 @@
 					output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
 					output += "<li id='bcomment_area" + jdata.jlist[i].rno +"'>"+ "</li>";
 					
+					if('${mid}' == jdata.jlist[i].mid) {
+						output += "<li>";
+						output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
+						output += "<a href='subcomment_delete_proc.do?brid=" + jdata.jlist[i].brid + "&bstitle=${ vo.bstitle }'><button type='button' id='delete'>삭제</button></a>";
+						output += "</li>";
+					}
+					
 					output += "</ul>";
 					output += "</div>";
 					output += "</div>";
@@ -461,11 +476,15 @@
 		
 	}//comment_list
 	
-	//수정 버튼 눌렸을 때
-/* 	$("#commentUpdate").click(function(){
-		alert("fdlke");
-		$("#section5_dongneLife_content").load("dongneLifeComment_update.do");
-	}); */
+	function update_pro(brid,rno) {
+		$("#bcomment_content"+rno).remove();
+		$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=${ vo.bstitle }");
+		$("button#update").hide();
+	}
+	
+	
+	
+	
 $(document).ready(function(){
 	
 	$("#comment_writeBtn").click(function(){
@@ -518,21 +537,21 @@ $(document).ready(function(){
 			<c:otherwise>
 			
 
-			<c:forEach var="vo" items="${ list }">
+			<c:forEach var="xvo" items="${ list }">
 
-			    <a href="http://localhost:9000/banana/mypage_subjectList_update.do"><div class="post-list">
+			    <a href="#"><div class="post-list">
 				
 				<div class="post-header">
 					<img class="userImg" src="http://localhost:9000/banana/images/mypage_bananaimg.jpg">
 					<ul>
-						<li class="userName">${ vo.nickname }</li>
-						<li class="userAddr">${ vo.maddr }</li>
-						<li class="regit-date">${ vo.bdate }</li>
+						<li class="userName">${ xvo.nickname }</li>
+						<li class="userAddr">${ xvo.maddr }</li>
+						<li class="regit-date">${ xvo.bdate }</li>
 					</ul>
 				</div>
 				<div class="box">
 					<div class="post-body">
-						<pre><c:out value="${ vo.btopic}" /></pre>
+						<pre><c:out value="${ xvo.btopic}" /></pre>
 					</div>
 				</div>
 				</a>
@@ -546,12 +565,12 @@ $(document).ready(function(){
 				</div>
 				<div class="post-footer">
 					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
-					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${vo.bid}')">댓글 16</button>
+					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${xvo.bid}')">댓글 ${count }</button>
 						<div id="subreview">
 						
 						</div>
 						 <div >				
-							<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${vo.bid }" method=POST id="board_review_write_form"  >
+							<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${xvo.bid }&loc=subcontent&bstitle=${ vo.bstitle }" method=POST id="board_review_write_form"  >
 								<div class="content_comment_write">
 									<ul>
 										<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
