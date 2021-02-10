@@ -13,4 +13,5 @@ public interface ProductService {
 	
 	Object getSellList();
 	Object sellUpdate(Object id);
+	String getPid(String ptitle);
 }
