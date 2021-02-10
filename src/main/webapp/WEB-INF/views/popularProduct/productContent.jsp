@@ -531,7 +531,11 @@ $(document).ready(function(){
 					<button type="button" class="btn_unlike" id="btnLike">
   						<span class="img_emoti">좋아요</span>
   					</button> 
-					<a href="#"><button type="button" class="product_btn_style">채팅 하기</button></a>
+  					
+  					<c:if test="${svo.mid ne vo.mid }">
+						<a href="chat_write.do?pid=${vo.pid}&mid=${vo.mid}"><button type="button" class="product_btn_style">채팅 하기</button></a>
+					</c:if>
+					
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
 				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate}</time></p>
@@ -540,7 +544,7 @@ $(document).ready(function(){
 					<p>${vo.pcontent}</p>
 				</div>
 				<p id="article-counts">
-					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
+					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9${vo.pid} ,${vo.mid}
 				</p>
 			</section> 	
 		</div>

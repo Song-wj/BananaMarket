@@ -7,7 +7,9 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.banana.vo.BananaKeywordAlarmVO;
 import com.banana.vo.BananaReviewAlarmVO;
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
@@ -26,11 +28,90 @@ public class dongneDAO extends DBConn{
 	}
 	*/
 	
+	public int getKeywordAlarmCount(String mid) {
+		return sqlSession.selectOne(namespace+".getKeywordAlarmCount", mid);
+	}
+	
+	public boolean keyAlarmWrite(String mid) {
+		boolean result = false;
+		int val = sqlSession.insert(namespace+".keyAlarmWrite", mid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
+	public boolean deleteKeywordAlarmProc(String pid) {
+		boolean result = false;
+		int val = sqlSession.delete(namespace+".deleteKeywordAlarm", pid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
+	public boolean deleteShopAlarmProc(String srid) {
+		boolean result = false;
+		int val = sqlSession.delete(namespace+".deleteShopAlarm", srid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
 	public boolean deleteReviewAlarmProc(String brid) {
 		boolean result = false;
 		int val = sqlSession.delete(namespace+".deleteReviewAlarm", brid);
 		if(val != 0) result = true;
 		return result;
+	}
+	
+	public ArrayList<BananaKeywordAlarmVO> getKeywordContent(String mid) {
+		ArrayList<BananaKeywordAlarmVO> list = new ArrayList<BananaKeywordAlarmVO>();
+		
+		try {
+			String sql ="select DISTINCT * from banana_keyword_alarm where mid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaKeywordAlarmVO vo = new BananaKeywordAlarmVO();
+				vo.setMid(rs.getString(1));
+				vo.setPid(rs.getString(2));
+				vo.setPtitle(rs.getString(3));
+				vo.setKeyword(rs.getString(4));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<BananaShopAlarmVO> getShopContent(String mid) {
+		ArrayList<BananaShopAlarmVO> list = new ArrayList<BananaShopAlarmVO>();
+		
+		try {
+			String sql ="select DISTINCT ssr.sname, ssr.mid, ssr.srcontent, sa.srid, sa.sa_date, ssr.sid "
+					+ "					from (select s.sid, s.sname, sr.mid, sr.srcontent, sr.srid "
+					+ "					      from banana_shop s, banana_shop_review sr "
+					+ "					      where s.sid = sr.sid and s.mid = ?) ssr, banana_shop_alarm sa "
+					+ "					where ssr.sid=sa.sid and ssr.srid = sa.srid and sa.mid != ?"
+					+ "					order by sa.sa_date desc";
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaShopAlarmVO vo = new BananaShopAlarmVO();
+				vo.setSname(rs.getString(1));
+				vo.setMid(rs.getString(2));
+				vo.setSrcontent(rs.getString(3));
+				vo.setSrid(rs.getString(4));
+				vo.setSa_date(rs.getString(5));
+				vo.setSid(rs.getString(6));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	public ArrayList<BananaReviewAlarmVO> getReviewContent(String mid) {
@@ -62,6 +143,10 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return list;
+	}
+	
+	public int getShopAlarmCount(String mid) {
+		return sqlSession.selectOne(namespace+".getShopAlarmCount", mid);
 	}
 	
 	public int getreviewCount(String bstitle) {
@@ -255,6 +340,91 @@ public class dongneDAO extends DBConn{
 			pstmt.setString(2, bid);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 검색 목록
+	 * @param search
+	 * @return
+	 */
+	public ArrayList<dongneVO> getsearchlist(String search){
+		ArrayList<dongneVO> list = new ArrayList<dongneVO>();
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select *\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, b.bid, b.mid, b.btitle, b.btopic, b.bdate, m.nickname, m.maddr\r\n" + 
+					"      from banana_board b, banana_member m\r\n" + 
+					"      where b.mid = m.mid)\r\n" + 
+					"where (btitle like ? or btopic like ? or nickname like ? or maddr like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			pstmt.setString(4, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				dongneVO vo = new dongneVO();
+				
+				vo.setRno(rs.getString(1));
+				vo.setBid(rs.getString(2));
+				vo.setMid(rs.getString(3));
+				vo.setBtitle(rs.getString(4));
+				vo.setBtopic(rs.getString(5));
+				vo.setBdate(rs.getString(6));
+				vo.setNickname(rs.getString(7));
+				vo.setMaddr(rs.getString(8));
+				
+				list.add(vo);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 검색 카운트
+	 * @param search
+	 * @return
+	 */
+	public int getsearchCount(String search){
+		int result = 0;
+		String set_search = "%" + search + "%";
+		
+		try {
+			String sql = "select count(*)\r\n" + 
+					"from (select *\r\n" + 
+					"from (select rownum rno, b.bid, b.mid, b.btitle, b.btopic, b.bdate, m.nickname, m.maddr\r\n" + 
+					"      from banana_board b, banana_member m\r\n" + 
+					"      where b.mid = m.mid)\r\n" + 
+					"where (btitle like ? or btopic like ? or nickname like ? or maddr like ?)\r\n" + 
+					")";
+			
+			getPreparedStatement(sql);
+			
+			pstmt.setString(1, set_search);
+			pstmt.setString(2, set_search);
+			pstmt.setString(3, set_search);
+			pstmt.setString(4, set_search);
+			
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt(1);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();

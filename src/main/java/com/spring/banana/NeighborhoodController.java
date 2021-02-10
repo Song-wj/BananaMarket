@@ -4,16 +4,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.dao.BananaShopReviewDAO;
+import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.BananaShopReviewVO;
 import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
 import com.enroll.service.EnrollstoreServiceImpl;
-import com.spring.service.ProductServiceImpl;
 
 @Controller
 public class NeighborhoodController {
@@ -26,6 +28,35 @@ public class NeighborhoodController {
 	
 	@Autowired
 	private EnrollService shopReviewService;
+	
+	@Autowired
+	private BananaShopReviewDAO shopReviewDAO;
+	
+	/**
+	 * 업체 후기 alarm
+	 */
+	@ResponseBody
+	@RequestMapping(value="/shop_alarm_write.do", method=RequestMethod.GET)
+	public String shop_alarm_write(BananaShopAlarmVO vo, HttpSession session, String sid, String srid) {
+		boolean result = false;
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		vo.setMid(svo.getMid());
+		vo.setSid(sid);
+		vo.setSrid(srid);
+		System.out.println(svo.getMid()+","+sid+","+srid);
+		result = shopReviewDAO.shopAlarmWrite(vo);
+		return String.valueOf(result);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getShopId.do", method=RequestMethod.GET)
+	public String getShopId(String sid) {
+		//return shopReviewService.getShopId(sid);
+		String srid = shopReviewDAO.getShopId(sid);
+		System.out.println("srid: "+ srid);
+		return srid;
+	}
+	
 	
 	/**
 	 * 내 근처 - 업체 후기 삭제 처리
@@ -89,13 +120,14 @@ public class NeighborhoodController {
 	 * 내 근처 - 업체 후기 등록 처리
 	 * @return
 	 */
-	@RequestMapping(value="/neighborStoreReview_write_proc.do",method=RequestMethod.POST)
-	public ModelAndView neighborStoreReview_write_proc(BananaShopReviewVO vo, String sid, HttpSession session) {
-		vo.setSid(sid);
+	@ResponseBody
+	@RequestMapping(value="/neighborStoreReview_write_proc.do",method=RequestMethod.GET)
+	public String neighborStoreReview_write_proc(BananaShopReviewVO vo, String sid, HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		vo.setMid(svo.getMid());
+		vo.setSid(sid);
 		
-		return (ModelAndView)shopReviewService.insert(vo);
+		return shopReviewService.insertStore(vo);
 	}
 	
 	/**

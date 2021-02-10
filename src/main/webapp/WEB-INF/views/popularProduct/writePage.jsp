@@ -124,9 +124,9 @@ $(document).ready(function(){
 		}else if($("#pcontent").val() ==""){
 			alert("상품 내용을 적어주세요");
 			$("#pcontent").focus();
-		}else
+		}else {
 			pwriteForm.submit();
-		
+		}
 	});
 	
 	
@@ -164,7 +164,7 @@ $(document).ready(function(){
 <jsp:include page="../header.jsp" />
 	<div class= "content">
 		<h1>상품 등록하기</h1>
-		<form name="pwriteForm" action="writePage_proc.do" method="post"
+		<form name="pwriteForm" action="writePage_proc.do" method="post" id="product_write"
 								 class="pwriteForm" enctype="multipart/form-data">
 		<ul>
 			<li><label for="input_img"><img src="http://localhost:9000/banana/images/dongneLife_inputimg.png">상품 이미지 추가</label>

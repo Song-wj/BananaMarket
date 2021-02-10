@@ -10,9 +10,15 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
-		get_alarm_review_msg('${ svo.mid }');
+		var all_al_cnt = parseInt(alarm_count()) + parseInt(shop_alarm_count()
+				+ parseInt(keyword_alarm_count()));
+		get_alarm_shop_msg();
+		get_alarm_review_msg();
+		get_alarm_keyword_msg();
 		
-		alarm_count('${ svo.mid }');
+		key_alarm_write();
+		
+		$("#al-cnt").append(all_al_cnt);
 		
 		$("#al-msg").click(function(){
 			$(".modal").toggle();
@@ -23,38 +29,122 @@
 		});
 	});
 	
-	function alarm_count(mid) {
+	function alarm_count() {
+		var str;
 		$.ajax({
-			url: "alarm_count.do?mid="+mid,
+			url: "alarm_count.do",
+			async: false,
 			success: function(cnt) {
-				$("#al-cnt").append(cnt);
+				//str += "<input type='text' id='review-al-cnt' value='"+ cnt +"'>";
+				//$("#fixed-bar").append(str);
+				str = cnt;		
 			}		
 		});
+		return str;		
 	}
 	
-	function get_alarm_review_msg(mid) {
+	function shop_alarm_count() {
+		var str;
 		$.ajax({
-			url: "getReviewAlarmContent.do?mid="+mid,
+			url: "shop_alarm_count.do",
+			async: false,
+			success: function(cnt) {
+			   //str += "<input type='text' id='shop-al-cnt' value='"+ cnt +"'>";
+			   //$("#fixed-bar").append(str);
+			   str = cnt;
+			}
+		});
+		return str;
+	}
+	
+	function keyword_alarm_count() {
+		var str;
+		$.ajax({
+			url: "keyword_alarm_count.do",
+			async: false,
+			success: function(cnt) {
+				str = cnt;
+			}
+		});
+		return str;
+	}
+	
+	function get_alarm_review_msg() {
+		$.ajax({
+			url: "getReviewAlarmContent.do",
 			success: function(result) {
 				var jdata = JSON.parse(result);
 				var output = "";
 					output+= "<ul id='review-alarm'>";
-				for(var i in jdata.jlist) {
-					//if(jdata.jlist.length > 0) {
-					output+= "<li onclick=" + "\"move_dongneLife_content('"+ jdata.jlist[i].bid +"','"+ jdata.jlist[i].brid +"')\">";
-					output+= "<p>";
-					output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].btopic+"</span> 글에 댓글을 남겼습니다.<br>";
-					output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>" +"<span class='ra-date'>"+ jdata.jlist[i].ra_data +"</span>";
-					output+= "</p>";
-					output+= "</li>";
-					/* }
-					else {
-						output+="<li>알림이 없습니다.</li>";
-					} */
+				if(jdata.jlist.length != 0){
+					for(var i in jdata.jlist) {
+						output+= "<li onclick=" + "\"move_dongneLife_content('"+ jdata.jlist[i].bid +"','"+ jdata.jlist[i].brid +"')\">";
+						output+= "<p>";
+						output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].btopic+"</span> 글에 댓글을 남겼습니다.<br>";
+						output+= "<span class='ra-content'>'" + jdata.jlist[i].bcomment + "'</span>" +"<span class='ra-date'>"+ jdata.jlist[i].ra_data +"</span>";
+						output+= "</p>";
+						output+= "</li>";
+					}
+				} else {
+					output += "<li style='color:red;'>알림이 없습니다.</li>";
 				}
 					output+= "</ul>";
 				
 				$(".review-al-content").append(output);
+			}
+		});
+	}
+	
+	function get_alarm_shop_msg() {
+		$.ajax({
+			url: "getShopAlarmContent.do",
+			success: function(result) {
+				var jdata = JSON.parse(result);
+				var output = "";
+					output+= "<ul id='review-alarm'>";
+				if(jdata.jlist.length != 0) {
+					for(var i in jdata.jlist) {
+						output+= "<li onclick=" + "\"move_neighborStoreReview_content('"+ jdata.jlist[i].srid +"','"+ jdata.jlist[i].sid +"')\">";
+						output+= "<p>";
+						output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 " + "<span class='ra-title'>" + jdata.jlist[i].sname+"</span> 가게에 후기를 남겼습니다.<br>";
+						output+= "<span class='ra-content'>'" + jdata.jlist[i].srcontent+ "'</span>" +"<span class='ra-date'>"+ jdata.jlist[i].sa_date +"</span>";
+						output+= "</p>";
+						output+= "</li>";
+					}
+				} else {
+					output += "<li style='color:red;'>알림이 없습니다.</li>";
+				} 
+				
+					output+= "</ul>";
+					
+				$(".shop-al-content").append(output);
+			}
+		});
+	}
+	
+	function get_alarm_keyword_msg() {
+		$.ajax({
+			url: "getKeywordAlarmContent.do",
+			success: function(result) {
+				var jdata = JSON.parse(result);
+				var output = "";
+					output+= "<ul id='review-alarm'>";
+				if(jdata.jlist.length != 0) {
+					for(var i in jdata.jlist) {
+						output+= "<li onclick=" + "\"move_keyword_content('"+ jdata.jlist[i].pid +"')\">";
+						output+= "<p>";
+						output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 찾으시는 키워드 " + "<span class='ra-title'>#" + jdata.jlist[i].keyword+"</span> 관련된 매물이 올라왔어요 :)<br>";
+						output+= "<span class='ra-content'>'" + jdata.jlist[i].ptitle+ "' 게시물을 확인하세요.'</span>";
+						output+= "</p>";
+						output+= "</li>";
+					}
+				} else {
+					output += "<li style='color:red;'>알림이 없습니다.</li>";
+				} 
+				
+					output+= "</ul>";
+					
+				$(".keyword-al-content").append(output);
 			}
 		});
 	}
@@ -71,6 +161,42 @@
 			} 
 		});
 	}
+	
+	function move_neighborStoreReview_content(srid, sid) {
+		$.ajax({
+			url: "sa_delete.do?srid="+srid,
+			success: function(result) {
+				if(result) {
+					$(location).attr('href','http://localhost:9000/banana/neighborStoreReview_content.do?srid='+srid);
+				} else {
+					alert("fail");
+				}
+			} 
+		});
+	}
+	
+	function move_keyword_content(pid) {
+		$.ajax({
+			url: "ka_delete.do?pid="+pid,
+			success: function(result) {
+				if(result) {
+					$(location).attr('href','http://localhost:9000/banana/productContent.do?pid='+pid);
+				} else {
+					alert("fail");
+				}
+			} 
+		});
+	}
+	
+	function key_alarm_write() {
+		$.ajax({
+			url: "key_alarm_write.do",
+			success: function(result) {
+				console.log(result);
+			}
+		});
+	}
+	
 </script>
 <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -238,6 +364,14 @@
         }
         
 </style>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#header-search-button").click(function() {
+    	var search = $("#header-search-input").val();
+		location.href="http://localhost:9000/banana/search.do?search="+search;
+    });
+});
+</script>
 </head>
 <body>
 	<header id="fixed-bar" class="fixed-bar-box-shadow">
@@ -275,6 +409,12 @@
 								<div class="modal_content">
 									<div class="review-al-content">
 										<span>우리동네 알림</span>
+									</div>
+									<div class="shop-al-content">
+										<span>내 가게 알림</span>
+									</div>
+									<div class="keyword-al-content">
+										<span>키워드 알림</span>
 									</div>
 								</div>
 							</div>
