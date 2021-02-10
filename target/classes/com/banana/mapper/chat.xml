@@ -10,7 +10,7 @@
 		insert into banana_chat values ('C_'||sqe_banana_chat.nextval,#{sell_mid},#{buy_mid},#{pid},#{chat_content},sysdate,#{chk_read})
 	</insert>
 	
-	<select id="ChatList" resultType="com.banana.vo.ChatContentVO">
+	<select id="ChatList" resultType="com.banana.vo.ChatVO">
 		select cid, sell_mid, buy_mid, pid, chat_content, to_char(cdate,'mm.dd  hh:mm') cdate, chk_read
 			from banana_chat  
 			

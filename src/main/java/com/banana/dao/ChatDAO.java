@@ -30,8 +30,12 @@ public class ChatDAO extends DBConn{
 	
 	
 	/** 채팅 content **/
+	public ChatContentVO getContent(String cid, String pid, String mid) {
+		return sqlSession.selectOne(namespace+".ChatContent", cid);
+	}
+	
+	/** 채팅 content2 **/
 	public ChatContentVO getContent(String cid) {
-		
 		return sqlSession.selectOne(namespace+".ChatContent", cid);
 	}	
 }
