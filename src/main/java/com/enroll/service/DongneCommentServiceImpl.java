@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.DongneCommentDAO;
 import com.banana.dao.dongneDAO;
+import com.banana.vo.BananaKeywordAlarmVO;
 import com.banana.vo.BananaReviewAlarmVO;
 import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
@@ -28,16 +29,6 @@ public class DongneCommentServiceImpl implements EnrollService {
 	private dongneDAO dongneDAO;
 	/////
 	
-	public String deleteShopAlarm(String srid) {
-		boolean result = dongneDAO.deleteShopAlarmProc(srid);
-		return String.valueOf(result);
-	}
-	
-	public String deleteReviewAlarm(String brid) {
-		boolean result = dongneDAO.deleteReviewAlarmProc(brid);
-		return String.valueOf(result);
-	}
-	
 	@Override
 	public String insertStore(Object vo) {
 		// TODO Auto-generated method stub
@@ -55,7 +46,52 @@ public class DongneCommentServiceImpl implements EnrollService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public String getKeywordAlarmCount(String mid) {
+		int val = dongneDAO.getKeywordAlarmCount(mid);
+		return String.valueOf(val);
+	}
+	
+	public String key_alarm_write(String mid) {
+		boolean result = dongneDAO.keyAlarmWrite(mid);
+		return String.valueOf(result);
+	}
+	
+	public String deleteKeywordAlarm(String pid) {
+		boolean result = dongneDAO.deleteKeywordAlarmProc(pid);
+		return String.valueOf(result);
+	}
+	
+	public String deleteShopAlarm(String srid) {
+		boolean result = dongneDAO.deleteShopAlarmProc(srid);
+		return String.valueOf(result);
+	}
+	
+	public String deleteReviewAlarm(String brid) {
+		boolean result = dongneDAO.deleteReviewAlarmProc(brid);
+		return String.valueOf(result);
+	}
+	
+	public String getKeywordAlarmContent(String mid) {
+		ArrayList<BananaKeywordAlarmVO> list = dongneDAO.getKeywordContent(mid);
+		
+		JsonArray jarray = new JsonArray();
+		JsonObject jdata = new JsonObject();
+		Gson gson = new Gson();
+		
+		for(BananaKeywordAlarmVO vo : list) {
+			JsonObject jobj = new JsonObject();
+			jobj.addProperty("mid", vo.getMid());
+			jobj.addProperty("pid", vo.getPid());
+			jobj.addProperty("ptitle", vo.getPtitle());
+			jobj.addProperty("keyword", vo.getKeyword());
+			jarray.add(jobj);
+		}
+		jdata.add("jlist", jarray);
+		
+		return gson.toJson(jdata);
+	}
+	
 	public String getShopAlarmContent(String mid) {
 		ArrayList<BananaShopAlarmVO> salist = dongneDAO.getShopContent(mid);
 		

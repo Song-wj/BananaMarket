@@ -10,11 +10,13 @@
 <title>Insert title here</title>
 <script>
 	$(document).ready(function(){
-		var all_al_cnt = parseInt(alarm_count('${ svo.mid }')) + parseInt(shop_alarm_count('${ svo.mid }'));
-		//alert(alarm_count('${ svo.mid }'));
-		//alert(shop_alarm_count('${ svo.mid }'));
-		get_alarm_shop_msg('${ svo.mid }');
-		get_alarm_review_msg('${ svo.mid }');
+		var all_al_cnt = parseInt(alarm_count()) + parseInt(shop_alarm_count()
+				+ parseInt(keyword_alarm_count()));
+		get_alarm_shop_msg();
+		get_alarm_review_msg();
+		get_alarm_keyword_msg();
+		
+		key_alarm_write();
 		
 		$("#al-cnt").append(all_al_cnt);
 		
@@ -27,10 +29,10 @@
 		});
 	});
 	
-	function alarm_count(mid) {
+	function alarm_count() {
 		var str;
 		$.ajax({
-			url: "alarm_count.do?mid="+mid,
+			url: "alarm_count.do",
 			async: false,
 			success: function(cnt) {
 				//str += "<input type='text' id='review-al-cnt' value='"+ cnt +"'>";
@@ -41,10 +43,10 @@
 		return str;		
 	}
 	
-	function shop_alarm_count(mid) {
+	function shop_alarm_count() {
 		var str;
 		$.ajax({
-			url: "shop_alarm_count.do?mid="+mid,
+			url: "shop_alarm_count.do",
 			async: false,
 			success: function(cnt) {
 			   //str += "<input type='text' id='shop-al-cnt' value='"+ cnt +"'>";
@@ -55,9 +57,21 @@
 		return str;
 	}
 	
-	function get_alarm_review_msg(mid) {
+	function keyword_alarm_count() {
+		var str;
 		$.ajax({
-			url: "getReviewAlarmContent.do?mid="+mid,
+			url: "keyword_alarm_count.do",
+			async: false,
+			success: function(cnt) {
+				str = cnt;
+			}
+		});
+		return str;
+	}
+	
+	function get_alarm_review_msg() {
+		$.ajax({
+			url: "getReviewAlarmContent.do",
 			success: function(result) {
 				var jdata = JSON.parse(result);
 				var output = "";
@@ -81,9 +95,9 @@
 		});
 	}
 	
-	function get_alarm_shop_msg(mid) {
+	function get_alarm_shop_msg() {
 		$.ajax({
-			url: "getShopAlarmContent.do?mid="+mid,
+			url: "getShopAlarmContent.do",
 			success: function(result) {
 				var jdata = JSON.parse(result);
 				var output = "";
@@ -104,6 +118,33 @@
 					output+= "</ul>";
 					
 				$(".shop-al-content").append(output);
+			}
+		});
+	}
+	
+	function get_alarm_keyword_msg() {
+		$.ajax({
+			url: "getKeywordAlarmContent.do",
+			success: function(result) {
+				var jdata = JSON.parse(result);
+				var output = "";
+					output+= "<ul id='review-alarm'>";
+				if(jdata.jlist.length != 0) {
+					for(var i in jdata.jlist) {
+						output+= "<li onclick=" + "\"move_keyword_content('"+ jdata.jlist[i].pid +"')\">";
+						output+= "<p>";
+						output+= "<span class='ra-id'>" + jdata.jlist[i].mid + "</span>님이 찾으시는 키워드 " + "<span class='ra-title'>#" + jdata.jlist[i].keyword+"</span> 관련된 매물이 올라왔어요 :)<br>";
+						output+= "<span class='ra-content'>'" + jdata.jlist[i].ptitle+ "' 게시물을 확인하세요.'</span>";
+						output+= "</p>";
+						output+= "</li>";
+					}
+				} else {
+					output += "<li style='color:red;'>알림이 없습니다.</li>";
+				} 
+				
+					output+= "</ul>";
+					
+				$(".keyword-al-content").append(output);
 			}
 		});
 	}
@@ -133,6 +174,29 @@
 			} 
 		});
 	}
+	
+	function move_keyword_content(pid) {
+		$.ajax({
+			url: "ka_delete.do?pid="+pid,
+			success: function(result) {
+				if(result) {
+					$(location).attr('href','http://localhost:9000/banana/productContent.do?pid='+pid);
+				} else {
+					alert("fail");
+				}
+			} 
+		});
+	}
+	
+	function key_alarm_write() {
+		$.ajax({
+			url: "key_alarm_write.do",
+			success: function(result) {
+				console.log(result);
+			}
+		});
+	}
+	
 </script>
 <style>
 	@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
@@ -348,6 +412,9 @@ $(document).ready(function() {
 									</div>
 									<div class="shop-al-content">
 										<span>내 가게 알림</span>
+									</div>
+									<div class="keyword-al-content">
+										<span>키워드 알림</span>
 									</div>
 								</div>
 							</div>

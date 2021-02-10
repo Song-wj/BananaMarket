@@ -29,6 +29,30 @@ public class EnrollstoreServiceImpl implements EnrollService {
 	
 	
 	@Override
+	public String deleteKeywordAlarm(String pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeywordAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeywordAlarmContent(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String key_alarm_write(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String insertStore(Object vo) {
 		// TODO Auto-generated method stub
 		return null;
