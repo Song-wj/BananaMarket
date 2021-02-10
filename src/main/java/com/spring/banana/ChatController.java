@@ -30,7 +30,17 @@ public class ChatController {
 	}
 	
 	/**
-	 * 채팅 - 상세 내용
+	 * 상품 - 채팅 하기
+	 */
+	@RequestMapping(value ="/chat_write.do", method = RequestMethod.GET)
+	public ModelAndView chat_insert(String pid, String mid, HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		
+		
+		return (ModelAndView)chatService.Content(pid, svo.getMid(), mid);
+	}
+	/**
+	 * 채팅 리스트 - 상세 내용
 	 * @return
 	 */
 	@RequestMapping(value ="/chat_list_content.do", method = RequestMethod.GET)
@@ -41,7 +51,7 @@ public class ChatController {
 	
 	
 	/**
-	 * 채팅 - 홈 화면
+	 * 채팅 리스트
 	 * @return
 	 */
 	@RequestMapping(value ="/chat_list.do", method = RequestMethod.GET)

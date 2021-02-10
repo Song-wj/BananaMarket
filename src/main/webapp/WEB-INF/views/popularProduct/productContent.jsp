@@ -533,7 +533,7 @@ $(document).ready(function(){
   					</button> 
   					
   					<c:if test="${svo.mid ne vo.mid }">
-						<a href="chat_list_content.do?pid=${vo.pid}&mid=${vo.mid}"><button type="button" class="product_btn_style">채팅 하기</button></a>
+						<a href="chat_write.do?pid=${vo.pid}&mid=${vo.mid}"><button type="button" class="product_btn_style">채팅 하기</button></a>
 					</c:if>
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>

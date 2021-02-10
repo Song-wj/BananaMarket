@@ -47,4 +47,13 @@ public class ChatServiceImpl {
 			return mv;
 	}
 	
+	public Object Content(String cid, String pid, String mid) {
+		ModelAndView mv = new ModelAndView();
+		ChatContentVO vo = chatDAO.getContent(cid, pid, mid);
+		mv.addObject("vo", vo);
+		mv.addObject("pid",pid);
+		mv.addObject("mid", mid);
+		mv.setViewName("/chatBanner/chat_write");
+		return mv;
+	}
 }
