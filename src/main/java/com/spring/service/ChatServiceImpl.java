@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.banana.dao.ChatDAO;
 import com.banana.vo.ChatContentVO;
 import com.banana.vo.ChatVO;
+import com.banana.vo.productVO;
 
 @Service("chatService")
 public class ChatServiceImpl {
@@ -24,7 +25,7 @@ public class ChatServiceImpl {
 		result = chatDAO.getInsert(cvo);
 		
 		if(result != 0) {
-			mv.setViewName("redirect:/chat_list_content.do?cid="+cvo.getCid());
+			mv.setViewName("redirect:chat_write.do?pid="+ cvo.getPid()+"&mid="+cvo.getSell_mid());
 		}
 		
 		return mv;
@@ -47,12 +48,14 @@ public class ChatServiceImpl {
 			return mv;
 	}
 	
-	public Object Content(String cid, String pid, String mid) {
+	public Object Content(String pid) {
 		ModelAndView mv = new ModelAndView();
-		ChatContentVO vo = chatDAO.getContent(cid, pid, mid);
+		productVO vo = chatDAO.getContent2(pid);
+		ArrayList<ChatContentVO> list = chatDAO.chat(pid);
 		mv.addObject("vo", vo);
-		mv.addObject("pid",pid);
-		mv.addObject("mid", mid);
+		mv.addObject("list", list);
+		//mv.addObject("pid",pid);
+		//mv.addObject("mid", mid);
 		mv.setViewName("/chatBanner/chat_write");
 		return mv;
 	}

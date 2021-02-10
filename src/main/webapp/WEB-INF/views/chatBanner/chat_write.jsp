@@ -155,7 +155,7 @@
 		<section class="section1_chatContent">
 			<div>
 				<ul>
-					<li><a href="productContent.do?pid=${pid}"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
+					<li><a href="productContent.do?pid=${vo.pid}"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li>
 						<table>
 							<tr>
@@ -185,9 +185,21 @@
 			</div>
 		</section>
 		<section class="section3_chatContent">
-				<div>
-					<p>채팅 내역이 없습니다.</p>			
-				</div>
+				<c:forEach var="vo" items="${list }"> 
+					<c:if test="${vo.chat_content ne null }">	
+						<div class="reply">
+							<p><span>${vo.buy_mid }</span>: ${vo.chat_content} </p>
+						</div>
+						<div class="request">
+							<p>질문질문</p>
+						</div>
+					</c:if>
+				</c:forEach>
+				<c:if test="${0 eq list.size()}">
+					<div>
+						<p>채팅 내역이 없습니다.</p>		
+					</div>
+				</c:if>
 		</section>
 		<section class="section4_chatContent">
 		  <c:choose>
@@ -197,8 +209,8 @@
 						<!-- <a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a> -->
 						<textarea name="chat_content" placeholder="메세지를 입력하세요."></textarea>
 						<button type="submit" class="chatBtn">전송</button>
-						<input type="hidden" name="sell_mid" value="${mid}">
-						<input type="hidden" name="pid" value="${pid}">  
+						<input type="hidden" name="sell_mid" value="${vo.mid}">
+						<input type="hidden" name="pid" value="${vo.pid}">  
 						<input type="hidden" name="buy_mid" value="${svo.mid}">
 						<input type="hidden" name="chk_read" value="x">
 					</div>
