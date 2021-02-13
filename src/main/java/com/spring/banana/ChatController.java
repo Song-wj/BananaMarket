@@ -33,11 +33,10 @@ public class ChatController {
 	 * 상품 - 채팅 하기
 	 */
 	@RequestMapping(value ="/chat_write.do", method = RequestMethod.GET)
-	public ModelAndView chat_insert(String pid, String mid, HttpSession session) {
-		SessionVO svo = (SessionVO)session.getAttribute("svo");
+	public ModelAndView chat_insert(String pid) {
+		//SessionVO svo = (SessionVO)session.getAttribute("svo");
 		
-		
-		return (ModelAndView)chatService.Content(pid, svo.getMid(), mid);
+		return (ModelAndView)chatService.Content(pid);
 	}
 	/**
 	 * 채팅 리스트 - 상세 내용

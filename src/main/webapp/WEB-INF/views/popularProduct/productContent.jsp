@@ -533,12 +533,9 @@ $(document).ready(function(){
   					</button> 
   					
   					<c:if test="${svo.mid ne vo.mid }">
-<<<<<<< HEAD
-						<a href="chat_list_content.do?cid=${cid }"><button type="button" class="product_btn_style">채팅 하기</button></a>
-=======
 						<a href="chat_write.do?pid=${vo.pid}&mid=${vo.mid}"><button type="button" class="product_btn_style">채팅 하기</button></a>
->>>>>>> branch 'master' of https://github.com/Dex-Park/BananaMarket.git
 					</c:if>
+					
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
 				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate}</time></p>
@@ -547,7 +544,7 @@ $(document).ready(function(){
 					<p>${vo.pcontent}</p>
 				</div>
 				<p id="article-counts">
-					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9
+					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9${vo.pid} ,${vo.mid}
 				</p>
 			</section> 	
 		</div>

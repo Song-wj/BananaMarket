@@ -6,10 +6,25 @@
 
 <mapper namespace="mapper.dongne">
 
+	<select id="getKeywordAlarmCount" parameterType="java.lang.String" resultType="int">
+		select count(DISTINCT pid) from banana_keyword_alarm where mid=#{mid}
+	</select>
+
+	<insert id="keyAlarmWrite" parameterType="java.lang.String">
+		insert into banana_keyword_alarm (mid, pid, ptitle, keyword)
+		SELECT k.mid, p.pid, p.ptitle, k.keyword
+		FROM BANANA_KEYWORD K, BANANA_PRODUCT P
+		WHERE P.PTITLE LIKE '%'||K.KEYWORD||'%' OR P.PCONTENT LIKE '%'||K.KEYWORD||'%' and k.mid = #{mid}
+	</insert>
+
 	<select id="getreviewcount" parameterType="java.lang.String" resultType="int">
 		select count(*) from banana_board b , banana_board_review r
 		where b.bid=r.bid and btitle=#{bstitle}
 	</select>
+	
+	<delete id="deleteKeywordAlarm" parameterType="java.lang.String">
+		delete from banana_keyword_alarm where pid=#{pid}
+	</delete>
 	
 	<delete id="deleteShopAlarm" parameterType="java.lang.String">
 		delete from banana_shop_alarm where srid=#{srid}
