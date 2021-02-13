@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.shop">
+
+	<select id="getshoplist" resultType="com.banana.vo.BananaShopVO">
+	Select D.sid, A.srid, A.srdate, nvl(A.srcontent,'등록된 업체리뷰 없음') srcontent, nvl(B.like_count,0) like_count, nvl(C.review_count,0) review_count,
+       D.sname, D.skinds, D.skinds2, D.saddr_num, D.saddr, D.sph, D.sdate, D.smain_img, 
+       D.smain_simg, D.scaro_img1, D.scaro_simg1
+	From 
+	  (Select Sid,srid,Srdate,nvl(Srcontent,'없음') srcontent, Rank 
+	    From  (Select  Sid, srid,Srdate, Srcontent, Rank() Over(Partition By Sid Order By Srdate Desc) Rank 
+	                From Banana_Shop_Review)
+	    Where Rank=1) A , 
+	  (Select Sid, Count(sid) like_Count From Banana_Interest Group By Sid) B,
+	  (select sid, count(srid) review_count from banana_shop_review group by sid) C,
+	  (select sid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, 
+	          smain_simg, scaro_img1, scaro_simg1
+	   from banana_shop 
+	   group by sid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, 
+	          smain_simg, scaro_img1, scaro_simg1) D
+	
+	where A.Sid = B.Sid(+) and A.sid = C.sid(+) and A.Sid(+) = D.Sid
+	Order By like_count Desc, review_count desc
+	</select>
+	
+	<select id="getshoplist2" resultType="com.banana.vo.BananaShopVO">
+	Select D.sid, A.srdate, nvl(A.srcontent,'등록된 업체리뷰 없음') srcontent, nvl(B.like_count,0) like_count, nvl(C.review_count,0) review_count,
+       D.sname, D.skinds, D.skinds2, D.saddr_num, D.saddr, D.sph, D.sdate, 
+       D.smain_img, D.smain_simg, D.scaro_img1, D.scaro_simg1
+	From 
+	  (Select Sid,Srdate,srcontent, Rank 
+	    From  (Select  Sid, Srdate, Srcontent, Rank() Over(Partition By Sid Order By Srdate Desc) Rank 
+	                From Banana_Shop_Review)
+	    Where Rank=1) A , 
+	  (Select Sid, Count(sid) like_Count From Banana_Interest Group By Sid) B,
+	  (select sid, count(srid) review_count from banana_shop_review group by sid) C,
+	  (select sid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, 
+	          smain_simg, scaro_img1, scaro_simg1
+	   from banana_shop 
+	   group by sid, sname, skinds, skinds2, saddr_num, saddr, sph, sdate, smain_img, 
+	          smain_simg, scaro_img1, scaro_simg1) D
+	
+	where A.Sid = B.Sid(+) and A.sid = C.sid(+) and A.Sid(+) = D.Sid
+	Order By sdate Desc
+	</select>
+
+</mapper>

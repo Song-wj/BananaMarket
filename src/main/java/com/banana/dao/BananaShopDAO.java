@@ -2,10 +2,20 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.BananaShopVO;
+import com.banana.vo.dongneVO;
 
 public class BananaShopDAO extends DBConn {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	private static String namespace = "mapper.shop";
 	
 	/**
 	 * Delete - 업체 삭제
@@ -191,49 +201,8 @@ public class BananaShopDAO extends DBConn {
 	 * @return
 	 */
 	public ArrayList<BananaShopVO> getLikeShopList(){
-		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
-		try {
-			String sql = "select s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.saddr_num, \r\n" + 
-					"       s.saddr, s.sph, s.sdate, s.smain_img, s.smain_simg, s.scaro_img1, s.scaro_simg1,\r\n" + 
-					"       count(i.sid) as like_count, count(r.sid) as review_count,\r\n" + 
-					"       r.srid, r.srcontent\r\n" + 
-					"from banana_shop s\r\n" + 
-					"left outer join banana_interest i on i.sid = s.sid\r\n" + 
-					"left outer join banana_shop_review r on i.sid = r.sid\r\n" + 
-					"group by s.sid, s.mid, s.sname, s.skinds, s.skinds2, \r\n" + 
-					"s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_img, \r\n" + 
-					"s.smain_simg, s.scaro_img1, s.scaro_simg1, r.srid, r.srcontent\r\n" + 
-					"order by count(i.sid) desc";
-			getStatement();
-			rs= stmt.executeQuery(sql);
-			while(rs.next()) {
-				BananaShopVO vo = new BananaShopVO();
-				vo.setSid(rs.getString(1));
-				vo.setMid(rs.getString(2));
-				vo.setSname(rs.getString(3));
-				vo.setSkinds(rs.getString(4));
-				vo.setSkinds2(rs.getString(5));
-				vo.setSaddr_num(rs.getString(6));
-				vo.setSaddr(rs.getString(7));
-				vo.setSph(rs.getString(8));
-				vo.setSdate(rs.getString(9));
-				vo.setSmain_img(rs.getString(10));
-				vo.setSmain_simg(rs.getString(11));
-				vo.setScaro_img1(rs.getString(12));
-				vo.setScaro_simg1(rs.getString(13));
-				vo.setLike_count(rs.getInt(14));
-				vo.setReview_count(rs.getInt(15));
-				vo.setSrid(rs.getString(16));
-				vo.setSrcontent(rs.getString(17));
-					
-				list.add(vo);
-					
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return list;
+		List<BananaShopVO> list = sqlSession.selectList(namespace+".getshoplist");
+		return (ArrayList<BananaShopVO>)list;
 	}	
 	
 	/**
@@ -241,49 +210,8 @@ public class BananaShopDAO extends DBConn {
 	 * @return
 	 */
 	public ArrayList<BananaShopVO> getShopList(){
-		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
-		try {
-			String sql = "select s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.saddr_num, \r\n" + 
-					"       s.saddr, s.sph, s.sdate, s.smain_img, s.smain_simg, s.scaro_img1, s.scaro_simg1,\r\n" + 
-					"       count(i.sid) as like_count, count(r.sid) as review_count,\r\n" + 
-					"       r.srid, r.srcontent\r\n" + 
-					"from banana_shop s\r\n" + 
-					"left outer join banana_interest i on i.sid = s.sid\r\n" + 
-					"left outer join banana_shop_review r on i.sid = r.sid\r\n" + 
-					"group by s.sid, s.mid, s.sname, s.skinds, s.skinds2, \r\n" + 
-					"s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_img, \r\n" + 
-					"s.smain_simg, s.scaro_img1, s.scaro_simg1, r.srid, r.srcontent\r\n" + 
-					"order by sdate desc";
-			getStatement();
-			rs= stmt.executeQuery(sql);
-			while(rs.next()) {
-				BananaShopVO vo = new BananaShopVO();
-				vo.setSid(rs.getString(1));
-				vo.setMid(rs.getString(2));
-				vo.setSname(rs.getString(3));
-				vo.setSkinds(rs.getString(4));
-				vo.setSkinds2(rs.getString(5));
-				vo.setSaddr_num(rs.getString(6));
-				vo.setSaddr(rs.getString(7));
-				vo.setSph(rs.getString(8));
-				vo.setSdate(rs.getString(9));
-				vo.setSmain_img(rs.getString(10));
-				vo.setSmain_simg(rs.getString(11));
-				vo.setScaro_img1(rs.getString(12));
-				vo.setScaro_simg1(rs.getString(13));
-				vo.setLike_count(rs.getInt(14));
-				vo.setReview_count(rs.getInt(15));
-				vo.setSrid(rs.getString(16));
-				vo.setSrcontent(rs.getString(17));
-					
-				list.add(vo);
-					
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return list;
+		List<BananaShopVO> list = sqlSession.selectList(namespace+".getshoplist2");
+		return (ArrayList<BananaShopVO>)list;
 	}	
 	
 	/**

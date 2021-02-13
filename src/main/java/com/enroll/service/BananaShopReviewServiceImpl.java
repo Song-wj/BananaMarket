@@ -58,8 +58,10 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<BananaShopReviewVO> list = shopReviewDAO.getShopReviewList(sid);
 		int review_count = shopReviewDAO.getShopReviewCount(sid);
+		String sname = shopReviewDAO.getSname(sid);
 
 		mv.addObject("review_count", review_count);
+		mv.addObject("sname", sname);
 		mv.addObject("list",list);
 		mv.setViewName("/myNeighborhood/neighborStoreReview_list");
 		

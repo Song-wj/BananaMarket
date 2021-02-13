@@ -32,6 +32,31 @@ public class BananaShopReviewDAO extends DBConn {
 	}
 	
 	/**
+	 * sid로 sname 구하기
+	 * @param vo
+	 * @return
+	 */
+	public String getSname(String sid) {
+		String sname = "";
+		
+		try {
+			String sql ="select sname from banana_shop where sid=?";
+			
+			getPreparedStatement(sql);
+			pstmt.setString(1, sid);
+				
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				sname = (rs.getString(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return sname;
+	}
+	
+	/**
 	 * Delete - 업체리뷰 삭제
 	 * @param srid
 	 * @return
