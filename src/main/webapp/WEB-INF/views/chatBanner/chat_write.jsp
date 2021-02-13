@@ -69,12 +69,12 @@
 		padding-bottom:30px;
 	}
 	section.section3_chatContent>div {
-		height:200px;
+		height:40px;
 	}
-	section.section3_chatContent>div p {
+	/*section.section3_chatContent>div p {
 		margin: 10% 43%;
 		font-size:20px;
-	}
+	}*/
 	
 	section.section3_chatContent>div.reply {
 		position:relative;
@@ -104,7 +104,7 @@
 		padding:50px 0;
 	}
 	section.section3_chatContent>div.request p {
-		padding:10px 10px;
+		/* padding:10px 10px; */
 	}
 	section.section3_chatContent>div.request span {
 		color:rgb(98,71,24);
