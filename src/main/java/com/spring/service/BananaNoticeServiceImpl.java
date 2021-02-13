@@ -85,10 +85,13 @@ public class BananaNoticeServiceImpl implements BoardService{
 		ModelAndView mv = new ModelAndView();
 		
 		BananaNoticeVO vo = BananaNoticeDAO.getContent(id);
+		BananaNoticeVO pre = BananaNoticeDAO.getPre(id);
+		BananaNoticeVO next = BananaNoticeDAO.getNext(id);
 		BananaNoticeDAO.getUpdateHits(id);
 		
 		mv.addObject("vo",vo);
-		
+		mv.addObject("pre",pre);		
+		mv.addObject("next",next);
 		if(param.equals("user")) {
 			mv.setViewName("/notice/notice_content");			
 		}else {

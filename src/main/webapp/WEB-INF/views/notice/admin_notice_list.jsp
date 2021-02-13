@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href = "http://localhost:9000/banana/css/am-pagination.css">
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
-<script src="http://localhost:9000/banana/js/am-pagination.js"></script>
+<script src="http://localhost:9000/banana/js/am-pagination.js"></script>rmfjg
 <script>
 	$(document).ready(function(){
 		
@@ -146,8 +146,8 @@
 					<table class="notice_list">
 			            <tr>
 			            	<td colspan="4" class="search">
-				            	<input type="text" placeholder="제목을 입력해주세요" id="svalue">
-								<button type="button" class="noticelist_btn_style" id="getSearchList">검색</button>
+				            	<!-- <input type="text" placeholder="제목을 입력해주세요" id="svalue">
+								<button type="button" class="noticelist_btn_style" id="getSearchList">검색</button> -->
 							</td>
 			            </tr>
 			            <tr class="table_title">

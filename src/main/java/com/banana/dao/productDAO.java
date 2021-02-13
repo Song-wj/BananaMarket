@@ -4,7 +4,9 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,15 +216,19 @@ public class productDAO extends DBConn{
 		return result;
 		*/
 	}
-	
-
 	/**
 	 * 좋아요
 	 */
 	public boolean getPickContent(String mid,String pid) {
 		boolean result = false;
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("pid", pid);
+		int val = sqlSession.insert(namespace+".getPickContent",param);
+		if(val != 0) result = true;
+		return result;
 		
-		try {
+		/*try {
 			String sql = "insert into BANANA_INTEREST values(?,?,'','')";
 			getPreparedStatement(sql);
 			pstmt.setString(1,mid);
@@ -238,7 +244,7 @@ public class productDAO extends DBConn{
 			e.printStackTrace();
 		}
 		
-		return result;
+		return result;*/
 	}
 	
 	/**
@@ -246,31 +252,40 @@ public class productDAO extends DBConn{
 	 */
 	public boolean getDeleteContent(String mid, String pid) {
 		boolean result = false;
-		
-		try {
-			String sql = "delete from BANANA_INTEREST where mid=? and pid=?";
-			
-			getPreparedStatement(sql);
-			pstmt.setString(1, mid);
-			pstmt.setString(2, pid);
-			
-			int val = pstmt.executeUpdate();
-			if(val != 0) result = true;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("pid", pid);
+		int val = sqlSession.delete(namespace+".getDeleteContent",param);
+		if(val != 0) result = true;
 		return result;
 	}
+		
+//		try {
+//			String sql = "delete from BANANA_INTEREST where mid=? and pid=?";
+//			
+//			getPreparedStatement(sql);
+//			pstmt.setString(1, mid);
+//			pstmt.setString(2, pid);
+//			
+//			int val = pstmt.executeUpdate();
+//			if(val != 0) result = true;
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return result;
+//	}
 	
 	/**
 	 * 좋아요 목록
 	 */
 	public ArrayList<LikeVO> getLikelist(String mid){
-		ArrayList<LikeVO> list = new ArrayList<LikeVO>();
-		
-		try {
+		List <LikeVO> list = sqlSession.selectList(namespace+".getLikelist",mid);
+		return (ArrayList<LikeVO>) list;
+	}
+	
+		/*try {
 			String sql = "select p.ptitle, m.maddr, p.pprice, p.pfile, p.psfile, p.pid"
 					+ " from banana_product p, banana_interest i, banana_member m "
 					+ " where i.mid=m.mid and i.pid=p.pid and i.mid=?";
@@ -297,18 +312,25 @@ public class productDAO extends DBConn{
 		}
 		
 		return list;
-	}
+	}*/
 	
 	/**
 	 * 좋아요 중복 체크
 	 */
 	public int likeResult(String mid, String pid) {
 		int result = 0;
+		/*
+		 * Map<String,String> param = new HashMap<String, String>(); param.put("mid",
+		 * mid); param.put("pid", pid); result=
+		 * sqlSession.selec(namespace+".likeResult", param); return result;
+		 */
+	
 		
 		try {
 			String sql ="select count(*) from BANANA_INTEREST where mid=? and pid=?";
 			getPreparedStatement(sql);
 			pstmt.setString(1, mid);
+			
 			pstmt.setString(2, pid);
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) result = rs.getInt(1);			
@@ -399,8 +421,14 @@ public class productDAO extends DBConn{
 	 */
 	public boolean getKeyword(String mid,String keyword) {
 		boolean result = false;
-		
-		try {
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("keyword", keyword);
+		int val = sqlSession.insert(namespace+".getKeyword",param);
+		if(val != 0) result = true;
+		return result;
+	}
+		/*try {
 			String sql = "insert into BANANA_KEYWORD values(?,?)";
 			getPreparedStatement(sql);
 			pstmt.setString(1,mid);
@@ -417,7 +445,7 @@ public class productDAO extends DBConn{
 		}
 		
 		return result;
-	}
+	}*/
 	
 	/**
 	 * 키워드검색 목록
@@ -485,7 +513,14 @@ public class productDAO extends DBConn{
 	
 	public boolean delkeyword(String mid, String keyword) {
 		boolean result = false;
-		
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("keyword", keyword);
+		int val = sqlSession.delete(namespace+".delkeyword",param);
+		if(val != 0) result = true;
+		return result;
+	}
+		/*
 		try {
 			String sql = "delete from BANANA_keyword where mid=? and keyword=?";
 			
@@ -501,7 +536,7 @@ public class productDAO extends DBConn{
 		}
 		
 		return result;
-	}
+	}*/
 	
 	public ArrayList<productVO> getkeywordclick(String keyword){
 		ArrayList<productVO> list = new ArrayList<productVO>();

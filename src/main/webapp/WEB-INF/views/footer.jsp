@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script src="http://localhost:9000/banana//js/jqbar.js"></script>
+<script src="http://localhost:9000/banana/js/am-pagination.js"></script>
 <title>Insert title here</title>
 <style>
 div.footer{
