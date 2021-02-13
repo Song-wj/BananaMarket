@@ -159,61 +159,61 @@
 	<div class="content">
 		<nav class="recommad_list">
 			<ul>
-				<li>이사</li>
-				<li>자동차</li>
-				<li>용달</li>
-				<li>공방</li>
-				<li>영어</li>
-				<li>피부관리</li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=병원/의료">병원/의료</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=빵집/카페">빵집/카페</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=뷰티/미용">뷰티/미용</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=인테리어">인테리어</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=운동">운동</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=의류판매점">의류판매점</a></li>
 			</ul>		
 		</nav>
 		<div class="category">
 			<div>
-				<a href="">			
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=일자리">			
 					<img src="images/work1.png">
 				    <label>일자리</label>
 				</a>
 			</div>
 			<div>	
-				<a href="">						
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=법무/세무">						
 					<img src="images/manager.png">
-					<label>동네 구인구직</label>
+					<label>법무/세무</label>
 				</a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=교육/학원">	
 					<img src="images/notebook.png">			
-					<label>과외/클래스</label>
+					<label>교육/학원</label>
 				</a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=음식점/반찬">	
 					<img src="images/harvest.png">		
-				    <label>농수산물</label>
+				    <label>음식점/반찬</label>
 				</a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=부동산">	
 					<img src="images/home.png">	
 				    <label>부동산</label>
 				</a>
 			</div>
 			<div>
-				<a href="">			
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=자동차">			
 					<img src="images/car1.png">
-					<label>중고차</label>
+					<label>자동차</label>
 				</a>
 			</div>
 			<div>
-				<a href="">					
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=전시/행사">					
 					<img src="images/diplay.png">			
 			    	<label>전시/행사</label>			
 			    </a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=세탁/수선">	
 					<img src="images/fashion.png">		
-					<label>세탁</label>
+					<label>세탁/수선</label>
 				</a>
 			</div>		
 		</div> <!-- category -->
