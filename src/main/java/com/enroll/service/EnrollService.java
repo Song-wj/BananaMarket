@@ -25,4 +25,8 @@ public interface EnrollService {
 	String getShopAlarmCount(String mid);
 	String getShopAlarmContent(String mid);
 	String deleteShopAlarm(String srid);
+	String key_alarm_write(String mid);
+	String getKeywordAlarmCount(String mid);
+	String getKeywordAlarmContent(String mid);
+	String deleteKeywordAlarm(String pid);
 }

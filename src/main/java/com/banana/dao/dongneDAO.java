@@ -7,6 +7,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.banana.vo.BananaKeywordAlarmVO;
 import com.banana.vo.BananaReviewAlarmVO;
 import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
@@ -27,6 +28,24 @@ public class dongneDAO extends DBConn{
 	}
 	*/
 	
+	public int getKeywordAlarmCount(String mid) {
+		return sqlSession.selectOne(namespace+".getKeywordAlarmCount", mid);
+	}
+	
+	public boolean keyAlarmWrite(String mid) {
+		boolean result = false;
+		int val = sqlSession.insert(namespace+".keyAlarmWrite", mid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
+	public boolean deleteKeywordAlarmProc(String pid) {
+		boolean result = false;
+		int val = sqlSession.delete(namespace+".deleteKeywordAlarm", pid);
+		if(val != 0) result = true;
+		return result;
+	}
+	
 	public boolean deleteShopAlarmProc(String srid) {
 		boolean result = false;
 		int val = sqlSession.delete(namespace+".deleteShopAlarm", srid);
@@ -39,6 +58,29 @@ public class dongneDAO extends DBConn{
 		int val = sqlSession.delete(namespace+".deleteReviewAlarm", brid);
 		if(val != 0) result = true;
 		return result;
+	}
+	
+	public ArrayList<BananaKeywordAlarmVO> getKeywordContent(String mid) {
+		ArrayList<BananaKeywordAlarmVO> list = new ArrayList<BananaKeywordAlarmVO>();
+		
+		try {
+			String sql ="select DISTINCT * from banana_keyword_alarm where mid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, mid);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BananaKeywordAlarmVO vo = new BananaKeywordAlarmVO();
+				vo.setMid(rs.getString(1));
+				vo.setPid(rs.getString(2));
+				vo.setPtitle(rs.getString(3));
+				vo.setKeyword(rs.getString(4));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	public ArrayList<BananaShopAlarmVO> getShopContent(String mid) {

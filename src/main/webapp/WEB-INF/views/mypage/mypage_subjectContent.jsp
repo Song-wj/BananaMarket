@@ -435,7 +435,10 @@
 <script>
 
 	
-	function comment_list(bid){ 
+	function comment_list(bid,count){ 
+	
+		if($("#subreview"+count).css("display") =="none" ){
+			
 		$.ajax({
 			url:"subjectContentReview.do?bid="+bid,
 			success:function(result){
@@ -468,13 +471,26 @@
 					output += "</div>";
 					output += "</div>";
 			    }
+				$("#subreview"+count).css("display" ,"block");
+				$("#subreview"+count).text("");
+				$("#subreview"+count).append(output);
 				
-				$("#subreview").text("");
-				$("#subreview").append(output);
+				
 			}
+				
 		})
+		}else {
+			$("#subreview"+count).css("display" ,"none");
+		}
+			
 		
 	}//comment_list
+	
+	function test(count){
+		$("#comment-btn"+count).click(function(){
+			$("#subreview"+count).css("display","none");
+		});
+	}
 	
 	function update_pro(brid,rno) {
 		$("#bcomment_content"+rno).remove();
@@ -537,7 +553,7 @@ $(document).ready(function(){
 			<c:otherwise>
 			
 
-			<c:forEach var="xvo" items="${ list }">
+			<c:forEach var="xvo" items="${ list }" varStatus="status">
 
 			    <a href="#"><div class="post-list">
 				
@@ -565,9 +581,11 @@ $(document).ready(function(){
 				</div>
 				<div class="post-footer">
 					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
-					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${xvo.bid}')">댓글 ${count }</button>
+					<img src="images/messenger.png"><button type="button"  id="comment-btn${status.count }" onclick="comment_list('${xvo.bid}','${status.count }')">댓글 ${count }</button>
 						<div id="subreview">
-						
+							<div id="subreview${status.count }" style="display:none;">
+							
+							</div>
 						</div>
 						 <div >				
 							<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${xvo.bid }&loc=subcontent&bstitle=${ vo.bstitle }" method=POST id="board_review_write_form"  >
@@ -581,10 +599,11 @@ $(document).ready(function(){
 								
 						</div> 
 					<div class="display-like"></div>
-				</div>
+				    </div>
 				</c:forEach>
 			</c:otherwise>
 			</c:choose>
+			
 		</section>
 	</div>
 	

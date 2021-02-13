@@ -28,7 +28,6 @@ public class ProductServiceImpl implements ProductService{
 		String result="";
 		int dao_result = 0;
 		productVO pvo = (productVO)vo;
-		
 		ArrayList<String> file_list = new ArrayList<String>();
 		ArrayList<String> pfile_list = new ArrayList<String>();
 		
@@ -279,6 +278,13 @@ public class ProductServiceImpl implements ProductService{
 			return mv;*/
 			return String.valueOf(result);
 	 }
+
+
+	@Override
+	public String getPid(String ptitle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	 
 		
 		
