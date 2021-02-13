@@ -135,8 +135,8 @@
 					<table class="notice_list">
 			            <tr>
 			            	<td colspan="4" class="search">
-				            	<input type="text" placeholder="제목을 입력해주세요" id="svalue">
-								<button type="button" class="noticelist_btn_style">검색</button>
+				            	<!-- <input type="text" placeholder="제목을 입력해주세요" id="svalue">
+								<button type="button" class="noticelist_btn_style">검색</button> -->
 							</td>
 			            </tr>
 			            <tr class="table_title">

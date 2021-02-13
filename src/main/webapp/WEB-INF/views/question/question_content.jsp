@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,6 +96,12 @@
 	button.noticelist_btn_style:hover{
 		opacity:0.7;
 	}
+	a.list{
+		text-decoration:none;
+	}
+	span.none{
+		opacity:0.7;
+	}
 </style>
 </head>
 <body>
@@ -129,12 +136,28 @@
 						</tr>
 						<tr>
 							<td class="up">
-								<img src="http://localhost:9000/banana/images/page_up.png">&nbsp;이전글&nbsp;&nbsp;&nbsp;&nbsp;ㅇㅇ
+								<img src="http://localhost:9000/banana/images/page_up.png">&nbsp;이전글&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:choose>
+									<c:when test="${ pre.ftitle eq null}">
+										<span class="none">이전글이 없습니다.</span>
+									</c:when>
+									<c:otherwise>
+										<a href="question_content.do?fid=${pre.fid }" class="list">${pre.ftitle }</a>
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 						<tr>
 							<td class="down">
-								<img src="http://localhost:9000/banana/images/page_down.png">&nbsp;다음글&nbsp;&nbsp;&nbsp;&nbsp;ㅇㅇ
+								<img src="http://localhost:9000/banana/images/page_down.png">&nbsp;다음글&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:choose>
+									<c:when test="${ next.ftitle eq null}">
+										<span class="none">다음글이 없습니다.</span>
+									</c:when>
+									<c:otherwise>
+										<a href="question_content.do?fid=${next.fid }" class="list">${next.ftitle }</a>
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 					</table>

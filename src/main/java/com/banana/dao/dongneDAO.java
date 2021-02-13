@@ -2,7 +2,9 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.banana.vo.BananaReviewAlarmVO;
 import com.banana.vo.BananaShopAlarmVO;
 import com.banana.vo.DongneCommentVO;
+import com.banana.vo.LikeVO;
 import com.banana.vo.dongneSubjectVO;
 import com.banana.vo.dongneVO;
 
@@ -207,8 +210,14 @@ public class dongneDAO extends DBConn{
 	 */
 	public boolean getPickContent(String mid,String bid) {
 		boolean result = false;
-		
-		try {
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("bid", bid);
+		int val = sqlSession.insert(namespace+".getPickContent",param);
+		if(val != 0) result = true;
+		return result;
+	}
+		/*try {
 			String sql = "insert into BANANA_INTEREST values(?,'',?,'')";
 			getPreparedStatement(sql);
 			pstmt.setString(1,mid);
@@ -225,15 +234,21 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return result;
-	}
+	}*/
 	
 	/**
 	 * 좋아요 취소 
 	 */
 	public boolean getDeleteContent(String mid, String bid) {
 		boolean result = false;
-		
-		try {
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("mid", mid);
+		param.put("bid", bid);
+		int val = sqlSession.delete(namespace+".getDeleteContent",param);
+		if(val != 0) result = true;
+		return result;
+	}
+		/*try {
 			String sql = "delete from BANANA_INTEREST where mid=? and bid=?";
 			
 			getPreparedStatement(sql);
@@ -248,14 +263,16 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return result;
-	}
+	}*/
 	
 	/**
 	 * 좋아요 목록
 	 */
 	public ArrayList<dongneVO> getLikelist(String mid){
-		ArrayList<dongneVO> list = new ArrayList<dongneVO>();
-		try {
+		List <dongneVO> list = sqlSession.selectList(namespace+".getLikelist",mid);
+		return (ArrayList<dongneVO>) list;
+	}
+		/*try {
 			String sql = "select b.btitle, m.nickname, m.maddr, b.btopic, b.bfile, b.bsfile ,b.bid"
 					+ " from banana_board b, banana_interest i, banana_member m "
 					+ " where i.mid=m.mid and i.bid=b.bid and i.mid=?";
@@ -284,7 +301,7 @@ public class dongneDAO extends DBConn{
 		
 		return list;
 	}
-	
+	*/
 	/**
 	 * 좋아요 중복 체크
 	 */
