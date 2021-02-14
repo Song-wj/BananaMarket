@@ -104,7 +104,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET , produces="text/plain;charset=UTF-8")
 	public ModelAndView mypage_subjectContent( String bstitle ,HttpSession session ) {
-		System.out.println(bstitle);
+		
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return dongneService.getSubjectListContent(bstitle ,svo.getMid());
 	}
@@ -116,6 +116,27 @@ public class MypageController {
 		return dongneService.getSubjectListReview(bid);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/subjectBoardlike.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String subjectContentlike(String bid , HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.subjectBoardlike(bid ,svo.getMid());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/subjectBoardlikecancel.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String subjectContentlikecancel(String bid , HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.subjectBoardlikecancel(bid ,svo.getMid());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/insertcomment.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String insertcomment(String bid , String comment ,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.insertcomment(bid ,comment ,svo.getMid());
+	}
+
 	/**
 	 * 마이페이지 - 동네생활 주제 목록2
 	 * @return
@@ -442,14 +463,7 @@ public class MypageController {
 		
 			
 		}
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/mypage_review.do", method=RequestMethod.GET) public
-	 * String mypage_review() { return (String)MypageReviewService.getList();
-	 * 
-	 * }
-	 */
+	
 		
 		
 	//주소 저장

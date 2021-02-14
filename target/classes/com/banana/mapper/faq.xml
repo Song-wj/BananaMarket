@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.faq">
+	<insert id="getInsert" parameterType="com.banana.vo.BananaFAQVO">
+		insert into banana_FAQ values('q_'||SQE_BANANA_FAQ.nextval,#{ftitle},#{fcontent},sysdate,0)
+	</insert>
+	
+	<!-- <select id="getListCount">
+		select count(*) from banana_FAQ
+	</select> -->
+	
+	<!-- <select id="getList" resultType="com.banana.vo.BananaFAQVO">
+		select rownum rno, fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits 
+		from (select * from banana_FAQ order by fdate desc))
+	</select> -->
+	
+	<select id="getContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaFAQVO">
+		select fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd') fdate, fhits from banana_FAQ where fid =#{fid}
+	</select>
+	
+	<select id="getPre" parameterType="java.lang.String" resultType="com.banana.vo.BananaFAQVO">
+		select rno, fid, ftitle from (select * from (select rownum rno, fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits 
+										from (select * from banana_faq order by fdate desc))) n 
+										where n.rno=(select rno from (select rownum rno, fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits 
+													from (select * from banana_faq order by fdate desc)) where fid=#{fid})-1
+	</select>
+	
+	<select id="getNext" parameterType="java.lang.String" resultType="com.banana.vo.BananaFAQVO">
+		select rno, fid, ftitle from (select * from (select rownum rno, fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits 
+										from (select * from banana_faq order by fdate desc))) n 
+										where n.rno=(select rno from (select rownum rno, fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits 
+													from (select * from banana_faq order by fdate desc)) where fid=#{fid})+1
+	</select>
+	
+	<update id="getUpdate" parameterType="com.banana.vo.BananaFAQVO">
+		update banana_FAQ set Ftitle=#{ftitle}, Fcontent=#{fcontent} where Fid=#{fid}
+	</update>
+	
+	<delete id="getDelete" parameterType="java.lang.String">
+		delete from banana_FAQ where fid=#{fid}
+	</delete>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.notice">
+	<insert id="getInsert" parameterType="com.banana.vo.BananaNoticeVO">
+		insert into banana_notice values('n_'||SQE_BANANA_NOTICE.nextval,#{ntitle},#{ncontent},sysdate,0)
+	</insert>
+	
+	<!-- <select id="getListCount">
+		select count(*) from banana_FAQ
+	</select> -->
+	
+	<!-- <select id="getList" resultType="com.banana.vo.BananaFAQVO">
+		select rownum rno, fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits 
+		from (select * from banana_FAQ order by fdate desc))
+	</select> -->
+	
+	<select id="getContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaNoticeVO">
+		select nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd') ndate, nhits from banana_notice where nid =#{nid}
+	</select>
+	
+	<select id="getPre" parameterType="java.lang.String" resultType="com.banana.vo.BananaNoticeVO">
+		select rno, nid, ntitle from (select * from (select rownum rno, nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd'), nhits 
+										from (select * from banana_notice order by ndate desc))) n 
+										where n.rno=(select rno from (select rownum rno, nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd'), nhits 
+													from (select * from banana_notice order by ndate desc)) where nid=#{nid})-1
+	</select>
+	
+	<select id="getNext" parameterType="java.lang.String" resultType="com.banana.vo.BananaNoticeVO">
+		select rno, nid, ntitle from (select * from (select rownum rno, nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd'), nhits 
+										from (select * from banana_notice order by ndate desc))) n 
+										where n.rno=(select rno from (select rownum rno, nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd'), nhits 
+													from (select * from banana_notice order by ndate desc)) where nid=#{nid})+1
+	</select>
+	
+	<update id="getUpdate" parameterType="com.banana.vo.BananaNoticeVO">
+		update banana_notice set Ntitle=#{ntitle}, Ncontent=#{ncontent} where Nid=#{nid}
+	</update>
+	
+	<delete id="getDelete" parameterType="java.lang.String">
+		delete from banana_notice where Nid=#{nid}
+	</delete>
+</mapper>
