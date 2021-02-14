@@ -71,11 +71,6 @@
 	section.section3_chatContent>div {
 		height:40px;
 	}
-	/*section.section3_chatContent>div p {
-		margin: 10% 43%;
-		font-size:20px;
-	}*/
-	
 	section.section3_chatContent>div.reply {
 		position:relative;
 		top:0px;
@@ -102,9 +97,10 @@
 		background-color: rgb(251,247,242); 
 		box-shadow: 0 0 16px rgb(221,221,221);
 		padding:50px 0;
+		margin:20px 0;
 	}
 	section.section3_chatContent>div.request p {
-		/* padding:10px 10px; */
+		padding:10px 10px;
 	}
 	section.section3_chatContent>div.request span {
 		color:rgb(98,71,24);
@@ -155,24 +151,12 @@
 		<section class="section1_chatContent">
 			<div>
 				<ul>
-					<li><a href="productContent.do?pid=${vo.pid}"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li>
-						<table>
-							<tr>
-								<td><span>${vo.nickname }</span></td>
-								<td><span>${vo.score}˚C</span></td>
-							</tr>
-							<tr>
-								<td>${vo.maddr }</td>	
-							</tr>
-						</table>
-					</li>
+					<li><a href="chat_list.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 				</ul>
 			</div>
 		</section>
 		<section class="section2_chatContent">
 			<div>
-			
 				<table class="table_chatContent">
 					<tr>
 						<td rowspan="2"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile }"></td>
@@ -180,19 +164,23 @@
 					</tr>
 					<tr>
 						<td><span>${vo.pprice } 원</span></td>
-					</tr>
+					</tr> 
 				</table>
 			</div>
 		</section>
 		<section class="section3_chatContent">
 				<c:forEach var="vo" items="${list }"> 
 					<c:if test="${vo.chat_content ne null }">	
+					<c:if test="${svo.mid ne vo.buy_mid}">
 						<div class="reply">
-							<p><span>${vo.buy_mid }</span>: ${vo.chat_content} </p>
+							<p><span>${vo.buy_mid }</span>: ${vo.chat_content}</p>
 						</div>
+					</c:if>	
+					<c:if test="${svo.mid eq vo.buy_mid}">	
 						<div class="request">
-							<p>질문질문</p>
-						</div>
+							<p><span>${svo.mid }</span>:${vo.chat_content}</p>
+						</div>  
+					</c:if>	
 					</c:if>
 				</c:forEach>
 				<c:if test="${0 eq list.size()}">
@@ -204,7 +192,7 @@
 		<section class="section4_chatContent">
 		  <c:choose>
 			<c:when test="${svo.mid ne null }">
-				<form name="chat_form" action="chat_write_proc.do?cid=${cid}" method=POST id="chat_write_form"  enctype="multipart/form-data">
+				<form name="chat_form" action="chat_write_proc.do" method=POST id="chat_write_form"  enctype="multipart/form-data">
 			  		<div>
 						<!-- <a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a> -->
 						<textarea name="chat_content" placeholder="메세지를 입력하세요."></textarea>
@@ -213,6 +201,7 @@
 						<input type="hidden" name="pid" value="${vo.pid}">  
 						<input type="hidden" name="buy_mid" value="${svo.mid}">
 						<input type="hidden" name="chk_read" value="x">
+						<%-- <input type="text" name="crid" value="cr${vo.pid}"> --%>
 					</div>
 				</form>
 			</c:when>

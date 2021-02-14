@@ -14,7 +14,6 @@
 		margin:auto;
 		height:1050px;
 		padding-top:150px;
-		border:1px solid green;
 		padding-bottom:5%;	
 		margin-bottom:100px;
 	}
@@ -154,7 +153,7 @@
 				<h1>동네 생활</h1>
 			</div>
 			<div class="dl_content1">
-				<img src="images/김수현.jpg"><label>히흫님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
+				<img src="images/banana.jpg"><label>${svo.nickname }님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
 				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
 			</div>	
 			<section class="sub_section">
