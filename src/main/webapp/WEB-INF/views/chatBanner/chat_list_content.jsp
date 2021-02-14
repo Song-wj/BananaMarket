@@ -177,23 +177,21 @@
 			</div>
 		</section>
 		<section class="section3_chatContent">
+		
 			<div class="reply">
 				<p><span>${vo.buy_mid } </span>: ${vo.chat_content}</p>
 			</div>
+			
 			<div class="request">
-				<p><span>${vo.sell_mid }</span>: 답장</p>
-			</div>
-			<div class="reply">
-				<p>답장답장</p>
-			</div>
-			<div class="request">
-				<p>질문질문</p>
+				<%-- <c:if test="${vo.mid} eq ${svo.mid}"> --%>
+				<p><span>${vo.sell_mid }</span>: ${VO.chat_content }</p>
+				<%-- </c:if> --%>
 			</div>
 		</section>
 		<section class="section4_chatContent">
 		  <c:choose>
 			<c:when test="${svo.mid ne null }">
-				<form name="chat_form" action="chat_write_proc.do?cid=${vo.cid}" method=POST id="chat_write_form"  enctype="multipart/form-data">
+				<form name="chat_form" action="chat_list_content_proc.do?cid=${vo.cid}" method=POST id="chat_write_form"  enctype="multipart/form-data">
 			  		<div>
 						<!-- <a href="#"><img src="images/dongneLife_inputimg.png"><button type="button"></button></a> -->
 						<textarea name="chat_content" placeholder="메세지를 입력하세요."></textarea>

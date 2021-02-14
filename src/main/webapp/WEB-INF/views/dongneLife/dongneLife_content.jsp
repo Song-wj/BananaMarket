@@ -362,7 +362,7 @@
 						if(session_mid == jdata.jlist[i].mid) {
 							output += "<li>";
 							output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
-							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button'>삭제</button></a>";
+							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button' id='delete'>삭제</button></a>";
 							output += "</li>";
 						}
 						
@@ -537,6 +537,7 @@ function update_pro(brid,rno) {
 	$("#bcomment_content"+rno).remove();
 	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=null");
 	$("button#update").hide();
+	$("button#delete").hide();
 }
 </script>
 
