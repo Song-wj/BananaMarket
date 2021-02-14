@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: mns03
 Build-Jdk: 14
-=======
-Built-By: whtjd
-Build-Jdk: 14.0.2
->>>>>>> a9cc95f2e0ed0a6400251831d75655907a8fd996
 Created-By: Maven Integration for Eclipse
 
