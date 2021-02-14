@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: deepb
 Build-Jdk: 14
-=======
-Built-By: whtjd
-Build-Jdk: 14.0.2
->>>>>>> 5a7ee8d60d1969edebcd36147c6882b1df15aa86
 Created-By: Maven Integration for Eclipse
 

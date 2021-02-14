@@ -19,7 +19,7 @@
 	</select> -->
 	
 	<select id="getContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaFAQVO">
-		select fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd'), fhits from banana_FAQ where fid =#{fid}
+		select fid, ftitle, fcontent, to_char(fdate,'yyyy.mm.dd') fdate, fhits from banana_FAQ where fid =#{fid}
 	</select>
 	
 	<select id="getPre" parameterType="java.lang.String" resultType="com.banana.vo.BananaFAQVO">
