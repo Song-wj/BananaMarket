@@ -130,7 +130,12 @@ public class MypageController {
 		return dongneService.subjectBoardlikecancel(bid ,svo.getMid());
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/insertcomment.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String insertcomment(String bid , String comment ,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.insertcomment(bid ,comment ,svo.getMid());
+	}
 
 	/**
 	 * 마이페이지 - 동네생활 주제 목록2

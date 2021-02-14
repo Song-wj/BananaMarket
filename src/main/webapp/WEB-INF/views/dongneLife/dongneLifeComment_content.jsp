@@ -26,13 +26,16 @@
 		resize:none;
 		overflow:auto;
 	}
+	form#uform{
+		margin-bottom:-50px;
+	}
 </style>
 </head>
 <body>
-	<form name="comment_update_form" action="comment_update_proc.do?bstitle=${bstitle }" method=POST id="comment_update_form" enctype="multipart/form-data">
+	<form name="comment_update_form" id="uform" action="comment_update_proc.do?bstitle=${bstitle }" method=POST id="comment_update_form" enctype="multipart/form-data">
 		<input type="hidden" name="brid" value="${vo.brid }">
 		<div><textarea name="bcomment" id="bcomment">${vo.bcomment }</textarea></div>
-		<div><button type="button" id="updateBtn">수정완료</button></div>
+		<div><button type="button" id="updateBtn" class="updateBtn" style="font-size:15px;">수정완료</button></div>
 	</form>
 </body>
 </html>
