@@ -12,7 +12,7 @@
        D.smain_simg, D.scaro_img1, D.scaro_simg1
 	From 
 	  (Select Sid,srid,Srdate,nvl(Srcontent,'없음') srcontent, Rank 
-	    From  (Select  Sid, srid,Srdate, Srcontent, Rank() Over(Partition By Sid Order By Srdate Desc) Rank 
+	    From  (Select  Sid, srid, Srdate, Srcontent, Rank() Over(Partition By Sid Order By Srdate Desc) Rank 
 	                From Banana_Shop_Review)
 	    Where Rank=1) A , 
 	  (Select Sid, Count(sid) like_Count From Banana_Interest Group By Sid) B,
@@ -28,12 +28,12 @@
 	</select>
 	
 	<select id="getshoplist2" resultType="com.banana.vo.BananaShopVO">
-	Select D.sid, A.srdate, nvl(A.srcontent,'등록된 업체리뷰 없음') srcontent, nvl(B.like_count,0) like_count, nvl(C.review_count,0) review_count,
+	Select D.sid, A.srid, A.srdate, nvl(A.srcontent,'등록된 업체리뷰 없음') srcontent, nvl(B.like_count,0) like_count, nvl(C.review_count,0) review_count,
        D.sname, D.skinds, D.skinds2, D.saddr_num, D.saddr, D.sph, D.sdate, 
        D.smain_img, D.smain_simg, D.scaro_img1, D.scaro_simg1
 	From 
-	  (Select Sid,Srdate,srcontent, Rank 
-	    From  (Select  Sid, Srdate, Srcontent, Rank() Over(Partition By Sid Order By Srdate Desc) Rank 
+	  (Select Sid,srid,Srdate,nvl(Srcontent,'없음') srcontent, Rank 
+	    From  (Select  Sid, srid, Srdate, Srcontent, Rank() Over(Partition By Sid Order By Srdate Desc) Rank 
 	                From Banana_Shop_Review)
 	    Where Rank=1) A , 
 	  (Select Sid, Count(sid) like_Count From Banana_Interest Group By Sid) B,

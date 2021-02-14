@@ -229,9 +229,18 @@
 				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
 			</div>	
-			<div class="store_review" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
-				<label>${vo.srcontent }</label>
-			</div>	
+			<c:choose>
+				<c:when test="${vo.srcontent ne '등록된 업체리뷰 없음' }">
+					<div class="store_review" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
+					<label>${vo.srcontent }</label>
+				</div>	
+				</c:when>
+				<c:otherwise>
+					<div class="store_review">
+					<label>${vo.srcontent }</label>
+				</div>	
+				</c:otherwise>
+			</c:choose>
 			</c:forEach>
 		</div>  <!-- recommand_store -->
 		<div class="recommand_store">
@@ -245,9 +254,18 @@
 				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
 			</div>	
-			<div class="store_review" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
-				<label>${vo.srcontent }</label>
-			</div>
+			<c:choose>
+				<c:when test="${vo.srcontent ne '등록된 업체리뷰 없음' }">
+					<div class="store_review" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
+					<label>${vo.srcontent }</label>
+				</div>	
+				</c:when>
+				<c:otherwise>
+					<div class="store_review">
+					<label>${vo.srcontent }</label>
+				</div>	
+				</c:otherwise>
+			</c:choose>
 			</c:forEach>
 			<!-- <button type="button">가게 소식 전체 보기 > </button> -->
 		</div><!-- store_news -->
