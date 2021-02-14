@@ -14,7 +14,6 @@
 		margin:auto;
 		height:1050px;
 		padding-top:150px;
-		border:1px solid green;
 		padding-bottom:5%;	
 		margin-bottom:100px;
 	}
@@ -28,6 +27,13 @@
 	.dl_content1 {
 		margin-top:20px;
 		text-align:center;
+	}
+	.dl_content1 hr{
+		margin:auto;
+		width:70%;
+	}
+	.dl_content1 a{
+		text-decoration:none;
 	}
 	.dl_content1 img{
 		width:50px;
