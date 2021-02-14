@@ -32,7 +32,32 @@
 		delete from banana_product where pid=#{pid}
 	</delete>
 	
+	<insert id="getPickContent" parameterType="map">
+		insert into BANANA_INTEREST values(#{mid},#{pid},'','')
 	
+	</insert>
+	
+	<delete id="getDeleteContent" parameterType="map">
+		delete from BANANA_INTEREST where mid=#{mid} and pid=#{pid}
+	</delete>
+	
+	<select id="getLikelist" parameterType="java.lang.String" resultType="com.banana.vo.LikeVO">
+		select p.ptitle, m.maddr, p.pprice, p.pfile, p.psfile, p.pid 
+		from banana_product p, banana_interest i, banana_member m 
+		where i.mid=m.mid and i.pid=p.pid and i.mid=#{mid}
+	</select>
+	
+	<!-- <select id="likeResult" parameterType="map">
+		select count(*) from BANANA_INTEREST where mid=#{mid} and pid=#{pid}
+	</select> -->
+	
+	<insert id="getKeyword" parameterType="map">
+		insert into BANANA_KEYWORD values(#{mid},#{keyword})
+	</insert>
+	
+	<delete id="delkeyword" parameterType="map">
+		delete from BANANA_keyword where mid=#{mid} and keyword=#{keyword}
+	</delete>
 	
 	
 	<select id="ProductSellList" resultType="com.banana.vo.productVO">

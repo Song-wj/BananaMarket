@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.BananaFAQDAO;
 import com.banana.vo.BananaFAQVO;
+import com.banana.vo.BananaNoticeVO;
 
 @Service("questionService")
 public class BananaFAQServiceImpl implements BoardService{
@@ -50,7 +51,6 @@ public class BananaFAQServiceImpl implements BoardService{
 		mv.addObject("dbCount",dbCount);
 		mv.addObject("reqPage",reqPage);
 		mv.addObject("pageSize",pageSize);
-		
 		if(param.equals("user")) {
 			mv.setViewName("question/question_list");			
 		}else {
@@ -80,9 +80,13 @@ public class BananaFAQServiceImpl implements BoardService{
 		ModelAndView mv = new ModelAndView();
 		
 		BananaFAQVO vo = BananaFAQDAO.getContent(id);
+		BananaFAQVO pre = BananaFAQDAO.getPre(id);
+		BananaFAQVO next = BananaFAQDAO.getNext(id);
 		BananaFAQDAO.getUpdateHits(id);
 		
 		mv.addObject("vo",vo);
+		mv.addObject("pre",pre);
+		mv.addObject("next",next);
 		
 		if(param.equals("user")) {
 			mv.setViewName("/question/question_content");			
