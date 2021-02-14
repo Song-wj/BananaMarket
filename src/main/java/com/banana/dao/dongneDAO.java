@@ -2,7 +2,9 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -188,8 +190,11 @@ public class dongneDAO extends DBConn{
 		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
 	}
 	
-	public ArrayList<dongneVO> getSubjectList(String btitle) {
-		List<dongneVO> list =sqlSession.selectList(namespace+".getDongneSubjectlist", btitle);
+	public ArrayList<dongneVO> getSubjectList(String btitle , String mid) {
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("btitle", btitle);
+		param.put("mid", mid);
+		List<dongneVO> list =sqlSession.selectList(namespace+".getDongneSubjectlist", param);
 		return (ArrayList<dongneVO>)list;
 	}
 	
@@ -431,5 +436,20 @@ public class dongneDAO extends DBConn{
 		}
 		
 		return result;
+	}
+	
+	
+	public int subjectBoardlike(String bid, String mid) {
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("bid", bid);
+		param.put("mid", mid);
+		return sqlSession.insert(namespace+".boardlike" ,param);
+	}
+	
+	public int subjectBoardlikecancel(String bid, String mid) {
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("bid", bid);
+		param.put("mid", mid);
+		return sqlSession.delete(namespace+".boardlikecancel" ,param);
 	}
 }

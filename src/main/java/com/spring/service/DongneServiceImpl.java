@@ -125,9 +125,10 @@ public class DongneServiceImpl implements BananaService{
 	
 	public ModelAndView getSubjectListContent( String bstitle ,String mid) {
 		ModelAndView mv = new ModelAndView();
+		
 		int count = dongneDAO.getreviewCount(bstitle);
 		dongneSubjectVO svo = dongneDAO.getSubjectContent(bstitle);
-		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle);
+		ArrayList<dongneVO> list  = dongneDAO.getSubjectList(bstitle ,mid);
 		String str ="";
 		for(dongneVO vo : list) {
 			int date = Integer.parseInt(vo.getBdate());
@@ -503,6 +504,8 @@ public class DongneServiceImpl implements BananaService{
 		
 	}
 	
+	
+	
 	public void countDate(ArrayList<dongneVO> list ,ArrayList<DongneCommentVO> clist) {
 		
 		String str="";
@@ -537,6 +540,15 @@ public class DongneServiceImpl implements BananaService{
 		
 		return str;
 		}
+	
+	
+	public String subjectBoardlike(String bid ,String mid) {
+		return String.valueOf(dongneDAO.subjectBoardlike(bid,mid));
+	}
+	
+	public String subjectBoardlikecancel(String bid ,String mid) {
+		return String.valueOf(dongneDAO.subjectBoardlikecancel(bid,mid));
+	}
 	
 	public String insertAddr(String addr , String mid) {	
 		return String.valueOf(bananaMemberDAO.insertAddr(addr, mid));
