@@ -169,7 +169,7 @@
 	<select id="getLikelist" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
 		select b.btitle, m.nickname, m.maddr, b.btopic, b.bfile, b.bsfile ,b.bid
 		from banana_board b, banana_interest i, banana_member m 
-		where i.mid=m.mid and i.bid=b.bid and i.mid=#{mid}
+		where b.mid=m.mid and i.bid=b.bid and i.mid=#{mid}
 	</select>
 	
 	
