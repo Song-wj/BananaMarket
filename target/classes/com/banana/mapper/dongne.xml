@@ -6,6 +6,12 @@
 
 <mapper namespace="mapper.dongne">
 
+	<delete id="boardlikecancel" parameterType="map">
+		delete from banana_board_like where mid=#{mid} and bid=#{bid}
+	</delete>
+	<insert id="boardlike" parameterType="map" >
+		insert into banana_board_like values(#{bid} , #{mid} , 'o')
+	</insert> 
 	<select id="getKeywordAlarmCount" parameterType="java.lang.String" resultType="int">
 		select count(DISTINCT pid) from banana_keyword_alarm where mid=#{mid}
 	</select>
@@ -72,10 +78,19 @@
 		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bstitle=#{bstitle}
 	</select>
 
-	<select id="getDongneSubjectlist" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
-		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
-	    from banana_member m , banana_board b
-	    where m.mid=b.mid and btitle= #{btitle}
+	<select id="getDongneSubjectlist" parameterType="map" resultType="com.banana.vo.dongneVO">
+		 select b.bid, mid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate  , NVL(cc,0) likecount ,blike ,reviewcount
+	     from (select b.bid , mid, maddr,bdate, nvl(bb,0) reviewcount ,nickname, btitle, bfile,bsfile,btopic
+               from  (select b.mid, b.bid ,maddr ,bdate ,nickname, btitle, bfile,bsfile,btopic
+                      from banana_board b , banana_member m 
+                      where b.mid=m.mid ) b, (select count(bid) bb, bid
+                                              from  banana_board_review
+                                              group by bid) r
+               where b.bid=r.bid(+)) b  ,(select count(bid) cc ,bid ,blike
+                                          from   banana_board_like 
+                                          group by bid ,blike) l
+	    where  b.bid=l.bid(+) and btitle=#{btitle}    
+	    order by bdate
 	</select>
 	
 	<update id="updateSubject" parameterType="com.banana.vo.dongneSubjectVO">

@@ -19,7 +19,7 @@
 	</select> -->
 	
 	<select id="getContent" parameterType="java.lang.String" resultType="com.banana.vo.BananaNoticeVO">
-		select nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd'), nhits from banana_notice where nid =#{nid}
+		select nid, ntitle, ncontent, to_char(ndate,'yyyy.mm.dd') ndate, nhits from banana_notice where nid =#{nid}
 	</select>
 	
 	<select id="getPre" parameterType="java.lang.String" resultType="com.banana.vo.BananaNoticeVO">

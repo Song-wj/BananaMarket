@@ -8,19 +8,25 @@
 <title>Insert title here</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script>
-	$(document).ready(function(){
-		$("#like-btn").click(function(){
-			$(".like-list").toggle();
-		});
+
+
+
+	/* $(document).ready(function(){
+		$("#like-btn").mousedown(function(){
 		
-		$("#like-btn1").click(function(){
+			$("#like-btn").css("background-color", "blue");
+		}) */
+		
+		
+		/* $("#like-btn1").click(function(){
 			if($(".display-like").text() == "") {
 				$(".display-like").text($("#like-btn1").text());
 				$("#like-btn1").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
-				$("#like-btn1").css("background-color","white");
+				$("#like-btn1").css("background-color","#FEE500");
 				$("#like-btn2").css("background-color","white");
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
@@ -33,10 +39,11 @@
 				$(".display-like").text($("#like-btn2").text());
 				$("#like-btn2").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
-				$("#like-btn2").css("background-color","white");
+				$("#like-btn2").css("background-color","#FEE500");
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
 				$("#like-btn5").css("background-color","white");
@@ -48,11 +55,12 @@
 				$(".display-like").text($("#like-btn3").text());
 				$("#like-btn3").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
 				$("#like-btn2").css("background-color","white");
-				$("#like-btn3").css("background-color","white");
+				$("#like-btn3").css("background-color","#FEE500");
 				$("#like-btn4").css("background-color","white");
 				$("#like-btn5").css("background-color","white");
 				$("#like-btn6").css("background-color","white");
@@ -63,12 +71,13 @@
 				$(".display-like").text($("#like-btn4").text());
 				$("#like-btn4").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
 				$("#like-btn2").css("background-color","white");
 				$("#like-btn3").css("background-color","white");
-				$("#like-btn4").css("background-color","white");
+				$("#like-btn4").css("background-color","#FEE500");
 				$("#like-btn5").css("background-color","white");
 				$("#like-btn6").css("background-color","white");
 			}
@@ -78,13 +87,14 @@
 				$(".display-like").text($("#like-btn5").text());
 				$("#like-btn5").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
 				$("#like-btn2").css("background-color","white");
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
-				$("#like-btn5").css("background-color","white");
+				$("#like-btn5").css("background-color","#FEE500");
 				$("#like-btn6").css("background-color","white");
 			}
 		});
@@ -93,6 +103,7 @@
 				$(".display-like").text($("#like-btn6").text());
 				$("#like-btn6").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
@@ -100,11 +111,11 @@
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
 				$("#like-btn5").css("background-color","white");
-				$("#like-btn6").css("background-color","white");
+				$("#like-btn6").css("background-color","#FEE500");
 			}
-		});
+		}); */
 		
-	});
+/* 	}); */
 </script>
 <script >
     $(document).ready(function(){
@@ -431,9 +442,51 @@
 	 	margin-right:10px;
    
 	}
+	div.likecount{
+		text-align:left;
+		margin-bottom:-50px;
+		padding-left:30px;
+	}
+	div.likecount >img{
+		width:20px;
+		height:20px;
+	}
+	div.likecount >span{
+		vertical-align:2px;
+	}
 </style>
 <script>
 
+	
+	function board_like(bid,blike,count){
+		if($("#good"+count).attr("src") == 'images/normal.png'){
+			$.ajax({
+				url:"subjectBoardlike.do?bid="+bid,
+				success:function(result){
+					if(result == "1"){
+						$("#good"+count).attr("src" ,"images/good.png");
+						$("#like-btn"+count).css("color","rgb(5,107,225)");
+						var plus = parseInt($("#a"+count).text());
+						$("#a"+count).text(plus+1);
+					}
+				}
+			})
+		}else{
+			$.ajax({
+				url:"subjectBoardlikecancel.do?bid="+bid,
+				success:function(result){
+					if(result == "1"){
+						$("#good"+count).attr("src" ,"images/normal.png");
+						$("#like-btn"+count).css("color","black");
+						var plus = parseInt($("#a"+count).text());
+						$("#a"+count).text(plus-1);
+					}
+				}
+			})
+			
+		}
+		
+	}
 	
 	function comment_list(bid,count){ 
 	
@@ -571,17 +624,36 @@ $(document).ready(function(){
 					</div>
 				</div>
 				</a>
-				<div class="like-list" style="display: none;">
+			<!-- 	<div class="like-list" style="display: none;">
 					<button type="button" id="like-btn1">👍</button>
 					<button type="button" id="like-btn2">💛</button>
 					<button type="button" id="like-btn3">😆</button>
 					<button type="button" id="like-btn4">😮</button>
 					<button type="button" id="like-btn5">😥</button>
 					<button type="button" id="like-btn6">😡</button>
-				</div>
+				</div> -->
+					<div class="likecount">
+						<img src="images/good.png" class="blue_img" > <span id="a${status.count }">${xvo.likecount }</span>
+					</div>
 				<div class="post-footer">
-					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
-					<img src="images/messenger.png"><button type="button"  id="comment-btn${status.count }" onclick="comment_list('${xvo.bid}','${status.count }')">댓글 ${count }</button>
+					<c:choose>
+						<c:when test="${xvo.blike eq 'o'}">						
+							<c:choose>
+							<c:when test="${mid ne xvo.mid }"> 
+								<img src="images/smile.png"><button type="button" id="like-btn${status.count }" onclick="board_like('${xvo.bid}','${xvo.blike }','${status.count }')"><img src="images/normal.png" id="good${status.count }" style="display:inline-block;vertical-align:middle;">공감하기</button>						
+						 	</c:when>
+						 	<c:otherwise>
+								<img src="images/smile.png"><button type="button" id="like-btn${status.count }" onclick="board_like('${xvo.bid}','${xvo.blike }','${status.count }')" style="color:rgb(5,107,225);"><img src="images/good.png" id="good${status.count }" style="display:inline-block;vertical-align:middle;">공감하기</button>
+						 	</c:otherwise> 
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<img src="images/smile.png"><button type="button" id="like-btn${status.count }" onclick="board_like('${xvo.bid}','${xvo.blike }','${status.count }')"><img src="images/normal.png" id="good${status.count }" style="display:inline-block;vertical-align:middle;">공감하기</button>						
+						</c:otherwise>
+					</c:choose>
+					
+					<img src="images/messenger.png"><button type="button"  id="comment-btn${status.count }" onclick="comment_list('${xvo.bid}','${status.count }')">댓글 ${xvo.reviewcount }</button>
+						<div class="display-like"></div>
 						<div id="subreview">
 							<div id="subreview${status.count }" style="display:none;">
 							
@@ -598,7 +670,7 @@ $(document).ready(function(){
 							</form>
 								
 						</div> 
-					<div class="display-like"></div>
+					
 				    </div>
 				</c:forEach>
 			</c:otherwise>
