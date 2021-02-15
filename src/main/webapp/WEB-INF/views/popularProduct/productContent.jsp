@@ -471,8 +471,13 @@ $(document).ready(function(){
 			 
 			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
-			    <c:if test="${pfile_list1 ne null}">
+			    <c:if test="${pfile_list0 ne null}">
 			     <div class="carousel-item active">
+			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list0}" >
+			    </div>
+			    </c:if>
+			    <c:if test="${pfile_list1 ne null}">
+			    <div class="carousel-item">
 			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list1}" >
 			    </div>
 			    </c:if>
@@ -489,11 +494,6 @@ $(document).ready(function(){
 			    <c:if test="${pfile_list4 ne null}">
 			    <div class="carousel-item">
 			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list4}" >
-			    </div>
-			    </c:if>
-			    <c:if test="${pfile_list5 ne null}">
-			    <div class="carousel-item">
-			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list5}" >
 			    </div>
 			    </c:if>
 			</div>
