@@ -107,11 +107,12 @@ public class ProductServiceImpl implements ProductService{
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
 		productDAO.getUpdateHits((String)pid);
-			if(vo.getPsfile() != null) {
-				String[] pfile_list =vo.getPsfile().split(",");
-		
-				mv.addObject("pfile_list", pfile_list);
+		if(vo.getPsfile() != null) {
+			String[] pfile_list =vo.getPsfile().split(",");	
+			for(int i=1; i<pfile_list.length; i++) {		
+				mv.addObject("pfile_list"+i, pfile_list[i]);
 			}
+		}
 			/*
 			String str ="";	
 			int date = Integer.parseInt(vo.getPdate());
@@ -175,15 +176,16 @@ public class ProductServiceImpl implements ProductService{
 							 }
 						} catch (Exception e) {	e.printStackTrace();	}
 			       }		       
-			}else if(pvo.getCancel_file().equals("cancel")) {
-				pvo.setPfile(null);
-				pvo.setPsfile(null);
+			}else if(pvo.getCancel_img().equals("cancel")) {
+				pvo.setPfile("");
+				pvo.setPsfile("");
 		        result = productDAO.getProductUpdate((productVO)vo);
 			}
-			/*else {
-				result = productDAO.getUpdateNofile((productVO)vo);
-			}*/
-				if(result != 0) {			
+			else {
+				 result = productDAO.getProductUpdate((productVO)vo);
+			}
+				
+			if(result != 0) {			
 					mv.setViewName("redirect:mypage.do");
 				}else {
 					mv.setViewName("errorPage");

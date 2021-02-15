@@ -6,6 +6,10 @@
 
 <mapper namespace="mapper.product">
 
+	<select id="getPsfiles" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
+		select distinct trim(regexp_substr(psfile, '[^,]+',1,level)) psfile from banana_product where pid=#{pid} connect by instr(psfile, ',', 1, level - 1) > 0
+	</select>
+
 	<insert id="InsertProduct" parameterType="com.banana.vo.productVO">
 		insert into banana_product values ('p_'||sqe_banana_product.nextval,#{mid},
 				#{ptitle},#{pcategory},#{pprice},#{pcontent},'0','0',sysdate,#{pchk},#{pfile},#{psfile},null,0)
@@ -18,18 +22,22 @@
 		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid 
 		from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid 
       			from banana_product   
-      			order by pdate desc)
+      			order by plike desc)
 
 	</select>
 	
 	<select id="ProductContent" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
-		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE, p.phits
+		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE, p.phits, m.msfile
 			from banana_product p, banana_member m 	
 			where p.mid = m.mid and p.pid = #{pid}
 	</select>
 	
 	<update id="ProductUpdate" parameterType="com.banana.vo.productVO">
-		update banana_product set ptitle=#{ptitle}, pcategory=#{pcategory}, pprice=#{pprice}, pcontent=#{pcontent}, pfile=#{pfile} , psfile=#{psfile} where pid=#{pid}
+		update banana_product set ptitle=#{ptitle}, pcategory=#{pcategory}, pprice=#{pprice}, pcontent=#{pcontent}
+		<if test="pfile != null">
+			,pfile=#{pfile} , psfile=#{psfile} 	
+		</if>
+			where pid=#{pid}
 	</update>
 	
 	<delete id="ProductDelete" parameterType="java.lang.String">

@@ -52,7 +52,7 @@
 		padding: 0; 
 		width:1px;
 		height:1px;  
-	    margin-left: -150px;
+	    margin-left: -144px;
 		margin-top: 24px;  
 	 	overflow: hidden;  
 	 	clip:rect(0 180px 150px 75px);  
@@ -61,7 +61,7 @@
 	div.content form.pupdateForm ul li:first-child span#fake_id{
 		display:inline-block;
 		position: absolute;
-		left:838px; 	
+		left:844px; 	
 		top:252px;
 		font-size:13.7px;
 		width:100px;

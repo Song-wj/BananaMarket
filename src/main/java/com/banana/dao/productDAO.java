@@ -23,6 +23,11 @@ public class productDAO extends DBConn{
 	
 	private static String namespace = "mapper.product";
 	
+	public ArrayList<productVO> getPsfiles(Object pid) {
+		List<productVO> list = sqlSession.selectList(namespace+".getPsfiles", (String)pid);
+		return (ArrayList<productVO>)list;
+	}
+	
 	public void getUpdateHits(String pid) {
 		try {
 			String sql = "update banana_product set phits = phits+1 where pid=?";

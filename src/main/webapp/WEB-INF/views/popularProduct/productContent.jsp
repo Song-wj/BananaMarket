@@ -463,30 +463,42 @@ $(document).ready(function(){
 <div id="content">
 		<div id="demo" class="carousel slide" data-ride="carousel">
 			 <!-- Indicators -->
-			  <ul class="carousel-indicators">
+			  <!-- <ul class="carousel-indicators">
 			    <li data-target="#demo" data-slide-to="0" class="active"></li>
 			    <li data-target="#demo" data-slide-to="1"></li>
 			    <li data-target="#demo" data-slide-to="2"></li>
-			  </ul>
+			  </ul> -->
 			 
 			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
-			    <div class="carousel-item active">
-			      <c:forEach var="list" items="${pfile_list}" >
-			      	<div>
-						<img src="http://localhost:9000/banana/resources/upload/${list}">
-				    </div>
-				    <div class="carousel-item">
-				    	<img src="http://localhost:9000/banana/resources/upload/${list}">
-				    </div>
-				    <div class="carousel-item">
-				      <a href="http://localhost:9000/banana/resources/upload/${st.current}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
-				    </div>
-				   </c:forEach> 
-			  </div>
+			    <c:if test="${pfile_list1 ne null}">
+			     <div class="carousel-item active">
+			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list1}" >
+			    </div>
+			    </c:if>
+			    <c:if test="${pfile_list2 ne null}">
+			    <div class="carousel-item">
+			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list2}" >
+			    </div>
+			    </c:if>
+			    <c:if test="${pfile_list3 ne null}">
+			    <div class="carousel-item">
+			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list3}" >
+			    </div>
+			    </c:if>
+			    <c:if test="${pfile_list4 ne null}">
+			    <div class="carousel-item">
+			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list4}" >
+			    </div>
+			    </c:if>
+			    <c:if test="${pfile_list5 ne null}">
+			    <div class="carousel-item">
+			      <img src="http://localhost:9000/banana/resources/upload/${pfile_list5}" >
+			    </div>
+			    </c:if>
 			</div>
 			 <!-- Left and right controls -->
-			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+			   <a class="carousel-control-prev" href="#demo" data-slide="prev">
 			    <span class="carousel-control-prev-icon"></span>
 			  </a>
 			  <a class="carousel-control-next" href="#demo" data-slide="next">
@@ -497,7 +509,7 @@ $(document).ready(function(){
 			<a id="article-profile-link" href="#">
 				<div class="space-between">
 					<div>
-						<div id="article-profile-image"><img src="http://localhost:9000/banana/images/mypage_bananaimg.jpg"></div>
+						<div id="article-profile-image"><img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }"></div>
 					</div>
 					<div id="article-profile-left">
 						<div id="nickname">${vo.nickname }</div>
