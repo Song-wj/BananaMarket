@@ -12,6 +12,7 @@
 	$(document).ready(function(){
 		var all_al_cnt = parseInt(alarm_count()) + parseInt(shop_alarm_count())
 				+ parseInt(keyword_alarm_count());
+		
 		get_alarm_shop_msg();
 		get_alarm_review_msg();
 		get_alarm_keyword_msg();
@@ -154,6 +155,7 @@
 			url: "ra_delete.do?brid="+brid,
 			success: function(result) {
 				if(result) {
+					alert(result);
 					$(location).attr('href','http://localhost:9000/banana/dongneLife_content.do?bid='+bid);
 				} else {
 					alert("fail");
