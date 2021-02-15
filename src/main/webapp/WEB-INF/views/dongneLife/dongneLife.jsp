@@ -28,6 +28,13 @@
 		margin-top:20px;
 		text-align:center;
 	}
+	.dl_content1 hr{
+		margin:auto;
+		width:70%;
+	}
+	.dl_content1 a{
+		text-decoration:none;
+	}
 	.dl_content1 img{
 		width:50px;
 		height:50px;

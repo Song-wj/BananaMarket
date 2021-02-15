@@ -8,18 +8,18 @@
 
 	<insert id="InsertProduct" parameterType="com.banana.vo.productVO">
 		insert into banana_product values ('p_'||sqe_banana_product.nextval,#{mid},
-				#{ptitle},#{pcategory},#{pprice},#{pcontent},0,0,sysdate,#{pchk},#{pfile},#{psfile},null)
+				#{ptitle},#{pcategory},#{pprice},#{pcontent},0,0,sysdate,#{pchk},#{pfile},#{psfile},null,0)
 
 	</insert>
 	
 	<select id="ProductList" resultType="com.banana.vo.productVO">
 		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate,
-		 	   pchk, pfile, psfile, buy_mid 
+		 	   pchk, pfile, psfile, buy_mid, phits 
 		from banana_product   order by pdate desc
 	</select>
 	
 	<select id="ProductContent" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
-		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE
+		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE, p.phits
 			from banana_product p, banana_member m 	
 			where p.mid = m.mid and p.pid = #{pid}
 	</select>

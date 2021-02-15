@@ -544,7 +544,7 @@ $(document).ready(function(){
 					<p>${vo.pcontent}</p>
 				</div>
 				<p id="article-counts">
-					채팅 ${vo.pchat} &middot; 관심 ${vo.plike} &middot; 조회 9${vo.pid} ,${vo.mid}
+					<%-- 채팅 ${vo.pchat} &middot;  --%>관심 ${vo.plike} &middot; 조회 ${vo.phits }
 				</p>
 			</section> 	
 		</div>
