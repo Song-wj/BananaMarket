@@ -170,15 +170,16 @@ public class ProductServiceImpl implements ProductService{
 							 }
 						} catch (Exception e) {	e.printStackTrace();	}
 			       }		       
-			}else if(pvo.getCancel_file().equals("cancel")) {
-				pvo.setPfile(null);
-				pvo.setPsfile(null);
+			}else if(pvo.getCancel_img().equals("cancel")) {
+				pvo.setPfile("");
+				pvo.setPsfile("");
 		        result = productDAO.getProductUpdate((productVO)vo);
 			}
-			/*else {
-				result = productDAO.getUpdateNofile((productVO)vo);
-			}*/
-				if(result != 0) {			
+			else {
+				 result = productDAO.getProductUpdate((productVO)vo);
+			}
+				
+			if(result != 0) {			
 					mv.setViewName("redirect:mypage.do");
 				}else {
 					mv.setViewName("errorPage");

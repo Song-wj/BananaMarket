@@ -29,7 +29,11 @@
 	</select>
 	
 	<update id="ProductUpdate" parameterType="com.banana.vo.productVO">
-		update banana_product set ptitle=#{ptitle}, pcategory=#{pcategory}, pprice=#{pprice}, pcontent=#{pcontent}, pfile=#{pfile} , psfile=#{psfile} where pid=#{pid}
+		update banana_product set ptitle=#{ptitle}, pcategory=#{pcategory}, pprice=#{pprice}, pcontent=#{pcontent}
+		<if test="pfile != null">
+			,pfile=#{pfile} , psfile=#{psfile} 	
+		</if>
+			where pid=#{pid}
 	</update>
 	
 	<delete id="ProductDelete" parameterType="java.lang.String">
