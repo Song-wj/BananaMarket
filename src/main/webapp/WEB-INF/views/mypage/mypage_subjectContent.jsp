@@ -366,22 +366,13 @@
 		height:23px;
 		margin-bottom:10px;
 	}
-	div.post-footer button#comment_writeBtn{
-		color:RGB(82,67,21);
-		background-color:RGB(254,229,0);
-		font-weight:bold;
-		border:1px solid RGB(254,229,0);
-		padding:7px 17px;
-		font-size:17px;
-		border-radius:5px; 
-		width:70px;
-		height:30px;
-		float:left;
-		
-	}
-	 div.post-footer button.comment_writeBtn:hover{
+	
+	
+	
+	 div.post-footer button.write_btn:hover{
 	 	cursor:pointer;
 		opacity:0.7;
+	
 	}
 	
 	div#subreview div.content_comment {
@@ -454,9 +445,23 @@
 	div.likecount >span{
 		vertical-align:2px;
 	}
+	.write_btn{
+		
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:7px 17px;
+		font-size:17px;
+		border-radius:5px; 
+		width:70px;
+		height:30px;
+		float:left;
+		z-index:10;  
+	}
 </style>
 <script>
-
+ 
 	
 	function board_like(bid,blike,count){
 		if($("#good"+count).attr("src") == 'images/normal.png'){
@@ -539,35 +544,71 @@
 		
 	}//comment_list
 	
-	function test(count){
-		$("#comment-btn"+count).click(function(){
-			$("#subreview"+count).css("display","none");
-		});
-	}
+
 	
 	function update_pro(brid,rno) {
 		$("#bcomment_content"+rno).remove();
 		$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=${ vo.bstitle }");
 		$("button#update").hide();
+		$("button#delete").hide();
 	}
 	
 	
 	
 	
-$(document).ready(function(){
+	function test(bid ,count){
+		
 	
-	$("#comment_writeBtn").click(function(){
-
-		if($("#bcomment").val() == ""){
+		var comment = $("#bcomment"+count).val();
+		if($("#bcomment"+count).val() == ""){
 			alert("댓글을 입력해주세요");
-			$("#bcomment").focus();
-			return false;
-		}else {
-			board_review_write_form.submit();
-			
-		}
-	});
-})
+		}else{
+				$.ajax({
+					url:"insertcomment.do?bid="+bid+"&comment=" + comment,
+					success:function(result){
+						
+						var jdata = JSON.parse(result);	
+						var output="";
+						
+						for(var i in jdata.jlist){	
+							output +="<div class='content_comment' id='content_comment'>"
+							output += "<div class='commentMemberImg'>";
+							output += "<img src='images/mypage_bananaimg.jpg' class='commentMemberImg'>";
+							output += "</div>";
+							output += "<div class='commentMemberSide'>";
+							output += "<ul class='commentMemberSide'>";
+							
+							output += "<li><input id='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
+							output += "<li>" + jdata.jlist[i].nickname + "</li>";
+							output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
+							output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
+							output += "<li id='bcomment_area" + jdata.jlist[i].rno +"'>"+ "</li>";
+							
+							if('${mid}' == jdata.jlist[i].mid) {
+								output += "<li>";
+								output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
+								output += "<a href='subcomment_delete_proc.do?brid=" + jdata.jlist[i].brid + "&bstitle=${ vo.bstitle }'><button type='button' id='delete'>삭제</button></a>";
+								output += "</li>";
+							}
+							
+							output += "</ul>";
+							output += "</div>";
+							output += "</div>";
+					    }
+						$("#bcomment"+count).val("");
+						$("#subreview"+count).css("display" ,"block");
+						$("#subreview"+count).text("");
+						$("#subreview"+count).append(output);
+						var plus =parseInt($("#b"+count).text());
+						$("#b"+count).text(plus+1);
+					}
+				})
+	
+			}
+	}
+
+	
+
 
 
 </script>
@@ -652,7 +693,7 @@ $(document).ready(function(){
 						</c:otherwise>
 					</c:choose>
 					
-					<img src="images/messenger.png"><button type="button"  id="comment-btn${status.count }" onclick="comment_list('${xvo.bid}','${status.count }')">댓글 ${xvo.reviewcount }</button>
+					<img src="images/messenger.png"><button type="button"  id="comment-btn${status.count }" onclick="comment_list('${xvo.bid}','${status.count }')">댓글<span id="b${status.count }"> ${xvo.reviewcount }</span></button>
 						<div class="display-like"></div>
 						<div id="subreview">
 							<div id="subreview${status.count }" style="display:none;">
@@ -660,14 +701,25 @@ $(document).ready(function(){
 							</div>
 						</div>
 						 <div >				
-							<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${xvo.bid }&loc=subcontent&bstitle=${ vo.bstitle }" method=POST id="board_review_write_form"  >
+							
 								<div class="content_comment_write">
 									<ul>
-										<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
-										<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+										<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment${status.count }" name="bcomment"></textarea></li>
+										<li><div><button type="button"  id="comment_writeBtn${status.count }" class="write_btn" onclick ="test('${xvo.bid}' ,'${status.count }')"
+										style="color:RGB(82,67,21);
+											background-color:RGB(254,229,0);
+											font-weight:bold;
+											border:1px solid RGB(254,229,0);
+											padding:7px 17px;
+											font-size:17px;
+											border-radius:5px; 
+											width:70px;
+											height:30px;
+											float:left;"
+		  											>등록</button></div></li>
 									</ul>
 								</div>
-							</form>
+						
 								
 						</div> 
 					

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banana.dao.ChatDAO;
+import com.banana.dao.productDAO;
 import com.banana.vo.ChatContentVO;
 import com.banana.vo.ChatVO;
 import com.banana.vo.productVO;
@@ -16,6 +17,9 @@ public class ChatServiceImpl {
 	
 	@Autowired
 	private ChatDAO chatDAO;
+	
+	@Autowired
+	private productDAO productDAO;
 
 	public Object insert(Object vo) {
 		ModelAndView mv = new ModelAndView();
@@ -30,14 +34,25 @@ public class ChatServiceImpl {
 		
 		return mv;
 	}
-
-	public Object getList() {
+/*	
+	public Object getList(String pid, String mid) {
 		  ModelAndView mv = new ModelAndView();
-		  ArrayList<ChatVO> list = chatDAO.getChatList();
+		  ArrayList<ChatVO> list = chatDAO.getChatList(pid, mid);
+		  
 			mv.addObject("list", list);
 			mv.setViewName("/chatBanner/chat_list");
 			return mv;
 	}
+*/
+	public Object getList() {
+		  ModelAndView mv = new ModelAndView();
+		  ArrayList<productVO> list = productDAO.getProductList();
+		  	
+		  	mv.addObject("list", list);
+			mv.setViewName("/chatBanner/chat_list");
+			return mv;
+	}
+
 	
 	public Object getContent(String cid) {
 	

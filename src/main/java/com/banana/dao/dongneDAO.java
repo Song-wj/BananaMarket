@@ -187,6 +187,22 @@ public class dongneDAO extends DBConn{
 		return (ArrayList<DongneCommentVO>)list;
 	}
 	
+	public ArrayList<DongneCommentVO> insertcomment(String bid, String comment, String mid){
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("bid", bid);
+		param.put("bcomment", comment);
+		param.put("mid", mid);
+		int val = sqlSession.insert(namespace +".insertcomment" ,param);
+		
+		if(val != 0) {
+			List<DongneCommentVO> list =sqlSession.selectList(namespace+".getsubreview" ,bid);
+			return (ArrayList<DongneCommentVO>)list;
+		}
+		 else {
+			 ArrayList<DongneCommentVO> list = new ArrayList<DongneCommentVO>();
+			 return list;
+		 }
+	}
 	public dongneSubjectVO getSubjectContent(String bsid) {
 		return sqlSession.selectOne(namespace+".getDongneSubjectContent", bsid);
 	}

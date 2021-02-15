@@ -55,6 +55,10 @@
 		where bid=#{bid}
 	</select>
 	
+	<insert id="insertcomment" parameterType="map" >
+		insert into banana_board_review values ('br_'||SQE_BANANA_BOARD_REVIEW.NEXTVAL , #{bid} ,#{mid},#{bcomment} ,sysdate)
+	</insert>
+	
 	<select id="getAlarmCount" parameterType="java.lang.String" resultType="int">
 		select count(distinct ra.brid)
 		from banana_board b, banana_board_review br, banana_review_alarm ra

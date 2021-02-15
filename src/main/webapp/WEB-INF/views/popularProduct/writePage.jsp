@@ -64,9 +64,9 @@
 	div.content form.pwriteForm ul li:nth-child(2) input[type='text']{
 		margin-top: 30px;
 	}
-	div.content form.pwriteForm ul li:nth-child(4){
+	/* div.content form.pwriteForm ul li:nth-child(4){
 		margin-left:170px;
-	}
+	} */
 	div.content form.pwriteForm ul li input[type='checkbox']{
 		margin-left:70px;
 	}
@@ -191,7 +191,7 @@ $(document).ready(function(){
 				<option value="기타 중고물품">기타 중고물품</option>
 				<option value="삽니다">삽니다.</option>
 			</select></li>
-			<li><input type="text" name="pprice" placeholder="₩가격 (선택사항)" id="pprice"><input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> </li>
+			<li><input type="text" name="pprice" placeholder="₩가격 " id="pprice"><!-- <input type ="checkbox" name ="bargin"  id="bargin"><span>가격제안받기</span> --> </li>
 			<li><textarea cols=10 rows=10 name="pcontent" placeholder="게시글 내용을 작성해주세요. 가품 및 판매금지품목은 게시가 제한될 수 있어요." id="pcontent" style="resize:none;"></textarea></li>
 			<li><input type="hidden" name="pchk" value="x"></li>
 			<li><input type="hidden" name="mid" value="${svo.mid}"></li>

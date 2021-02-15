@@ -11,11 +11,26 @@
 	</insert>
 	
 	<select id="ChatList" resultType="com.banana.vo.ChatVO">
-		select cid, sell_mid, buy_mid, pid, chat_content, to_char(cdate,'mm.dd  hh:mm') cdate, chk_read
-			from banana_chat  
-			
-			order by cdate desc
+		 select c.cid, c.sell_mid, c.buy_mid, c.pid, c.chat_content, to_char(c.cdate,'mm.dd  hh:mm') cdate, c.chk_read, p.psfile, p.ptitle, p.pprice
+			from banana_chat c, banana_product p
+			where p.pid=c.pid
+			order by cdate desc 
 	</select>
+	
+	<select id="ProductList" resultType="com.banana.vo.productVO">
+		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate,
+		 	   pchk, pfile, psfile, buy_mid 
+		from banana_product   
+		order by pdate desc
+	</select>
+	
+	<!-- <select id="ChatList" parameterType="map" resultType="com.banana.vo.ChatContentVO">
+		select m.msfile, m.nickname, c.cdate, c.chat_content , c.pid, c.sell_mid, c.buy_mid
+ 		from (select rownum rno, cid, sell_mid, buy_mid, pid, chat_content, cdate, chk_read 
+       		  from (select * from banana_chat order by cdate desc)
+       		  where sell_mid =#{mid} and pid=#{pid}) c, banana_member m
+ 		where c.sell_mid=m.mid and c.rno=1
+	</select> --> 
 	
 	<select id="ChatContent"  parameterType="java.lang.String"  resultType="com.banana.vo.ChatContentVO" >
 		select cp.cid, cp.buy_mid, cp.sell_mid, cp.pid, cp.chat_content, cp.cdate,
@@ -23,15 +38,18 @@
 		from (select c.cid, c.buy_mid, c.sell_mid, c.pid, c.chat_content, c.cdate, c.chk_read, p.mid, p.ptitle, p.pprice,p.psfile 
 				from (select cid, buy_mid, sell_mid, pid, chat_content, cdate, chk_read
 						from banana_chat
-						where cid=#{cid}) c , banana_product p
-				where c.pid = p.PID) cp , banana_member m
+						where cid=#{cid} order by cdate desc) c , banana_product p
+				where c.pid = p.PID 
+				order by c.cdate desc) cp , banana_member m
 		where cp.buy_mid = m.mid
+		order by cp.cdate desc
 	</select>
 	
 	<select id="ChatContent2"  parameterType="java.lang.String"  resultType="com.banana.vo.productVO" >
 		select p.pid, p.ptitle, p.pprice, p.psfile, m.nickname, m.score, m.maddr
 			from banana_product p, banana_member m
 			where p.mid= m.mid and p.pid=#{pid}
+			
 	</select>
 	
 	<select id="Chat" parameterType="java.lang.String"  resultType="com.banana.vo.ChatContentVO">
