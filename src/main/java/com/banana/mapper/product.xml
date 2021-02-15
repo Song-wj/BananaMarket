@@ -6,6 +6,10 @@
 
 <mapper namespace="mapper.product">
 
+	<select id="getPsfiles" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
+		select distinct trim(regexp_substr(psfile, '[^,]+',1,level)) psfile from banana_product where pid=#{pid} connect by instr(psfile, ',', 1, level - 1) > 0
+	</select>
+
 	<insert id="InsertProduct" parameterType="com.banana.vo.productVO">
 		insert into banana_product values ('p_'||sqe_banana_product.nextval,#{mid},
 				#{ptitle},#{pcategory},#{pprice},#{pcontent},'0','0',sysdate,#{pchk},#{pfile},#{psfile},null,0)

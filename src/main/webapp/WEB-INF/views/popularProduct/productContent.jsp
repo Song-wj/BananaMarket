@@ -472,17 +472,14 @@ $(document).ready(function(){
 			 <!-- The slideshow -->
 			  <div class="carousel-inner" style="width:677px; margin-left:32%;">
 			    <div class="carousel-item active">
-			      <c:forEach var="list" items="${pfile_list}" >
-			      	<div>
+			      	<div class="carousel-item active">
+						<img src="http://localhost:9000/banana/resources/upload/${vo.psfile}">
+				    </div>
+			     <%--  <c:forEach var="list" items="${list}" >
+			      	<div class="carousel-item">
 						<img src="http://localhost:9000/banana/resources/upload/${list}">
 				    </div>
-				    <div class="carousel-item">
-				    	<img src="http://localhost:9000/banana/resources/upload/${list}">
-				    </div>
-				    <div class="carousel-item">
-				      <a href="http://localhost:9000/banana/resources/upload/${st.current}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
-				    </div>
-				   </c:forEach> 
+				   </c:forEach>  --%>
 			  </div>
 			</div>
 			 <!-- Left and right controls -->
