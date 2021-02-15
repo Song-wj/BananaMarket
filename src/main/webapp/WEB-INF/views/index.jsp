@@ -353,7 +353,7 @@
 				<h1 class="home-main-title">내 근처에서 찾는<br>우리 동네 가게</h1>
 				<p class="home-main-txt">우리 동네 가게를 찾고 있나요?<br>동네 주민이 남긴 진짜 후기를 함께 확인해보세요!</p>
 				<div class="home-buttons">
-					<a class="home-button3" href="#">당근마켓 동네가게 찾기</a>
+					<a class="home-button3" href="http://localhost:9000/banana/neighborhood.do">당근마켓 동네가게 찾기</a>
 				</div>
 			</div>
 		</div>
@@ -467,7 +467,7 @@
 						</a>
 					</article>
 					<div>
-						<a href="#" style="text-align: center; font-size: 16px; font-weight: bold;">인기매물 더 보기</a>
+						<a href="http://localhost:9000/banana/popularProduct.do" style="text-align: center; font-size: 16px; font-weight: bold;">인기매물 더 보기</a>
 					</div>
 				</div>
 		</div>

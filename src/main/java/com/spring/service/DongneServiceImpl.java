@@ -352,7 +352,6 @@ public class DongneServiceImpl implements BananaService{
 	public Object getContent(Object bid, String mid) {
 		ModelAndView mv = new ModelAndView();
 		int result = dongneDAO.likeResult(mid, (String)bid);
-		mv.addObject("result",result);
 		dongneVO vo = dongneDAO.getBoardContent((String)bid);
 		if(vo.getBsfile() != null) {
 			String[] sfile_list =vo.getBsfile().split(",");
@@ -375,6 +374,7 @@ public class DongneServiceImpl implements BananaService{
 			vo.setBdate(str);
 		
 		
+		mv.addObject("result",result);
 		mv.addObject("vo", vo);
 		mv.setViewName("/dongneLife/dongneLife_content");
 		return mv;
