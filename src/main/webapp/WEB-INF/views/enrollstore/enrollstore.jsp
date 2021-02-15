@@ -301,6 +301,8 @@ $(document).ready(function(){
 							<option value="자동차">자동차</option>
 							<option value="반려동물">반려동물</option>
 							<option value="농수산물">농수산물</option>
+							<option value="일자리">일자리</option>
+							<option value="전시/행사">전시/행사</option>
 							<option value="기타 동네업체">기타 동네업체</option>
 						</select>
 					</li>
