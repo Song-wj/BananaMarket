@@ -101,6 +101,7 @@ public class ProductServiceImpl implements ProductService{
 		int result = productDAO.likeResult(mid, (String)pid);
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
+		productDAO.getUpdateHits((String)pid);
 			if(vo.getPsfile() != null) {
 				String[] pfile_list =vo.getPsfile().split(",");
 		
@@ -216,7 +217,7 @@ public class ProductServiceImpl implements ProductService{
 	 public ModelAndView product_like(String mid, String pid) {
 		 ModelAndView mv = new ModelAndView();
 		 boolean result = productDAO.getPickContent(mid,pid); 
-			
+		 productDAO.getLikeHits((String)pid);
 			if(result) {
 				//좋아요 버튼 잘 반영
 				ArrayList<LikeVO> list = productDAO.getLikelist(mid); 
@@ -249,7 +250,7 @@ public class ProductServiceImpl implements ProductService{
 	 public String product_unlike(String mid, String pid) {
 		 //ModelAndView mv = new ModelAndView();
 		 boolean result = productDAO.getDeleteContent(mid,pid); 
-		 System.out.println(mid+","+pid);
+		 productDAO.getLikeminus((String)pid);
 			/*if(result) {
 				//좋아요 버튼 잘 반영
 				ArrayList<LikeVO> list = productDAO.getLikelist(mid); 

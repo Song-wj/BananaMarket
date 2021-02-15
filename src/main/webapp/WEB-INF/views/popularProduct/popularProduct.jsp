@@ -174,7 +174,7 @@
 					<label class="ptitle">${vo.ptitle }</label>
 					<label class="pprice">${vo.pprice }</label>
 					<label class="loc">서울 강남구 역삼동</label>
-					<span class="interest">${vo.plike }</span>&nbsp;∙&nbsp;<span class="chat">${vo.pchat}</span>
+					<span class="interest">관심 ${vo.plike }</span>&nbsp;&nbsp;<span class="chat">조회 ${vo.phits}</span>
 					
 			</div>
 			</c:forEach>
