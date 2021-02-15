@@ -321,17 +321,34 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_contract.do", method=RequestMethod.GET)
-	public ModelAndView mypage_contract() {
-		return (ModelAndView)productService.getSellList();
+	public ModelAndView mypage_contract(String pid) {
+		//SessionVO svo = (SessionVO)session.getAttribute("svo");
+		System.out.println(pid);
+		
+		return (ModelAndView)productService.getSellList(pid);
 	}
+	
+	@RequestMapping(value="/mypage_contract_sellComplete.do", method=RequestMethod.GET)
+	public ModelAndView mypage_contract_sellComplete(String pid) {
+		
+		return (ModelAndView)productService.sellUpdate(pid);
+	}
+	
+	
+	/** 리뷰 구매자 아이디 가져오기 **/
 	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
-	public String mypage_contract_review() {
-		return "mypage/mypage_contract_review";
+	public ModelAndView mypage_contract_review(String pid) {
+		
+		//return "mypage/mypage_contract_review";
+		return (ModelAndView)MypageReviewService.getBuyMidList(pid);
 	}
+	
+	
+	
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
 	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
-		 vo.setMid(svo.getMid());
+		/* vo.setMid(svo.getMid()); */
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file1");
 		 String path1 = request.getSession().getServletContext().getRealPath("/");

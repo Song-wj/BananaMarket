@@ -4,15 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.dao.pReviewDAO;
 import com.banana.dao.productDAO;
 import com.banana.vo.LikeVO;
+import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -23,6 +23,8 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private productDAO productDAO;
+	@Autowired
+	private pReviewDAO reviewDAO;
 	
 	public Object insert(Object vo) {
 		String result="";
@@ -85,13 +87,20 @@ public class ProductServiceImpl implements ProductService{
 			mv.setViewName("/popularProduct/popularProduct");
 			return mv;
 	  }
-
-	 public Object getSellList() {
+	 
+		/* public Object getSellList() { return "0"; } */
+	 
+	 public Object getSellList(String pid) {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
+<<<<<<< HEAD
 		
 		
+=======
+			/* productVO slist = reviewDAO.getmid(pid); */
+>>>>>>> ac689ac57686b436fc1ab1fa9ce4c3111feae2ca
 			mv.addObject("list", list);
+			/* mv.addObject("slist", slist); */
 			mv.setViewName("/mypage/mypage_contract");
 			return mv;
 	  }
@@ -192,10 +201,10 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object sellUpdate(Object pid) {
 		 ModelAndView mv = new ModelAndView();
-		 int result = 0;
+		 boolean result = false;
 		 result = productDAO.getSellUpdate((String)pid);
 		 
-		 if(result != 0 ){
+		 if(result == true ){
 				mv.setViewName("redirect:/mypage.do");
 			}else{
 				mv.setViewName("errorPage");

@@ -58,6 +58,10 @@
 		order by sdate 
 	</select>
 	
+	<select id="getmid" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
+		select mid from banana_sell_review where pid=#{pid}
+	</select>
+	
 	<select id="getmyreviewlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
 		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
 		from banana_member m , 
@@ -118,5 +122,9 @@
 		where p.pid=r.pid and p.mid=#{mid} 
 	</select>
 	
+	
+	<!-- <select id="buymidlist" parameterType="java.lang.String" resultType="com.banana.vo.ChatVO">
+		select distinct buy_mid from banana_chat where pid=#{pid}
+	</select> -->
 	
 </mapper>

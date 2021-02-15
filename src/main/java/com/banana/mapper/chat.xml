@@ -46,11 +46,12 @@
 	</select>
 	
 	<select id="ChatContent2"  parameterType="java.lang.String"  resultType="com.banana.vo.productVO" >
-		select p.pid, p.ptitle, p.pprice, p.psfile, m.nickname, m.score, m.maddr
+		select p.pid, p.ptitle, p.pprice, p.psfile, m.nickname, m.score, m.maddr, p.mid
 			from banana_product p, banana_member m
 			where p.mid= m.mid and p.pid=#{pid}
 			
 	</select>
+	
 	
 	<select id="Chat" parameterType="java.lang.String"  resultType="com.banana.vo.ChatContentVO">
 		select cid, sell_mid, buy_mid, pid, chat_content, to_char(cdate,'mm.dd  hh:mm') cdate, chk_read

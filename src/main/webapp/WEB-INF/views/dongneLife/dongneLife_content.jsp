@@ -185,12 +185,12 @@
 		margin-top:-20px;
 	}
 	section.section5_dongneLife_content img.commentMemberImg {
-		magin-bottom:100px;
-		width:50px;
-		heigth:50px;
+		margin-top: 10px;
+		width:75px;
 		border-radius:50%;
 		border:6px solid #fff;
 		box-shadow: 0 0 16px #FEE500;
+		height: 75px;
 	}
 	section.section5_dongneLife_content div.commentMemberImg {
 		float:left;
@@ -201,6 +201,7 @@
 	section.section5_dongneLife_content div.commentMemberSide {
 		margin-top:-10px;
 		padding-bottom:30px;
+		margin-left: 90px;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide {
 		display:inline-block;
@@ -272,6 +273,7 @@
 		padding:7px 17px;
 		font-size:17px;
 		border-radius:5px;
+		float: left;
 	}
 	section.section6_dongneLife_content button.comment_writeBtn:hover,
 	section.section1_dongneLife_content li:nth-child(3) button:hover,
@@ -491,7 +493,8 @@
   								<span class="img_emoti">좋아요</span></button></span>
 				<div class="content_member">
 					<div class="memberImg">
-						<img src="images/mypage_bananaimg.jpg" class="memberImg">
+						<img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }" class="memberImg"
+						style="width: 100px; height: 100px;">
 					</div>
 					<div class="memberSide">
 						<ul class="memberSide">
@@ -512,7 +515,8 @@
 			<div id ="img_div">
 			<c:forEach var="list" items="${sfile_list }" >
 			
-					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
+					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set">
+					<img src="http://localhost:9000/banana/resources/upload/${list}"></a> 
 				
 			</c:forEach>
 			</div>	
@@ -538,7 +542,8 @@
 				<div class="content_comment_write">
 					<ul>
 						<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
-						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn"
+						>등록</button></div></li>
 					</ul>
 				</div>
 			</form>

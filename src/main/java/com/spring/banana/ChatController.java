@@ -48,6 +48,8 @@ public class ChatController {
 		
 		return (ModelAndView)chatService.Content(pid);
 	}
+	
+	
 	/**
 	 * 채팅 리스트 - 상세 내용
 	 * @return
