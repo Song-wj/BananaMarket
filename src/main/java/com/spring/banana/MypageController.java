@@ -325,8 +325,10 @@ public class MypageController {
 		return (ModelAndView)productService.getSellList();
 	}
 	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
-	public String mypage_contract_review() {
-		return "mypage/mypage_contract_review";
+	public ModelAndView mypage_contract_review(String pid) {
+		
+		//return "mypage/mypage_contract_review";
+		return (ModelAndView)MypageReviewService.getBuyMidList(pid);
 	}
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
 	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {

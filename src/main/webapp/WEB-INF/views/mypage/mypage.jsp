@@ -35,10 +35,10 @@
 			$("#contentSection").load("mypage_like.do");
 		});
 		
-		$("#mypage_setLocationBtn").click(function(){
+		/* $("#mypage_setLocationBtn").click(function(){
 			$("#contentSection").load("mypage_setLocation.do");
 		});
-		
+		 */
 		$("#mypage_locationCheck").click(function(){
 			$("#contentSection").load("mypage_locationCheck.do");	
 		});
@@ -47,9 +47,9 @@
 			$("#contentSection").load("mypage_keyword.do");	
 		});
 		
-		$("#mypage_collectView").click(function(){
+		/* $("#mypage_collectView").click(function(){
 			$("#contentSection").load("mypage_collectView.do");	
-		});
+		}); */
 		
 		$("#mypost").click(function(){
 			$("#contentSection").load("mypage_mypost.do");
@@ -337,18 +337,18 @@
 		<section class="section4_mypage">
 			<div class="profileDetails">
 				<ul>
-					<li>
+					<!-- <li>
 						<a href="javascript:void(0)" id="mypage_setLocationBtn">내 동네 설정</a>
-					</li>
+					</li> -->
 					<li>
 						<a href="javascript:void(0)" id="mypage_locationCheck">동네 인증</a>
 					</li>
 					<li>
 						<a href="javascript:void(0)" id="mypage_keyword">키워드 알림 설정</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="javascript:void(0)" id="mypage_collectView">모아보기</a>
-					</li>
+					</li> -->
 					<li>
 						<button class="dropdown-btn">동네생활
 							<i class="fa fa-caret-down"></i>

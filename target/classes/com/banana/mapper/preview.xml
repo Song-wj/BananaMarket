@@ -119,4 +119,8 @@
 	</select>
 	
 	
+	<select id="buymidlist" parameterType="java.lang.String" resultType="com.banana.vo.ChatVO">
+		select distinct buy_mid from banana_chat where pid=#{pid}
+	</select>
+	
 </mapper>

@@ -35,9 +35,9 @@
 			showConfirm(pid);
 		});
 		
-		$("#btn_sellcomplete").click(function(){
+		/* $("#btn_sellcomplete").click(function(){
 			ConfirmSell(pid);
-		});
+		}); */
 		
 	});
 	
@@ -64,20 +64,8 @@
 	function ConfirmSell(pid) {
 		var doConfirm = confirm("해당 상품을 정말로 판매 완료했습니까?");
 			if(doConfirm) {
-				$.ajax({
-					url : 'mypage_contract_review.do?pid='+pid,
-					success: function(result){
-						if(result) {
-							
-							console.log("sell success");
-						} else {
-							console.log("sell fail");
-						}
-					}
-				 });
-				
-				location.href='mypage_contract_review.do?pid='+pid
 				alert("리뷰 작성 페이지로 넘어갑니다.");		
+				$(location).attr('href','mypage_contract_review.do?pid='+pid);
 			} else {
 				alert("취소했습니다.");
 			}
@@ -174,7 +162,7 @@
 			<div>
 				<ul class="contract_nav">
 					<li><a href="#" id="contract_ing">판매중</a></li>
-					<li><a href="#" id="contract_end">거래완료</a></li>
+					<li><a href="#" id="contract_end">판매 완료</a></li>
 				</ul>
 			</div>
 		</section>
@@ -228,8 +216,8 @@
 							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
 							<td><span class="product">${vo.ptitle} </span></td>
 							<td rowspan="3" rowspan="3" class="manner_grade">
-							<!-- <a href="mypage_contract_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
-							 --></td>
+								<a href="mypage_contract_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
+							</td>
 						</tr>
 						<tr>
 							<td><span class="category">${vo.pcategory}</span></td>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,9 +186,11 @@
 			 	<label>구매자를 선택해주세요</label><br>
 						<select  name="buy_mid" onchange="showConfirm()" id="buy_mid">
 							<option value="none">선택</option>
-							<option value="chat1"> 채팅1($(buy_mid)) </option>
-							<option value="chat2"> 채팅2($(buy_mid)) </option>
+					 <%-- <c:forEach var="vo" items="list">
+							<option value="${ vo.buy_mid }">${ vo.buy_mid }</option>
+					  </c:forEach>  --%>
 						</select> 			
+						<input type="text" value="${ vo.buy_mid}">
 			</div>
 			<div class="write_topic" id="write_topic">
 			 	<label>매너점수를 주세요</label><br>

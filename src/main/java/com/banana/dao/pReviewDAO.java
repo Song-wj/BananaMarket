@@ -6,9 +6,10 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.banana.vo.ChatVO;
 import com.banana.vo.ReviewVO;
 
-public class pReviewDAO {
+public class pReviewDAO extends DBConn{
 
 	
 	@Autowired
@@ -74,5 +75,10 @@ public class pReviewDAO {
 		return (ArrayList<ReviewVO>)list;
 	}
 	
+	//리뷰작성시 buy_mid 불러오기
+	public ArrayList<ChatVO> getBuyMidList(String pid){
+		List<ChatVO> list =sqlSession.selectList(namespace + ".buymidlist" , pid);
+		return (ArrayList<ChatVO>)list;
+	}
 	
 }
