@@ -170,7 +170,8 @@
 			<div class="plist">
 				<c:if test="${vo.psfile ne null }"> 
 					<a href="productContent.do?pid=${vo.pid}">
-                         <img src="http://localhost:9000/banana/resources/upload/${vo.psfile }">
+					<c:set var="fname" value="first_img${status.index}" />				
+                         <img src="http://localhost:9000/banana/resources/upload/${requestScope[fname]}">
 						</a> 
                  </c:if>      
 					<label class="ptitle">${vo.ptitle }</label>

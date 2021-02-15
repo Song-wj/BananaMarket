@@ -83,6 +83,13 @@ public class ProductServiceImpl implements ProductService{
 	 public Object getList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
+		  int count = 0;
+		  for(productVO vo: list) {
+				String[] imgs =vo.getPsfile().split(",");
+				 mv.addObject("first_img"+count ,imgs[0]);
+				 count++;
+				 
+		  }
 			mv.addObject("list", list);
 			mv.setViewName("/popularProduct/popularProduct");
 			return mv;
