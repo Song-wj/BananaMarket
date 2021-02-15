@@ -357,7 +357,7 @@ public class MypageController {
 		 vo.setSavepath(path1+path2);
 		 vo.setList(fileList);
 		 
-		vo.setParam("판매자리뷰");
+		 vo.setParam("판매자리뷰");
 		return (String)MypageReviewService.insert(vo); 
 	}
 	/**

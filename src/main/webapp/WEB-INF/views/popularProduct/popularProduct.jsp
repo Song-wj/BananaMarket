@@ -165,7 +165,8 @@
 			</select>
 		</div> <!-- select_div -->
 		<div class ="product">
-			<c:forEach var="vo"  items="${list}">
+			<c:forEach var="vo"  items="${list}"  varStatus="status" >
+				
 			<div class="plist">
 				<c:if test="${vo.psfile ne null }"> 
 					<a href="productContent.do?pid=${vo.pid}">
