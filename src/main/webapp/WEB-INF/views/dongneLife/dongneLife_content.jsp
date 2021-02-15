@@ -273,6 +273,7 @@
 		padding:7px 17px;
 		font-size:17px;
 		border-radius:5px;
+		float: left;
 	}
 	section.section6_dongneLife_content button.comment_writeBtn:hover,
 	section.section1_dongneLife_content li:nth-child(3) button:hover,
@@ -541,7 +542,8 @@
 				<div class="content_comment_write">
 					<ul>
 						<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
-						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn"
+						>등록</button></div></li>
 					</ul>
 				</div>
 			</form>
