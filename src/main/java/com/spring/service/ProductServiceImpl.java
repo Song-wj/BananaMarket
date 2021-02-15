@@ -104,8 +104,9 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object getContent(Object pid, String mid) {
 		ModelAndView mv = new ModelAndView();
-		
+		ArrayList<productVO> list = productDAO.getProductList();
 		int result = productDAO.likeResult(mid, (String)pid);
+		mv.addObject("list",list);
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
 		productDAO.getUpdateHits((String)pid);
