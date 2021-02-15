@@ -88,7 +88,7 @@ public class ProductServiceImpl implements ProductService{
 			return mv;
 	  }
 	 
-		/* public Object getSellList() { return "0"; } */
+	
 	 
 	 public Object getSellList(String pid) {
 		  ModelAndView mv = new ModelAndView();
