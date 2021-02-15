@@ -56,10 +56,11 @@
 	</select> 
 	
 	<select id="getselllist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
-		select rid,r.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-sdate)*24*60)) rdate
-		from  banana_product p  , banana_sell_review r
-		where p.pid= p.pid and p.buy_mid =#{mid}
-		order by sdate 
+		select rid,mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-sdate)*24*60)) rdate	
+		from (select rid,mid,score,review, rfile, rsfile, sdate
+			  from  banana_sell_review 
+			   where mid =#{mid}
+				 order by sdate desc)
 	</select>
 	
 	<select id="getmid" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
@@ -67,15 +68,18 @@
 	</select>
 	
 	<select id="getmyreviewlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
-		select rid,pid,m.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
-		from banana_member m , 
-   			 (select rid,pid,mid,score,review, rfile, rsfile, rdate
-      		  from banana_buy_review
-              union
-              select rid,pid,mid,score,review, rfile, rsfile, sdate
-              from banana_sell_review) r
-		where m.mid= r.mid and m.mid=#{mid}
-		order by rdate 
+		
+		select rid,r.pid, p.mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+    	from(select *
+         	from( select rid ,r.pid, r.mid, score, review, rfile, rsfile,rdate
+                  from banana_buy_review r, banana_product p
+                  where r.pid=p.pid and p.mid=#{mid}
+                  union
+                  select rid ,r.pid, r.mid, score, review,rfile, rsfile, sdate
+		          from banana_sell_review r,banana_product p
+                  where r.pid=p.pid and p.mid=#{mid})
+            order by rdate desc)  r , banana_product p
+      	where p.pid = r.pid
 	</select> 
 	
 	<select id="getmyreview" parameterType="java.lang.String"  resultType="com.banana.vo.ReviewVO">
@@ -102,7 +106,14 @@
 	</update>
 	
 	<update id="updatesellmyreview" parameterType="com.banana.vo.ReviewVO">
+		<choose>
+		<when test="rfile != null">
 		update banana_sell_review set review = #{review} , score=#{score}  ,rfile= #{rfile} , rsfile = #{rsfile}  sdate = sysdate where rid=#{rid}
+		</when>
+		<otherwise>
+		update banana_sell_review set review = #{review} , score=#{score} where rid=#{rid}
+		</otherwise>
+		</choose>
 	</update>
 	
 	<delete id="deletebuymyreview" parameterType="java.lang.String"  >
@@ -116,14 +127,23 @@
 	</delete>
 	
 	<select id="gradelist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO">
-		select r.score , review  ,rdate
+		<!-- select r.score , review  ,rdate
 		from banana_product p ,
 		  (select pid, mid, score, review, rdate
 		  from banana_buy_review
 		  union
 		  select pid, mid, score, review, sdate
 		  from banana_sell_review) r
-		where p.pid=r.pid and p.mid=#{mid} 
+		where p.pid=r.pid and p.mid=#{mid}  -->
+		
+		 select  score , review  ,rdate
+		 from (select rid, r.pid, r.mid, score, review, rdate
+               from banana_buy_review r, banana_product p
+               where r.pid=p.pid
+               union
+               select rid ,pid, mid, score, review, sdate
+		       from banana_sell_review) 
+		where  mid=#{mid}   
 	</select>
 	
 	
