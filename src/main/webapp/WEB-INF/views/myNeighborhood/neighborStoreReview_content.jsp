@@ -36,7 +36,6 @@
 		height: 1000px;
 		padding-top:150px;
 		padding-bottom:3%;
-		border:1px solid green;
 		overflow:auto;
 	}
 	section.section2_dongneLife_content,
