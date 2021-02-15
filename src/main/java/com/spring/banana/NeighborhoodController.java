@@ -33,6 +33,9 @@ public class NeighborhoodController {
 	@Autowired
 	private BananaShopReviewDAO shopReviewDAO;
 	
+	@Autowired
+	private SearchServiceImpl searchService;
+	
 	/**
 	 * 업체 후기 alarm
 	 */
@@ -57,8 +60,6 @@ public class NeighborhoodController {
 		System.out.println("srid: "+ srid);
 		return srid;
 	}
-	
-	private SearchServiceImpl searchService;
 	
 	/**
 	 * 내 근처 - 업체 후기 삭제 처리
@@ -180,7 +181,7 @@ public class NeighborhoodController {
 	}
 	
 	/**
-	 * 내 근처 - 키워드 리스트 화면
+	 * 내 근처 - 업체 검색 리스트 화면
 	 */
 	@RequestMapping(value="/neighborhood_search.do",method=RequestMethod.GET)
 	public ModelAndView neighborhood_search(String search) {
