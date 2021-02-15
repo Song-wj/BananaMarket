@@ -497,7 +497,7 @@ $(document).ready(function(){
 			<a id="article-profile-link" href="#">
 				<div class="space-between">
 					<div>
-						<div id="article-profile-image"><img src="http://localhost:9000/banana/images/mypage_bananaimg.jpg"></div>
+						<div id="article-profile-image"><img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }"></div>
 					</div>
 					<div id="article-profile-left">
 						<div id="nickname">${vo.nickname }</div>

@@ -23,7 +23,7 @@
 	</select>
 	
 	<select id="ProductContent" parameterType="java.lang.String" resultType="com.banana.vo.productVO">
-		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE, p.phits
+		select p.pid, p.mid, p.ptitle, p.pcategory, p.pprice, p.pcontent, p.plike, p.pchat, p.pdate, p.pfile, p.psfile, m.MADDR, m.NICKNAME, m.SCORE, p.phits, m.msfile
 			from banana_product p, banana_member m 	
 			where p.mid = m.mid and p.pid = #{pid}
 	</select>

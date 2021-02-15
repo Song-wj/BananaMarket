@@ -12,6 +12,9 @@ public class productVO {
 	List<MultipartFile> list ;
 	String rno;
 	int phits;
+	String msfile;
+	
+	
 	
 	//CommonsMultipartFile[] file_list;
 	
@@ -24,6 +27,14 @@ public class productVO {
 	}
 	*/
 	
+	public String getMsfile() {
+		return msfile;
+	}
+
+	public void setMsfile(String msfile) {
+		this.msfile = msfile;
+	}
+
 	public int getPhits() {
 		return phits;
 	}
