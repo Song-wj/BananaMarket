@@ -25,6 +25,7 @@ public class ChatDAO extends DBConn{
 		return sqlSession.insert(namespace+".InsertChat", vo);
 	}
 	
+	
 	/** 채팅 리스트 *
 	public ArrayList<ChatContentVO> getChatList(String pid, String mid){
 		Map <String, String> param = new HashMap<String, String>();

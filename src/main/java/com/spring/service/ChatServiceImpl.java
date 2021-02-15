@@ -34,6 +34,7 @@ public class ChatServiceImpl {
 		
 		return mv;
 	}
+	
 /*	
 	public Object getList(String pid, String mid) {
 		  ModelAndView mv = new ModelAndView();
@@ -74,4 +75,5 @@ public class ChatServiceImpl {
 		mv.setViewName("/chatBanner/chat_write");
 		return mv;
 	}
+	
 }

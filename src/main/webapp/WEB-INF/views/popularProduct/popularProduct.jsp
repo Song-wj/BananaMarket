@@ -146,7 +146,7 @@
 				<option value="부산광역시">부산광역시</option>
 				<option value="대구광역시">대구광역시</option>
 				<option value="인천광역시">인천광역시</option>
-				<option value="광주광역시">주광역시</option>
+				<option value="광주광역시">광주광역시</option>
 				<option value="대전광역시">대전광역시</option>
 				<option value="울산광역시">울산광역시</option>
 				<option value="세종특별자치시">세종특별자치시</option>
@@ -165,7 +165,8 @@
 			</select>
 		</div> <!-- select_div -->
 		<div class ="product">
-			<c:forEach var="vo"  items="${list}">
+			<c:forEach var="vo"  items="${list}"  varStatus="status" >
+				
 			<div class="plist">
 				<c:if test="${vo.psfile ne null }"> 
 					<a href="productContent.do?pid=${vo.pid}">

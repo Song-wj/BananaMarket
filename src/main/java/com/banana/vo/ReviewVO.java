@@ -9,13 +9,20 @@ public class ReviewVO {
 	 String score;
 	 String param;
 	 String maddr;
+	 String buy_mid;
 	 
 	 String file;
 	 String sfile;
 	 List<MultipartFile> list ;
 		
 	 
-	 public String getCancel_img() {
+	 public String getBuy_mid() {
+		return buy_mid;
+	}
+	public void setBuy_mid(String buy_mid) {
+		this.buy_mid = buy_mid;
+	}
+	public String getCancel_img() {
 		 return cancel_img;
 	 }
 	 public void setCancel_img(String cancel_img) {
