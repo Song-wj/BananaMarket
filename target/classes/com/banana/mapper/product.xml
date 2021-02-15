@@ -19,8 +19,8 @@
 	
 	<select id="ProductList" resultType="com.banana.vo.productVO">
 
-		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid 
-		from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid 
+		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid, phits
+		from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid, phits 
       			from banana_product   
       			order by plike desc)
 
