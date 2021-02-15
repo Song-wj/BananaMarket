@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -339,6 +339,7 @@
 	.cards-wrap .card .card-photo img {
 		position: absolute;
 	    top: 0;
+	    left: 0;
 	    bottom: 0;
 	    width: 100%;
 	    box-sizing: border-box;
@@ -551,7 +552,7 @@ $(document).ready(function(){
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
 				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate}</time></p>
-				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
+				<p id="article-price" style="font-size:20px; font-weight: bold;"><fmt:formatNumber value="${vo.pprice }" pattern="###,###"/> 원</p>
 				<div id="article-detail">
 					<p>${vo.pcontent}</p>
 				</div>
@@ -563,86 +564,23 @@ $(document).ready(function(){
 
 <section id="article-detail-hot-more">
 	<h3>당근마켓 인기중고</h3>
-	<div id="hot-more-link"><a href="#">더 구경하기</a></div>
+	<div id="hot-more-link"><a href="popularProduct.do">더 구경하기</a></div>
 	<section class="cards-wrap">
+		<c:forEach var="vo" items="${ list }">
 		<article class="card">
-			<a class="card-link" href="#">
+			<a class="card-link" href="productContent.do?pid=${vo.pid}">
 				<div class="card-photo">
-					<img src="">
+					<img src="http://localhost:9000/banana/resources/upload/${vo.psfile }">
 				</div>
 				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
+					<h2 class="card-title">${vo.ptitle }</h2>
+					<div class="card-price"><fmt:formatNumber value="${vo.pprice }" pattern="###,###"/>원</div>
 					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
+					<div class="card-counts"><span>관심 ${vo.plike }</span>&middot;<span>조회 ${vo.phits}</span></div>
 				</div>
 			</a>
 		</article>
-		<!--  <article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article> -->
+		</c:forEach>
 	</section>
 </section>
 
