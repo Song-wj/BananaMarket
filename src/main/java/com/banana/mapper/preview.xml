@@ -6,6 +6,10 @@
 
 <mapper namespace="mapper.preview">
 	
+	<update id="insertbuyid" parameterType="map" >
+		update banana_product set buy_mid=#{mid} where pid=#{pid}
+	</update>
+	
 	<insert id="buyreviewinsert" parameterType="com.banana.vo.ReviewVO">
 		insert into banana_buy_review values
 		<choose>

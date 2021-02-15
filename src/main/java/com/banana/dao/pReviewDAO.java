@@ -2,14 +2,15 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.ChatVO;
 import com.banana.vo.ReviewVO;
-import com.banana.vo.productVO;
 
 public class pReviewDAO extends DBConn{
 
@@ -21,13 +22,22 @@ public class pReviewDAO extends DBConn{
 	private static String namespace ="mapper.preview";
 	
 	// 리뷰 등록
-	public int reviewInsert(ReviewVO vo) {	
-		
-		if(vo.getParam().equals("구매자리뷰")) {
-			return sqlSession.insert(namespace+".buyreviewinsert" , vo);
-		}else {
-			return sqlSession.insert(namespace+".sellreviewinsert" , vo);
+	public int reviewInsert(ReviewVO vo) {
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("mid", vo.getMid());
+		param.put("pid", vo.getPid());
+		int b=0;
+		int a = sqlSession.update(namespace+".insertbuyid" ,param);
+		if(a !=0) {
+			if(vo.getParam().equals("구매자리뷰")) {
+				b= sqlSession.insert(namespace+".buyreviewinsert" , vo);
+			}else {
+				b= sqlSession.insert(namespace+".sellreviewinsert" , vo);
+			}
+			
 		}
+		
+		return b;
 	}
 	// 리스트 불러오기
 	public ArrayList<ReviewVO> getReviewList(String mid){
