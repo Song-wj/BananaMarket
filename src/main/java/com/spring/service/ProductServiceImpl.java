@@ -89,7 +89,8 @@ public class ProductServiceImpl implements ProductService{
 	 public Object getSellList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
-		  
+		
+		
 			mv.addObject("list", list);
 			mv.setViewName("/mypage/mypage_contract");
 			return mv;
