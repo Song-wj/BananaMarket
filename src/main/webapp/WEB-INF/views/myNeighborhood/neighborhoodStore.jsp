@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -272,9 +274,9 @@
 	</div>
 	<div class="desc-container">
 		<div>
-			<a href="#">${vo.dong}</a> &middot; <a href="#">${vo.skinds}<!--   뷰티/미용  --></a>
+			<a href="http://localhost:9000/banana/neighborhood_search.do?search=${vo.dong }">${vo.dong}</a> &middot; <a href="http://localhost:9000/banana/neighborhood_search.do?search=${vo.skinds }">${vo.skinds}</a>
 		</div>
-		<h1>${vo.sname}<!--  뷰림헤어살롱 옥정점  --></h1>
+		<h1>${vo.sname}</h1>
 	</div>
 </section>
 <section class="store-info-body">
@@ -286,11 +288,6 @@
 					
 				</div>
 				<p class="info-content">${vo.sintro }
-					<!-- 안녕하세요^^<br>
-					옥정동 뷰림헤어입니다.<br>
-					요즘 코로나 때문에 마음대로 다니시길 어려우시져?<br>
-					저희샵은 공간을 최대한 분리되어있어서 좀더 쾌적하고 편안하게 시술받을 수 있는 장점이 있어요<br>
-					신규고객님들은 30%할인 적용도 있으시니 방문해주셔서 예쁘게 머리하시고 기분전환하세요! -->
 				</p>
 				<div class="likebutton">
 				<button type="button" class="btn_unlike" id="btnLike">
@@ -301,13 +298,13 @@
 				<div class="location-img">
 					<img src="http://localhost:9000/banana/images/location.svg">
 				</div>
-				<p class="info-location">${vo.saddr} ${vo.saddr_num}<!--  경기도 양주시 회천남로 76 --></p>
+				<p class="info-location">${fn:replace(vo.saddr,'/',' ')} ${vo.saddr_num}</p>
 			</li>
 			<li>
 				<div class="phone-img">
 					<img src="http://localhost:9000/banana/images/phone.svg">
 				</div>
-				<p class="info-phone"><a href="#">${vo.sph}<!-- 0318623555 --></a></p>
+				<p class="info-phone"><a href="#">${vo.sph}</a></p>
 			</li>
 			<c:if test="${svo.mid eq vo.mid}">
 			<li>

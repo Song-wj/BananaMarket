@@ -87,19 +87,32 @@
 		margin-left:10px;
 		font-size:13px;
 	}
+	div.recommand_store>div {
+		margin-bottom:50px;
+		outline:none;
+	}
 	div.recommand_store>div span.review_count{
 		color:green;
 		font-weight:550;
+		margin-bottom:20px;
 	}
 	div.recommand_store div.store_review{
+		position:relative;
+		top:30px;
+		left:0px;
+		bottom:30px;
 		width:260px;
 		height:50px;
 		border-radius:17px;
-		margin-left:10px;
+		margin-left:-300px;
+		margin-right:50px;
 		background-color:lightgray;
 	}
 	div.recommand_store div.store_review span{
 		font-weight:550;
+	}
+	div.recommand_store div.store_review label {
+		padding-left:10px;
 	}
 	div.recommand_store button{
 		margin-top:30px;
@@ -110,7 +123,7 @@
 		border-radius:15px;
 	}
 	div.store_recommand {
-		margin-bottom:10px;
+		margin-bottom:30px;
 	}
 	div.store_news img{
 		width:290px;
@@ -149,61 +162,61 @@
 	<div class="content">
 		<nav class="recommad_list">
 			<ul>
-				<li>이사</li>
-				<li>자동차</li>
-				<li>용달</li>
-				<li>공방</li>
-				<li>영어</li>
-				<li>피부관리</li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=병원/의료">병원/의료</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=빵집/카페">빵집/카페</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=뷰티/미용">뷰티/미용</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=인테리어">인테리어</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=운동">운동</a></li>
+				<li><a href="http://localhost:9000/banana/neighborhood_search.do?search=의류판매점">의류판매점</a></li>
 			</ul>		
 		</nav>
 		<div class="category">
 			<div>
-				<a href="">			
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=일자리">			
 					<img src="images/work1.png">
 				    <label>일자리</label>
 				</a>
 			</div>
 			<div>	
-				<a href="">						
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=법무/세무">						
 					<img src="images/manager.png">
-					<label>동네 구인구직</label>
+					<label>법무/세무</label>
 				</a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=교육/학원">	
 					<img src="images/notebook.png">			
-					<label>과외/클래스</label>
+					<label>교육/학원</label>
 				</a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=음식점/반찬">	
 					<img src="images/harvest.png">		
-				    <label>농수산물</label>
+				    <label>음식점/반찬</label>
 				</a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=부동산">	
 					<img src="images/home.png">	
 				    <label>부동산</label>
 				</a>
 			</div>
 			<div>
-				<a href="">			
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=자동차">			
 					<img src="images/car1.png">
-					<label>중고차</label>
+					<label>자동차</label>
 				</a>
 			</div>
 			<div>
-				<a href="">					
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=전시/행사">					
 					<img src="images/diplay.png">			
 			    	<label>전시/행사</label>			
 			    </a>
 			</div>
 			<div>
-				<a href="">	
+				<a href="http://localhost:9000/banana/neighborhood_search.do?search=세탁/수선">	
 					<img src="images/fashion.png">		
-					<label>세탁</label>
+					<label>세탁/수선</label>
 				</a>
 			</div>		
 		</div> <!-- category -->
@@ -220,14 +233,23 @@
 				<label class="store_name">${vo.sname }</label>
 				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
-				<div class="store_review" style="margin-top: 5px;">
-					<label>${fn:substring(vo.srcontent,0,8) }..</label>
-				</div>	
 			</div>	
+			<c:choose>
+				<c:when test="${vo.srcontent ne '등록된 업체리뷰 없음' }">
+					<div class="store_review" style="margin-top: 5px;" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
+					<label>${fn:substring(vo.srcontent,0,25) }..</label>
+				</div>	
+				</c:when>
+				<c:otherwise>
+					<div class="store_review" style="margin-top: 5px;">
+					<label>${vo.srcontent }</label>
+				</div>	
+				</c:otherwise>
+			</c:choose>
 			</c:forEach>
 		</div>  <!-- recommand_store -->
-		<div class="recommand_store" >
-			<label>내 근처 가게 소식</label>
+		<div class="recommand_store">
+			<label>새로운 가게 소식</label>
 			<c:forEach var="vo" items="${list }">
 			<div class="store_recommand" onclick="location.href='neighborhoodStore.do?sid=${vo.sid }'"
 			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 10px; border-radius: 10px;">
@@ -237,10 +259,19 @@
 				<label class="store_name">${vo.sname }</label>
 				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
-				<div class="store_review" style="margin-top: 5px;">
-					<label>${fn:substring(vo.srcontent,0,8) }..</label>
-				</div>	
 			</div>	
+			<c:choose>
+				<c:when test="${vo.srcontent ne '등록된 업체리뷰 없음' }">
+					<div class="store_review" style="margin-top: 5px;" onclick="location.href='neighborStoreReview_content.do?srid=${vo.srid}'">
+					<label>${fn:substring(vo.srcontent,0,15) }..</label>
+				</div>	
+				</c:when>
+				<c:otherwise>
+					<div class="store_review" style="margin-top: 5px;">
+					<label>${vo.srcontent }</label>
+				</div>	
+				</c:otherwise>
+			</c:choose>
 			</c:forEach>
 			<!-- <button type="button">가게 소식 전체 보기 > </button> -->
 		</div><!-- store_news -->

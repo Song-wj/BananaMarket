@@ -14,7 +14,6 @@
 		margin:auto;
 		height:1050px;
 		padding-top:150px;
-		border:1px solid green;
 		padding-bottom:5%;	
 		margin-bottom:100px;
 	}
@@ -28,6 +27,7 @@
 	.dl_content1 {
 		margin-top:20px;
 		text-align:center;
+		padding:10px 0;
 	}
 	.dl_content1 img{
 		width:50px;
@@ -151,10 +151,10 @@
 		<section class="section1">
 		
 			<div class="dl_title">
-				<h1>전체 후기 목록</h1>
+				<h1>' ${sname } ' 업체의 전체 후기 목록</h1>
 			</div>
 			<div class="dl_content1">
-				<img src="images/김수현.jpg"><label>업체 후기 ${review_count }</label><hr><br>
+				<label>업체 후기 ${review_count }</label><hr><br>
 				<%-- <a href="neighborStoreReview_write.do?sid=${vo.sid }&mid=${vo.mid }"><button type="button">후기 작성하기</button></a><hr> --%>
 			</div>	
 			<section class="sub_section">
