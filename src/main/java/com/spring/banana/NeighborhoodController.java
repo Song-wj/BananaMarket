@@ -16,6 +16,7 @@ import com.banana.vo.BananaShopReviewVO;
 import com.banana.vo.SessionVO;
 import com.enroll.service.EnrollService;
 import com.enroll.service.EnrollstoreServiceImpl;
+import com.spring.service.SearchServiceImpl;
 
 @Controller
 public class NeighborhoodController {
@@ -57,6 +58,7 @@ public class NeighborhoodController {
 		return srid;
 	}
 	
+	private SearchServiceImpl searchService;
 	
 	/**
 	 * 내 근처 - 업체 후기 삭제 처리
@@ -175,5 +177,13 @@ public class NeighborhoodController {
 	public String product_unlike(HttpSession session, String sid) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return EnrollstoreServiceImpl.product_unlike(svo.getMid(), sid);
+	}
+	
+	/**
+	 * 내 근처 - 키워드 리스트 화면
+	 */
+	@RequestMapping(value="/neighborhood_search.do",method=RequestMethod.GET)
+	public ModelAndView neighborhood_search(String search) {
+		return (ModelAndView)searchService.getStoreList(search);
 	}
 }

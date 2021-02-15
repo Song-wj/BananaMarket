@@ -128,16 +128,18 @@
 	section.section1_mypage img.mypageImg {
 		magin-bottom:100px;
 		width:100px;
-		heigth:100px;
+		height:100px;
 		border-radius:50%;
 		border:6px solid #fff;
 		box-shadow: 0 0 16px #FEE500;
+		
 	}
 	section.section1_mypage div.mypageImg {
 		float:left;
 		display:inline-block;
 		width:120px;
 		height:120px;
+
 	} 
 	section.section1_mypage div.mypageSide {
 		float:inherit; 

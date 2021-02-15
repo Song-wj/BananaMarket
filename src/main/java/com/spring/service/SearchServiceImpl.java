@@ -49,4 +49,22 @@ public class SearchServiceImpl {
 		mv.setViewName("/search");
 		return mv;
 	}
+	
+	 public Object getStoreList(String search) {
+			ModelAndView mv = new ModelAndView();
+			
+			ArrayList<BananaShopVO> list3 = bananashopDAO.getsearchlist(search);
+			
+			int shop_count = bananashopDAO.getsearchCount(search);
+			int total_count = shop_count;
+			
+			mv.addObject("search", search);
+			mv.addObject("list3", list3);
+			mv.addObject("shop_count", shop_count);
+			
+			mv.addObject("total_count", total_count);
+			
+			mv.setViewName("/myNeighborhood/neighborhood_search");
+			return mv;
+		}
 }
