@@ -227,9 +227,9 @@
 							<td rowspan="3" rowspan="3" class="manner_grade">
 							<%-- <input type="hidden" name="pid" value="${vo.pid}"> --%>
 							
-								<%-- <c:if test="${empty slist}"> --%>
+								<c:if test="${vo.buy_mid eq null}">
 								<button type ="button" onclick="Review('${vo.pid}')" id="write_btn">후기 작성</button>
-								<%-- </c:if> --%>
+								</c:if>
 							
 							</td>
 						</tr>

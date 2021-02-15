@@ -140,7 +140,7 @@
 	<div class="content">
 		<h1 class="ph3">중고거래 인기매물</h1>
 		<div class="select_div">
-			<select name="select_loc" class="select_loc" >
+			<!-- <select name="select_loc" class="select_loc" >
 			    <option value="none">지역을 선택하세요</option>
 				<option value="서울특별시">서울특별시</option>
 				<option value="부산광역시">부산광역시</option>
@@ -162,7 +162,7 @@
 			</select>
 			<select  name ="select_dongne" class="select_dongne" disabled>
 				<option value="none">동네를 선택하세요</option>
-			</select>
+			</select> -->
 		</div> <!-- select_div -->
 		<div class ="product">
 			<c:forEach var="vo"  items="${list}"  varStatus="status" >

@@ -64,13 +64,6 @@ public class ChatServiceImpl {
 			return mv;
 	}
 	
-	public Object getContent3(String pid) {
-		ModelAndView mv = new ModelAndView();
-		ArrayList<ChatContentVO> list = chatDAO.getContent3(pid);
-		mv.addObject("list", list);
-		mv.setViewName("/chatBanner/chat_list_content");
-		return mv;
-	}
 	
 	public Object Content(String pid) {
 		ModelAndView mv = new ModelAndView();

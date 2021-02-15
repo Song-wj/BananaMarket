@@ -88,6 +88,13 @@ public class ProductServiceImpl implements ProductService{
 			return mv;
 	  }
 	 
+		/*
+		 * public Object getList_top3() { ModelAndView mv = new ModelAndView();
+		 * ArrayList<productVO> list = productDAO.getProductList_top3();
+		 * mv.addObject("list", list); mv.setViewName("/popularProduct/popularProduct");
+		 * return mv; }
+		 */
+	 
 		/* public Object getSellList() { return "0"; } */
 	 
 	 public Object getSellList(String pid) {
@@ -104,7 +111,8 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object getContent(Object pid, String mid) {
 		ModelAndView mv = new ModelAndView();
-		
+		 ArrayList<productVO> list = productDAO.getProductList_top3();
+		 mv.addObject("list", list);
 		int result = productDAO.likeResult(mid, (String)pid);
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);

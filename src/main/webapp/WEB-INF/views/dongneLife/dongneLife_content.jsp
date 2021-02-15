@@ -383,7 +383,7 @@
 						if(session_mid == jdata.jlist[i].mid) {
 							output += "<li>";
 							output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
-							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button' id='delete'>삭제</button></a>";
+							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "' style='text-decoration:none'><button type='button' id='delete'>삭제</button></a>";
 							output += "</li>";
 						}
 						
@@ -488,7 +488,7 @@
 		</section>
 		<section class="section2_dongneLife_content">
 			<div class="content_top">
-				<a href="#"><label class="content_topic">우리동네질문 ></label></a>
+				<label class="content_topic">${vo.btitle} </label>
 				<span class="right"><button type="button" class="btn_unlike" id="btnLike">
   								<span class="img_emoti">좋아요</span></button></span>
 				<div class="content_member">
@@ -526,8 +526,8 @@
 			<div class="content_response">
 				<ul>
 					<li>
-						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
-						<img src="images/messenger.png"><button type="button">댓글 <span id="comment_count"></span></button>
+						<!-- <img src="images/smile.png"><button type="button">공감하기</button> -->
+						<img src="images/messenger.png"><button type="button">&nbsp; 댓글 <span id="comment_count"></span></button>
 					</li>
 				</ul>
 			</div>

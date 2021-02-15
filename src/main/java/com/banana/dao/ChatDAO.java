@@ -39,11 +39,6 @@ public class ChatDAO extends DBConn{
 	
 	
 	/** Ã¤ÆÃ content **/
-	public ArrayList<ChatContentVO> getContent3(String pid) {
-		List <ChatContentVO> list = sqlSession.selectList(namespace+".ChatContent3", pid);
-		return (ArrayList<ChatContentVO>) list;
-	}
-	
 	public productVO getContent2(String pid) {
 		
 		return sqlSession.selectOne(namespace+".ChatContent2", pid);

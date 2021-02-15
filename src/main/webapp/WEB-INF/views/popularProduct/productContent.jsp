@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -444,6 +444,44 @@
 	    text-indent: 0;
 	}
 	
+	div.plist a{
+		text-decoration:none;
+	}
+	div.plist{
+		display:inline-block;
+		width:190px;
+		height:370px;
+		margin-right:16px;
+		margin-left:16px;
+	}
+	div.plist img{
+		width:190px;
+		height:190px;
+		border-radius:20%;
+		border:3px solid #FEE500;
+	}
+	div.plist label{
+		display:block;
+		cursor:pointer;
+	}
+	div.plist label.ptitle{
+	    font-size:17px;
+		overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
+	div.plist label.pprice{
+		font-weight:bold;
+		font-size:17px;
+	}
+	div.plist label.loc{
+		font-size:15px;
+	}
+	div.plist span{
+		font-size:13px;
+		color:gray;
+	}
+	
 </style>
 </head>
 <script>
@@ -531,15 +569,6 @@ $(document).ready(function(){
 		<div class="description">
 			<section id="article-description">
 				<div class="product_btn">
-					<%-- <c:choose>
-						<c:when test="${mid ne null }">
-							<a href="pickProc.di?mid=${mid }&pid=${pid}"><button type="button" class="product_btn_style" id="like">찜</button></a>
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="product_btn_style" id="like">찜</button>
-						</c:otherwise>
-					</c:choose> --%>
-					<!-- <button type="button" class="product_btn_style" id="like">찜하기</button>  -->
 					<button type="button" class="btn_unlike" id="btnLike">
   						<span class="img_emoti">좋아요</span>
   					</button> 
@@ -551,7 +580,7 @@ $(document).ready(function(){
 				</div>
 				<h1 id="article-title" style="margin-top:0px;">${vo.ptitle}</h1>
 				<p id="article-category">${vo.pcategory}&middot;<time>${vo.pdate}</time></p>
-				<p id="article-price" style="font-size:20px; font-weight: bold;">${vo.pprice} 원</p>
+				<p id="article-price" style="font-size:20px; font-weight: bold;"><fmt:formatNumber value="${vo.pprice }" pattern="###,###"/> 원</p>
 				<div id="article-detail">
 					<p>${vo.pcontent}</p>
 				</div>
@@ -563,87 +592,22 @@ $(document).ready(function(){
 
 <section id="article-detail-hot-more">
 	<h3>당근마켓 인기중고</h3>
-	<div id="hot-more-link"><a href="#">더 구경하기</a></div>
-	<section class="cards-wrap">
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
+	<div id="hot-more-link"><a href="popularProduct.do">더 구경하기</a></div>
+		<div class ="product">
+			<c:forEach var="vo"  items="${list}"  varStatus="status" >
+				<div class="plist">
+					<c:if test="${vo.psfile ne null }"> 
+						<a href="productContent.do?pid=${vo.pid}">
+	                         <img src="http://localhost:9000/banana/resources/upload/${vo.psfile }">
+							</a> 
+	                 </c:if>      
+						<label class="ptitle">${vo.ptitle }</label>
+						<label class="pprice"><fmt:formatNumber value="${vo.pprice }" pattern="###,###"/>원</label>
+						<!-- <label class="loc">서울 강남구 역삼동</label> -->
+						<span class="interest">관심 ${vo.plike }</span>&nbsp;&nbsp;<span class="chat">조회 ${vo.phits}</span>
 				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<!--  <article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article>
-		<article class="card">
-			<a class="card-link" href="#">
-				<div class="card-photo">
-					<img src="">
-				</div>
-				<div class="card-desc">
-					<h2 class="card-title">추피와두두</h2>
-					<div class="card-price">50,000원</div>
-					<div class="card-region-name">서울 용산구 한남동</div>
-					<div class="card-counts"><span>관심 8</span>&middot;<span>채팅 15</span></div>
-				</div>
-			</a>
-		</article> -->
-	</section>
+			</c:forEach>
+		</div>
 </section>
 
 </div>

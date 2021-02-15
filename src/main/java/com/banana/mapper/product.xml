@@ -17,6 +17,14 @@
 
 	</insert>
 	
+	<select id="ProductList_top3" resultType="com.banana.vo.productVO">
+		select rownum rno, pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid, phits
+		from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid, phits 
+      			from banana_product   
+      			order by plike desc)
+    	 where rownum between 1 and 6
+	</select>
+	
 	<select id="ProductList" resultType="com.banana.vo.productVO">
 
 		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid, phits

@@ -226,7 +226,7 @@
 			<label>이웃들의 추천 가게</label>
 			<c:forEach var="vo" items="${list2 }">
 			<div class="store_recommand" onclick="location.href='neighborhoodStore.do?sid=${vo.sid }'"
-			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 10px; border-radius: 10px;">
+			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 65px; border-radius: 10px;">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>
@@ -252,7 +252,7 @@
 			<label>새로운 가게 소식</label>
 			<c:forEach var="vo" items="${list }">
 			<div class="store_recommand" onclick="location.href='neighborhoodStore.do?sid=${vo.sid }'"
-			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 10px; border-radius: 10px;">
+			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 65px; border-radius: 10px;">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>

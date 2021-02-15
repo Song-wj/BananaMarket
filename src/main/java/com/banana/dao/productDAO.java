@@ -100,11 +100,19 @@ public class productDAO extends DBConn{
 	
 	
 	/**
-	 *  중고 제품 리스트
+	 *  중고 제품 리스트 top3
 	 */
-	public ArrayList<productVO> getProductList(){
-		List <productVO> list = sqlSession.selectList(namespace+".ProductList");
+	public ArrayList<productVO> getProductList_top3(){
+		List <productVO> list = sqlSession.selectList(namespace+".ProductList_top3");
 		return (ArrayList<productVO>) list;
+	}
+		
+		/**
+		 *  중고 제품 리스트
+		 */
+		public ArrayList<productVO> getProductList(){
+			List <productVO> list = sqlSession.selectList(namespace+".ProductList");
+			return (ArrayList<productVO>) list;
 		/*
 		ArrayList<productVO> list = new ArrayList<productVO>();
 		try {
