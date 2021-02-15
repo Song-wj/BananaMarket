@@ -102,11 +102,11 @@ public class ProductServiceImpl implements ProductService{
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
 		productDAO.getUpdateHits((String)pid);
-			if(vo.getPsfile() != null) {
-				String[] pfile_list =vo.getPsfile().split(",");
-		
-				mv.addObject("pfile_list", pfile_list);
-			}
+		if(vo.getPsfile() != null) {
+			//String[] pfile_list =vo.getPsfile().split(",");
+			ArrayList<productVO> list = productDAO.getPsfiles(pid);
+			mv.addObject("list", list);
+		}
 			/*
 			String str ="";	
 			int date = Integer.parseInt(vo.getPdate());
