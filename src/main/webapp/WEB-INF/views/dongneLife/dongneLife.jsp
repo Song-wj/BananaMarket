@@ -173,7 +173,7 @@
 					<li><pre><c:out value="${vo.btopic}" /></pre></li>
 					<li>
 						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
-						<a href="dongneLife_content.do"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
+						<a href="dongneLife_content.do?bid=${ vo.bid }"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
 					</li>
 				</ul>
 			</div>

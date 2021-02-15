@@ -13,6 +13,7 @@
 		margin-top: 150px;
 		margin-left: 280px;
 		text-align: center;
+		overflow: scroll;
 	}
 	
 	.table-title {

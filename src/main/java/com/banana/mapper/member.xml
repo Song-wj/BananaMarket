@@ -49,7 +49,7 @@
 	</select>
 	
 	<select id="memberlist" resultType="com.banana.vo.BananaMemberVO">
-		select mid, nickname, ph, maddr, mdate from banana_member order by mdate
+		select mid, nickname, ph, maddr, mdate from banana_member order by mdate desc
 	</select>
 	
 	<update id="insertaddr" parameterType="map" >
