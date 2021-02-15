@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" 
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -139,13 +140,13 @@
 	<div class="content">
 		<h1 class="ph3">중고거래 인기매물</h1>
 		<div class="select_div">
-			<select name="select_loc" class="select_loc" >
+			<!-- <select name="select_loc" class="select_loc" >
 			    <option value="none">지역을 선택하세요</option>
 				<option value="서울특별시">서울특별시</option>
 				<option value="부산광역시">부산광역시</option>
 				<option value="대구광역시">대구광역시</option>
 				<option value="인천광역시">인천광역시</option>
-				<option value="광주광역시">주광역시</option>
+				<option value="광주광역시">광주광역시</option>
 				<option value="대전광역시">대전광역시</option>
 				<option value="울산광역시">울산광역시</option>
 				<option value="세종특별자치시">세종특별자치시</option>
@@ -161,20 +162,22 @@
 			</select>
 			<select  name ="select_dongne" class="select_dongne" disabled>
 				<option value="none">동네를 선택하세요</option>
-			</select>
+			</select> -->
 		</div> <!-- select_div -->
 		<div class ="product">
-			<c:forEach var="vo"  items="${list}">
+			<c:forEach var="vo"  items="${list}"  varStatus="status" >
+				
 			<div class="plist">
 				<c:if test="${vo.psfile ne null }"> 
 					<a href="productContent.do?pid=${vo.pid}">
-                         <img src="http://localhost:9000/banana/resources/upload/${vo.psfile }">
+					<c:set var="fname" value="first_img${status.index}" />				
+                         <img src="http://localhost:9000/banana/resources/upload/${requestScope[fname]}">
 						</a> 
                  </c:if>      
 					<label class="ptitle">${vo.ptitle }</label>
-					<label class="pprice">${vo.pprice }</label>
-					<label class="loc">서울 강남구 역삼동</label>
-					<span class="interest">${vo.plike }</span>&nbsp;∙&nbsp;<span class="chat">${vo.pchat}</span>
+					<label class="pprice"><fmt:formatNumber value="${vo.pprice }" pattern="###,###"/>원</label>
+					<label class="loc">${vo.maddr }</label>
+					<span class="interest">관심 ${vo.plike }</span>&nbsp;&nbsp;<span class="chat">조회 ${vo.phits}</span>
 					
 			</div>
 			</c:forEach>

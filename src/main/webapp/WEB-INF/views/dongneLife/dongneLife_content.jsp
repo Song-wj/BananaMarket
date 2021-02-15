@@ -59,7 +59,6 @@
 		margin:auto;
 		padding-top:150px;
 		padding-bottom:3%;
-		border:1px solid green;
 	}
 	section.section2_dongneLife_content,
 	section.section3_dongneLife_content,
@@ -68,12 +67,14 @@
 	section.section6_dongneLife_content,
 	section.section7_dongneLife_content  {
 		width:60%;
-		margin-left:14%;
+		margin-left:17%;
 		padding-left:5%;
 		margin-bottom:40px;
 	}
 	section.section1_dongneLife_content div.content_nav {
 		border-bottom:1px solid black;
+		width:80%;
+		margin:auto;
 		padding:10px 0;
 	}
 	section.section1_dongneLife_content li {
@@ -81,14 +82,16 @@
 	}
 	section.section1_dongneLife_content li:first-child {
 		display:inline-block;
-		margin-left:-10%;
+		margin-left:-15%;
+		margin-right:10%;
 		padding:0 25%;
 		font-size:22px;
 		font-weight:800;
 	}
 	section.section1_dongneLife_content li:nth-child(2) {
 		display:inline-block;
-		padding-left:20%;
+		padding-left:30%;
+		padding-top:-15px;
 	}
 	section.section1_dongneLife_content li:nth-child(3) button {
 		margin-left:15px;
@@ -98,47 +101,7 @@
 		width:30px;
 		height:30px;
 	}
-	section.section1_dongneLife_content .btn_unlike {
-	  	position: relative;
-	 	margin:2px 10px;
-	  	width: 50px;
-	  	height: 50px;
-	  	border: 1px solid #e8e8e8;
-	  	border-radius: 44px;
-	  	font-family: notokr-bold,sans-serif;
-	  	font-size: 14px;
-	  	line-height: 16px;
-	  	background-color: #fff;
-	  	color: #DD5D54;
-	  	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
-	  	transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
-	  	cursor: pointer;
-	}
-	section.section1_dongneLife_content .btn_unlike:hover {
-	  border: 1px solid rgba(228,89,89,0.3);
-	  background-color: rgba(228,89,89,0.02);
-	  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
-	}
-	section.section1_dongneLife_content .btn_like .img_emoti {
-	    background-position: -30px -120px;
-	}
-	section.section1_dongneLife_content .img_emoti {
-	    display: inline-block;
-	    overflow: hidden;
-	    font-size: 0;
-	    line-height: 0;
-	    background: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/img_emoti.png?v=20180410) no-repeat;
-	    text-indent: -9999px;
-	    vertical-align: top;
-	    width: 20px;
-	    height: 17px;
-	    margin-top: 1px;
-	    background-position: 0px -120px;
-	    text-indent: 0;
-	}
-	section.section1_dongneLife_content  .btn_unlike .ani_heart_m {
-	    margin: -63px 0 0 -63px;
-	}
+	
 	section.section2_dongneLife_content div.content_top {
 		padding:20px 0;
 	}
@@ -218,16 +181,16 @@
 		height:20px;
 	}
 	section.section5_dongneLife_content div.content_comment {
-		margin-bottom:10px;
+		margin-bottom:20px;
 		margin-top:-20px;
 	}
 	section.section5_dongneLife_content img.commentMemberImg {
-		magin-bottom:100px;
-		width:50px;
-		heigth:50px;
+		margin-top: 10px;
+		width:75px;
 		border-radius:50%;
 		border:6px solid #fff;
 		box-shadow: 0 0 16px #FEE500;
+		height: 75px;
 	}
 	section.section5_dongneLife_content div.commentMemberImg {
 		float:left;
@@ -238,6 +201,7 @@
 	section.section5_dongneLife_content div.commentMemberSide {
 		margin-top:-10px;
 		padding-bottom:30px;
+		margin-left: 90px;
 	}
 	section.section5_dongneLife_content ul.commentMemberSide {
 		display:inline-block;
@@ -309,6 +273,7 @@
 		padding:7px 17px;
 		font-size:17px;
 		border-radius:5px;
+		float: left;
 	}
 	section.section6_dongneLife_content button.comment_writeBtn:hover,
 	section.section1_dongneLife_content li:nth-child(3) button:hover,
@@ -328,6 +293,63 @@
 	div.content_comment_write>ul>li:first-child {
 		padding-bottom:10px;
 	}
+	.btn_unlike {
+	  	position: relative;
+	 	margin:2px 10px;
+	  	width: 50px;
+	  	height: 50px;
+	  	border: 1px solid #e8e8e8;
+	  	border-radius: 44px;
+	  	font-family: notokr-bold,sans-serif;
+	  	font-size: 14px;
+	  	line-height: 16px;
+	  	background-color: #fff;
+	  	color: #DD5D54;
+	  	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
+	  	transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
+	  	cursor: pointer;
+	}
+	.btn_unlike:hover {
+	  border: 1px solid rgba(228,89,89,0.3);
+	  background-color: rgba(228,89,89,0.02);
+	  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
+	}
+	.btn_like .img_emoti {
+	    background-position: -30px -120px;
+	}
+	.img_emoti {
+	    display: inline-block;
+	    overflow: hidden;
+	    font-size: 0;
+	    line-height: 0;
+	    background: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/img_emoti.png?v=20180410) no-repeat;
+	    text-indent: -9999px;
+	    vertical-align: top;
+	    width: 20px;
+	    height: 17px;
+	    margin-top: 1px;
+	    background-position: 0px -120px;
+	    text-indent: 0;
+	}
+	.btn_unlike .ani_heart_m {
+	    margin: -63px 0 0 -63px;
+	}
+	button.btn_style{
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:7px 17px;
+		font-size:17px;
+		border-radius:5px;
+	}
+	button.btn_style:hover{
+		opacity:0.7;
+	}
+	span.right{
+		float:right;
+		margin-left:200px;
+	}
 </style>
 <script>
 	$(document).ready(function(){
@@ -346,7 +368,7 @@
 					for(var i in jdata.jlist){	
 						output +="<div class='content_comment' id='content_comment'>"
 						output += "<div class='commentMemberImg'>";
-						output += "<img src='images/mypage_bananaimg.jpg' class='commentMemberImg'>";
+						output += "<img src='http://localhost:9000/banana/resources/upload/"+jdata.jlist[i].msfile+"' class='commentMemberImg'>";
 						output += "</div>";
 						output += "<div class='commentMemberSide'>";
 						output += "<ul class='commentMemberSide'>";
@@ -361,7 +383,7 @@
 						if(session_mid == jdata.jlist[i].mid) {
 							output += "<li>";
 							output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
-							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "'><button type='button'>삭제</button></a>";
+							output += "<a href='comment_delete_proc.do?brid=" + jdata.jlist[i].brid + "' style='text-decoration:none'><button type='button' id='delete'>삭제</button></a>";
 							output += "</li>";
 						}
 						
@@ -450,28 +472,33 @@
 		<section class="section1_dongneLife_content">
 		<input type="hidden" id="bid" value="${vo.bid }">
 		<input type="hidden" id="session_mid" value="${svo.mid }">
+		<input type="hidden" id="session_mid" value="${vo.mid }">
 			<div class="content_nav">
 				<ul>
 					<li><a href="dongneLife.do"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
 					<li>
-						<button type="button" class="btn_unlike" id="btnLike">
-  						<span class="img_emoti">좋아요</span></button>
+  					<c:if test="${svo.mid eq vo.mid }">
+					<a href="dongneLife_update.do?bid=${vo.bid }"><button class="btn_style">수정</button></a>
+					<a href="dongneLife_delete.do?bid=${vo.bid }"><button class="btn_style">삭제</button></a>
+					</c:if>
+						
   					</li>
-					<li><a href="dongneLife_update.do?bid=${vo.bid }"><button class="comment_updateBtn">수정</button></a>
-					<li><a href="dongneLife_delete.do?bid=${vo.bid }"><button class="comment_deleteBtn">삭제</button></a>
 				</ul>
 			</div>
 		</section>
 		<section class="section2_dongneLife_content">
 			<div class="content_top">
-				<a href="#"><label class="content_topic">우리동네질문 ></label></a>
+				<label class="content_topic">${vo.btitle} </label>
+				<span class="right"><button type="button" class="btn_unlike" id="btnLike">
+  								<span class="img_emoti">좋아요</span></button></span>
 				<div class="content_member">
 					<div class="memberImg">
-						<img src="images/mypage_bananaimg.jpg" class="memberImg">
+						<img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }" class="memberImg"
+						style="width: 100px; height: 100px;">
 					</div>
 					<div class="memberSide">
 						<ul class="memberSide">
-							<li>${vo.nickname }</li>
+							<li>${vo.nickname } </li>
 							<li>${vo.maddr } / ${vo.bdate }</li>
 						</ul>
 					</div>
@@ -488,7 +515,8 @@
 			<div id ="img_div">
 			<c:forEach var="list" items="${sfile_list }" >
 			
-					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set"><img src="http://localhost:9000/banana/resources/upload/${list}" ></a> 
+					<a href="http://localhost:9000/banana/resources/upload/${list}"  data-lightbox="example-set">
+					<img src="http://localhost:9000/banana/resources/upload/${list}"></a> 
 				
 			</c:forEach>
 			</div>	
@@ -498,8 +526,8 @@
 			<div class="content_response">
 				<ul>
 					<li>
-						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
-						<img src="images/messenger.png"><button type="button">댓글 <span id="comment_count"></span></button>
+						<!-- <img src="images/smile.png"><button type="button">공감하기</button> -->
+						<img src="images/messenger.png"><button type="button">&nbsp; 댓글 <span id="comment_count"></span></button>
 					</li>
 				</ul>
 			</div>
@@ -514,7 +542,8 @@
 				<div class="content_comment_write">
 					<ul>
 						<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
-						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+						<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn"
+						>등록</button></div></li>
 					</ul>
 				</div>
 			</form>
@@ -536,6 +565,7 @@ function update_pro(brid,rno) {
 	$("#bcomment_content"+rno).remove();
 	$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=null");
 	$("button#update").hide();
+	$("button#delete").hide();
 }
 </script>
 

@@ -36,7 +36,6 @@
 		height: 1000px;
 		padding-top:150px;
 		padding-bottom:3%;
-		border:1px solid green;
 		overflow:auto;
 	}
 	section.section2_dongneLife_content,
@@ -307,10 +306,10 @@
 			<div class="content_nav">
 				<ul>
 					<li><a href="neighborStoreReview_list.do?sid=${vo.sid }"><img src="images/dongneLife_backword.png"><button type="button"></button></a></li>
-					<li>
+					<!--  <li>
 						<button type="button" class="btn_unlike" id="btnLike">
   						<span class="img_emoti">좋아요</span></button>
-  					</li>
+  					</li>-->
   					<c:if test="${svo.mid eq vo.mid}">
 					<li><a href="neighborStoreReview_update.do?srid=${vo.srid }"><button class="comment_updateBtn">수정</button></a></li>
 					<li><a href="neighborStoreReview_delete.do?srid=${vo.srid }"><button class="comment_deleteBtn">삭제</button></a></li>

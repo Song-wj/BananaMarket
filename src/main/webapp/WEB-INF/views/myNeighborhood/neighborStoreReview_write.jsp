@@ -12,7 +12,6 @@
 		margin:auto;
 		height: 1000px;
 		padding-top:150px;
-		border:1px solid green;
 	}
 	section.section2_dongneLife_write,
 	section.section3_dongneLife_write,
@@ -24,8 +23,10 @@
 	}
 	section.section1_dongneLife_write div.write_nav {
 		border-bottom:1px solid black;
+		width:67%;
 		text-align:center;
 		padding:10px 0;
+		margin:auto;
 		margin-bottom:80px;
 	}
 	section.section1_dongneLife_write li {
@@ -108,6 +109,18 @@
 	 	clip:rect(0 180px 150px 75px);  
 		border: 0; 
 	} 
+	button.btn_style{
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:7px 17px;
+		font-size:17px;
+		border-radius:5px;
+	}
+	button.btn_style:hover{
+		opacity:0.7;
+	}
 </style>
 
 <script>
@@ -170,7 +183,7 @@
 				<ul>
 					<li><a href="neighborhoodStore.do?sid=${sid }"><img src="http://localhost:9000/banana/images/dongneLife_backword.png" class="backword"><button type="button"></button></a></li>
 					<li><label>추천 후기 작성하기</label></li>
-					<li><button type="button" id="board_write_btn">완료</button></li>
+					<li><button type="button" class="btn_style" id="board_write_btn">완료</button></li>
 				</ul>
 			</div>    
 		</section>

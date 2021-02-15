@@ -104,7 +104,7 @@ public class MypageController {
 	
 	@RequestMapping(value="/mypage_subjectContent.do", method=RequestMethod.GET , produces="text/plain;charset=UTF-8")
 	public ModelAndView mypage_subjectContent( String bstitle ,HttpSession session ) {
-		System.out.println(bstitle);
+		
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return dongneService.getSubjectListContent(bstitle ,svo.getMid());
 	}
@@ -116,6 +116,27 @@ public class MypageController {
 		return dongneService.getSubjectListReview(bid);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/subjectBoardlike.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String subjectContentlike(String bid , HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.subjectBoardlike(bid ,svo.getMid());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/subjectBoardlikecancel.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String subjectContentlikecancel(String bid , HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.subjectBoardlikecancel(bid ,svo.getMid());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/insertcomment.do", method=RequestMethod.GET ,produces="text/plain;charset=UTF-8")
+	public String insertcomment(String bid , String comment ,HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		return dongneService.insertcomment(bid ,comment ,svo.getMid());
+	}
+
 	/**
 	 * 마이페이지 - 동네생활 주제 목록2
 	 * @return
@@ -300,17 +321,34 @@ public class MypageController {
 	 * @return
 	 */
 	@RequestMapping(value="/mypage_contract.do", method=RequestMethod.GET)
-	public ModelAndView mypage_contract() {
-		return (ModelAndView)productService.getSellList();
+	public ModelAndView mypage_contract(String pid) {
+		//SessionVO svo = (SessionVO)session.getAttribute("svo");
+		System.out.println(pid);
+		
+		return (ModelAndView)productService.getSellList(pid);
 	}
+	
+	@RequestMapping(value="/mypage_contract_sellComplete.do", method=RequestMethod.GET)
+	public ModelAndView mypage_contract_sellComplete(String pid) {
+		
+		return (ModelAndView)productService.sellUpdate(pid);
+	}
+	
+	
+	/** 리뷰 구매자 아이디 가져오기 **/
 	@RequestMapping(value="/mypage_contract_review.do", method=RequestMethod.GET)
-	public String mypage_contract_review() {
-		return "mypage/mypage_contract_review";
+	public ModelAndView mypage_contract_review(String pid) {
+		
+		//return "mypage/mypage_contract_review";
+		return (ModelAndView)MypageReviewService.getBuyMidList(pid);
 	}
+	
+	
+	
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
 	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
-		 vo.setMid(svo.getMid());
+		/* vo.setMid(svo.getMid()); */
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file1");
 		 String path1 = request.getSession().getServletContext().getRealPath("/");
@@ -319,7 +357,7 @@ public class MypageController {
 		 vo.setSavepath(path1+path2);
 		 vo.setList(fileList);
 		 
-		vo.setParam("판매자리뷰");
+		 vo.setParam("판매자리뷰");
 		return (String)MypageReviewService.insert(vo); 
 	}
 	/**
@@ -442,14 +480,7 @@ public class MypageController {
 		
 			
 		}
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value="/mypage_review.do", method=RequestMethod.GET) public
-	 * String mypage_review() { return (String)MypageReviewService.getList();
-	 * 
-	 * }
-	 */
+	
 		
 		
 	//주소 저장

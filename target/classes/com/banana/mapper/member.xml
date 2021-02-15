@@ -41,7 +41,7 @@
 	</select>
 	
 	<select id="login" parameterType="com.banana.vo.BananaMemberVO" resultType="com.banana.vo.SessionVO">
-		select count(*) result, nickname,mid from banana_member where mid=#{mid} and pw=#{pw} group by nickname,mid
+		select count(*) result, nickname, mid, msfile from banana_member where mid=#{mid} and pw=#{pw} group by nickname,mid,msfile
 	</select>
 	
 	<select id="logincheck" parameterType="map" resultType="int">
@@ -49,7 +49,7 @@
 	</select>
 	
 	<select id="memberlist" resultType="com.banana.vo.BananaMemberVO">
-		select mid, nickname, ph, maddr, mdate from banana_member order by mdate
+		select mid, nickname, ph, maddr, mdate from banana_member order by mdate desc
 	</select>
 	
 	<update id="insertaddr" parameterType="map" >

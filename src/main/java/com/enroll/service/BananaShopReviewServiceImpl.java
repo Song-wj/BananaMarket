@@ -12,6 +12,32 @@ import com.banana.vo.BananaShopReviewVO;
 @Service("shopReviewService")
 public class BananaShopReviewServiceImpl implements EnrollService {
 	
+	
+	
+	@Override
+	public String deleteKeywordAlarm(String pid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeywordAlarmContent(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getKeywordAlarmCount(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String key_alarm_write(String mid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public Object insert(Object vo) {
 		// TODO Auto-generated method stub
@@ -91,8 +117,10 @@ public class BananaShopReviewServiceImpl implements EnrollService {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<BananaShopReviewVO> list = shopReviewDAO.getShopReviewList(sid);
 		int review_count = shopReviewDAO.getShopReviewCount(sid);
+		String sname = shopReviewDAO.getSname(sid);
 
 		mv.addObject("review_count", review_count);
+		mv.addObject("sname", sname);
 		mv.addObject("list",list);
 		mv.setViewName("/myNeighborhood/neighborStoreReview_list");
 		

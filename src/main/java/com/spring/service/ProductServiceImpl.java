@@ -4,15 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.banana.dao.pReviewDAO;
 import com.banana.dao.productDAO;
 import com.banana.vo.LikeVO;
+import com.banana.vo.ReviewVO;
 import com.banana.vo.productVO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -23,12 +23,13 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private productDAO productDAO;
+	@Autowired
+	private pReviewDAO reviewDAO;
 	
 	public Object insert(Object vo) {
 		String result="";
 		int dao_result = 0;
 		productVO pvo = (productVO)vo;
-		
 		ArrayList<String> file_list = new ArrayList<String>();
 		ArrayList<String> pfile_list = new ArrayList<String>();
 		
@@ -82,31 +83,49 @@ public class ProductServiceImpl implements ProductService{
 	 public Object getList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
+		  int count = 0;
+		  for(productVO vo: list) {
+				String[] imgs =vo.getPsfile().split(",");
+				 mv.addObject("first_img"+count ,imgs[0]);
+				 count++;
+				 
+		  }
 			mv.addObject("list", list);
 			mv.setViewName("/popularProduct/popularProduct");
 			return mv;
 	  }
-
-	 public Object getSellList() {
+	 
+	 
+	 public Object getSellList(String pid) {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
-		  
+
+			/* productVO slist = reviewDAO.getmid(pid); */
+
 			mv.addObject("list", list);
+			/* mv.addObject("slist", slist); */
 			mv.setViewName("/mypage/mypage_contract");
 			return mv;
 	  }
 	 
 	 public Object getContent(Object pid, String mid) {
 		ModelAndView mv = new ModelAndView();
-		
+		 ArrayList<productVO> list = productDAO.getProductList_top3();
+		 mv.addObject("list", list);
+
 		int result = productDAO.likeResult(mid, (String)pid);
+		mv.addObject("list",list);
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
-			if(vo.getPsfile() != null) {
-				String[] pfile_list =vo.getPsfile().split(",");
-		
-				mv.addObject("pfile_list", pfile_list);
+		productDAO.getUpdateHits((String)pid);
+		if(vo.getPsfile() != null) {
+			
+			String[] pfile_list =vo.getPsfile().split(",");	
+			for(int i=0; i<pfile_list.length; i++) {
+					mv.addObject("pfile_list"+i, pfile_list[i]);
 			}
+			
+		}
 			/*
 			String str ="";	
 			int date = Integer.parseInt(vo.getPdate());
@@ -170,15 +189,16 @@ public class ProductServiceImpl implements ProductService{
 							 }
 						} catch (Exception e) {	e.printStackTrace();	}
 			       }		       
-			}else if(pvo.getCancel_file().equals("cancel")) {
-				pvo.setPfile(null);
-				pvo.setPsfile(null);
+			}else if(pvo.getCancel_img().equals("cancel")) {
+				pvo.setPfile("");
+				pvo.setPsfile("");
 		        result = productDAO.getProductUpdate((productVO)vo);
 			}
-			/*else {
-				result = productDAO.getUpdateNofile((productVO)vo);
-			}*/
-				if(result != 0) {			
+			else {
+				 result = productDAO.getProductUpdate((productVO)vo);
+			}
+				
+			if(result != 0) {			
 					mv.setViewName("redirect:mypage.do");
 				}else {
 					mv.setViewName("errorPage");
@@ -189,10 +209,10 @@ public class ProductServiceImpl implements ProductService{
 	 
 	 public Object sellUpdate(Object pid) {
 		 ModelAndView mv = new ModelAndView();
-		 int result = 0;
+		 boolean result = false;
 		 result = productDAO.getSellUpdate((String)pid);
 		 
-		 if(result != 0 ){
+		 if(result == true ){
 				mv.setViewName("redirect:/mypage.do");
 			}else{
 				mv.setViewName("errorPage");
@@ -217,7 +237,7 @@ public class ProductServiceImpl implements ProductService{
 	 public ModelAndView product_like(String mid, String pid) {
 		 ModelAndView mv = new ModelAndView();
 		 boolean result = productDAO.getPickContent(mid,pid); 
-			
+		 productDAO.getLikeHits((String)pid);
 			if(result) {
 				//좋아요 버튼 잘 반영
 				ArrayList<LikeVO> list = productDAO.getLikelist(mid); 
@@ -250,7 +270,7 @@ public class ProductServiceImpl implements ProductService{
 	 public String product_unlike(String mid, String pid) {
 		 //ModelAndView mv = new ModelAndView();
 		 boolean result = productDAO.getDeleteContent(mid,pid); 
-		 System.out.println(mid+","+pid);
+		 productDAO.getLikeminus((String)pid);
 			/*if(result) {
 				//좋아요 버튼 잘 반영
 				ArrayList<LikeVO> list = productDAO.getLikelist(mid); 
@@ -279,6 +299,13 @@ public class ProductServiceImpl implements ProductService{
 			return mv;*/
 			return String.valueOf(result);
 	 }
+
+
+	@Override
+	public String getPid(String ptitle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	 
 		
 		

@@ -28,12 +28,12 @@ public class ProductController {
 	@Autowired
 	private ProductServiceImpl ProductServiceImpl;
 	
-	
 	@RequestMapping(value="/productContent.do", method=RequestMethod.GET)
 	public ModelAndView productContent(String pid, HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
 		return (ModelAndView)productService.getContent(pid,svo.getMid());
 	}
+	
 	
 	@RequestMapping(value="/popularProduct.do", method=RequestMethod.GET)
 	public ModelAndView popularProduct() {
@@ -45,7 +45,7 @@ public class ProductController {
 		return "/popularProduct/writePage";
 	}
 	
-	@RequestMapping(value="/writePage_proc.do", method=RequestMethod.POST)
+	@RequestMapping(value="/writePage_proc.do", method= RequestMethod.POST)
 	public String writePage_proc(productVO vo, MultipartHttpServletRequest mtfRequest, HttpServletRequest request ) {
 		//서버의 저장경로
 		 List<MultipartFile> fileList = mtfRequest.getFiles("file1");

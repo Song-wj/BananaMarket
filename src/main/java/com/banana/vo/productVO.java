@@ -8,9 +8,14 @@ public class productVO {
 	String pid, mid, ptitle, pcategory , pprice, pcontent, plike, pchat, pdate, pchk, buy_mid;
 	String pfile, psfile, savepath;
 	String maddr, nickname, score;
-	String file, sfile, cancel_file;
+	String file, sfile, cancel_img;
 	List<MultipartFile> list ;
 	String rno;
+	int phits;
+	String msfile;
+	
+	
+	
 	//CommonsMultipartFile[] file_list;
 	
 	/*
@@ -22,6 +27,22 @@ public class productVO {
 	}
 	*/
 	
+	public String getMsfile() {
+		return msfile;
+	}
+
+	public void setMsfile(String msfile) {
+		this.msfile = msfile;
+	}
+
+	public int getPhits() {
+		return phits;
+	}
+
+	public void setPhits(int phits) {
+		this.phits = phits;
+	}
+
 	public String getMaddr() {
 		return maddr;
 	}
@@ -58,12 +79,13 @@ public class productVO {
 		this.sfile = sfile;
 	}
 
-	public String getCancel_file() {
-		return cancel_file;
+	
+	public String getCancel_img() {
+		return cancel_img;
 	}
 
-	public void setCancel_file(String cancel_file) {
-		this.cancel_file = cancel_file;
+	public void setCancel_img(String cancel_img) {
+		this.cancel_img = cancel_img;
 	}
 
 	public List<MultipartFile> getList() {

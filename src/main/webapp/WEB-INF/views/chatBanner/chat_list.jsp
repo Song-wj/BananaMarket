@@ -46,7 +46,7 @@
 	section.section2_chatList tr:first-child td img {
 		width:100px;
 		heigth:100px;
-		border-radius:50%;
+		border-radius:20%;
 		border:6px solid #fff;
 		box-shadow: 0 0 16px #FEE500;
 	}
@@ -70,6 +70,15 @@
 		font-size:20px;
 	}
 </style>
+<script>
+	$(document).ready(function(){
+		
+	});
+	
+	function move_chat(pid, mid) {
+		$(location).attr('href', 'chat_write.do?pid='+pid+'&mid='+mid);
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"/>
@@ -81,27 +90,26 @@
 			</div>
 		</section>
 		<section class="section2_chatList">
-		   <c:forEach var="vo" items="${list }"> 
-			  <c:if test="${vo.buy_mid ne svo.mid }">
-			    
-				<div onclick="location.href='chat_list_content.do?cid=${vo.cid}'">
-					
+		   <c:forEach var="vo" items="${list}"> 
+			  <c:if test="${vo.mid eq svo.mid }">
+				 <%-- <div onclick="location.href='chat_list_content.do?cid=${vo.cid}'"> --%>
+				<div onclick="move_chat('${vo.pid }','${svo.mid }')" >
 					<table class="table_chatList">
-						<tr>
-							<td rowspan="2"><img src="images/mypage_bananaimg.jpg"></td>
+						<tr> 
+							<td rowspan="2"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile }"></td>
 							<td>
 								<ul>
-									<li><span> ${vo.buy_mid}</span></li>
-									<li><span> ${vo.cdate }</span></li>
+									<li><span> ${vo.ptitle}</span></li>
+									<li><span> ${vo.pprice } 원</span></li>
 								</ul>
 							</td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td><span>${vo.chat_content }</span></td>
-						</tr>
+						</tr> --%>
 					</table>
 				</div>
-			</c:if>
+			</c:if> 
 	 	  </c:forEach>	
 		</section>
 	</div>

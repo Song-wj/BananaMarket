@@ -329,10 +329,10 @@
 						<span>-&nbsp;</span><input type="text" name="ph2" class="hp_number" id="hp2" value="${ vo.ph2 }">
 						<span>-&nbsp;</span><input type="text" name="ph3" class="hp_number" id="hp3" value="${ vo.ph3 }">
 					</li>
-					<li>
+					<%--<li>
 						<label>주소</label>
 					</li>
-					<%-- <li>
+					 <li>
 						<input type="text" name="maddr_num" placeholder="우편번호" class="addr1" id="addr1" value="${ vo.maddr_num }">
 						<button type="button" class="join_btn_style" onClick="goPopup();">찾기</button>
 					<li>

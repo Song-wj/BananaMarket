@@ -8,19 +8,25 @@
 <title>Insert title here</title>
 <script src="http://localhost:9000/banana/js/jquery-3.5.1.min.js"></script>
 <script>
-	$(document).ready(function(){
-		$("#like-btn").click(function(){
-			$(".like-list").toggle();
-		});
+
+
+
+	/* $(document).ready(function(){
+		$("#like-btn").mousedown(function(){
 		
-		$("#like-btn1").click(function(){
+			$("#like-btn").css("background-color", "blue");
+		}) */
+		
+		
+		/* $("#like-btn1").click(function(){
 			if($(".display-like").text() == "") {
 				$(".display-like").text($("#like-btn1").text());
 				$("#like-btn1").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
-				$("#like-btn1").css("background-color","white");
+				$("#like-btn1").css("background-color","#FEE500");
 				$("#like-btn2").css("background-color","white");
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
@@ -33,10 +39,11 @@
 				$(".display-like").text($("#like-btn2").text());
 				$("#like-btn2").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
-				$("#like-btn2").css("background-color","white");
+				$("#like-btn2").css("background-color","#FEE500");
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
 				$("#like-btn5").css("background-color","white");
@@ -48,11 +55,12 @@
 				$(".display-like").text($("#like-btn3").text());
 				$("#like-btn3").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
 				$("#like-btn2").css("background-color","white");
-				$("#like-btn3").css("background-color","white");
+				$("#like-btn3").css("background-color","#FEE500");
 				$("#like-btn4").css("background-color","white");
 				$("#like-btn5").css("background-color","white");
 				$("#like-btn6").css("background-color","white");
@@ -63,12 +71,13 @@
 				$(".display-like").text($("#like-btn4").text());
 				$("#like-btn4").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
 				$("#like-btn2").css("background-color","white");
 				$("#like-btn3").css("background-color","white");
-				$("#like-btn4").css("background-color","white");
+				$("#like-btn4").css("background-color","#FEE500");
 				$("#like-btn5").css("background-color","white");
 				$("#like-btn6").css("background-color","white");
 			}
@@ -78,13 +87,14 @@
 				$(".display-like").text($("#like-btn5").text());
 				$("#like-btn5").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
 				$("#like-btn2").css("background-color","white");
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
-				$("#like-btn5").css("background-color","white");
+				$("#like-btn5").css("background-color","#FEE500");
 				$("#like-btn6").css("background-color","white");
 			}
 		});
@@ -93,6 +103,7 @@
 				$(".display-like").text($("#like-btn6").text());
 				$("#like-btn6").css("border-radius","100px")
 				.css("background-color","#FEE500");
+				$(".like-list").toggle();
 			} else {
 				$(".display-like").text("");
 				$("#like-btn1").css("background-color","white");
@@ -100,11 +111,11 @@
 				$("#like-btn3").css("background-color","white");
 				$("#like-btn4").css("background-color","white");
 				$("#like-btn5").css("background-color","white");
-				$("#like-btn6").css("background-color","white");
+				$("#like-btn6").css("background-color","#FEE500");
 			}
-		});
+		}); */
 		
-	});
+/* 	}); */
 </script>
 <script >
     $(document).ready(function(){
@@ -355,22 +366,13 @@
 		height:23px;
 		margin-bottom:10px;
 	}
-	div.post-footer button#comment_writeBtn{
-		color:RGB(82,67,21);
-		background-color:RGB(254,229,0);
-		font-weight:bold;
-		border:1px solid RGB(254,229,0);
-		padding:7px 17px;
-		font-size:17px;
-		border-radius:5px; 
-		width:70px;
-		height:30px;
-		float:left;
-		
-	}
-	 div.post-footer button.comment_writeBtn:hover{
+	
+	
+	
+	 div.post-footer button.write_btn:hover{
 	 	cursor:pointer;
 		opacity:0.7;
+	
 	}
 	
 	div#subreview div.content_comment {
@@ -431,11 +433,70 @@
 	 	margin-right:10px;
    
 	}
+	div.likecount{
+		text-align:left;
+		margin-bottom:-50px;
+		padding-left:30px;
+	}
+	div.likecount >img{
+		width:20px;
+		height:20px;
+	}
+	div.likecount >span{
+		vertical-align:2px;
+	}
+	.write_btn{
+		
+		color:RGB(82,67,21);
+		background-color:RGB(254,229,0);
+		font-weight:bold;
+		border:1px solid RGB(254,229,0);
+		padding:7px 17px;
+		font-size:17px;
+		border-radius:5px; 
+		width:70px;
+		height:30px;
+		float:left;
+		z-index:10;  
+	}
 </style>
 <script>
-
+ 
 	
-	function comment_list(bid){ 
+	function board_like(bid,blike,count){
+		if($("#good"+count).attr("src") == 'images/normal.png'){
+			$.ajax({
+				url:"subjectBoardlike.do?bid="+bid,
+				success:function(result){
+					if(result == "1"){
+						$("#good"+count).attr("src" ,"images/good.png");
+						$("#like-btn"+count).css("color","rgb(5,107,225)");
+						var plus = parseInt($("#a"+count).text());
+						$("#a"+count).text(plus+1);
+					}
+				}
+			})
+		}else{
+			$.ajax({
+				url:"subjectBoardlikecancel.do?bid="+bid,
+				success:function(result){
+					if(result == "1"){
+						$("#good"+count).attr("src" ,"images/normal.png");
+						$("#like-btn"+count).css("color","black");
+						var plus = parseInt($("#a"+count).text());
+						$("#a"+count).text(plus-1);
+					}
+				}
+			})
+			
+		}
+		
+	}
+	
+	function comment_list(bid,count){ 
+	
+		if($("#subreview"+count).css("display") =="none" ){
+			
 		$.ajax({
 			url:"subjectContentReview.do?bid="+bid,
 			success:function(result){
@@ -468,37 +529,86 @@
 					output += "</div>";
 					output += "</div>";
 			    }
+				$("#subreview"+count).css("display" ,"block");
+				$("#subreview"+count).text("");
+				$("#subreview"+count).append(output);
 				
-				$("#subreview").text("");
-				$("#subreview").append(output);
+				
 			}
+				
 		})
+		}else {
+			$("#subreview"+count).css("display" ,"none");
+		}
+			
 		
 	}//comment_list
+	
+
 	
 	function update_pro(brid,rno) {
 		$("#bcomment_content"+rno).remove();
 		$("#bcomment_area"+rno).load("dongneLifeComment_update.do?brid=" + brid + "&rno=" + rno + "&bstitle=${ vo.bstitle }");
 		$("button#update").hide();
+		$("button#delete").hide();
 	}
 	
 	
 	
 	
-$(document).ready(function(){
+	function test(bid ,count){
+		
 	
-	$("#comment_writeBtn").click(function(){
-
-		if($("#bcomment").val() == ""){
+		var comment = $("#bcomment"+count).val();
+		if($("#bcomment"+count).val() == ""){
 			alert("댓글을 입력해주세요");
-			$("#bcomment").focus();
-			return false;
-		}else {
-			board_review_write_form.submit();
-			
-		}
-	});
-})
+		}else{
+				$.ajax({
+					url:"insertcomment.do?bid="+bid+"&comment=" + comment,
+					success:function(result){
+						
+						var jdata = JSON.parse(result);	
+						var output="";
+						
+						for(var i in jdata.jlist){	
+							output +="<div class='content_comment' id='content_comment'>"
+							output += "<div class='commentMemberImg'>";
+							output += "<img src='images/mypage_bananaimg.jpg' class='commentMemberImg'>";
+							output += "</div>";
+							output += "<div class='commentMemberSide'>";
+							output += "<ul class='commentMemberSide'>";
+							
+							output += "<li><input id='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
+							output += "<li>" + jdata.jlist[i].nickname + "</li>";
+							output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
+							output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
+							output += "<li id='bcomment_area" + jdata.jlist[i].rno +"'>"+ "</li>";
+							
+							if('${mid}' == jdata.jlist[i].mid) {
+								output += "<li>";
+								output += "<a onclick=" + "\"update_pro("+"\'"+ jdata.jlist[i].brid +"\'"+","+"\'"+ jdata.jlist[i].rno +"\'" +")\"><button type='button' id='update'>수정</button></a>";
+								output += "<a href='subcomment_delete_proc.do?brid=" + jdata.jlist[i].brid + "&bstitle=${ vo.bstitle }'><button type='button' id='delete'>삭제</button></a>";
+								output += "</li>";
+							}
+							
+							output += "</ul>";
+							output += "</div>";
+							output += "</div>";
+					    }
+						$("#bcomment"+count).val("");
+						$("#subreview"+count).css("display" ,"block");
+						$("#subreview"+count).text("");
+						$("#subreview"+count).append(output);
+						var plus =parseInt($("#b"+count).text());
+						$("#b"+count).text(plus+1);
+					}
+				})
+	
+			}
+	}
+
+	
+
 
 
 </script>
@@ -537,7 +647,7 @@ $(document).ready(function(){
 			<c:otherwise>
 			
 
-			<c:forEach var="xvo" items="${ list }">
+			<c:forEach var="xvo" items="${ list }" varStatus="status">
 
 			    <a href="#"><div class="post-list">
 				
@@ -555,36 +665,69 @@ $(document).ready(function(){
 					</div>
 				</div>
 				</a>
-				<div class="like-list" style="display: none;">
+			<!-- 	<div class="like-list" style="display: none;">
 					<button type="button" id="like-btn1">👍</button>
 					<button type="button" id="like-btn2">💛</button>
 					<button type="button" id="like-btn3">😆</button>
 					<button type="button" id="like-btn4">😮</button>
 					<button type="button" id="like-btn5">😥</button>
 					<button type="button" id="like-btn6">😡</button>
-				</div>
+				</div> -->
+					<div class="likecount">
+						<img src="images/good.png" class="blue_img" > <span id="a${status.count }">${xvo.likecount }</span>
+					</div>
 				<div class="post-footer">
-					<a href="#"><img src="images/smile.png"><button type="button" id="like-btn">공감하기</button></a>
-					<img src="images/messenger.png"><button type="button" id="comment-btn" onclick="comment_list('${xvo.bid}')">댓글 ${count }</button>
+					<c:choose>
+						<c:when test="${xvo.blike eq 'o'}">						
+							<c:choose>
+							<c:when test="${mid ne xvo.mid }"> 
+								<img src="images/smile.png"><button type="button" id="like-btn${status.count }" onclick="board_like('${xvo.bid}','${xvo.blike }','${status.count }')"><img src="images/normal.png" id="good${status.count }" style="display:inline-block;vertical-align:middle;">공감하기</button>						
+						 	</c:when>
+						 	<c:otherwise>
+								<img src="images/smile.png"><button type="button" id="like-btn${status.count }" onclick="board_like('${xvo.bid}','${xvo.blike }','${status.count }')" style="color:rgb(5,107,225);"><img src="images/good.png" id="good${status.count }" style="display:inline-block;vertical-align:middle;">공감하기</button>
+						 	</c:otherwise> 
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<img src="images/smile.png"><button type="button" id="like-btn${status.count }" onclick="board_like('${xvo.bid}','${xvo.blike }','${status.count }')"><img src="images/normal.png" id="good${status.count }" style="display:inline-block;vertical-align:middle;">공감하기</button>						
+						</c:otherwise>
+					</c:choose>
+					
+					<img src="images/messenger.png"><button type="button"  id="comment-btn${status.count }" onclick="comment_list('${xvo.bid}','${status.count }')">댓글<span id="b${status.count }"> ${xvo.reviewcount }</span></button>
+						<div class="display-like"></div>
 						<div id="subreview">
-						
+							<div id="subreview${status.count }" style="display:none;">
+							
+							</div>
 						</div>
 						 <div >				
-							<form name="board_review_write_form" action="dongneLife_review_write_proc.do?bid=${xvo.bid }&loc=subcontent&bstitle=${ vo.bstitle }" method=POST id="board_review_write_form"  >
+							
 								<div class="content_comment_write">
 									<ul>
-										<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment" name="bcomment"></textarea></li>
-										<li><div><button type="button" class="comment_writeBtn" id="comment_writeBtn">등록</button></div></li>
+										<li><textarea placeholder="따뜻한 댓글을 입력해주세요 :)" id="bcomment${status.count }" name="bcomment"></textarea></li>
+										<li><div><button type="button"  id="comment_writeBtn${status.count }" class="write_btn" onclick ="test('${xvo.bid}' ,'${status.count }')"
+										style="color:RGB(82,67,21);
+											background-color:RGB(254,229,0);
+											font-weight:bold;
+											border:1px solid RGB(254,229,0);
+											padding:7px 17px;
+											font-size:17px;
+											border-radius:5px; 
+											width:70px;
+											height:30px;
+											float:left;"
+		  											>등록</button></div></li>
 									</ul>
 								</div>
-							</form>
+						
 								
 						</div> 
-					<div class="display-like"></div>
-				</div>
+					
+				    </div>
 				</c:forEach>
 			</c:otherwise>
 			</c:choose>
+			
 		</section>
 	</div>
 	
