@@ -171,8 +171,8 @@
 	<div class="dongnelife_write">
 		<form name="contract_reivew_form" action="contract_reivew_write_proc.do" method=POST id="board_write_form"  enctype="multipart/form-data">
 		<section class="section1_dongneLife_write">
-			<!-- <input type="hidden" name="pid" value="p_1"> -->	
-			<input type="hidden" name="mid" value="test12">
+			<input type="hidden" name="pid" value="${pid }"> 	
+			<!-- <input type="hidden" name="mid" value="test12"> -->
 			<div class="write_nav">
 				<ul>				
 					<li><a href="mypage.do"><img src="http://localhost:9000/banana/images/dongneLife_backword.png"><button type="button"></button></a></li>
@@ -184,13 +184,14 @@
 		<section class="section2_dongneLife_write">
 			<div class="write_buyer" id="write_buyer">
 			 	<label>구매자를 선택해주세요</label><br>
-						<select  name="buy_mid" onchange="showConfirm()" id="buy_mid">
+						<select  name="mid" onchange="showConfirm()" id="mid">
 							<option value="none">선택</option>
-					 <%-- <c:forEach var="vo" items="list">
-							<option value="${ vo.buy_mid }">${ vo.buy_mid }</option>
-					  </c:forEach>  --%>
-						</select> 			
-						<input type="text" value="${ vo.buy_mid}">
+							<c:forEach var="vo" items="${ list}">
+								<c:if test="${svo.mid ne vo.buy_mid}">
+									<option  value="${ vo.buy_mid }">${ vo.buy_mid }</option>
+								</c:if>
+							</c:forEach>  
+						</select>
 			</div>
 			<div class="write_topic" id="write_topic">
 			 	<label>매너점수를 주세요</label><br>

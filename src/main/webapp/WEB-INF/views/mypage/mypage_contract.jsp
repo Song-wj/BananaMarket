@@ -64,12 +64,21 @@
 	function ConfirmSell(pid) {
 		var doConfirm = confirm("해당 상품을 정말로 판매 완료했습니까?");
 			if(doConfirm) {
-				alert("리뷰 작성 페이지로 넘어갑니다.");		
-				$(location).attr('href','mypage_contract_review.do?pid='+pid);
+				alert("해당 상품이 판매 완료가 되었습니다.");
+				//alert("리뷰 작성 페이지로 넘어갑니다.");		
+				//$(location).attr('href','mypage_contract_review.do?pid='+pid);
+				$(location).attr('href','mypage_contract_sellComplete.do?pid='+pid);
 			} else {
 				alert("취소했습니다.");
 			}
 		}
+	
+	function Review(pid) {
+			//alert("리뷰 작성 페이지로 넘어갑니다.");		
+			$(location).attr('href','mypage_contract_review.do?pid='+pid);
+			
+			
+	}
 	
 </script>
 <style>
@@ -216,7 +225,12 @@
 							<td rowspan="3" class="tdimg"><img src="http://localhost:9000/banana/resources/upload/${vo.psfile}"></td>
 							<td><span class="product">${vo.ptitle} </span></td>
 							<td rowspan="3" rowspan="3" class="manner_grade">
-								<a href="mypage_contract_review.do"><button type ="button" id="write_btn">후기 작성</button></a>
+							<%-- <input type="hidden" name="pid" value="${vo.pid}"> --%>
+							
+								<%-- <c:if test="${empty slist}"> --%>
+								<button type ="button" onclick="Review('${vo.pid}')" id="write_btn">후기 작성</button>
+								<%-- </c:if> --%>
+							
 							</td>
 						</tr>
 						<tr>

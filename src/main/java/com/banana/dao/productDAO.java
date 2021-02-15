@@ -425,9 +425,9 @@ public class productDAO extends DBConn{
 	/**
 	 *  중고 물품 (판매 중 => 판매 완료) 상태 변경 
 	 */
-	public int getSellUpdate(String pid) {
-		return sqlSession.update(namespace+".ProductSellUpdate", pid);
-		/*
+	public boolean getSellUpdate(String pid) {
+		//return sqlSession.update(namespace+".ProductSellUpdate", pid);
+		
 		boolean result = false;
 		
 		try {
@@ -445,7 +445,7 @@ public class productDAO extends DBConn{
 		}
 		
 		return result;
-		*/
+		
 	}
 	/**
 	 * 키워드등록

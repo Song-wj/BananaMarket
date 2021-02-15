@@ -66,9 +66,15 @@ public class MypageReviewServiceImpl implements BananaService {
 	public Object getList() {
 	 return "";
 	}
+	
+	
+	
+	
+//	리뷰 구매자 아이디 가져오기
 	public Object getBuyMidList(String pid) {
 		ModelAndView mv = new ModelAndView();
 		ArrayList<ChatVO> list = reviewDAO.getBuyMidList(pid);
+		mv.addObject("pid",pid);
 		mv.addObject("list", list);
 		mv.setViewName("mypage/mypage_contract_review");
 		return mv;

@@ -1,5 +1,6 @@
 package com.banana.dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.ChatVO;
 import com.banana.vo.ReviewVO;
+import com.banana.vo.productVO;
 
 public class pReviewDAO extends DBConn{
 
@@ -52,6 +54,13 @@ public class pReviewDAO extends DBConn{
 		return sqlSession.selectOne(namespace+".getmyreview" , rid);
 		
 	}
+
+	/*
+	 * public productVO getmid(String pid) { return
+	 * sqlSession.selectOne(namespace+".getmid" ,pid);
+	 * 
+	 * }
+	 */
 	// 리뷰 수정
 	public int updateBuyMyReview(ReviewVO vo) {
 		return sqlSession.update(namespace+".updatebuymyreview" , vo);
@@ -77,8 +86,28 @@ public class pReviewDAO extends DBConn{
 	
 	//리뷰작성시 buy_mid 불러오기
 	public ArrayList<ChatVO> getBuyMidList(String pid){
-		List<ChatVO> list =sqlSession.selectList(namespace + ".buymidlist" , pid);
-		return (ArrayList<ChatVO>)list;
+		ArrayList<ChatVO> list = new ArrayList<ChatVO>();
+		try {
+			String sql = "select distinct buy_mid from banana_chat where pid=? ";
+			getPreparedStatement(sql);
+			pstmt.setString(1, pid);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ChatVO vo = new ChatVO();
+				vo.setBuy_mid(rs.getString(1));
+				
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+		//List<ChatVO> list =sqlSession.selectList(namespace + ".buymidlist" , pid);
+		//return (ArrayList<ChatVO>)list;
 	}
 	
 }
