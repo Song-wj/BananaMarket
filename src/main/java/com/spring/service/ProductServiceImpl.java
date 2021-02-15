@@ -83,19 +83,18 @@ public class ProductServiceImpl implements ProductService{
 	 public Object getList() {
 		  ModelAndView mv = new ModelAndView();
 		  ArrayList<productVO> list = productDAO.getProductList();
+		  int count = 0;
+		  for(productVO vo: list) {
+				String[] imgs =vo.getPsfile().split(",");
+				 mv.addObject("first_img"+count ,imgs[0]);
+				 count++;
+				 
+		  }
 			mv.addObject("list", list);
 			mv.setViewName("/popularProduct/popularProduct");
 			return mv;
 	  }
 	 
-		/*
-		 * public Object getList_top3() { ModelAndView mv = new ModelAndView();
-		 * ArrayList<productVO> list = productDAO.getProductList_top3();
-		 * mv.addObject("list", list); mv.setViewName("/popularProduct/popularProduct");
-		 * return mv; }
-		 */
-	 
-		/* public Object getSellList() { return "0"; } */
 	 
 	 public Object getSellList(String pid) {
 		  ModelAndView mv = new ModelAndView();
@@ -113,15 +112,19 @@ public class ProductServiceImpl implements ProductService{
 		ModelAndView mv = new ModelAndView();
 		 ArrayList<productVO> list = productDAO.getProductList_top3();
 		 mv.addObject("list", list);
+
 		int result = productDAO.likeResult(mid, (String)pid);
+		mv.addObject("list",list);
 		mv.addObject("result",result);
 		productVO vo = productDAO.getProductContent((String)pid);
 		productDAO.getUpdateHits((String)pid);
 		if(vo.getPsfile() != null) {
+			
 			String[] pfile_list =vo.getPsfile().split(",");	
-			for(int i=1; i<pfile_list.length; i++) {		
-				mv.addObject("pfile_list"+i, pfile_list[i]);
+			for(int i=0; i<pfile_list.length; i++) {
+					mv.addObject("pfile_list"+i, pfile_list[i]);
 			}
+			
 		}
 			/*
 			String str ="";	

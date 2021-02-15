@@ -164,6 +164,13 @@ $(document).ready(function(){
 		if(sel_files.length == 1) {
 			$("#inputMain").hide();
 			$("#storename").focus();
+			return true;
+		}else if(sel_files.length > 1) {
+			alert("메인이미지는 한 장만 가능합니다.");
+			$("#input_img").val("");
+			$("#img_list").hide();
+			$("#input_img").focus();			
+			return false;
 		}
 		
 	});
@@ -192,6 +199,13 @@ $(document).ready(function(){
 		if(sel_files2.length == 3) {
 			$("#inputCarousel").hide();
 			$("#btnEnroll").focus();
+			return true;
+		}else if(sel_files2.length > 3) {
+			alert("광고이미지는 최대 세 장만 가능합니다.");
+			$("#inputCarousel").val("");
+			$("#img_carousel_list").hide();
+			$("#inputCarousel").focus();			
+			return false;
 		}
 		
 	});
