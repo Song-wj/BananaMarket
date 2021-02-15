@@ -14,11 +14,19 @@ public class BananaShopVO {
 	List<MultipartFile> flie_list ;
 	String rno, nickname, maddr;
 	int like_count, review_count;
-	String srid, srcontent;
+	String srid, srcontent, srdate;
 	
 	String savepath1;
 	StringBuilder dong = new StringBuilder();
 	
+	public String getSrdate() {
+		return srdate;
+	}
+
+	public void setSrdate(String srdate) {
+		this.srdate = srdate;
+	}
+
 	public int getReview_count() {
 		return review_count;
 	}

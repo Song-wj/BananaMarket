@@ -2,10 +2,21 @@ package com.banana.dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.banana.vo.BananaShopVO;
 
 public class BananaShopDAO extends DBConn {
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	private static String namespace = "mapper.shop";
 	
 	/**
 	 * Delete - 업체 삭제
@@ -14,15 +25,9 @@ public class BananaShopDAO extends DBConn {
 	 */
 	public boolean shopDelete(String sid) {
 		boolean result = false;
-		try {
-			String sql="delete from banana_shop where sid=?";
-			getPreparedStatement(sql);
-			pstmt.setString(1, sid);
-			int count = pstmt.executeUpdate();
-			if(count != 0) result = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		int val = sqlSession.delete(namespace + ".shopDelete", sid);
+		if (val != 0)
+			result = true;
 		return result;
 	}
 	
@@ -148,42 +153,7 @@ public class BananaShopDAO extends DBConn {
 	 * @return
 	 */
 	public BananaShopVO getShopContent(String sid) {
-		BananaShopVO vo = new BananaShopVO();
-		try {
-			String sql ="select  sid , mid, sname, skinds, skinds2, sintro, saddr_num, saddr, sph, sdate, smain_img, smain_simg,\r\n" + 
-					"        scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3\r\n" + 
-					"from banana_shop where sid=?";
-			getPreparedStatement(sql);
-			pstmt.setString(1, sid);
-				
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				vo.setSid(rs.getString(1));
-				vo.setMid(rs.getString(2));
-				vo.setSname(rs.getString(3));
-				vo.setSkinds(rs.getString(4));
-				vo.setSkinds2(rs.getString(5));
-				vo.setSintro(rs.getString(6));
-				vo.setSaddr_num(rs.getString(7));
-				vo.setSaddr(rs.getString(8));
-				vo.setSph(rs.getString(9));
-				vo.setSdate(rs.getString(10));
-				vo.setSmain_img(rs.getString(11));
-				vo.setSmain_simg(rs.getString(12));
-				vo.setScaro_img1(rs.getString(13));
-				vo.setScaro_simg1(rs.getString(14));
-				vo.setScaro_img2(rs.getString(15));
-				vo.setScaro_simg2(rs.getString(16));
-				vo.setScaro_img3(rs.getString(17));
-				vo.setScaro_simg3(rs.getString(18));
-				
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return vo;
+		return sqlSession.selectOne(namespace + ".getShopContent", sid);
 	}
 	
 	/**
@@ -191,49 +161,8 @@ public class BananaShopDAO extends DBConn {
 	 * @return
 	 */
 	public ArrayList<BananaShopVO> getLikeShopList(){
-		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
-		try {
-			String sql = "select s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.saddr_num, \r\n" + 
-					"       s.saddr, s.sph, s.sdate, s.smain_img, s.smain_simg, s.scaro_img1, s.scaro_simg1,\r\n" + 
-					"       count(i.sid) as like_count, count(r.sid) as review_count,\r\n" + 
-					"       r.srid, r.srcontent\r\n" + 
-					"from banana_shop s\r\n" + 
-					"left outer join banana_interest i on i.sid = s.sid\r\n" + 
-					"left outer join banana_shop_review r on i.sid = r.sid\r\n" + 
-					"group by s.sid, s.mid, s.sname, s.skinds, s.skinds2, \r\n" + 
-					"s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_img, \r\n" + 
-					"s.smain_simg, s.scaro_img1, s.scaro_simg1, r.srid, r.srcontent\r\n" + 
-					"order by count(i.sid) desc";
-			getStatement();
-			rs= stmt.executeQuery(sql);
-			while(rs.next()) {
-				BananaShopVO vo = new BananaShopVO();
-				vo.setSid(rs.getString(1));
-				vo.setMid(rs.getString(2));
-				vo.setSname(rs.getString(3));
-				vo.setSkinds(rs.getString(4));
-				vo.setSkinds2(rs.getString(5));
-				vo.setSaddr_num(rs.getString(6));
-				vo.setSaddr(rs.getString(7));
-				vo.setSph(rs.getString(8));
-				vo.setSdate(rs.getString(9));
-				vo.setSmain_img(rs.getString(10));
-				vo.setSmain_simg(rs.getString(11));
-				vo.setScaro_img1(rs.getString(12));
-				vo.setScaro_simg1(rs.getString(13));
-				vo.setLike_count(rs.getInt(14));
-				vo.setReview_count(rs.getInt(15));
-				vo.setSrid(rs.getString(16));
-				vo.setSrcontent(rs.getString(17));
-					
-				list.add(vo);
-					
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return list;
+		List<BananaShopVO> list = sqlSession.selectList(namespace+".getshoplist");
+		return (ArrayList<BananaShopVO>)list;
 	}	
 	
 	/**
@@ -241,49 +170,8 @@ public class BananaShopDAO extends DBConn {
 	 * @return
 	 */
 	public ArrayList<BananaShopVO> getShopList(){
-		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
-		try {
-			String sql = "select s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.saddr_num, \r\n" + 
-					"       s.saddr, s.sph, s.sdate, s.smain_img, s.smain_simg, s.scaro_img1, s.scaro_simg1,\r\n" + 
-					"       count(i.sid) as like_count, count(r.sid) as review_count,\r\n" + 
-					"       r.srid, r.srcontent\r\n" + 
-					"from banana_shop s\r\n" + 
-					"left outer join banana_interest i on i.sid = s.sid\r\n" + 
-					"left outer join banana_shop_review r on i.sid = r.sid\r\n" + 
-					"group by s.sid, s.mid, s.sname, s.skinds, s.skinds2, \r\n" + 
-					"s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_img, \r\n" + 
-					"s.smain_simg, s.scaro_img1, s.scaro_simg1, r.srid, r.srcontent\r\n" + 
-					"order by sdate desc";
-			getStatement();
-			rs= stmt.executeQuery(sql);
-			while(rs.next()) {
-				BananaShopVO vo = new BananaShopVO();
-				vo.setSid(rs.getString(1));
-				vo.setMid(rs.getString(2));
-				vo.setSname(rs.getString(3));
-				vo.setSkinds(rs.getString(4));
-				vo.setSkinds2(rs.getString(5));
-				vo.setSaddr_num(rs.getString(6));
-				vo.setSaddr(rs.getString(7));
-				vo.setSph(rs.getString(8));
-				vo.setSdate(rs.getString(9));
-				vo.setSmain_img(rs.getString(10));
-				vo.setSmain_simg(rs.getString(11));
-				vo.setScaro_img1(rs.getString(12));
-				vo.setScaro_simg1(rs.getString(13));
-				vo.setLike_count(rs.getInt(14));
-				vo.setReview_count(rs.getInt(15));
-				vo.setSrid(rs.getString(16));
-				vo.setSrcontent(rs.getString(17));
-					
-				list.add(vo);
-					
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return list;
+		List<BananaShopVO> list = sqlSession.selectList(namespace+".getshoplist2");
+		return (ArrayList<BananaShopVO>)list;
 	}	
 	
 	/**
@@ -463,53 +351,13 @@ public class BananaShopDAO extends DBConn {
 	 * @return
 	 */
 	public ArrayList<BananaShopVO> getsearchlist(String search){
-		ArrayList<BananaShopVO> list = new ArrayList<BananaShopVO>();
 		String set_search = "%" + search + "%";
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("search", String.valueOf(search));
+		param.put("set_search", String.valueOf(set_search));
 		
-		try {
-			String sql = "select *\r\n" + 
-					"from (select *\r\n" + 
-					"from (select rownum rno, s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.sintro, s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_simg, m.nickname, m.maddr\r\n" + 
-					"      from banana_shop s, banana_member m\r\n" + 
-					"      where s.mid = m.mid)\r\n" + 
-					"where (sname like ? or skinds like ? or sintro like ? or saddr like ? or sph like ?)\r\n" + 
-					")";
-			
-			getPreparedStatement(sql);
-			
-			pstmt.setString(1, set_search);
-			pstmt.setString(2, set_search);
-			pstmt.setString(3, set_search);
-			pstmt.setString(4, set_search);
-			pstmt.setString(5, set_search);
-			
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				BananaShopVO vo = new BananaShopVO();
-				
-				vo.setRno(rs.getString(1));
-				vo.setSid(rs.getString(2));
-				vo.setMid(rs.getString(3));
-				vo.setSname(rs.getString(4));
-				vo.setSkinds(rs.getString(5));
-				vo.setSkinds2(rs.getString(6));
-				vo.setSintro(rs.getString(7));
-				vo.setSaddr_num(rs.getString(8));
-				vo.setSaddr(rs.getString(9));
-				vo.setSph(rs.getString(10));
-				vo.setSdate(rs.getString(11));
-				vo.setSmain_simg(rs.getString(12));
-				vo.setNickname(rs.getString(13));
-				vo.setMaddr(rs.getString(14));
-				
-				list.add(vo);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
+		List<BananaShopVO> list = sqlSession.selectList(namespace + ".getsearchlist", param);
+		return (ArrayList<BananaShopVO>) list;
 	}
 	
 	/**
@@ -520,33 +368,11 @@ public class BananaShopDAO extends DBConn {
 	public int getsearchCount(String search){
 		int result = 0;
 		String set_search = "%" + search + "%";
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("search", String.valueOf(search));
+		param.put("set_search", String.valueOf(set_search));
 		
-		try {
-			String sql = "select count(*)\r\n" + 
-					"from (select *\r\n" + 
-					"from (select rownum rno, s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.sintro, s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_simg, m.nickname, m.maddr\r\n" + 
-					"      from banana_shop s, banana_member m\r\n" + 
-					"      where s.mid = m.mid)\r\n" + 
-					"where (sname like ? or skinds like ? or sintro like ? or saddr like ? or sph like ?)\r\n" + 
-					")";
-			
-			getPreparedStatement(sql);
-			
-			pstmt.setString(1, set_search);
-			pstmt.setString(2, set_search);
-			pstmt.setString(3, set_search);
-			pstmt.setString(4, set_search);
-			pstmt.setString(5, set_search);
-			
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				result = rs.getInt(1);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		result = sqlSession.selectOne(namespace + ".getsearchCount", param);
 		return result;
 	}
 
