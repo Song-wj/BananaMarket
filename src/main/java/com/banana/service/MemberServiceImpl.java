@@ -77,8 +77,8 @@ public class MemberServiceImpl implements MemberService{
 	public Object getResultJoin(BananaMemberVO vo) {
 		ModelAndView mv = new ModelAndView();
 		boolean result = false;
+		UUID uuid = UUID.randomUUID();
 		if(vo.getFile1().getSize() != 0) {
-			UUID uuid = UUID.randomUUID();
 			vo.setMfile(vo.getFile1().getOriginalFilename());
 			vo.setMsfile(uuid + "_" + vo.getFile1().getOriginalFilename());
 			 result = memberDAO.InsertMember(vo);
@@ -96,10 +96,12 @@ public class MemberServiceImpl implements MemberService{
 			}
 			
 		} else {
+			vo.setMfile("banana.jpg");
+			vo.setMsfile("banana.jpg");
 			result = memberDAO.InsertMember(vo);
-			if(result) {
+			
 				mv.setViewName("/login/login");
-			}
+			
 			/* System.out.println("해당 파일 없음"); */
 		}
 		
