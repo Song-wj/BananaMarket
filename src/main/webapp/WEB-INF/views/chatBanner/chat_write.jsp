@@ -82,7 +82,9 @@
 		margin:20px 0;
 	}
 	section.section3_chatContent>div.reply p {
-		padding:10px 10px;
+		/* padding:10px 10px; */
+		margin-left:20px;
+		font-size:24px;
 	}
 	section.section3_chatContent>div.reply span {
 		color:rgb(98,71,24);
@@ -100,7 +102,10 @@
 		margin:20px 0;
 	}
 	section.section3_chatContent>div.request p {
-		padding:10px 10px;
+		/* padding:5px 10px; */
+		margin-right:20px;
+		text-align:right;
+		font-size:24px;
 	}
 	section.section3_chatContent>div.request span {
 		color:rgb(98,71,24);
@@ -173,12 +178,12 @@
 					<c:if test="${vo.chat_content ne null }">	
 					<c:if test="${svo.mid ne vo.buy_mid}">
 						<div class="reply">
-							<p><span>${vo.buy_mid }</span>: ${vo.chat_content}</p>
+							<p><span>${vo.nickname}</span>: ${vo.chat_content}</p>
 						</div>
 					</c:if>	
 					<c:if test="${svo.mid eq vo.buy_mid}">	
 						<div class="request">
-							<p><span>${svo.mid }</span>:${vo.chat_content}</p>
+							<p>${vo.chat_content}</p>
 						</div>  
 					</c:if>	
 					</c:if>

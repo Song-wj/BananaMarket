@@ -63,10 +63,14 @@
 	
 	
 	<select id="Chat" parameterType="java.lang.String"  resultType="com.banana.vo.ChatContentVO">
-		select cid, sell_mid, buy_mid, pid, chat_content, to_char(cdate,'mm.dd  hh:mm') cdate, chk_read
+		<!-- select cid, sell_mid, buy_mid, pid, chat_content, to_char(cdate,'mm.dd  hh:mm') cdate, chk_read
 			from banana_chat  
 			where pid=#{pid}
-		order by cdate	
+		order by cdate -->	
+		select c.cid, c.sell_mid, c.buy_mid, c.pid, c.chat_content, to_char(c.cdate,'mm.dd  hh:mm') cdate, c.chk_read, m.nickname, m.maddr
+			from banana_chat c, banana_member m 
+			where c.buy_mid=m.mid and  pid=#{pid}
+		order by cdate
 	</select>
 	
 </mapper>

@@ -18,19 +18,26 @@
 	</insert>
 	
 	<select id="ProductList_top3" resultType="com.banana.vo.productVO">
-		select rownum rno, pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid, phits
+		<!-- select rownum rno, pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid, phits
 		from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid, phits 
       			from banana_product   
       			order by plike desc)
-    	 where rownum between 1 and 6
+    	 where rownum between 1 and 6 -->
+		select rownum rno, pp.pid, pp.mid, pp.ptitle, pp.pcategory, pp.pprice, pp.pcontent, pp.plike, pp.pchat, to_char(pp.pdate,'yyyy.mm.dd') pdate, pp.pchk, pp.pfile, pp.psfile, pp.buy_mid, pp.phits,
+        					m.maddr
+        from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid, phits 
+      			from banana_product   
+      			order by plike desc)pp , banana_member m
+    	 where pp.mid=m.mid and rownum between 1 and 6
 	</select>
 	
 	<select id="ProductList" resultType="com.banana.vo.productVO">
-
-		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid, phits
+      	select pp.pid, pp.mid, pp.ptitle, pp.pcategory, pp.pprice, pp.pcontent, pp.plike, pp.pchat, to_char(pp.pdate,'yyyy.mm.dd') pdate, pp.pchk, pp.pfile, pp.psfile, pp.buy_mid, pp.phits,
+        m.maddr
 		from (select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat,  pdate, pchk, pfile, psfile, buy_mid, phits 
       			from banana_product   
-      			order by plike desc)
+      			order by plike desc) pp , banana_member m
+		where pp.mid=m.mid  		
 
 	</select>
 	
@@ -67,10 +74,6 @@
 		where i.mid=m.mid and i.pid=p.pid and i.mid=#{mid}
 	</select>
 	
-	<!-- <select id="likeResult" parameterType="map">
-		select count(*) from BANANA_INTEREST where mid=#{mid} and pid=#{pid}
-	</select> -->
-	
 	<insert id="getKeyword" parameterType="map">
 		insert into BANANA_KEYWORD values(#{mid},#{keyword})
 	</insert>
@@ -84,9 +87,5 @@
 		select pid, mid, ptitle, pcategory, pprice, pcontent, plike, pchat, to_char(pdate,'yyyy.mm.dd') pdate, pchk, pfile, psfile, buy_mid
 			from banana_product where pchk=#{x}
 	</select>
-	
-	<!-- <update id="ProductSellUpdate" parameterType="java.lang.String" >
-		update banana_product set pchk="o"  where pid=#{pid}
-	</update> -->
 	
 </mapper>
