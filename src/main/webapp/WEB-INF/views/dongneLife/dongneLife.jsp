@@ -28,6 +28,13 @@
 		margin-top:20px;
 		text-align:center;
 	}
+	.dl_content1 hr{
+		margin:auto;
+		width:70%;
+	}
+	.dl_content1 a{
+		text-decoration:none;
+	}
 	.dl_content1 img{
 		width:50px;
 		height:50px;
@@ -153,7 +160,7 @@
 				<h1>동네 생활</h1>
 			</div>
 			<div class="dl_content1">
-				<img src="images/banana.jpg"><label>${svo.nickname }님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
+				<img src="http://localhost:9000/banana/resources/upload/${ svo.msfile }"><label>${svo.nickname }님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
 				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
 			</div>	
 			<section class="sub_section">
@@ -165,14 +172,14 @@
 						<label>${vo.bdate }</label>
 					</li>
 					<li>
-						<img src="images/banana.jpg">
+						<img src="http://localhost:9000/banana/resources/upload/${ vo.msfile }">
 						<label>${vo.nickname }</label>
 						<label>${vo.maddr }</label>
 					</li>	
 					<li><pre><c:out value="${vo.btopic}" /></pre></li>
 					<li>
 						<a href="#"><img src="images/smile.png"><button type="button">공감하기</button></a>
-						<a href="dongneLife_content.do"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
+						<a href="dongneLife_content.do?bid=${ vo.bid }"><img src="images/messenger.png"><button type="button">댓글쓰기</button></a>
 					</li>
 				</ul>
 			</div>

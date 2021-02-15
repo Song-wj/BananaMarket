@@ -267,7 +267,7 @@ public class DongneServiceImpl implements BananaService{
 		
 		if(dvo_result) {
 			File file = new File(dvo.getSavepath() + dvo.getBssfile());
-			
+			System.out.println(file);
 			try {
 				dvo.getFile1().transferTo(file);
 			} catch (Exception e) {

@@ -11,6 +11,8 @@ public class productVO {
 	String file, sfile, cancel_file;
 	List<MultipartFile> list ;
 	String rno;
+	int phits;
+	
 	//CommonsMultipartFile[] file_list;
 	
 	/*
@@ -22,6 +24,14 @@ public class productVO {
 	}
 	*/
 	
+	public int getPhits() {
+		return phits;
+	}
+
+	public void setPhits(int phits) {
+		this.phits = phits;
+	}
+
 	public String getMaddr() {
 		return maddr;
 	}

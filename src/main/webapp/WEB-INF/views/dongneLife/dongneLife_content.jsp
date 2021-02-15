@@ -59,7 +59,6 @@
 		margin:auto;
 		padding-top:150px;
 		padding-bottom:3%;
-		border:1px solid green;
 	}
 	section.section2_dongneLife_content,
 	section.section3_dongneLife_content,
@@ -74,6 +73,8 @@
 	}
 	section.section1_dongneLife_content div.content_nav {
 		border-bottom:1px solid black;
+		width:80%;
+		margin:auto;
 		padding:10px 0;
 	}
 	section.section1_dongneLife_content li {

@@ -48,10 +48,11 @@
 		
 	<select id="getsubreview" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
 		select mid, nickname, maddr, brid, bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate, rownum rno 
-		from (select mem.mid, mem.nickname, mem.maddr,rev.brid, rev.bid, rev.bcomment, rev.brdate
-			  from banana_member mem, banana_board_review rev, banana_board board
-			  where mem.mid = rev.mid and rev.bid = board.bid
-			  order by rev.brdate desc)
+		from (select mid, nickname, maddr, brid, bid, bcomment, brdate, rownum rno 
+			  from (select mem.mid, mem.nickname, mem.maddr,rev.brid, rev.bid, rev.bcomment, rev.brdate
+			        from banana_member mem, banana_board_review rev, banana_board board
+			         where mem.mid = rev.mid and rev.bid = board.bid
+			   order by rev.brdate desc))
 		where bid=#{bid}
 	</select>
 	
@@ -79,22 +80,25 @@
 	</select>
 	
 	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
-		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bstitle=#{bstitle}
+		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
 	</select>
 
 	<select id="getDongneSubjectlist" parameterType="map" resultType="com.banana.vo.dongneVO">
-		 select b.bid, mid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate  , NVL(cc,0) likecount ,blike ,reviewcount
-	     from (select b.bid , mid, maddr,bdate, nvl(bb,0) reviewcount ,nickname, btitle, bfile,bsfile,btopic
-               from  (select b.mid, b.bid ,maddr ,bdate ,nickname, btitle, bfile,bsfile,btopic
-                      from banana_board b , banana_member m 
-                      where b.mid=m.mid ) b, (select count(bid) bb, bid
-                                              from  banana_board_review
-                                              group by bid) r
-               where b.bid=r.bid(+)) b  ,(select count(bid) cc ,bid ,blike
-                                          from   banana_board_like 
-                                          group by bid ,blike) l
-	    where  b.bid=l.bid(+) and btitle=#{btitle}    
-	    order by bdate
+		
+		select bid, mid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate  , likecount ,blike ,reviewcount
+		from (select b.bid, mid, nickname, btitle, bfile,bsfile,btopic,maddr,  bdate  , NVL(cc,0) likecount ,blike ,reviewcount
+	    	  from (select b.bid , mid, maddr,bdate, nvl(bb,0) reviewcount ,nickname, btitle, bfile,bsfile,btopic
+               		from  (select b.mid, b.bid ,maddr ,bdate ,nickname, btitle, bfile,bsfile,btopic
+                      		from banana_board b , banana_member m 
+                      		where b.mid=m.mid ) b, (select count(bid) bb, bid
+                                             		 from  banana_board_review
+                                             		 group by bid) r
+              			 where b.bid=r.bid(+)) b  ,(select count(bid) cc ,bid ,blike
+                                         			 from   banana_board_like 
+                                         				 group by bid ,blike) l
+	   		 where  b.bid=l.bid(+) and btitle=#{btitle} 
+	    	 order by bdate desc )
+		
 	</select>
 	
 	<update id="updateSubject" parameterType="com.banana.vo.dongneSubjectVO">
@@ -123,15 +127,16 @@
 	</insert>
 	
 	<select id="boardlist" resultType="com.banana.vo.dongneVO">
-		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
-	    from banana_member m , banana_board b
-		where m.mid = b.mid order by bdate 
+		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate, msfile
+		from(select bid, nickname, btitle, bfile,bsfile,btopic,maddr, bdate, m.msfile
+	    	 from banana_member m , banana_board b
+			 where m.mid = b.mid order by bdate desc) 
 	</select>
 	
 	<select id="boardcontent" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
-		select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate 
-	    from banana_member m , banana_board b
-		where m.mid = b.mid and bid=#{bid}
+			select  bid ,nickname, btitle, bfile,bsfile,btopic, maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate 
+		    from banana_member m , banana_board b
+			where m.mid = b.mid and bid=#{bid}
 	</select>
 	
 	<update id="boardupdate" parameterType="com.banana.vo.dongneVO">
@@ -149,16 +154,18 @@
 
 	<select id="getmypost" parameterType="java.lang.String" resultType="com.banana.vo.dongneVO">
 		select bid, nickname, btitle , btopic ,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
-	    from banana_member m , banana_board b
-		where m.mid = b.mid and m.mid=#{mid} 
-		order by bdate 
+		from(select bid, nickname, btitle , btopic ,maddr,bdate
+		     from banana_member m , banana_board b
+			 where m.mid = b.mid and m.mid=#{mid} 
+			 order by bdate desc) 
 	</select>
 	
 	<select id="getmycomment" parameterType="java.lang.String" resultType="com.banana.vo.DongneCommentVO">
 		select nickname , brid , bid, bcomment, to_char(ROUND((sysdate-brdate)*24*60)) brdate 
-		from banana_board_review r, banana_member m
-		where r.mid= m.mid and m.mid=#{mid}
-		order by brdate
+		from(select nickname , brid , bid, bcomment, brdate 
+			 from banana_board_review r, banana_member m
+			 where r.mid= m.mid and m.mid=#{mid}
+			 order by brdate desc)
 	</select>
 	
 	<insert id="getPickContent" parameterType="map">
