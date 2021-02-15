@@ -8,11 +8,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class dongneVO {
 
-	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate ,savepath ,cancel_img ;
+	String bid, nickname,mid, btitle, bfile, bsfile, btopic, blike, maddr, bdate ,savepath ,cancel_img;
 	int likecount ,reviewcount;
 	
 
-
+	String msfile;
 	String file;
 	String sfile;
 	
@@ -20,6 +20,16 @@ public class dongneVO {
 	
 	String rno;
 	
+	
+	
+	public String getMsfile() {
+		return msfile;
+	}
+
+	public void setMsfile(String msfile) {
+		this.msfile = msfile;
+	}
+
 	public int getReviewcount() {
 		return reviewcount;
 	}

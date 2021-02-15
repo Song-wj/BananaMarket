@@ -17,6 +17,16 @@ public class ChatController {
 	
 	@Autowired
 	private ChatServiceImpl chatService;
+	/**
+	 *  채팅 처리
+	 */
+	@RequestMapping(value="/chat_list_content_proc.do", method=RequestMethod.POST)
+	public ModelAndView chat_write_proc(ChatVO cvo, HttpSession session) {
+		//cvo.setCid(cid);
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		cvo.setBuy_mid(svo.getMid());
+		return (ModelAndView)chatService.insert(cvo);
+	}
 	
 	/**
 	 *  채팅 처리
@@ -48,17 +58,25 @@ public class ChatController {
 		return (ModelAndView)chatService.getContent(cid);
 	}
 	
-	
 	/**
 	 * 채팅 리스트
 	 * @return
-	 */
+	 */ 
 	@RequestMapping(value ="/chat_list.do", method = RequestMethod.GET)
 	public ModelAndView chat_list() {
-		
 		return (ModelAndView)chatService.getList();
+	}
+	
+	/*
+	@RequestMapping(value ="/chat_list.do", method = RequestMethod.GET)
+	public ModelAndView chat_list(String pid, HttpSession session) {
+		SessionVO svo = (SessionVO)session.getAttribute("svo");
+		//ArrayList<BananaMemberVO> list1 = 
+		//System.out.println("pid--"+pid+","+svo.getMid());
+		return (ModelAndView)chatService.getList(pid, svo.getMid());
 		//"/chatBanner/chat_list";
 	}
+	*/
 	
 	/**
 	 * 채팅

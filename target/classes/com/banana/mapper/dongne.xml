@@ -79,7 +79,7 @@
 	</select>
 	
 	<select id="getDongneSubjectContent" parameterType="java.lang.String"  resultType="com.banana.vo.dongneSubjectVO">
-		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bstitle=#{bstitle}
+		select bsid, bstitle, bstopic, bssfile from banana_board_subject where bsid=#{bsid}
 	</select>
 
 	<select id="getDongneSubjectlist" parameterType="map" resultType="com.banana.vo.dongneVO">
@@ -123,7 +123,7 @@
 	</insert>
 	
 	<select id="boardlist" resultType="com.banana.vo.dongneVO">
-		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
+		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate, m.msfile
 	    from banana_member m , banana_board b
 		where m.mid = b.mid order by bdate 
 	</select>

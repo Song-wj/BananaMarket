@@ -23,6 +23,40 @@ public class productDAO extends DBConn{
 	
 	private static String namespace = "mapper.product";
 	
+	public void getUpdateHits(String pid) {
+		try {
+			String sql = "update banana_product set phits = phits+1 where pid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, pid);
+			pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void getLikeHits(String pid) {
+		try {
+			String sql = "update banana_product set plike = plike+1 where pid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, pid);
+			pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void getLikeminus(String pid) {
+		try {
+			String sql = "update banana_product set plike = plike-1 where pid=?";
+			getPreparedStatement(sql);
+			pstmt.setString(1, pid);
+			pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Insert : 중고 물품 등록
 	 */

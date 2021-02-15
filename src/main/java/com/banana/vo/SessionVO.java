@@ -1,8 +1,15 @@
 package com.banana.vo;
 
 public class SessionVO {
-	String nickname ,mid;
+	String nickname ,mid, msfile;
 	int result;
+	
+	public String getMsfile() {
+		return msfile;
+	}
+	public void setMsfile(String msfile) {
+		this.msfile = msfile;
+	}
 	public String getMid() {
 		return mid;
 	}
