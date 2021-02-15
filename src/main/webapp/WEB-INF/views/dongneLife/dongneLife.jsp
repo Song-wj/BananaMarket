@@ -159,10 +159,12 @@
 			<div class="dl_title">
 				<h1>동네 생활</h1>
 			</div>
+			<c:if test="${svo.mid ne null }">
 			<div class="dl_content1">
-				<img src="http://localhost:9000/banana/resources/upload/${ svo.msfile }"><label>${svo.nickname }님 오늘 이의동의 이야기를 들려주세요!</label><hr><br>
+				<img src="http://localhost:9000/banana/resources/upload/${ svo.msfile }"><label>${svo.nickname }님 오늘 이의동의 이야기를 들려주세요!</label><br><br>
 				<a href="dongneLife_write.do"><button type="button"> 동네생활 글쓰기</button></a><hr>
-			</div>	
+			</div>
+			</c:if>	
 			<section class="sub_section">
 			<c:forEach var="vo" items="${list }">
 			<div class="dl_content2" onclick="location.href='dongneLife_content.do?bid=${vo.bid}'">
