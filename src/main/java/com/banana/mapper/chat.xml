@@ -43,6 +43,8 @@
 				order by c.cdate desc) cp , banana_member m
 		where cp.buy_mid = m.mid
 		order by cp.cdate desc
+		
+		
 	</select>
 	
 	<select id="ChatContent2"  parameterType="java.lang.String"  resultType="com.banana.vo.productVO" >
@@ -50,6 +52,13 @@
 			from banana_product p, banana_member m
 			where p.mid= m.mid and p.pid=#{pid}
 			
+	</select>
+	
+	<select id="ChatContent3"  parameterType="java.lang.String"  resultType="com.banana.vo.ChatContentVO" >
+		select cid, sell_mid, buy_mid, pid, chat_content, cdate, chk_read 
+		from banana_chat c 
+		where pid=#{pid} order by cdate
+		
 	</select>
 	
 	

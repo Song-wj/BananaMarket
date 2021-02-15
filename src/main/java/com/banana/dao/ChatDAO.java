@@ -1,9 +1,7 @@
 package com.banana.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +39,11 @@ public class ChatDAO extends DBConn{
 	
 	
 	/** Ã¤ÆÃ content **/
+	public ArrayList<ChatContentVO> getContent3(String pid) {
+		List <ChatContentVO> list = sqlSession.selectList(namespace+".ChatContent3", pid);
+		return (ArrayList<ChatContentVO>) list;
+	}
+	
 	public productVO getContent2(String pid) {
 		
 		return sqlSession.selectOne(namespace+".ChatContent2", pid);

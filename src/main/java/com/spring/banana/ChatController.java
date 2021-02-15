@@ -60,6 +60,7 @@ public class ChatController {
 		return (ModelAndView)chatService.getContent(cid);
 	}
 	
+	
 	/**
 	 * 채팅 리스트
 	 * @return
