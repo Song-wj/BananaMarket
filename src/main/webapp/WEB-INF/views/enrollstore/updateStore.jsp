@@ -191,8 +191,8 @@ $(document).ready(function(){
 		if(sel_files.length == 1) {
 			$("#inputMain").hide();
 			$("#storename").focus();
+			return true;
 		}
-		/* alert("sel_files"+sel_files); */
 		
 	});
 	
@@ -221,6 +221,7 @@ $(document).ready(function(){
 		if(sel_files2.length == 3) {
 			$("#inputCarousel").hide();
 			$("#btnEnroll").focus();
+			return true;
 		}
 		
 	});
@@ -296,7 +297,7 @@ $(document).ready(function(){
 					<li><div id="inputMain"><label for="input_img">메인 이미지 추가<br><span class="input_red">최대 1장</span></label>
 						<c:choose>
 							<c:when test="${vo.smain_img ne null }">
-								<input type="file" id="input_img" name="file1" multiple><span id="fname">${vo.smain_img }</span>
+								<input type="file" id="input_img" name="file1" multiple value="${vo.smain_img }"><span id="fname">${vo.smain_img }</span>
 							</c:when>
 							<c:otherwise>
 								<input type="file" id="input_img" name="file1" multiple><span id="fname">선택된 파일 없음</span>
