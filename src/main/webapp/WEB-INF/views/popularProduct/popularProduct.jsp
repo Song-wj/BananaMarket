@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" 
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <!DOCTYPE html>
 <html>
@@ -172,7 +173,7 @@
 						</a> 
                  </c:if>      
 					<label class="ptitle">${vo.ptitle }</label>
-					<label class="pprice">${vo.pprice }</label>
+					<label class="pprice"><fmt:formatNumber value="${vo.pprice }" pattern="###,###"/>원</label>
 					<label class="loc">서울 강남구 역삼동</label>
 					<span class="interest">관심 ${vo.plike }</span>&nbsp;&nbsp;<span class="chat">조회 ${vo.phits}</span>
 					

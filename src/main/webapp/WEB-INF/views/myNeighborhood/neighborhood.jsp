@@ -138,7 +138,9 @@
 		outline:none;
 		border-radius:15px;
 		margin-left:270px;
-		
+	}
+	#enroll-store-btn:active {
+		background-color: #FEE500;
 	}
 </style>
 </head>
@@ -206,33 +208,36 @@
 			</div>		
 		</div> <!-- category -->
 		<div class="recommand_store">
-			<a href="enrollstore.do"><button type="button">업체 등록</button></a>
+			<a href="enrollstore.do"><button type="button" id="enroll-store-btn"
+			style="border:2px solid #FEE500; padding: 8px; font-weight: bold; font-size: 15px;">업체 등록</button></a>
 			<label>이웃들의 추천 가게</label>
 			<c:forEach var="vo" items="${list2 }">
-			<div class="store_recommand">
+			<div class="store_recommand" onclick="location.href='neighborhoodStore.do?sid=${vo.sid }'"
+			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 10px; border-radius: 10px;">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>
-				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
+				<label class="store_name">${vo.sname }</label>
 				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
-				<div class="store_review">
+				<div class="store_review" style="margin-top: 5px;">
 					<label>${fn:substring(vo.srcontent,0,8) }..</label>
 				</div>	
 			</div>	
 			</c:forEach>
 		</div>  <!-- recommand_store -->
-		<div class="recommand_store">
+		<div class="recommand_store" >
 			<label>내 근처 가게 소식</label>
 			<c:forEach var="vo" items="${list }">
-			<div class="store_recommand">
+			<div class="store_recommand" onclick="location.href='neighborhoodStore.do?sid=${vo.sid }'"
+			style="border: 3px solid #FEE500; padding-left:20px; padding-top:10px; padding-bottom: 10px; border-radius: 10px;">
 				<div>				
 					<img src="http://localhost:9000/banana/resources/upload/${vo.smain_simg}"><img src="http://localhost:9000/banana/resources/upload/${vo.scaro_simg1}">
 				</div>
-				<a href="neighborhoodStore.do?sid=${vo.sid }"><label class="store_name">${vo.sname }</label></a>
+				<label class="store_name">${vo.sname }</label>
 				<label class="store_info">${vo.sintro }</label>
 				<span class="review_count">후기 ${vo.review_count }</span><span class="interest_count">관심 ${vo.like_count }</span>
-				<div class="store_review">
+				<div class="store_review" style="margin-top: 5px;">
 					<label>${fn:substring(vo.srcontent,0,8) }..</label>
 				</div>	
 			</div>	
