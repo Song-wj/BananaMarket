@@ -36,15 +36,15 @@
 	
 	<select id="getlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
 	
-   select  rid, mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
-   from( select  rid, r.mid,r.score,review, rfile, rsfile, rdate
-		 from banana_buy_review r ,  banana_product p                            
-		 where r.pid = p.pid and p.mid =#{mid}	   
-   		 union
-   		 select rid,r.mid,r.score,review, rfile, rsfile,  sdate
-		 from  banana_product p  , banana_sell_review r
-		 where p.pid= p.pid and p.buy_mid =#{mid})
-    order by rdate 
+	   select  rid, mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+	   from( select  rid, r.mid,r.score,review, rfile, rsfile, rdate
+			 from banana_buy_review r ,  banana_product p                            
+			 where r.pid = p.pid and p.mid =#{mid}	   
+	   		 union
+	   		 select rid,r.mid,r.score,review, rfile, rsfile,  sdate
+			 from  banana_product p  , banana_sell_review r
+			 where p.pid= p.pid and p.buy_mid =#{mid})
+	    order by rdate 
 	</select> 
 	
 	
@@ -69,11 +69,11 @@
 	
 	<select id="getmyreviewlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
 		
-		select rid,r.pid, p.mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+		select rid,r.pid, score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
     	from(select *
          	from( select rid ,r.pid, r.mid, score, review, rfile, rsfile,rdate
                   from banana_buy_review r, banana_product p
-                  where r.pid=p.pid and p.mid=#{mid}
+                  where r.pid=p.pid and r.mid=#{mid}
                   union
                   select rid ,r.pid, r.mid, score, review,rfile, rsfile, sdate
 		          from banana_sell_review r,banana_product p
@@ -127,23 +127,17 @@
 	</delete>
 	
 	<select id="gradelist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO">
-		<!-- select r.score , review  ,rdate
-		from banana_product p ,
-		  (select pid, mid, score, review, rdate
-		  from banana_buy_review
-		  union
-		  select pid, mid, score, review, sdate
-		  from banana_sell_review) r
-		where p.pid=r.pid and p.mid=#{mid}  -->
 		
-		 select  score , review  ,rdate
-		 from (select rid, r.pid, r.mid, score, review, rdate
-               from banana_buy_review r, banana_product p
-               where r.pid=p.pid
-               union
-               select rid ,pid, mid, score, review, sdate
-		       from banana_sell_review) 
-		where  mid=#{mid}   
+		 select score,review,rdate
+	   from( select  rid, r.mid,r.score,review,rdate
+			 from banana_buy_review r ,  banana_product p                            
+			 where r.pid = p.pid and p.mid =#{mid}	   
+	   		 union
+	   		 select rid,r.mid,r.score,review,sdate
+			 from  banana_product p  , banana_sell_review r
+			 where p.pid= p.pid and p.buy_mid =#{mid})
+	    order by rdate 
+		
 	</select>
 	
 	
