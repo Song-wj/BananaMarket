@@ -6,6 +6,8 @@
 
 <mapper namespace="mapper.shop">
 
+	<!-- Shop -->
+	<!-- id:getshoplist -->
 	<select id="getshoplist" resultType="com.banana.vo.BananaShopVO">
 	Select D.sid, A.srid, A.srdate, nvl(A.srcontent,'등록된 업체리뷰 없음') srcontent, nvl(B.like_count,0) like_count, nvl(C.review_count,0) review_count,
        D.sname, D.skinds, D.skinds2, D.saddr_num, D.saddr, D.sph, D.sdate, D.smain_img, 
@@ -27,6 +29,7 @@
 	Order By like_count Desc, review_count desc
 	</select>
 	
+	<!-- id:getshoplist2 -->
 	<select id="getshoplist2" resultType="com.banana.vo.BananaShopVO">
 	Select D.sid, A.srid, A.srdate, nvl(A.srcontent,'등록된 업체리뷰 없음') srcontent, nvl(B.like_count,0) like_count, nvl(C.review_count,0) review_count,
        D.sname, D.skinds, D.skinds2, D.saddr_num, D.saddr, D.sph, D.sdate, 
@@ -47,5 +50,112 @@
 	where A.Sid = B.Sid(+) and A.sid = C.sid(+) and A.Sid(+) = D.Sid
 	Order By sdate Desc
 	</select>
-
+	
+	<!-- id:getShopContent -->
+	<select id="getShopContent" parameterType="java.lang.String"
+			resultType="com.banana.vo.BananaShopVO">
+		select  sid , mid, sname, skinds, skinds2, sintro, saddr_num, saddr, sph, sdate, 
+		smain_img, smain_simg, scaro_img1, scaro_simg1, scaro_img2, scaro_simg2, scaro_img3, scaro_simg3
+		from banana_shop where sid=#{sid}
+	</select>
+	
+	<!-- id:shopDelete -->
+	<delete id="shopDelete" parameterType="java.lang.String">
+		delete from banana_shop where sid=#{sid}
+	</delete>
+	
+	<!-- id:getsearchlist -->
+	<select id="getsearchlist" parameterType="map"
+			resultType="com.banana.vo.BananaShopVO">
+		select *
+		from (select *
+			  from (select rownum rno, s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.sintro, s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_simg, m.nickname, m.maddr
+					from banana_shop s, banana_member m
+					where s.mid = m.mid)
+			  where (sname like #{set_search} or skinds like #{set_search} or sintro like #{set_search} or saddr like #{set_search} or sph like #{set_search})
+		)
+	</select>
+	
+	<!-- id:getsearchCount -->
+	<select id="getsearchCount" parameterType="map"
+			resultType="int">
+		select count(*)
+		from (select *
+			  from (select rownum rno, s.sid, s.mid, s.sname, s.skinds, s.skinds2, s.sintro, s.saddr_num, s.saddr, s.sph, s.sdate, s.smain_simg, m.nickname, m.maddr 
+					from banana_shop s, banana_member m
+					where s.mid = m.mid)
+			  where (sname like #{set_search} or skinds like #{set_search} or sintro like #{set_search} or saddr like #{set_search} or sph like #{set_search})
+		)
+	</select>
+	
+	<!-- ShopReview -->
+	<!-- id:insertShopReview -->
+	<insert id="insertShopReview" parameterType="com.banana.vo.BananaShopReviewVO">
+		insert into banana_shop_review
+		values('sr_'||SQE_BANANA_SHOP_REVIEW.NEXTVAL,#{sid},#{mid},#{srcontent},sysdate)
+	</insert>
+	
+	<!-- id:getShopReviewList -->
+	<select id="getShopReviewList" resultType="com.banana.vo.BananaShopReviewVO">
+		select srid, sid, mid, srcontent, srdate
+		from banana_shop_review order by srdate desc
+	</select>
+	
+	<!-- id:getShopReviewList2 -->
+	<select id="getShopReviewList2" parameterType="java.lang.String" 
+			resultType="com.banana.vo.BananaShopReviewVO">
+		select mid, nickname, maddr, msfile, srid, sid, srdate, sname, srcontent
+		from (select mem.mid, mem.nickname, mem.maddr, mem.msfile, rev.srid, rev.sid, rev.srdate, shop.sname, rev.srcontent
+			  from banana_member mem, banana_shop_review rev, banana_shop shop
+			  where mem.mid = rev.mid and rev.sid = shop.sid
+			  order by rev.srdate desc)
+		where sid=#{sid}
+	</select>
+	
+	<!-- id:getShopReviewCount -->
+	<select id="getShopReviewCount" parameterType="java.lang.String"
+			resultType="int">
+		select count(*) from banana_shop_review where sid=#{sid}
+	</select>
+	
+	<!-- id:getShopReviewContent -->
+	<select id="getShopReviewContent" parameterType="java.lang.String"
+			resultType="com.banana.vo.BananaShopReviewVO">
+		select srid, sid , mid, srcontent, srdate
+		from banana_shop_review where srid=#{srid}
+	</select>
+	
+	<!-- id:getShopReviewDetail -->
+	<select id="getShopReviewDetail" parameterType="java.lang.String"
+			resultType="com.banana.vo.BananaShopReviewVO">
+		select mid, nickname, maddr, msfile, srid, sid, sname
+		from (select mem.mid, mem.nickname, mem.maddr, mem.msfile, rev.srid, rev.sid, shop.sname
+			  from banana_member mem, banana_shop_review rev, banana_shop shop
+			  where mem.mid = rev.mid and rev.sid = shop.sid)
+		where srid=#{srid}
+	</select>
+	
+	<!-- id:shopReviewUpdate-->
+	<update id="shopReviewUpdate" parameterType="com.banana.vo.BananaShopReviewVO">
+		UPDATE BANANA_SHOP_REVIEW SET SRCONTENT=#{srcontent}
+		WHERE SRID=#{srid}
+	</update>
+	
+	<!-- id:shopReviewDelete -->
+	<delete id="shopReviewDelete" parameterType="java.lang.String">
+		delete from banana_shop_review where srid=#{srid}
+	</delete>
+	
+	<!-- id:getSname -->
+	<select id="getSname" parameterType="java.lang.String"
+			resultType="java.lang.String">
+		select sname from banana_shop where sid=#{sid}
+	</select>
+	
+	<!-- id:getSid -->
+	<select id="getSid" parameterType="com.banana.vo.BananaShopReviewVO"
+			resultType="java.lang.String">
+		select sid from banana_shop_review where srid=#{srid}
+	</select>
+	
 </mapper>
