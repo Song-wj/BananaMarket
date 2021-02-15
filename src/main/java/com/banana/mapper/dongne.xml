@@ -123,7 +123,7 @@
 	</insert>
 	
 	<select id="boardlist" resultType="com.banana.vo.dongneVO">
-		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate
+		select bid, nickname, btitle, bfile,bsfile,btopic,maddr, to_char(ROUND((sysdate-bdate)*24*60)) bdate, m.msfile
 	    from banana_member m , banana_board b
 		where m.mid = b.mid order by bdate 
 	</select>
