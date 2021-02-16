@@ -188,7 +188,7 @@
 							<option value="none">선택</option>
 							<c:forEach var="vo" items="${ list}">
 								<c:if test="${svo.mid ne vo.buy_mid}">
-									<option  value="${ vo.buy_mid }">${ vo.buy_mid }</option>
+									<option  value="${ vo.nickname }">${ vo.nickname }</option>
 								</c:if>
 							</c:forEach>  
 						</select>

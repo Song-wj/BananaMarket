@@ -98,7 +98,9 @@ public class pReviewDAO extends DBConn{
 	public ArrayList<ChatVO> getBuyMidList(String pid){
 		ArrayList<ChatVO> list = new ArrayList<ChatVO>();
 		try {
-			String sql = "select distinct buy_mid from banana_chat where pid=? ";
+			//String sql = "select distinct nickname, buy_mid from banana_chat where pid=? ";
+			String sql = "select distinct m.nickname, c.buy_mid from banana_chat c, banana_member m\r\n"
+							+ "where c.buy_mid = m.mid and  c.pid=? " ;
 			getPreparedStatement(sql);
 			pstmt.setString(1, pid);
 			
@@ -106,7 +108,8 @@ public class pReviewDAO extends DBConn{
 			
 			while(rs.next()) {
 				ChatVO vo = new ChatVO();
-				vo.setBuy_mid(rs.getString(1));
+				vo.setNickname(rs.getString(1));
+				vo.setBuy_mid(rs.getString(2));
 				
 				list.add(vo);
 			}
