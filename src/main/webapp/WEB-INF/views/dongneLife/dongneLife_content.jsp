@@ -373,7 +373,7 @@
 						output += "<div class='commentMemberSide'>";
 						output += "<ul class='commentMemberSide'>";
 						
-						output += "<li><input id='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
+						output += "<li><input class='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
 						output += "<li>" + jdata.jlist[i].nickname + "</li>";
 						output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
 						output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
@@ -424,7 +424,7 @@
 	function r_alarm_write() {
 		//$(location).attr("href","review_alarm_write.do?bid=${vo.bid}&brid="+$('#brid').val());
 		$.ajax({
-			url: "review_alarm_write.do?bid=${vo.bid}&brid="+$('#brid').val(),
+			url: "review_alarm_write.do?bid=${vo.bid}&brid="+$('.brid').val(),
 			success: function(result) {
 				if(result) {
 					console.log("sucess");
