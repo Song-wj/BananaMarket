@@ -391,6 +391,8 @@ $(document).ready(function() {
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/logout.do">로그아웃</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/memberManage.do">회원 관리</a></li>
 						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/boardSubjectManage.do">동네생활 관리</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/admin_question_list.do">자주 묻는 질문</a></li>
+						<li class="header-menu-item"><a class="menu-link" href="http://localhost:9000/banana/admin_notice_list.do">공지사항</a></li>
 					</ul>
 				</c:when>
 				<c:when test="${ svo ne null }">
