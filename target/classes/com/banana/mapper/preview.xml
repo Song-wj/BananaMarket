@@ -36,7 +36,7 @@
 	
 	<select id="getlist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
 	
-	   select  rid, mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+	   select  rid, score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
 	   from( select  rid, r.mid,r.score,review, rfile, rsfile, rdate
 			 from banana_buy_review r ,  banana_product p                            
 			 where r.pid = p.pid and p.mid =#{mid}	   
@@ -49,14 +49,14 @@
 	
 	
 	<select id="getbuylist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
-		select  rid, r.mid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
+		select  rid,r.score,review, rfile, rsfile, to_char(ROUND((sysdate-rdate)*24*60)) rdate
 		from banana_buy_review r ,  banana_product p                            
 		where r.pid = p.pid and p.mid =#{mid}
 		order by rdate
 	</select> 
 	
 	<select id="getselllist" parameterType="java.lang.String" resultType="com.banana.vo.ReviewVO" >
-		select rid,mid,score,review, rfile, rsfile, to_char(ROUND((sysdate-sdate)*24*60)) rdate	
+		select rid,score,review, rfile, rsfile, to_char(ROUND((sysdate-sdate)*24*60)) rdate	
 		from (select rid,mid,score,review, rfile, rsfile, sdate
 			  from  banana_sell_review 
 			   where mid =#{mid}
