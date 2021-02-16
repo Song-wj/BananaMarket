@@ -373,7 +373,7 @@
 						output += "<div class='commentMemberSide'>";
 						output += "<ul class='commentMemberSide'>";
 						
-						output += "<li><input id= "+jdata.jlist[i].brid +"type='hidden' value='"+ jdata.jlist[i].brid + "'>"
+						output += "<li><input id='brid' type='hidden' value='"+ jdata.jlist[i].brid + "'>"
 						output += "<li>" + jdata.jlist[i].nickname + "</li>";
 						output += "<li>" + jdata.jlist[i].maddr + "/" + jdata.jlist[i].brdate + "</li>";
 						output += "<li id='bcomment_content" + jdata.jlist[i].rno +"'>" + jdata.jlist[i].bcomment + "</li>";
