@@ -97,7 +97,7 @@
 	<update id="updatebuymyreview" parameterType="com.banana.vo.ReviewVO">
 		<choose>
 		<when test="rfile != null">
-			update banana_buy_review set review = #{review} , score=#{score} , rfile= #{rfile} , rsfile = #{rsfile}  rdate =sysdate where rid=#{rid}
+			update banana_buy_review set review = #{review} , score=#{score} , rfile= #{rfile} , rsfile = #{rsfile} , rdate =sysdate where rid=#{rid}
 		</when>
 		<otherwise>
 			update banana_buy_review set review = #{review} , score=#{score} where rid=#{rid}
@@ -108,7 +108,7 @@
 	<update id="updatesellmyreview" parameterType="com.banana.vo.ReviewVO">
 		<choose>
 		<when test="rfile != null">
-		update banana_sell_review set review = #{review} , score=#{score}  ,rfile= #{rfile} , rsfile = #{rsfile}  sdate = sysdate where rid=#{rid}
+		update banana_sell_review set review = #{review} , score=#{score}  ,rfile= #{rfile} , rsfile = #{rsfile} , sdate = sysdate where rid=#{rid}
 		</when>
 		<otherwise>
 		update banana_sell_review set review = #{review} , score=#{score} where rid=#{rid}

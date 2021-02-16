@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: user
 Build-Jdk: 13
-=======
-Built-By: whtjd
-Build-Jdk: 14.0.2
->>>>>>> 9b25a78e7630c3c054c23e082e9adea0661cf1d3
 Created-By: Maven Integration for Eclipse
 
