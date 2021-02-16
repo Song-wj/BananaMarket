@@ -184,7 +184,7 @@
 		<section class="section2_dongneLife_write">
 			<div class="write_buyer" id="write_buyer">
 			 	<label>구매자를 선택해주세요</label><br>
-						<select  name="mid" onchange="showConfirm()" id="mid">
+						<select  name="nickname" onchange="showConfirm()" id="mid">
 							<option value="none">선택</option>
 							<c:forEach var="vo" items="${ list}">
 								<c:if test="${svo.mid ne vo.buy_mid}">

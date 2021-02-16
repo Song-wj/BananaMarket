@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ReviewVO {
-	 String rid, mid, pid, review, rfile, rsfile, rdate ,savepath , cancel_img;
-	 String score;
+	 String rid, mid, pid, review, rfile, rsfile, rdate ,savepath , cancel_img ,nickname;
+	String score;
 	 String param;
 	 String maddr;
 	 String buy_mid;
@@ -16,6 +16,12 @@ public class ReviewVO {
 	 List<MultipartFile> list ;
 		
 	 
+	 public String getNickname() {
+		 return nickname;
+	 }
+	 public void setNickname(String nickname) {
+		 this.nickname = nickname;
+	 }
 	 public String getBuy_mid() {
 		return buy_mid;
 	}

@@ -348,7 +348,7 @@ public class MypageController {
 	@RequestMapping(value="/contract_reivew_write_proc.do", method=RequestMethod.POST)
 	public String contract_reivew_write_proc(ReviewVO vo , MultipartHttpServletRequest mtfRequest ,HttpServletRequest request ,HttpSession session) {
 		SessionVO svo = (SessionVO)session.getAttribute("svo");
-		/* vo.setMid(svo.getMid()); */
+		 vo.setMid(svo.getMid()); 
 		
 		List<MultipartFile> fileList = mtfRequest.getFiles("file1");
 		 String path1 = request.getSession().getServletContext().getRealPath("/");
