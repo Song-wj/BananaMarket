@@ -149,7 +149,7 @@ public class DongneCommentServiceImpl implements EnrollService {
 	public String reviewAlarmWrite(Object vo) {
 		boolean result = false;
 		BananaReviewAlarmVO rvo = (BananaReviewAlarmVO)vo;
-		dongneDAO.reviewAlarmWrite(rvo); 
+		result = dongneDAO.reviewAlarmWrite(rvo); 
 		return String.valueOf(result);
 	}
 	
